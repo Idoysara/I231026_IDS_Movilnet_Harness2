@@ -109,4 +109,23 @@
 
 ---
 
-**ESTADO: SISTEMA IDS_MOVILNET AUDITADO, CERTIFICADO Y ELEVADO A 100/100 TIER-1 PLATINUM.**
+## CAPÍTULO 8: CREACIÓN DEL REPOSITORIO DE RESPALDO SOBERANO Y PUBLICACIÓN EN GITHUB (I231026_IDS_MOVILNET_HARNESS2)
+- **Fecha**: 2026-10-23T21:40:00Z
+- **Acción**: Respaldo soberano, estructuración de repositorio limpio y publicación oficial en GitHub.
+- **Acciones Ejecutadas**:
+  1. *Estructuración Física y Enlace Canónico*:
+     - Directorio maestro: [`/Users/ismael/231026_IDS_Movilnet/I231026_IDS_Movilnet_Harness2/`](file:///Users/ismael/231026_IDS_Movilnet/I231026_IDS_Movilnet_Harness2/).
+     - Enlace simbólico en raíz de usuario: [`/Users/ismael/I231026_IDS_Movilnet_Harness2`](file:///Users/ismael/I231026_IDS_Movilnet_Harness2).
+  2. *Sincronización Selectiva Hermética*:
+     - 1,156 archivos transferidos con exclusión de `.cache`, `.pytest_cache`, `.DS_Store`, `*.tar.gz` y `*.zip` (460,355 inserciones de código fuente limpio).
+  3. *Gobernanza Git y Publicación en GitHub*:
+     - Repositorio remoto: `https://github.com/Idoysara/I231026_IDS_Movilnet_Harness2.git`.
+     - Optimización de canal de red: `http.postBuffer 524288000` (500MB) y `http.version HTTP/1.1`.
+     - Comando `git push -u origin main` ejecutado con 100% de éxito (905 objetos comprimidos, 38.90 MiB).
+     - Estado de rama: `Your branch is up to date with 'origin/main'. Working tree clean`.
+- **Enlace Oficial del Repositorio:** [https://github.com/Idoysara/I231026_IDS_Movilnet_Harness2](https://github.com/Idoysara/I231026_IDS_Movilnet_Harness2)
+- **Veredicto Empírico**: `helped` (Respaldo inmutable en la nube y trazabilidad total del código certificado).
+
+---
+
+**ESTADO: SISTEMA IDS_MOVILNET AUDITADO, CERTIFICADO AL 100/100 TIER-1 PLATINUM Y PUBLICADO EN GITHUB.**
