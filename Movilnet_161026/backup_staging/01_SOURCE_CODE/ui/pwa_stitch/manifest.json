@@ -1,0 +1,25 @@
+{
+  "name": "Movilnet Core 4GMAX",
+  "short_name": "Movilnet",
+  "description": "Plataforma de Autoservicio y Telemetría Convergente Movilnet Core N->1",
+  "start_url": "/ui/pwa_stitch/index.html",
+  "scope": "/ui/pwa_stitch/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0B1C30",
+  "theme_color": "#FF6600",
+  "icons": [
+    {
+      "src": "/ui/assets/logos/logo_small.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ui/assets/logos/logo_oficial.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "name": "Movilnet Omnicanal — Retención Proactiva, Fidelización & Churn ML",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "movilnet-retention-churn-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node_churn_webhook",
+      "name": "1. Receptor Evento Retención y Churn",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Extracción y Normalización de Características de Churn\ndata = _input.first().json\nphone = str(data.get('msisdn', '')).strip()\nchannel = str(data.get('channel', 'whatsapp')).strip()\ncomplaints = int(data.get('complaints_count_30d', 0))\ndays_no_rec = int(data.get('days_without_recharge', 15))\ndata_drop = float(data.get('data_usage_trend_pct', -20.0))\nantiquity = float(data.get('antiquity_months', 18.0))\n\nreturn {\n    'msisdn': phone,\n    'channel': channel,\n    'antiquity_months': antiquity,\n    'days_without_recharge': days_no_rec,\n    'data_usage_trend_pct': data_drop,\n    'complaints_count_30d': complaints,\n    'evaluation_timestamp': $now.toISO()\n}\n"
+      },
+      "id": "node_churn_parser",
+      "name": "2. Extracción y Normalización de Características",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/v1/agents/retention-churn/predict",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"msisdn\": $json.msisdn, \"antiquity_months\": $json.antiquity_months, \"days_without_recharge\": $json.days_without_recharge, \"data_usage_trend_pct\": $json.data_usage_trend_pct, \"complaints_count_30d\": $json.complaints_count_30d } }}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "node_churn_predict",
+      "name": "3. Inferencia Predictiva Churn ML (TMF680)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/v1/agents/retention-churn/offer",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"msisdn\": $json.msisdn, \"channel\": $node['2. Extracción y Normalización de Características'].json.channel } }}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "node_churn_offer",
+      "name": "4. Generar Oferta Next-Best-Action (NBA)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Formateador de Campaña Omnicanal y Botones CTA\nres = _input.first().json\nmsisdn = res.get('msisdn', 'Línea')\npred = res.get('churn_prediction', {})\noffer = res.get('selected_offer', {})\nmsg = res.get('personalized_message', '')\nbuttons = res.get('interactive_buttons', [])\n\nreturn {\n    'msisdn': msisdn,\n    'churn_score_pct': pred.get('churn_score_pct', 0.0),\n    'risk_segment': pred.get('risk_segment', 'LOW_RISK'),\n    'offer_id': offer.get('offer_id', 'OFFER-DEFAULT'),\n    'coupon_code': offer.get('coupon_code', 'RET-0000'),\n    'discount_pct': offer.get('discount_pct', 0.0),\n    'bonus_data_gb': offer.get('bonus_data_gb', 0.0),\n    'personalized_message': msg,\n    'interactive_buttons': buttons,\n    'omnichannel_ready': True\n}\n"
+      },
+      "id": "node_churn_formatter",
+      "name": "5. Formateador de Campaña Omnicanal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1180, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"msisdn\": $json.msisdn, \"risk_segment\": $json.risk_segment, \"churn_score_pct\": $json.churn_score_pct, \"offer_id\": $json.offer_id, \"coupon_code\": $json.coupon_code, \"discount_pct\": $json.discount_pct, \"bonus_data_gb\": $json.bonus_data_gb, \"message\": $json.personalized_message, \"interactive_buttons\": $json.interactive_buttons, \"omnichannel_ready\": true } }}",
+        "options": {}
+      },
+      "id": "node_churn_respond",
+      "name": "6. Responder Webhook de Retención y Churn",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1440, 300]
+    }
+  ],
+  "connections": {
+    "1. Receptor Evento Retención y Churn": {
+      "main": [[{"node": "2. Extracción y Normalización de Características", "type": "main", "index": 0}]]
+    },
+    "2. Extracción y Normalización de Características": {
+      "main": [[{"node": "3. Inferencia Predictiva Churn ML (TMF680)", "type": "main", "index": 0}]]
+    },
+    "3. Inferencia Predictiva Churn ML (TMF680)": {
+      "main": [[{"node": "4. Generar Oferta Next-Best-Action (NBA)", "type": "main", "index": 0}]]
+    },
+    "4. Generar Oferta Next-Best-Action (NBA)": {
+      "main": [[{"node": "5. Formateador de Campaña Omnicanal", "type": "main", "index": 0}]]
+    },
+    "5. Formateador de Campaña Omnicanal": {
+      "main": [[{"node": "6. Responder Webhook de Retención y Churn", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

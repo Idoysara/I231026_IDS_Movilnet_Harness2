@@ -1,0 +1,49 @@
+{
+  "measurements": [
+    {
+      "phone": "04165551234",
+      "carrier": "Movilnet",
+      "intent": "BALANCE_CHECK",
+      "latency_mode": "FAST_PATH_DETERMINISTIC",
+      "tokens_cost_usd": 0.0,
+      "runs": 500,
+      "median_ms": 0.104,
+      "p95_ms": 0.141,
+      "max_ms": 0.546
+    },
+    {
+      "phone": "04142650088",
+      "carrier": "Movistar",
+      "intent": "CONTRACT_INFO",
+      "latency_mode": "FAST_PATH_DETERMINISTIC",
+      "tokens_cost_usd": 0.0,
+      "runs": 500,
+      "median_ms": 0.101,
+      "p95_ms": 0.14,
+      "max_ms": 0.353
+    },
+    {
+      "phone": "04129998877",
+      "carrier": "Digitel",
+      "intent": "RECHARGE_C2P",
+      "latency_mode": "FAST_PATH_DETERMINISTIC",
+      "tokens_cost_usd": 0.0,
+      "runs": 500,
+      "median_ms": 0.114,
+      "p95_ms": 0.299,
+      "max_ms": 0.812
+    },
+    {
+      "phone": "04261112233",
+      "carrier": "Movilnet",
+      "intent": "EMERGENCY_EIR",
+      "latency_mode": "FAST_PATH_DETERMINISTIC",
+      "tokens_cost_usd": 0.0,
+      "runs": 500,
+      "median_ms": 0.101,
+      "p95_ms": 0.133,
+      "max_ms": 0.369
+    }
+  ],
+  "sha256": "dd91b83a2331d9ea8dc718fdeff91016b53dc7831fbaba868d05ed64a4200683"
+}

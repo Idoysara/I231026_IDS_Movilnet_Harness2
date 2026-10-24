@@ -1,0 +1,11 @@
+{
+  "watchdog_timestamp": "2026-10-22T11:47:10.272488+00:00",
+  "system_status": "HEALTHY",
+  "database_integrity": {
+    "integrity_check": "ok",
+    "wal_mode": "WAL"
+  },
+  "api_health_code": 200,
+  "noc_metrics_code": 200,
+  "carrier_sla": "CONFORME (P95 < 250ms, 0 Errores)"
+}

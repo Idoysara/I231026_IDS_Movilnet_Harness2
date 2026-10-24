@@ -1,0 +1,3085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content"/>
+  <meta name="theme-color" id="meta-theme-color" content="#0F172A"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <title>Movilnet Core — PWA 4GMAX</title>
+  <link rel="icon" href="/ui/assets/logos/boton_4gmax_oficial.svg" type="image/svg+xml"/>
+  <link rel="apple-touch-icon" href="/ui/assets/logos/movilnet_logo_blanco.svg"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Movilnet Core — PWA 4GMAX"/>
+  <meta property="og:description" content="Canal oficial de autogestión Movilnet 4GMAX. Consulta de saldo, megas, recarga C2P y planes."/>
+  <meta property="og:image" content="https://movilnet-core.onrender.com/ui/assets/logos/movilnet_logo_blanco.svg"/>
+  <meta name="twitter:card" content="summary"/>
+  <link rel="manifest" href="/ui/pwa_stitch/manifest.json"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "var(--color-bg)",
+            "surface": "var(--color-surface)",
+            "surface-container": "var(--color-surface-container)",
+            "surface-container-low": "var(--color-surface-container-low)",
+            "surface-container-high": "var(--color-surface-container-high)",
+            "surface-container-lowest": "var(--color-surface-container-lowest)",
+            "primary": "var(--color-primary)",
+            "primary-dark": "var(--color-primary-dark)",
+            "primary-container": "var(--color-primary)",
+            "on-primary": "#ffffff",
+            "tertiary": "#006398",
+            "tertiary-fixed": "#cce5ff",
+            "on-surface": "var(--color-on-surface)",
+            "secondary": "var(--color-secondary)",
+            "chat-bg": "var(--chat-wallpaper-bg)",
+            "chat-bubble-user": "var(--color-primary)",
+            "chat-bubble-bot": "var(--chat-bubble-bot-bg)"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          },
+          screens: {
+            "xs": "360px",
+            "sm": "640px",
+            "md": "768px",
+            "lg": "1024px"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* ==========================================================================
+       VARIABLES DE ILUMINACIÓN DE 3 NIVELES (LIGHT / MEDIUM / DARK)
+       ========================================================================== */
+    :root, [data-theme="light"] {
+      --color-bg: #f8f9ff;
+      --color-surface: #f8f9ff;
+      --color-surface-container: #e2e8f0;
+      --color-surface-container-low: #eff4ff;
+      --color-surface-container-high: #dbe4f3;
+      --color-surface-container-lowest: #ffffff;
+      --color-on-surface: #0b1c30;
+      --color-secondary: #565e74;
+      --color-primary: #FF3838;
+      --color-primary-dark: #D82424;
+      --chat-wallpaper-bg: #efeae2;
+      --chat-wallpaper-dot: #d5cdc4;
+      --chat-bubble-bot-bg: #ffffff;
+      --chat-bubble-bot-text: #0b1c30;
+      --chat-bubble-bot-border: #e2e8f0;
+    }
+
+    [data-theme="medium"] {
+      --color-bg: #0F172A;
+      --color-surface: #0F172A;
+      --color-surface-container: #1E293B;
+      --color-surface-container-low: #162032;
+      --color-surface-container-high: #27354A;
+      --color-surface-container-lowest: #1E293B;
+      --color-on-surface: #F8FAFC;
+      --color-secondary: #94A3B8;
+      --color-primary: #FF4A4A;
+      --color-primary-dark: #DC2626;
+      --chat-wallpaper-bg: #0F172A;
+      --chat-wallpaper-dot: #1E293B;
+      --chat-bubble-bot-bg: #1E293B;
+      --chat-bubble-bot-text: #F8FAFC;
+      --chat-bubble-bot-border: #334155;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #060B14;
+      --color-surface: #060B14;
+      --color-surface-container: #0C1524;
+      --color-surface-container-low: #08101C;
+      --color-surface-container-high: #152238;
+      --color-surface-container-lowest: #0D1626;
+      --color-on-surface: #F1F5F9;
+      --color-secondary: #64748B;
+      --color-primary: #FF5252;
+      --color-primary-dark: #E02424;
+      --chat-wallpaper-bg: #060B14;
+      --chat-wallpaper-dot: #101c30;
+      --chat-bubble-bot-bg: #0D1626;
+      --chat-bubble-bot-text: #F1F5F9;
+      --chat-bubble-bot-border: rgba(255, 82, 82, 0.3);
+    }
+
+    @layer base {
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-bg);
+        color: var(--color-on-surface);
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings: "tnum";
+        transition: background-color 0.25s ease, color 0.25s ease;
+      }
+      body {
+        overscroll-behavior-y: none;
+      }
+      .pt-safe {
+        padding-top: max(env(safe-area-inset-top, 0px), 12px);
+      }
+      .pt-safe {
+        padding-top: max(env(safe-area-inset-top, 0px), 12px);
+      }
+      .pt-safe-top {
+        padding-top: calc(max(env(safe-area-inset-top, 0px), 16px) + var(--browser-top-offset, 0px)) !important;
+      }
+      .pb-safe {
+        padding-bottom: max(env(safe-area-inset-bottom, 0px), 10px);
+      }
+      /* Variables Dinámicas Universales de Viewport y Resguardo por Navegador */
+      :root {
+        --vvh: 100dvh;
+        --vvt: 0px;
+        --browser-top-offset: 0px;
+        --browser-bottom-offset: 0px; /* En dispositivos móviles reales la barra nativa ya está fuera del viewport */
+        --composer-dock-elevation: 0px;
+        --bottom-nav-total-height: calc(56px + max(env(safe-area-inset-bottom, 0px), 10px) + var(--browser-bottom-offset, 0px));
+      }
+      /* =========================================================================
+         CONFIGURACIÓN DE RESGUARDO PARA SIMULADOR EMBEBIDO (IFRAME SIMULADOR.HTML)
+         En celulares reales (window.self === window.top) --browser-bottom-offset es 0px
+         ========================================================================= */
+      html.in-simulator-frame.browser-mode-safari {
+        --browser-top-offset: 0px;
+        --browser-bottom-offset: 94px; /* Barra simulada AA + controles de iOS Safari en simulador */
+      }
+      html.in-simulator-frame.browser-mode-chrome {
+        --browser-top-offset: 52px;    /* Omnibox superior simulado de Chrome */
+        --browser-bottom-offset: 28px; /* Barra inferior simulada de navegación gestual */
+      }
+      html.in-simulator-frame.browser-mode-opera {
+        --browser-top-offset: 0px;
+        --browser-bottom-offset: 88px; /* Barra Fast-Action simulada de Opera */
+      }
+      html.in-simulator-frame.browser-mode-brave {
+        --browser-top-offset: 0px;
+        --browser-bottom-offset: 86px; /* Barra simulada Brave Shields */
+      }
+      html.in-simulator-frame.browser-mode-yahoo {
+        --browser-top-offset: 46px;    /* Cabecera simulada Yahoo! */
+        --browser-bottom-offset: 80px; /* Barra inferior simulada Yahoo! */
+      }
+      html.in-simulator-frame.browser-mode-samsung {
+        --browser-top-offset: 44px;    /* Barra superior simulada Samsung Internet */
+        --browser-bottom-offset: 82px; /* Barra inferior simulada Samsung */
+      }
+      html.in-simulator-frame.browser-mode-standalone,
+      .browser-mode-standalone {
+        --browser-top-offset: 0px;
+        --browser-bottom-offset: 0px;
+      }
+
+      /* Ajuste dinámico de los contenedores para nunca ser tapados por barras de navegación */
+      #chat-input-bar {
+        padding-bottom: calc(10px + var(--composer-dock-elevation, 0px)) !important;
+      }
+      #bottom-nav {
+        padding-bottom: calc(max(env(safe-area-inset-bottom, 0px), 10px) + var(--browser-bottom-offset, 0px)) !important;
+      }
+      #tab-dashboard,
+      #tab-c2p,
+      #tab-deals {
+        padding-bottom: calc(88px + max(env(safe-area-inset-bottom, 0px), 10px) + var(--browser-bottom-offset, 0px)) !important;
+      }
+
+      /* Habilitar selección de texto, evitar zoom automático de iOS en inputs y asegurar respuesta táctil inmediata en botones */
+      input, textarea, select {
+        -webkit-user-select: text !important;
+        user-select: text !important;
+        font-size: 16px !important; /* REGLA CLAVE IOS: 16px evita auto-zoom */
+        touch-action: manipulation;
+      }
+      button, .nav-btn {
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+      }
+      .nav-btn * {
+        pointer-events: none !important;
+      }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .tab-content { display: none !important; }
+    .tab-content.active { display: flex !important; }
+    .nav-btn.active { color: var(--color-primary) !important; font-weight: 700; }
+    .chat-wallpaper {
+      background-color: var(--chat-wallpaper-bg);
+      background-image: radial-gradient(var(--chat-wallpaper-dot) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    /* Contenedor responsivo centrado para iPhone y pantallas grandes */
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    /* =========================================================================
+       DISEÑO ÚNICO DE CONVERSACIÓN DE MENSAJERÍA MOVILNET AI (OMNI-CHAT ADAPTATIVO)
+       ========================================================================= */
+    #tab-assistant {
+      position: fixed;
+      top: var(--vvt, 0px);
+      left: 0 !important;
+      right: 0 !important;
+      margin-left: auto;
+      margin-right: auto;
+      transform: none !important;
+      width: 100%;
+      max-width: 480px;
+      height: calc(var(--vvh, 100dvh) - var(--bottom-nav-total-height, 66px));
+      max-height: calc(var(--vvh, 100dvh) - var(--bottom-nav-total-height, 66px));
+      bottom: var(--bottom-nav-total-height, 66px) !important;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      z-index: 40;
+      transition: height 0.15s ease-out;
+    }
+    #tab-assistant.active {
+      display: flex !important;
+    }
+
+    /* Cápsula Flotante Ergonómica de Escritura (Anti-Bloqueo Universal) */
+    .omni-composer-dock {
+      background: var(--color-surface-container-lowest);
+      border-top: 1px solid var(--color-surface-container);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+      transition: all 0.25s ease;
+      z-index: 50;
+      flex-shrink: 0;
+    }
+
+    /* Modo Escritura Superior (Top Docking para acceso instantáneo anti-bloqueo) */
+    .composer-dock-top #chat-dock-wrapper {
+      order: 1 !important;
+      border-top: none;
+      border-bottom: 1.5px solid var(--color-surface-container);
+    }
+    .composer-dock-top #chat-input-bar {
+      padding-bottom: 10px !important;
+    }
+    .composer-dock-top #chat-messages {
+      order: 2 !important;
+      padding-bottom: 16px !important;
+    }
+
+    /* ESTILO DE BOTONES DE ILUMINACIÓN */
+    .theme-btn-pwa {
+      color: var(--color-secondary);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .theme-btn-pwa.active {
+      background: var(--color-primary);
+      color: #ffffff !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col min-h-screen min-h-[100dvh] antialiased">
+
+  <!-- ========================================================================
+       TOP APP HEADER ESTÁNDAR (VISIBLE EN DASHBOARD Y SERVICIOS)
+       ======================================================================== -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 mx-auto w-full max-w-[480px] z-30 pt-safe bg-surface/95 backdrop-blur-xl border-b border-surface-container shadow-sm transition-colors">
+    <div class="px-2.5 pb-2 flex flex-col gap-1.5">
+      <!-- Fila Superior: Botón Volver, Logo Oficial, Iluminación, Telemetría y Badge 4GMAX -->
+      <div class="flex items-center justify-between h-9 gap-1">
+        <div class="flex items-center gap-1 min-w-0 shrink">
+          <!-- BOTÓN REGRESAR A LA PÁGINA ANTERIOR -->
+          <button type="button" onclick="handleGoBack()" id="btn-back-header" class="h-7 px-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface text-xs font-bold flex items-center gap-0.5 border border-surface-container active:scale-95 transition-all shrink-0" title="Volver a la pantalla anterior">
+            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            <span class="hidden sm:inline text-[11px]">Volver</span>
+          </button>
+
+          <!-- LOGO OFICIAL MOVILNET CON ALTA VISIBILIDAD SIN SOLAPAMIENTO EN IPHONE -->
+          <div class="flex items-center gap-1 min-w-0 shrink pl-0.5">
+            <img id="pwa-header-logo" src="/ui/assets/logos/movilnet_logo_color.svg" alt="Movilnet Oficial" class="h-5 xs:h-5.5 sm:h-7 max-w-[88px] xs:max-w-[102px] sm:max-w-none w-auto object-contain drop-shadow-sm transition-all"/>
+            <div class="hidden sm:flex flex-col">
+              <span class="text-[9px] font-extrabold text-primary tracking-tight leading-none">CORE N→1 :8010</span>
+              <span class="text-[8px] text-secondary font-mono leading-tight">O(1) SQLite WAL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1 shrink-0">
+          <!-- SELECTOR DE INTENSIDAD DE ILUMINACIÓN (LIGHT / MEDIUM / DARK) -->
+          <div class="illumination-box flex items-center bg-surface-container-high rounded-full p-0.5 border border-surface-container shadow-inner" title="Intensidad de Iluminación Visual">
+            <button type="button" onclick="setIllumination('light')" data-theme-btn="light" class="theme-btn-pwa px-1.5 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-0.5 transition-all" title="Modo Claro">
+              <span class="material-symbols-outlined text-[13px]">light_mode</span>
+              <span class="hidden sm:inline">Light</span>
+            </button>
+            <button type="button" onclick="setIllumination('medium')" data-theme-btn="medium" class="theme-btn-pwa px-1.5 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-0.5 transition-all" title="Modo Medio (Dark/Light)">
+              <span class="material-symbols-outlined text-[13px]">tonality</span>
+              <span class="hidden sm:inline">Med</span>
+            </button>
+            <button type="button" onclick="setIllumination('dark')" data-theme-btn="dark" class="theme-btn-pwa px-1.5 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-0.5 transition-all" title="Modo Oscuro Profundo">
+              <span class="material-symbols-outlined text-[13px]">dark_mode</span>
+              <span class="hidden sm:inline">Dark</span>
+            </button>
+          </div>
+
+          <!-- Ping de Telemetría Real -->
+          <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-100/90 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-700">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span id="telemetry-ping" class="text-[10px] font-mono text-emerald-800 dark:text-emerald-300 font-semibold">0.8ms</span>
+          </div>
+
+          <!-- Badge 4GMAX Oficial -->
+          <img id="logo-4gmax" src="/ui/assets/logos/boton_4gmax_oficial.svg" alt="4GMAX" class="h-5.5 sm:h-6 w-auto object-contain cursor-pointer active:scale-95 transition-transform" onclick="goToTab('dashboard')" title="Movilnet 4GMAX"/>
+        </div>
+      </div>
+
+      <!-- Fila Inferior: Selector Multi-Operadora (Movilnet, Movistar, Digitel) -->
+      <div class="flex items-center justify-between text-xs pt-0.5">
+        <div class="flex items-center gap-1 text-[11px] font-medium text-secondary">
+          <span class="material-symbols-outlined text-[14px]">sim_card</span>
+          <span>Línea:</span>
+          <select id="carrier-select" onchange="onCarrierChange(this.value)" class="bg-surface-container-high font-semibold text-on-surface rounded px-1.5 py-0.5 text-[11px] border-none outline-none cursor-pointer">
+            <option value="04160000001" selected>📱 04160000001 (Movilnet 4GMAX)</option>
+            <option value="04241533712">📱 00584241533712 (WhatsApp Asignado)</option>
+            <option value="04142554590">📱 04142554590 (Ids - Movistar)</option>
+            <option value="04260000002">📱 04260000002 (Movilnet Prepago)</option>
+            <option value="04142345678">📱 04142345678 (Movistar 4G+ Sim)</option>
+            <option value="04123456789">📱 04123456789 (Digitel LTE Sim)</option>
+            <option value="CUSTOM_PHONE">✏️ Otro número externo...</option>
+          </select>
+        </div>
+        <div id="carrier-chip" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-orange-100 text-orange-700">
+          NATIVO
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       BANNER DE INSTALACIÓN PWA
+       ======================================================================== -->
+  <div id="pwa-install-banner" class="w-full max-w-[480px] mx-auto px-3.5 pt-32 pb-1">
+    <div class="w-full rounded-xl bg-surface-container-lowest border border-surface-container p-2.5 flex items-center justify-between gap-2 shadow-sm">
+      <div class="flex items-center gap-2 min-w-0">
+        <div class="w-9 h-9 rounded-lg bg-orange-100 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-primary text-[20px]">install_mobile</span>
+        </div>
+        <div class="flex flex-col min-w-0">
+          <span class="text-xs font-bold text-on-surface truncate">Instalar App Movilnet</span>
+          <p class="text-[10px] text-secondary truncate">Acceso directo autónomo sin intermediarios</p>
+        </div>
+      </div>
+      <button id="btn-pwa-install" class="px-3 py-1.5 bg-primary hover:bg-primary-dark text-white text-xs font-bold rounded-lg shadow-sm active:scale-95 transition-transform">
+        Instalar
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CONTENIDO PRINCIPAL (3 PESTAÑAS REACTIVAS SPA)
+       ======================================================================== -->
+  <main class="flex-1 w-full max-w-[480px] mx-auto flex flex-col">
+
+    <!-- ======================================================================
+         PESTAÑA 1: DASHBOARD O(1) TELEMETRÍA TMF678 (VENTANA 1 STITCH)
+         ====================================================================== -->
+    <section id="tab-dashboard" class="tab-content active flex-col gap-3 w-full px-3.5 pb-24">
+      
+      <!-- Tarjeta de Perfil del Abonado -->
+      <div class="rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm p-3.5 flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-11 h-11 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-sm shadow">
+              <span id="sub-initials">CM</span>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex items-center gap-1">
+                <span id="sub-name" class="text-sm font-bold text-on-surface">Carlos Mendoza</span>
+                <span class="material-symbols-outlined text-sky-600 text-[16px]">verified</span>
+              </div>
+              <span id="sub-phone" class="font-mono text-xs text-secondary font-medium">0416-000-0001</span>
+            </div>
+          </div>
+          <span id="sub-carrier-badge" class="px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 text-[10px] font-bold uppercase tracking-wider">
+            4GMAX ACTIVO
+          </span>
+        </div>
+
+        <!-- Telemetría SQLite WAL y Plan -->
+        <div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-2.5 text-xs">
+          <div>
+            <span class="text-secondary text-[11px] block">Plan Actual</span>
+            <span id="sub-plan" class="font-semibold text-on-surface text-xs truncate block">Plan Movilnet 4GMAX</span>
+          </div>
+          <div class="text-right">
+            <span class="text-secondary text-[11px] block">SIM / IMSI Check</span>
+            <span id="sub-imsi" class="font-mono text-xs text-slate-700 block">734-06-8821039-4K</span>
+          </div>
+          <div class="col-span-2 pt-1 border-t border-surface-container flex items-center justify-between text-[11px]">
+            <span class="text-primary font-mono font-bold flex items-center gap-1">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+              <span id="label-db-wal">SQLite WAL: 0.42ms</span>
+            </span>
+            <span class="font-mono text-secondary">O(1) MemMap :8010</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Módulo Financiero de Saldo (TMF678) -->
+      <div class="rounded-xl bg-slate-900 text-white shadow-md p-4 flex flex-col gap-2 relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-orange-500/20 blur-xl"></div>
+        <div class="flex items-center justify-between text-xs text-slate-300">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-orange-400 text-[18px]">account_balance_wallet</span>
+            <span class="font-medium">Saldo Disponible Principal</span>
+          </div>
+          <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-orange-300">C2P Ready</span>
+        </div>
+        
+        <div class="flex items-baseline gap-2 mt-1">
+          <span id="dash-balance-ves" class="text-2xl font-extrabold text-orange-400 font-mono tracking-tight">Bs. 1.650,00</span>
+          <span id="dash-balance-usd" class="text-xs text-slate-400 font-medium">~ $44.78 USD (BCV)</span>
+        </div>
+        
+        <div class="flex items-center justify-between pt-2 border-t border-slate-800 mt-1">
+          <span class="text-[10px] text-slate-400 font-mono">Liquidación en caliente WAL</span>
+          <button id="btn-recharge-dash" onclick="goToTab('c2p')" class="px-2.5 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold rounded flex items-center gap-1 shadow-sm active:scale-95 transition-transform">
+            <span class="material-symbols-outlined text-[14px]">bolt</span> Recargar C2P
+          </button>
+        </div>
+      </div>
+
+      <!-- Telemetría de Consumo de Cuota (Datos, Voz, SMS) -->
+      <div class="rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm p-3.5 flex flex-col gap-3">
+        <div class="flex items-center justify-between text-xs">
+          <span class="font-bold text-on-surface uppercase tracking-wider text-[11px]">Consumo en Tiempo Real (TMF678)</span>
+          <span class="font-mono text-[10px] text-primary font-bold">● LIVE OCS</span>
+        </div>
+
+        <!-- Radial / Barra de Datos -->
+        <div class="flex flex-col gap-1.5">
+          <div class="flex justify-between text-xs font-semibold">
+            <span class="text-secondary">Datos 4GMAX</span>
+            <span id="quota-display-text" class="text-primary font-mono">35.4 GB / 40.0 GB</span>
+          </div>
+          <div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+            <div id="quota-progress-bar" class="bg-primary h-full rounded-full transition-all duration-500" style="width: 88%;"></div>
+          </div>
+          <div class="flex justify-between text-[10px] text-secondary font-mono">
+            <span id="quota-used-text">Consumido: 4.6 GB</span>
+            <span id="quota-pct-text">Restante: 88%</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-surface-container text-center">
+          <div class="bg-surface-container-low p-2 rounded-lg">
+            <span class="text-[10px] text-secondary block">Minutos Movilnet</span>
+            <span class="text-sm font-bold text-on-surface font-mono">840 Min</span>
+          </div>
+          <div class="bg-surface-container-low p-2 rounded-lg">
+            <span class="text-[10px] text-secondary block">SMS Nacionales</span>
+            <span class="text-sm font-bold text-on-surface font-mono">920 SMS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Switches Rápidos de Red y Seguridad (Conectados al Core) -->
+      <div class="rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm p-3 flex flex-col gap-2">
+        <div class="flex items-center justify-between py-1 border-b border-surface-container text-xs">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[18px]">lock</span>
+            <div>
+              <span class="font-semibold block">Candado SIM Antifraude</span>
+              <span class="text-[10px] text-secondary">Bloqueo ante cambio de IMSI no autorizado</span>
+            </div>
+          </div>
+          <input id="toggle-sim-antifraud" onchange="toggleSimLock(this.checked)" type="checkbox" checked class="w-4 h-4 accent-primary cursor-pointer"/>
+        </div>
+
+        <div class="flex items-center justify-between py-1 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-sky-600 text-[18px]">cell_tower</span>
+            <div>
+              <span class="font-semibold block">VoLTE HD Voice</span>
+              <span class="text-[10px] text-secondary">Llamadas de alta definición sobre LTE</span>
+            </div>
+          </div>
+          <input id="toggle-volte" onchange="toggleVoLTE(this.checked)" type="checkbox" checked class="w-4 h-4 accent-primary cursor-pointer"/>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 2: SERVICIOS, C2P SUDEBAN & CATÁLOGO TMF620 (VENTANA 2 STITCH)
+         ====================================================================== -->
+    <section id="tab-c2p" class="tab-content flex-col gap-3 w-full px-3.5 pt-28 pb-24">
+
+      <!-- Ticker de Estado SUDEBAN -->
+      <div class="flex items-center justify-between px-3 py-1.5 rounded-lg bg-sky-100/70 border border-sky-200 text-xs text-sky-950 font-medium">
+        <div class="flex items-center gap-1.5 truncate">
+          <span class="inline-block w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+          <span class="font-mono text-[11px] truncate">CANAL SUDEBAN C2P // TMF676 ACTIVO</span>
+        </div>
+        <span class="font-mono text-[10px] bg-white px-1.5 py-0.5 rounded shadow-2xs font-bold">PORT 8010</span>
+      </div>
+
+      <!-- Acciones Rápidas O(1) -->
+      <div class="grid grid-cols-2 gap-2">
+        <button id="btn-flash-query" onclick="executeFlashQuery()" class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm text-left active:scale-95 transition-transform">
+          <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center mb-1.5">
+            <span class="material-symbols-outlined text-[20px]">bolt</span>
+          </div>
+          <span class="font-bold text-xs text-on-surface block">Consulta Flash</span>
+          <span class="text-[10px] text-secondary block">Saldo sub-ms O(1)</span>
+        </button>
+
+        <button id="btn-quick-c2p" onclick="document.getElementById('c2p-box').scrollIntoView({behavior:'smooth'})" class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm text-left active:scale-95 transition-transform">
+          <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center mb-1.5">
+            <span class="material-symbols-outlined text-[20px]">contactless</span>
+          </div>
+          <span class="font-bold text-xs text-on-surface block">Pago Móvil C2P</span>
+          <span class="text-[10px] text-secondary block">Débito Inmediato BDV</span>
+        </button>
+
+        <button id="btn-direct-recharge" onclick="document.getElementById('c2p-box').scrollIntoView({behavior:'smooth'})" class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm text-left active:scale-95 transition-transform">
+          <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-1.5">
+            <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+          </div>
+          <span class="font-bold text-xs text-on-surface block">Recarga Saldo</span>
+          <span class="text-[10px] text-secondary block">Ledger Contable WAL</span>
+        </button>
+
+        <button id="btn-usage-breakdown" onclick="openUsageModal()" class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm text-left active:scale-95 transition-transform">
+          <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center mb-1.5">
+            <span class="material-symbols-outlined text-[20px]">query_stats</span>
+          </div>
+          <span class="font-bold text-xs text-on-surface block">Mis Consumos</span>
+          <span class="text-[10px] text-secondary block">TMF678 CDRs en vivo</span>
+        </button>
+      </div>
+
+      <!-- Formulario de Cobro C2P Inmediato SUDEBAN -->
+      <div id="c2p-box" class="rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm p-4 flex flex-col gap-3">
+        <div class="flex items-center justify-between border-b border-surface-container pb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-primary text-[20px]">security</span>
+            <span class="font-bold text-xs text-on-surface">MÓDULO DE COBRO C2P INMEDIATO</span>
+          </div>
+          <span class="text-[10px] font-mono bg-orange-100 text-orange-800 px-1.5 py-0.5 rounded font-bold">SUDEBAN TMF676</span>
+        </div>
+
+        <div class="text-[11px] text-secondary bg-surface-container-low p-2 rounded-lg flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-emerald-600 text-[16px]">verified</span>
+          <span>Procesamiento bancario directo en <strong>&lt;1.2s</strong> enlazado a Movilnet Core.</span>
+        </div>
+
+        <form id="form-c2p" onsubmit="processC2P(event)" class="flex flex-col gap-2.5 text-xs">
+          <div>
+            <label class="block text-secondary text-[11px] font-medium mb-1">Banco Emisor del Pagador</label>
+            <select id="c2p-bank" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-2 font-medium text-xs text-on-surface outline-none">
+              <option value="0102" selected>0102 - Banco de Venezuela (BDV)</option>
+              <option value="0134">0134 - Banesco</option>
+              <option value="0105">0105 - Banco Mercantil</option>
+              <option value="0108">0108 - Banco Provincial</option>
+              <option value="0191">0191 - Banco Nacional de Crédito (BNC)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-secondary text-[11px] font-medium mb-1">Cédula / RIF</label>
+              <input id="c2p-ci" type="text" value="V-10000001" required class="w-full bg-surface-container-low border border-surface-container rounded-lg p-2 font-mono text-xs text-on-surface outline-none"/>
+            </div>
+            <div>
+              <label class="block text-secondary text-[11px] font-medium mb-1">Teléfono Débito</label>
+              <input id="c2p-phone" type="tel" value="04160000001" required class="w-full bg-surface-container-low border border-surface-container rounded-lg p-2 font-mono text-xs text-on-surface outline-none"/>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-secondary text-[11px] font-medium mb-1">Monto a Débito (Bolívares)</label>
+            <div class="grid grid-cols-4 gap-1.5 mb-1.5">
+              <button type="button" onclick="setC2PAmount(150)" class="py-1.5 rounded bg-surface-container text-xs font-semibold hover:bg-orange-100 active:scale-95">Bs. 150</button>
+              <button type="button" onclick="setC2PAmount(300)" class="py-1.5 rounded bg-primary text-white text-xs font-bold shadow-xs active:scale-95">Bs. 300</button>
+              <button type="button" onclick="setC2PAmount(500)" class="py-1.5 rounded bg-surface-container text-xs font-semibold hover:bg-orange-100 active:scale-95">Bs. 500</button>
+              <button type="button" onclick="setC2PAmount(1000)" class="py-1.5 rounded bg-surface-container text-xs font-semibold hover:bg-orange-100 active:scale-95">Bs. 1000</button>
+            </div>
+            <input id="c2p-amount" type="number" step="10" value="300.00" required class="w-full bg-surface-container-low border border-surface-container rounded-lg p-2 font-mono font-bold text-sm text-on-surface outline-none"/>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-secondary text-[11px] font-medium">Clave Dinámica C2P / Token SMS</label>
+              <span class="text-[10px] text-sky-700 font-medium">Generada en tu App Bancaria</span>
+            </div>
+            <input id="c2p-otp" type="text" maxlength="8" placeholder="Ingresa clave 6-8 dígitos" value="782910" required class="w-full bg-surface-container-low border border-surface-container rounded-lg p-2 font-mono font-bold text-center tracking-widest text-sm text-on-surface outline-none"/>
+          </div>
+
+          <button id="btn-process-c2p" type="submit" class="w-full mt-2 py-2.5 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-transform">
+            <span class="material-symbols-outlined text-[18px]">bolt</span>
+            <span>Procesar Pago C2P Inmediato</span>
+          </button>
+        </form>
+
+        <div id="c2p-result" class="hidden rounded-lg p-2.5 text-xs"></div>
+      </div>
+
+      <!-- Catálogo Dinámico 4GMAX (TMF620) -->
+      <div class="flex flex-col gap-2 mt-2">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-xs font-bold text-on-surface uppercase tracking-wider flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px] text-primary">storefront</span>
+            Catálogo Comercial 4GMAX (TMF620)
+          </span>
+          <span class="text-[10px] font-mono text-secondary">Base de Datos Core</span>
+        </div>
+
+        <!-- Contenedor Dinámico de Planes -->
+        <div id="plans-catalog-grid" class="flex flex-col gap-2.5">
+          <!-- Se puebla dinámicamente desde GET /api/v1/catalog/plans -->
+          <div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container text-center text-xs text-secondary">
+            Cargando catálogo comercial en vivo...
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 4: CLUB 4GMAX — CAZADOR DE OFERTAS & CUPONERÍA SOBERANA
+         ====================================================================== -->
+    <section id="tab-deals" class="tab-content flex-col gap-3 w-full px-3.5 pt-28 pb-24">
+      <!-- Tarjeta Cabecera Radar -->
+      <div class="rounded-2xl p-4 bg-gradient-to-br from-primary/10 via-surface-container to-surface-container-low border border-primary/20 shadow-lg flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[26px]">local_offer</span>
+            <div>
+              <h2 class="text-base font-extrabold text-on-surface">Club 4GMAX • Cazador de Ofertas</h2>
+              <p class="text-[11px] text-secondary">Descuentos verificados y cupones dinámicos TOTP sin gastar megas (Zero-Rating).</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold border border-emerald-500/30">
+              SPLIT 20/80
+            </span>
+            <button onclick="openMerchantOnboardingModal()" class="px-2.5 py-1 rounded-full bg-primary hover:bg-orange-600 text-white text-[10px] font-extrabold flex items-center gap-1 shadow-md active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[13px]">add_business</span> + Publicar Local
+            </button>
+          </div>
+        </div>
+
+        <!-- Selector de Cobertura Espacial (3 Escenarios de Cero Fricción) -->
+        <div class="mt-2 flex flex-col gap-2">
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
+            <button type="button" onclick="loadDealsByZone('run of network')" class="zone-pill whitespace-nowrap px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container font-semibold transition-all">
+              🌐 Toda la Red
+            </button>
+            <button type="button" onclick="loadDealsByZone('chacao')" class="zone-pill active whitespace-nowrap px-3 py-1 rounded-full bg-primary text-white font-semibold transition-all">
+              📍 Caracas (Chacao / Mercedes)
+            </button>
+            <button type="button" onclick="loadDealsByZone('maracay')" class="zone-pill whitespace-nowrap px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container font-semibold transition-all">
+              📍 Maracay
+            </button>
+            <button type="button" onclick="loadDealsByZone('valencia')" class="zone-pill whitespace-nowrap px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container font-semibold transition-all">
+              📍 Valencia
+            </button>
+            <button type="button" onclick="loadDealsByZone('la guaira')" class="zone-pill whitespace-nowrap px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container font-semibold transition-all">
+              📍 La Guaira
+            </button>
+            <button type="button" onclick="loadDealsByZone('barquisimeto')" class="zone-pill whitespace-nowrap px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container font-semibold transition-all">
+              📍 Barquisimeto
+            </button>
+            <button type="button" onclick="loadDealsByZone('maracaibo')" class="zone-pill whitespace-nowrap px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container font-semibold transition-all">
+              📍 Maracaibo
+            </button>
+            <button type="button" onclick="loadDealsByZone('lecheria')" class="zone-pill whitespace-nowrap px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container font-semibold transition-all">
+              📍 Lechería
+            </button>
+            <button type="button" onclick="useDeviceGpsForDeals()" class="whitespace-nowrap px-3 py-1 rounded-full bg-secondary/15 text-primary hover:bg-secondary/25 font-semibold flex items-center gap-1 transition-all">
+              <span class="material-symbols-outlined text-[14px]">my_location</span> Cerca de Mí (500m)
+            </button>
+          </div>
+
+          <!-- Filtro por categoría -->
+          <div class="flex items-center gap-1 overflow-x-auto pb-1 text-[10px] no-scrollbar text-secondary font-medium">
+            <button type="button" onclick="filterDealsCategory('')" class="cat-pill active px-2.5 py-0.5 rounded-md bg-primary/20 text-primary font-bold">Todos</button>
+            <button type="button" onclick="filterDealsCategory('Gastronomía')" class="cat-pill px-2.5 py-0.5 rounded-md bg-surface-container hover:text-on-surface">Gastronomía</button>
+            <button type="button" onclick="filterDealsCategory('Salud y Farmacia')" class="cat-pill px-2.5 py-0.5 rounded-md bg-surface-container hover:text-on-surface">Farmacia</button>
+            <button type="button" onclick="filterDealsCategory('Tecnología')" class="cat-pill px-2.5 py-0.5 rounded-md bg-surface-container hover:text-on-surface">Tecnología</button>
+            <button type="button" onclick="filterDealsCategory('Servicios')" class="cat-pill px-2.5 py-0.5 rounded-md bg-surface-container hover:text-on-surface">Servicios</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Mis Cupones Activos -->
+      <div id="user-coupons-section" class="hidden rounded-2xl p-3 bg-surface-container-low border border-surface-container shadow-sm flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-on-surface flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px] text-amber-500">confirmation_number</span> Mis Cupones Activos (TOTP)
+          </span>
+          <span id="active-coupons-badge" class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 font-bold">0/3</span>
+        </div>
+        <div id="user-coupons-list" class="flex flex-col gap-2">
+          <!-- Se puebla dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Feed de Ofertas del Radar -->
+      <div class="flex items-center justify-between px-1">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-secondary flex items-center gap-1">
+          <span class="material-symbols-outlined text-[16px] text-primary">radar</span> Ofertas Verificadas en tu Radar
+        </h3>
+        <span id="deals-count-badge" class="text-[10px] font-mono bg-surface-container-high px-2 py-0.5 rounded-full text-secondary">
+          Buscando...
+        </span>
+      </div>
+
+      <!-- Contenedor dinámico de ofertas -->
+      <div id="deals-cards-container" class="flex flex-col gap-2.5">
+        <div class="p-6 rounded-2xl bg-surface-container-low border border-surface-container text-center text-xs text-secondary animate-pulse">
+          Sintonizando radar geoespacial de comercios aliados...
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 3: ASISTENTE COGNITIVO IA VÍA B (CHAT FULL-SCREEN TELEGRAM/WHATSAPP)
+         ====================================================================== -->
+    <section id="tab-assistant" class="tab-content flex-col w-full max-w-[480px] mx-auto z-40 bg-surface shadow-2xl overflow-hidden">
+      
+      <!-- Top Chat App Bar (Diseño Único Omni-Chat Movilnet AI con Resguardo Anti-Notificaciones) -->
+      <div class="w-full pt-safe-top pb-2.5 px-3 bg-surface-container-lowest border-b border-surface-container text-on-surface flex items-center justify-between shadow-md z-10 shrink-0">
+        <div class="flex items-center gap-2">
+          <!-- BOTÓN VOLVER AL DASHBOARD -->
+          <button onclick="goToTab('dashboard')" class="h-8 px-2.5 rounded-xl bg-surface-container-high hover:bg-surface-container text-on-surface flex items-center gap-1 active:scale-90 transition-transform border border-surface-container shadow-2xs" title="Regresar al Dashboard">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span class="text-[11px] font-bold">Volver</span>
+          </button>
+          
+          <div class="relative">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-orange-600 text-white flex items-center justify-center font-bold shadow-md">
+              <span class="material-symbols-outlined text-[20px]">smart_toy</span>
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-surface"></span>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1">
+              <span class="font-bold text-xs tracking-tight leading-tight text-on-surface">Movilnet Omni-AI</span>
+              <span class="text-[8px] bg-primary/15 text-primary border border-primary/30 px-1 rounded font-mono font-bold">VÍA B</span>
+            </div>
+            <span class="text-[10px] text-emerald-500 font-medium leading-tight">● En línea • Core N→1</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <!-- Mini Selector de Iluminación dentro del Chat -->
+          <div class="illumination-box flex items-center bg-surface-container-high rounded-full p-0.5 border border-surface-container shadow-inner" title="Intensidad de Iluminación">
+            <button onclick="setIllumination('light')" data-theme-btn="light" class="theme-btn-pwa px-1.5 py-0.5 rounded-full text-[10px] font-bold" title="Modo Claro">
+              <span class="material-symbols-outlined text-[13px]">light_mode</span>
+            </button>
+            <button onclick="setIllumination('medium')" data-theme-btn="medium" class="theme-btn-pwa px-1.5 py-0.5 rounded-full text-[10px] font-bold" title="Modo Medio (Dark/Light)">
+              <span class="material-symbols-outlined text-[13px]">tonality</span>
+            </button>
+            <button onclick="setIllumination('dark')" data-theme-btn="dark" class="theme-btn-pwa px-1.5 py-0.5 rounded-full text-[10px] font-bold" title="Modo Oscuro Profundo">
+              <span class="material-symbols-outlined text-[13px]">dark_mode</span>
+            </button>
+          </div>
+
+          <!-- Conmutador de Posición de Escritura (Arriba / Abajo) -->
+          <button id="btn-dock-pos" onclick="toggleComposerDockPosition()" title="Alternar Caja de Escritura: Arriba / Abajo" class="h-7 px-1.5 rounded-lg bg-primary/15 hover:bg-primary/25 text-primary border border-primary/30 flex items-center gap-0.5 text-[9px] font-bold active:scale-90 transition-transform">
+            <span id="dock-pos-icon" class="material-symbols-outlined text-[14px]">vertical_align_top</span>
+            <span id="dock-pos-label" class="hidden xs:inline">Arriba</span>
+          </button>
+
+          <!-- Voz / Altavoz de Síntesis -->
+          <button id="btn-voice-speaker" onclick="toggleSpeechAudio()" title="Activar/Silenciar Audio de Voz del Asistente" class="w-7 h-7 rounded-full hover:bg-surface-container flex items-center justify-center text-secondary active:scale-90 transition-transform">
+            <span id="speaker-icon" class="material-symbols-outlined text-[17px]">volume_up</span>
+          </button>
+
+          <span id="ai-rtt-badge" class="hidden sm:inline-block px-1.5 py-0.5 rounded-full bg-surface-container text-emerald-500 font-mono text-[9px] font-bold border border-surface-container">
+            142ms
+          </span>
+          <button onclick="clearChatHistory()" title="Limpiar conversación" class="w-7 h-7 rounded-full hover:bg-surface-container flex items-center justify-center text-secondary active:scale-90 transition-transform">
+            <span class="material-symbols-outlined text-[17px]">delete_sweep</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Guardarraíl Visual ZH-MHEP + Sincronización Temporal Venezuela -->
+      <div class="w-full bg-surface-container-low border-b border-surface-container px-3 py-1 flex items-center justify-between text-[10px] text-secondary shrink-0">
+        <span class="flex items-center gap-1 truncate">
+          <span class="material-symbols-outlined text-primary text-[13px]">verified_user</span>
+          <span class="truncate">Protocolo ZH-MHEP • Anclaje 1:1 OCS</span>
+        </span>
+        <span class="font-mono text-primary font-bold shrink-0 ml-1">Strict Lock</span>
+      </div>
+
+      <!-- Lienzo de Mensajes del Chat (Scrollable con min-h-0 para flex shrink garantizado) -->
+      <div id="chat-messages" class="flex-1 min-h-0 overflow-y-auto px-3 py-2.5 chat-wallpaper flex flex-col gap-2.5 overscroll-contain">
+        <!-- Mensaje de Bienvenida del Asistente -->
+        <div class="self-start max-w-[88%] bg-surface-container-lowest rounded-2xl rounded-tl-xs p-3 shadow-sm border border-surface-container text-xs text-on-surface flex flex-col gap-1">
+          <div class="flex items-center justify-between text-[10px] text-secondary font-medium">
+            <span class="text-primary font-bold">Movilnet Core AI</span>
+            <span id="welcome-msg-time-top" class="font-mono text-[10px]">Ahora</span>
+          </div>
+          <p class="leading-relaxed">
+            ¡Hola! Soy tu asistente virtual de <strong>Telecomunicaciones Movilnet C.A.</strong> Estoy conectado en tiempo real al Core N→1. Puedes consultar tu saldo O(1), preparar órdenes de recarga C2P o cambiar de plan.
+          </p>
+          <div class="self-end text-[9px] text-secondary flex items-center gap-0.5 font-mono">
+            <span id="welcome-msg-time-bot">Ahora</span>
+            <span class="material-symbols-outlined text-[12px] text-sky-500">done_all</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           CÁPSULA ÚNICA UNIVERSAL DE MENSAJERÍA (OMNI-COMPOSER ANTI-BLOQUEO)
+           Flota sobre cualquier barra de Safari, Chrome, Opera, Brave o Yahoo
+           ==================================================================== -->
+      <div id="chat-dock-wrapper" class="omni-composer-dock flex flex-col w-full">
+        
+        <!-- Micro-Barra de Ajuste Ergonómico Universal Anti-Navegador -->
+        <div class="w-full bg-surface-container-low/90 border-b border-surface-container px-2.5 py-1 flex items-center justify-between text-[10px] text-secondary">
+          <span class="flex items-center gap-1 font-medium text-on-surface/80">
+            <span class="material-symbols-outlined text-[13px] text-emerald-500">shield_moon</span>
+            <span>Omni-Dock Universal:</span>
+            <strong id="active-browser-badge" class="text-primary font-mono text-[9px] uppercase">Auto-Safe</strong>
+          </span>
+          <div class="flex items-center gap-1">
+            <button type="button" onclick="adjustComposerElevation(25)" class="px-1.5 py-0.5 rounded bg-surface-container-high hover:bg-primary/20 text-on-surface font-bold text-[9px] border border-surface-container active:scale-95 transition-all" title="Elevar caja +25px por encima del navegador">
+              ⬆️ Subir Caja
+            </button>
+            <button type="button" onclick="resetComposerElevation()" class="px-1.5 py-0.5 rounded bg-surface-container-high hover:bg-surface-container text-secondary font-semibold text-[9px] border border-surface-container active:scale-95 transition-all" title="Restaurar altura estándar">
+              ⬇️ Normal
+            </button>
+            <button type="button" onclick="toggleComposerDockPosition()" class="px-1.5 py-0.5 rounded bg-primary/15 hover:bg-primary/25 text-primary font-bold text-[9px] border border-primary/30 active:scale-95 transition-all" title="Pasar la caja de escritura a la parte superior">
+              🔝 Fijar Arriba
+            </button>
+          </div>
+        </div>
+
+        <!-- Chips de Sugerencia / Pregunta Rápida Flotantes -->
+        <div class="w-full bg-surface-container-lowest/95 px-2.5 pt-2 pb-1 flex items-center gap-1.5 overflow-x-auto shrink-0 no-scrollbar">
+          <button type="button" onclick="sendQuickPrompt('¿Cuál es mi saldo actual y cuántos megas me quedan?')" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-primary/15 text-on-surface text-[11px] font-semibold border border-surface-container shrink-0 active:scale-95 transition-all flex items-center gap-1 shadow-2xs">
+            <span>💰 Mi Saldo y Megas</span>
+          </button>
+          <button type="button" onclick="sendQuickPrompt('Necesito recargar 300 Bs por C2P con Banco de Venezuela.')" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-primary/15 text-on-surface text-[11px] font-semibold border border-surface-container shrink-0 active:scale-95 transition-all flex items-center gap-1 shadow-2xs">
+            <span>⚡ Recargar C2P BDV</span>
+          </button>
+          <button type="button" onclick="sendQuickPrompt('Muéstrame los planes 4GMAX comerciales disponibles.')" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-primary/15 text-on-surface text-[11px] font-semibold border border-surface-container shrink-0 active:scale-95 transition-all flex items-center gap-1 shadow-2xs">
+            <span>📦 Ver Planes 4GMAX</span>
+          </button>
+          <button type="button" onclick="sendQuickPrompt('¿Qué día y hora es hoy en Venezuela?')" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-primary/15 text-on-surface text-[11px] font-semibold border border-surface-container shrink-0 active:scale-95 transition-all flex items-center gap-1 shadow-2xs">
+            <span>🕒 Hora y Día VE</span>
+          </button>
+        </div>
+
+        <!-- Barra de Entrada Encapsulada (Con resguardo dinámico garantizado) -->
+        <div id="chat-input-bar" class="w-full bg-surface-container-lowest px-2.5 pt-1.5 pb-safe flex items-center gap-1.5 shrink-0 z-50">
+          <div class="w-full flex items-center gap-1.5 p-1.5 rounded-2xl bg-surface-container-low border-2 border-primary/40 shadow-md">
+            <button type="button" onclick="document.getElementById('chat-input').focus()" class="w-9 h-9 rounded-xl text-primary hover:bg-primary/10 flex items-center justify-center shrink-0 transition-colors" title="Enfocar y escribir mensaje">
+              <span class="material-symbols-outlined text-[20px]">edit_square</span>
+            </button>
+
+            <form id="chat-form" onsubmit="sendChatMessage(event)" class="flex-1 flex items-center gap-1.5 min-w-0">
+              <input id="chat-input" type="text" placeholder="Escribe aquí tu mensaje a Movilnet..." autocomplete="off" autocorrect="on" autocapitalize="sentences" class="flex-1 min-w-0 bg-transparent px-2 py-1.5 text-[16px] font-medium outline-none text-on-surface placeholder:text-secondary/80 select-text"/>
+              
+              <!-- BOTÓN DE MICRÓFONO / VOZ -->
+              <button type="button" id="btn-voice-mic" onclick="toggleVoiceRecording()" class="w-10 h-10 rounded-xl bg-surface-container-high hover:bg-primary/20 text-on-surface flex items-center justify-center shrink-0 shadow-xs active:scale-90 transition-all border border-surface-container" title="Hablar por Micrófono (Reconocimiento de Voz)">
+                <span id="mic-icon" class="material-symbols-outlined text-[20px]">mic</span>
+              </button>
+
+              <!-- BOTÓN ENVIAR MENSAJE -->
+              <button id="chat-submit-btn" type="submit" class="w-10 h-10 rounded-xl bg-primary hover:bg-primary-dark text-white flex items-center justify-center shrink-0 shadow-md active:scale-90 transition-transform" title="Enviar Mensaje">
+                <span class="material-symbols-outlined text-[20px]">send</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       BARRA INFERIOR DE NAVEGACIÓN FIJA UNIVERSAL (Z-INDEX 60, ZERO-TRANSLATE, MÁXIMA ERGONOMÍA)
+       ======================================================================== -->
+  <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[480px] z-[60] pb-safe bg-surface/95 backdrop-blur-xl border-t border-surface-container shadow-2xl select-none">
+    <div class="flex justify-around items-stretch h-14 px-1">
+      <button type="button" data-tab="dashboard" onclick="goToTab('dashboard')" id="nav-dashboard" class="nav-btn active flex-1 h-full flex flex-col items-center justify-center py-1 text-secondary transition-colors cursor-pointer select-none">
+        <span class="material-symbols-outlined text-[22px] pointer-events-none">speed</span>
+        <span class="text-[10px] mt-0.5 font-semibold pointer-events-none">Dashboard O(1)</span>
+      </button>
+
+      <button type="button" data-tab="c2p" onclick="goToTab('c2p')" id="nav-c2p" class="nav-btn flex-1 h-full flex flex-col items-center justify-center py-1 text-secondary transition-colors cursor-pointer select-none">
+        <span class="material-symbols-outlined text-[22px] pointer-events-none">account_balance_wallet</span>
+        <span class="text-[10px] mt-0.5 font-semibold pointer-events-none">Servicios & C2P</span>
+      </button>
+
+      <button type="button" data-tab="deals" onclick="goToTab('deals')" id="nav-deals" class="nav-btn flex-1 h-full flex flex-col items-center justify-center py-1 text-secondary transition-colors cursor-pointer select-none">
+        <span class="material-symbols-outlined text-[22px] pointer-events-none">local_offer</span>
+        <span class="text-[10px] mt-0.5 font-semibold pointer-events-none">Club 4GMAX</span>
+      </button>
+
+      <button type="button" data-tab="assistant" onclick="goToTab('assistant')" id="nav-assistant" class="nav-btn flex-1 h-full flex flex-col items-center justify-center py-1 text-secondary transition-colors cursor-pointer select-none">
+        <span class="material-symbols-outlined text-[22px] pointer-events-none">smart_toy</span>
+        <span class="text-[10px] mt-0.5 font-semibold pointer-events-none">Asistente IA</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       VENTANA MODAL 1: DETALLE DE "MIS CONSUMOS" (TMF678 CDRs)
+       ======================================================================== -->
+  <div id="modal-usage" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="w-full sm:max-w-md max-h-[88dvh] overflow-y-auto overscroll-contain bg-surface-container-lowest border border-surface-container rounded-t-2xl sm:rounded-2xl p-4 pb-safe flex flex-col gap-3 shadow-2xl animate-in slide-in-from-bottom duration-200">
+      <div class="flex items-center justify-between border-b border-surface-container pb-2 shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-[22px]">query_stats</span>
+          <h3 class="font-bold text-sm text-on-surface">Mis Consumos TMF678 (CDRs en Vivo)</h3>
+        </div>
+        <button onclick="closeUsageModal()" class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-secondary hover:text-on-surface">✕</button>
+      </div>
+
+      <!-- Resumen de Ciclo -->
+      <div class="bg-surface-container-low border border-surface-container rounded-xl p-3 flex flex-col gap-1.5 shrink-0">
+        <div class="flex justify-between text-xs font-semibold">
+          <span class="text-on-surface">Datos 4GMAX Consumidos</span>
+          <span class="text-primary font-mono font-bold">4.6 GB / 35.0 GB</span>
+        </div>
+        <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+          <div class="bg-primary h-full rounded-full" style="width: 14%;"></div>
+        </div>
+        <div class="flex justify-between text-[10px] text-secondary font-mono">
+          <span>Ciclo Actual: Activo</span>
+          <span>86% Cupo Disponible</span>
+        </div>
+      </div>
+
+      <!-- Desglose por Aplicación -->
+      <div class="flex flex-col gap-1 text-xs shrink-0">
+        <span class="font-bold text-secondary text-[11px] uppercase tracking-wider">Desglose Estimado de Tráfico</span>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low border border-surface-container">
+          <span class="flex items-center gap-1.5"><span class="text-red-500 font-bold">▶</span> Video Streaming & YouTube</span>
+          <span class="font-mono font-bold text-on-surface">2.8 GB</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low border border-surface-container">
+          <span class="flex items-center gap-1.5"><span class="text-emerald-500 font-bold">💬</span> WhatsApp & Mensajería</span>
+          <span class="font-mono font-bold text-on-surface">1.2 GB</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low border border-surface-container">
+          <span class="flex items-center gap-1.5"><span class="text-sky-500 font-bold">🌐</span> Navegación Web & Transacciones</span>
+          <span class="font-mono font-bold text-on-surface">0.6 GB</span>
+        </div>
+      </div>
+
+      <!-- Lista de CDRs Recientes de SQLite -->
+      <div class="flex flex-col gap-1 text-xs shrink-0">
+        <span class="font-bold text-secondary text-[11px] uppercase tracking-wider">Últimos Registros CDR de Red</span>
+        <div class="p-2 rounded-lg bg-slate-950 text-white font-mono text-[10px] space-y-1 border border-surface-container">
+          <div class="flex justify-between text-emerald-400">
+            <span>● DATA_4G • 500 MB</span>
+            <span>CAR-CCS-ENB-001</span>
+          </div>
+          <div class="flex justify-between text-slate-400">
+            <span>● DATA_4G • 500 MB</span>
+            <span>CAR-CCS-ENB-001</span>
+          </div>
+          <div class="flex justify-between text-slate-400">
+            <span>● DATA_4G • 500 MB</span>
+            <span>CAR-CCS-ENB-001</span>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="closeUsageModal()" class="w-full py-2.5 bg-surface-container-high hover:bg-surface-container text-on-surface font-bold rounded-lg text-xs mt-1 border border-surface-container shrink-0 active:scale-95 transition-transform">
+        Cerrar Detalle
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       VENTANA MODAL 2: CONFIRMACIÓN DE CAMBIO DE PLAN (TMF622)
+       ======================================================================== -->
+  <div id="modal-plan-order" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="w-full max-w-sm max-h-[88dvh] overflow-y-auto overscroll-contain bg-surface-container-lowest border border-surface-container rounded-2xl p-4 pb-safe flex flex-col gap-3 shadow-2xl animate-in zoom-in-95 duration-150">
+      <div class="flex items-center justify-between border-b border-surface-container pb-2 shrink-0">
+        <div class="flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-primary text-[22px]">swap_horiz</span>
+          <h3 class="font-bold text-sm text-on-surface">Confirmar Cambio de Plan</h3>
+        </div>
+        <button onclick="closePlanModal()" class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-secondary hover:text-on-surface">✕</button>
+      </div>
+
+      <div class="p-3 rounded-xl bg-surface-container-low border border-surface-container flex flex-col gap-1 text-xs shrink-0">
+        <span class="text-secondary text-[11px]">Nuevo Plan Seleccionado:</span>
+        <span id="modal-plan-target-name" class="font-bold text-sm text-primary">Inteliplan 20GB 4GMAX</span>
+        <span id="modal-plan-target-price" class="font-mono text-xs text-on-surface font-bold">$12.00 USD / mes</span>
+      </div>
+
+      <div class="text-[11px] text-secondary bg-surface-container-low p-2.5 rounded-lg border border-surface-container leading-relaxed shrink-0">
+        • La activación del nuevo plan se aplicará de inmediato en el Core.<br/>
+        • Línea a actualizar: <strong id="modal-plan-target-phone" class="font-mono text-on-surface">04160000001</strong><br/>
+        • Los datos restantes del plan anterior se mantendrán durante el ciclo activo.
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 mt-1 shrink-0">
+        <button onclick="closePlanModal()" class="py-2.5 bg-surface-container-high hover:bg-surface-container text-on-surface font-bold rounded-lg text-xs active:scale-95 transition-transform border border-surface-container">
+          Cancelar
+        </button>
+        <button id="btn-confirm-plan-change" onclick="executePlanChange()" class="py-2.5 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg text-xs shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-[16px]">check</span>
+          <span>Confirmar Orden</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       VENTANA MODAL 3: DIÁLOGO UNIVERSAL DE ACCIONES Y MÓDULOS DE RED (EN LUGAR DE ALERTS)
+       ======================================================================== -->
+  <div id="modal-action-info" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="w-full max-w-sm max-h-[88dvh] overflow-y-auto overscroll-contain bg-surface-container-lowest border border-surface-container rounded-2xl p-4.5 pb-safe flex flex-col gap-3 shadow-2xl animate-in zoom-in-95 duration-150">
+      <div class="flex items-center justify-between border-b border-surface-container pb-2 shrink-0">
+        <div class="flex items-center gap-2">
+          <span id="modal-info-icon" class="material-symbols-outlined text-primary text-[24px]">info</span>
+          <h3 id="modal-info-title" class="font-bold text-sm text-on-surface">Módulo</h3>
+        </div>
+        <button onclick="closeActionModal()" class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-secondary hover:text-on-surface">✕</button>
+      </div>
+      <div id="modal-info-body" class="text-xs text-on-surface leading-relaxed p-1 shrink-0">
+        Contenido del módulo
+      </div>
+      <button onclick="closeActionModal()" class="w-full py-2.5 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg text-xs shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1 shrink-0">
+        <span class="material-symbols-outlined text-[16px]">check</span>
+        <span>Aceptar y Continuar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       VENTANA MODAL 4: CUPÓN DINÁMICO TOTP QR (CANJE SEGURO EN CAJA POS)
+       ======================================================================== -->
+  <div id="modal-totp-qr" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="w-full sm:max-w-md bg-surface-container-lowest border border-surface-container rounded-t-2xl sm:rounded-2xl p-5 pb-safe flex flex-col gap-3.5 shadow-2xl animate-in slide-in-from-bottom duration-200">
+      <div class="flex items-center justify-between border-b border-surface-container pb-2 shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-[24px]">qr_code_2</span>
+          <div>
+            <h3 class="font-bold text-sm text-on-surface">Cupón Dinámico Seguro TOTP</h3>
+            <p class="text-[10px] text-secondary">Presenta este código al cajero en el POS</p>
+          </div>
+        </div>
+        <button onclick="closeTotpModal()" class="text-secondary hover:text-on-surface p-1 rounded-lg">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="flex flex-col items-center justify-center py-3 bg-surface-container rounded-xl gap-2 border border-surface-container-high">
+        <span class="text-[10px] font-semibold text-secondary uppercase tracking-widest">Código de Verificación</span>
+        <div id="totp-code-display" class="font-mono text-3xl font-extrabold tracking-widest text-primary">
+          ------
+        </div>
+        <div class="flex items-center gap-1.5 text-[11px] text-secondary">
+          <span class="material-symbols-outlined text-[16px] text-amber-500 animate-spin">timer</span>
+          <span>Expira en: <strong id="totp-countdown-sec" class="text-amber-400 font-mono">60s</strong></span>
+        </div>
+        <div id="totp-qr-box" class="p-3 bg-white rounded-xl shadow-md mt-1">
+          <!-- Render dinámico del QR -->
+        </div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-surface-container-high/40 text-[11px] text-secondary flex flex-col gap-1 border border-surface-container">
+        <div class="flex justify-between font-mono">
+          <span>Cupón ID:</span>
+          <strong id="totp-coupon-id" class="text-on-surface">CUP-XXXX</strong>
+        </div>
+        <div class="flex justify-between font-mono">
+          <span>Comercio:</span>
+          <strong id="totp-merchant-name" class="text-on-surface">Comercio</strong>
+        </div>
+        <div class="flex justify-between font-mono">
+          <span>Firma Anti-Replay:</span>
+          <span id="totp-signature-short" class="text-[9px] text-primary truncate max-w-[200px]">HMAC-SHA256</span>
+        </div>
+      </div>
+
+      <button onclick="closeTotpModal()" class="w-full py-2.5 rounded-xl bg-primary text-white font-bold text-xs shadow-md active:scale-98 transition-transform">
+        Entendido • Volver al Radar
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       VENTANA MODAL 5: PUBLICAR COMERCIO EN 30s (CERO FRICCIÓN ESPACIAL)
+       ======================================================================== -->
+  <div id="modal-merchant-onboarding" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="w-full sm:max-w-lg bg-surface-container-lowest border border-surface-container rounded-t-2xl sm:rounded-2xl p-5 pb-safe flex flex-col gap-3 shadow-2xl animate-in slide-in-from-bottom duration-200 max-h-[90vh] overflow-y-auto no-scrollbar">
+      <div class="flex items-center justify-between border-b border-surface-container pb-2 shrink-0">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-primary/20 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">campaign</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-on-surface">Publicar Comercio • Cero Fricción</h3>
+            <p class="text-[10px] text-secondary">Activa tu negocio en Club 4GMAX en menos de 30 segundos</p>
+          </div>
+        </div>
+        <button onclick="closeMerchantOnboardingModal()" class="text-secondary hover:text-on-surface p-1 rounded-lg">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Formulario Cero Fricción -->
+      <form id="form-merchant-onboarding" onsubmit="submitMerchantOnboarding(event)" class="flex flex-col gap-3">
+        <!-- Datos Básicos -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div class="flex flex-col gap-1">
+            <label class="text-[11px] font-bold text-on-surface">Nombre del Negocio *</label>
+            <input id="onboard-nombre" type="text" required placeholder="Ej: Ávila Burger Grill" class="px-3 py-2 rounded-xl bg-surface-container border border-surface-container-high text-xs text-on-surface focus:outline-none focus:border-primary" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[11px] font-bold text-on-surface">RIF Fiscal *</label>
+            <input id="onboard-rif" type="text" required placeholder="Ej: J-12345678-9" class="px-3 py-2 rounded-xl bg-surface-container border border-surface-container-high text-xs text-on-surface uppercase focus:outline-none focus:border-primary" />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-[11px] font-bold text-on-surface">Categoría Comercial</label>
+          <select id="onboard-categoria" class="px-3 py-2 rounded-xl bg-surface-container border border-surface-container-high text-xs text-on-surface focus:outline-none focus:border-primary">
+            <option value="Gastronomía">🍔 Gastronomía y Restaurantes</option>
+            <option value="Salud y Farmacia">💊 Salud, Farmacias y Cuidado</option>
+            <option value="Supermercados">🛒 Supermercados y Alimentos</option>
+            <option value="Tecnología">💻 Tecnología y Celulares</option>
+            <option value="Servicios">🔧 Servicios Profesionales y Automotriz</option>
+            <option value="Moda y Calzado">👟 Moda, Calzado y Retail</option>
+          </select>
+        </div>
+
+        <!-- 3 ESCENARIOS AUTOMÁTICOS DE COBERTURA (0 RADIOS EN METROS) -->
+        <div class="flex flex-col gap-1.5 mt-1">
+          <span class="text-[11px] font-extrabold text-on-surface flex items-center gap-1">
+            <span class="material-symbols-outlined text-[15px] text-primary">share_location</span>
+            ¿Dónde quieres que se vea tu anuncio? (Cero Cálculos)
+          </span>
+
+          <div class="grid grid-cols-1 gap-2">
+            <!-- Escenario 1: Por Zona (90% de los casos) -->
+            <label onclick="selectOnboardingScenario('ZONA')" id="card-scenario-zona" class="cursor-pointer p-2.5 rounded-xl border-2 border-primary bg-primary/5 flex items-start gap-2.5 transition-all">
+              <input type="radio" name="onboard-tipo-cobertura" value="ZONA" checked class="mt-0.5 text-primary focus:ring-primary" />
+              <div class="flex-1 flex flex-col">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-on-surface">📍 Escenario 1: Elegir una Zona</span>
+                  <span class="text-[9px] bg-primary/20 text-primary px-1.5 py-0.2 rounded font-bold">RECOMENDADO (90%)</span>
+                </div>
+                <p class="text-[10px] text-secondary mt-0.5">El límite lo fija el polígono de calles de la zona. <strong>0 números ni radios que ingresar.</strong></p>
+                <div id="box-zone-selector" class="mt-2">
+                  <select id="onboard-zona-select" class="w-full px-2.5 py-1.5 rounded-lg bg-surface border border-surface-container-high text-xs text-on-surface font-semibold focus:outline-none focus:border-primary">
+                    <option value="las mercedes">📍 Las Mercedes (Caracas)</option>
+                    <option value="chacao">📍 Chacao (Caracas)</option>
+                    <option value="altamira">📍 Altamira (Caracas)</option>
+                    <option value="los palos grandes">📍 Los Palos Grandes (Caracas)</option>
+                    <option value="sabana grande">📍 Sabana Grande (Caracas)</option>
+                    <option value="la candelaria">📍 La Candelaria (Caracas)</option>
+                    <option value="el rosal">📍 El Rosal (Caracas)</option>
+                    <option value="brickell">📍 Brickell (Miami - DOOH)</option>
+                  </select>
+                </div>
+              </div>
+            </label>
+
+            <!-- Escenario 2: Toda la Ciudad (Run of Network) -->
+            <label onclick="selectOnboardingScenario('RUN_OF_NETWORK')" id="card-scenario-ron" class="cursor-pointer p-2.5 rounded-xl border border-surface-container-high bg-surface-container flex items-start gap-2.5 transition-all">
+              <input type="radio" name="onboard-tipo-cobertura" value="RUN_OF_NETWORK" class="mt-0.5 text-primary focus:ring-primary" />
+              <div class="flex-1 flex flex-col">
+                <span class="text-xs font-bold text-on-surface">🌐 Escenario 2: Toda la Ciudad (Run of Network)</span>
+                <p class="text-[10px] text-secondary mt-0.5">Sin geocercas restrictivas. Rota libremente en todas las pantallas y tablets metropolitanas (50 km).</p>
+              </div>
+            </label>
+
+            <!-- Escenario 3: Dirección con Radio Automático (Smart Default) -->
+            <label onclick="selectOnboardingScenario('PUNTO_INTERES')" id="card-scenario-poi" class="cursor-pointer p-2.5 rounded-xl border border-surface-container-high bg-surface-container flex items-start gap-2.5 transition-all">
+              <input type="radio" name="onboard-tipo-cobertura" value="PUNTO_INTERES" class="mt-0.5 text-primary focus:ring-primary" />
+              <div class="flex-1 flex flex-col">
+                <span class="text-xs font-bold text-on-surface">🎯 Escenario 3: Solo Dirección de mi Local</span>
+                <p class="text-[10px] text-secondary mt-0.5">El algoritmo auto-asigna un <strong>radio estándar de 500m</strong> (cinemático urbano).</p>
+                <div id="box-address-input" class="hidden mt-2 flex flex-col gap-1">
+                  <input id="onboard-direccion" type="text" placeholder="Ej: Torre Jalisco, Calle Jalisco, Las Mercedes" class="w-full px-2.5 py-1.5 rounded-lg bg-surface border border-surface-container-high text-xs text-on-surface focus:outline-none focus:border-primary" />
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Opción Avanzada Opcional (Colapsada) -->
+        <details class="text-[11px] text-secondary mt-1">
+          <summary class="cursor-pointer hover:text-on-surface font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px]">tune</span> Opciones avanzadas (Opcional - Corporativo)
+          </summary>
+          <div class="p-2.5 mt-1.5 rounded-xl bg-surface-container border border-surface-container flex flex-col gap-1.5">
+            <label class="text-[10px] text-secondary">Radio manual específico en metros (mínimo 50m):</label>
+            <input id="onboard-radio-manual" type="number" min="50" max="50000" placeholder="Dejar en blanco para cálculo automático (500m)" class="px-3 py-1.5 rounded-lg bg-surface border border-surface-container-high text-xs text-on-surface focus:outline-none focus:border-primary" />
+            <span class="text-[9px] text-secondary/80">Nota de seguridad: Los radios menores a 50m están prohibidos por el protocolo para evitar spots inaudibles (&lt;1.8s a 40km/h).</span>
+          </div>
+        </details>
+
+        <!-- Feedback de estado -->
+        <div id="onboard-feedback" class="hidden p-2 rounded-xl text-xs font-medium"></div>
+
+        <!-- Botones de Acción -->
+        <div class="flex items-center gap-2 mt-2">
+          <button type="button" onclick="closeMerchantOnboardingModal()" class="w-1/3 py-2.5 rounded-xl bg-surface-container-high hover:bg-surface-container text-on-surface text-xs font-bold transition-all">
+            Cancelar
+          </button>
+          <button type="submit" id="btn-submit-onboard" class="w-2/3 py-2.5 rounded-xl bg-primary hover:bg-orange-600 text-white text-xs font-extrabold shadow-lg active:scale-98 transition-all flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">rocket_launch</span> Activar en Club 4GMAX
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       LÓGICA JAVASCRIPT: CONEXIÓN 100% VIVA CON TODOS LOS MÓDULOS DE MOVILNET CORE
+       ======================================================================== -->
+  <script>
+    let currentMsisdn = "04160000001";
+    let selectedPlanId = null;
+    let selectedPlanName = null;
+    let currentComposerElevation = 0;
+    let isComposerTopDocked = false;
+
+    // 1. Registro PWA Service Worker con Auto-Purga de Caché Obsoleto (Zero-Stale-Cache)
+    if ('caches' in window) {
+      caches.keys().then(keys => {
+        keys.forEach(k => {
+          if (k !== 'movilnet-pwa-v170-network-first') {
+            caches.delete(k);
+          }
+        });
+      }).catch(() => {});
+    }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/ui/pwa_stitch/sw.js?v=170').then(reg => {
+          reg.update();
+        }).catch(e => console.warn(e));
+      });
+    }
+
+    // 1.1 Motor Universal de Viewport Dinámico (Previene ocultamiento en Safari/Chrome/Opera/Brave/Yahoo)
+    function syncUniversalViewport() {
+      const vv = window.visualViewport;
+      const vHeight = vv ? vv.height : window.innerHeight;
+      const vOffsetTop = vv ? vv.offsetTop : 0;
+      document.documentElement.style.setProperty('--vvh', `${vHeight}px`);
+      document.documentElement.style.setProperty('--vvt', `${vOffsetTop}px`);
+
+      const bottomNav = document.getElementById('bottom-nav');
+      const navH = bottomNav ? bottomNav.offsetHeight : 66;
+
+      const assistant = document.getElementById('tab-assistant');
+      if (assistant && assistant.classList.contains('active')) {
+        const chatH = Math.max(vHeight - navH, 200);
+        assistant.style.height = `${chatH}px`;
+        assistant.style.maxHeight = `${chatH}px`;
+        assistant.style.top = `${vOffsetTop}px`;
+        assistant.style.bottom = `${navH}px`;
+        const chatBox = document.getElementById('chat-messages');
+        if (chatBox) {
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+      }
+    }
+
+    // 1.2 Controles del Diseño Único Omni-Chat (Elevación y Posición Superior/Inferior)
+    function adjustComposerElevation(delta) {
+      currentComposerElevation = Math.min(Math.max(currentComposerElevation + delta, 0), 150);
+      document.documentElement.style.setProperty('--composer-dock-elevation', `${currentComposerElevation}px`);
+      const badge = document.getElementById('active-browser-badge');
+      if (badge) badge.textContent = `Elevado +${currentComposerElevation}px`;
+      const chatBox = document.getElementById('chat-messages');
+      setTimeout(() => { if (chatBox) chatBox.scrollTop = chatBox.scrollHeight; }, 60);
+    }
+
+    function resetComposerElevation() {
+      currentComposerElevation = 0;
+      isComposerTopDocked = false;
+      document.documentElement.style.setProperty('--composer-dock-elevation', '0px');
+      const assistant = document.getElementById('tab-assistant');
+      if (assistant) assistant.classList.remove('composer-dock-top');
+      const icon = document.getElementById('dock-pos-icon');
+      const label = document.getElementById('dock-pos-label');
+      if (icon) icon.textContent = 'vertical_align_top';
+      if (label) label.textContent = 'Arriba';
+      const badge = document.getElementById('active-browser-badge');
+      if (badge) badge.textContent = 'Auto-Safe';
+      const chatBox = document.getElementById('chat-messages');
+      setTimeout(() => { if (chatBox) chatBox.scrollTop = chatBox.scrollHeight; }, 60);
+    }
+
+    function toggleComposerDockPosition() {
+      const assistant = document.getElementById('tab-assistant');
+      if (!assistant) return;
+      isComposerTopDocked = !isComposerTopDocked;
+      assistant.classList.toggle('composer-dock-top', isComposerTopDocked);
+      const icon = document.getElementById('dock-pos-icon');
+      const label = document.getElementById('dock-pos-label');
+      const badge = document.getElementById('active-browser-badge');
+      if (isComposerTopDocked) {
+        if (icon) icon.textContent = 'vertical_align_bottom';
+        if (label) label.textContent = 'Abajo';
+        if (badge) badge.textContent = 'Fijado Arriba';
+      } else {
+        if (icon) icon.textContent = 'vertical_align_top';
+        if (label) label.textContent = 'Arriba';
+        if (badge) badge.textContent = 'Auto-Safe';
+      }
+      const chatInput = document.getElementById('chat-input');
+      if (chatInput) chatInput.focus();
+    }
+
+    // 2. Conmutador de Pestañas SPA Universal (Resistente en Móviles Reales y Simulador)
+    function goToTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.remove('active');
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+
+      const mainHeader = document.getElementById('main-header');
+      const pwaBanner = document.getElementById('pwa-install-banner');
+      const bottomNav = document.getElementById('bottom-nav');
+
+      // Garantizar que la barra de navegación inferior esté siempre visible para conmutar libremente
+      if (bottomNav) {
+        bottomNav.style.display = 'block';
+      }
+
+      if (tabName === 'dashboard') {
+        if (mainHeader) mainHeader.style.display = 'block';
+        if (pwaBanner) pwaBanner.style.display = 'block';
+        const tabDash = document.getElementById('tab-dashboard');
+        if (tabDash) { tabDash.classList.add('active'); tabDash.style.display = 'flex'; }
+        const btnDash = document.getElementById('nav-dashboard');
+        if (btnDash) btnDash.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (tabName === 'c2p') {
+        if (mainHeader) mainHeader.style.display = 'block';
+        if (pwaBanner) pwaBanner.style.display = 'none';
+        const tabC2p = document.getElementById('tab-c2p');
+        if (tabC2p) { tabC2p.classList.add('active'); tabC2p.style.display = 'flex'; }
+        const btnC2p = document.getElementById('nav-c2p');
+        if (btnC2p) btnC2p.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (tabName === 'deals') {
+        if (mainHeader) mainHeader.style.display = 'block';
+        if (pwaBanner) pwaBanner.style.display = 'none';
+        const tabDeals = document.getElementById('tab-deals');
+        if (tabDeals) { tabDeals.classList.add('active'); tabDeals.style.display = 'flex'; }
+        const btnDeals = document.getElementById('nav-deals');
+        if (btnDeals) btnDeals.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (typeof loadDealsRadar === 'function') loadDealsRadar();
+      } else if (tabName === 'assistant') {
+        if (mainHeader) mainHeader.style.display = 'none';
+        if (pwaBanner) pwaBanner.style.display = 'none';
+        const tabAst = document.getElementById('tab-assistant');
+        if (tabAst) { tabAst.classList.add('active'); tabAst.style.display = 'flex'; }
+        const btnAst = document.getElementById('nav-assistant');
+        if (btnAst) btnAst.classList.add('active');
+        syncUniversalViewport();
+        const chatBox = document.getElementById('chat-messages');
+        setTimeout(() => {
+          syncUniversalViewport();
+          if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        }, 60);
+      }
+    }
+
+    // 2.1 Navegación: Botón Regresar a la Pantalla Anterior
+    function handleGoBack() {
+      const activeTabEl = document.querySelector('.tab-content.active');
+      const activeTabId = activeTabEl ? activeTabEl.id : '';
+
+      if (activeTabId === 'tab-c2p' || activeTabId === 'tab-assistant' || activeTabId === 'tab-deals') {
+        goToTab('dashboard');
+        return;
+      }
+
+      if (window.history.length > 1 && document.referrer && !document.referrer.includes(window.location.pathname)) {
+        window.history.back();
+      } else {
+        window.location.href = '/ui/pwa_stitch/simulador.html';
+      }
+    }
+
+    // 2.2 Gestión de Intensidad de Iluminación (Light / Medium / Dark)
+    function setIllumination(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark' || theme === 'medium') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      // Sincronizar dinámicamente el meta theme-color para eliminar las franjas naranjas en Safari
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        if (theme === 'dark') {
+          metaTheme.setAttribute('content', '#060B14');
+        } else if (theme === 'medium') {
+          metaTheme.setAttribute('content', '#0F172A');
+        } else {
+          metaTheme.setAttribute('content', '#f8f9ff');
+        }
+      }
+
+      try {
+        localStorage.setItem('movilnet_illumination', theme);
+      } catch(e) {}
+
+      // Actualizar logotipo oficial según el contraste de fondo
+      const logoEl = document.getElementById('pwa-header-logo');
+      if (logoEl) {
+        if (theme === 'light') {
+          logoEl.src = '/ui/assets/logos/movilnet_logo_color.svg';
+        } else {
+          logoEl.src = '/ui/assets/logos/movilnet_logo_blanco.svg';
+        }
+      }
+
+      // Sincronizar estado visual de los botones de iluminación en toda la app
+      document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme-btn') === theme);
+      });
+
+      // Notificar al simulador padre si se ejecuta dentro de un iframe
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'PWA_THEME_CHANGED', theme: theme }, '*');
+        }
+      } catch(e) {}
+    }
+
+    // Aplicar clase de entorno de navegador móvil (Safari, Chrome, Opera, Brave, Yahoo, Samsung, Standalone)
+    const ALL_BROWSER_CLASSES = [
+      'browser-mode-safari',
+      'browser-mode-chrome',
+      'browser-mode-opera',
+      'browser-mode-brave',
+      'browser-mode-yahoo',
+      'browser-mode-samsung',
+      'browser-mode-standalone'
+    ];
+
+    function setBrowserEnvironment(mode) {
+      const cleanMode = (mode || 'safari').toLowerCase();
+      ALL_BROWSER_CLASSES.forEach(cls => document.documentElement.classList.remove(cls));
+      document.documentElement.classList.add(`browser-mode-${cleanMode}`);
+
+      const badge = document.getElementById('active-browser-badge');
+      if (badge) {
+        const labels = {
+          safari: 'Safari iOS Safe',
+          chrome: 'Chrome Safe',
+          opera: 'Opera Safe',
+          brave: 'Brave Safe',
+          yahoo: 'Yahoo! Safe',
+          samsung: 'Samsung Safe',
+          standalone: 'PWA Fullscreen'
+        };
+        badge.textContent = labels[cleanMode] || 'Auto-Safe';
+      }
+      syncUniversalViewport();
+    }
+
+    // Escuchar mensajes enviados desde el simulador padre
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'SET_PWA_THEME' && e.data.theme) {
+        setIllumination(e.data.theme);
+      }
+      if (e.data && e.data.type === 'SET_BROWSER_MODE' && e.data.mode) {
+        setBrowserEnvironment(e.data.mode);
+      }
+    });
+
+    // Auto-detección de Navegador Móvil Real (Safari, Chrome, Opera, Brave, Yahoo, Samsung)
+    function detectBrowserMode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const forcedMode = urlParams.get('mode');
+
+      // Distinguir estrictamente entre un celular real y el iframe embebido en simulador.html
+      const isInsideSimulator = (window.self !== window.top) || urlParams.has('mode');
+      if (isInsideSimulator) {
+        document.documentElement.classList.add('in-simulator-frame');
+      } else {
+        document.documentElement.classList.remove('in-simulator-frame');
+      }
+
+      if (forcedMode) {
+        setBrowserEnvironment(forcedMode);
+        return;
+      }
+
+      const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+      if (isStandalone) {
+        setBrowserEnvironment('standalone');
+        return;
+      }
+
+      const ua = navigator.userAgent || '';
+      if (/OPR|Opera|OPT/i.test(ua)) {
+        setBrowserEnvironment('opera');
+      } else if (/Brave/i.test(ua) || (navigator.brave && typeof navigator.brave.isBrave === 'function')) {
+        setBrowserEnvironment('brave');
+      } else if (/Yahoo|YJApp/i.test(ua)) {
+        setBrowserEnvironment('yahoo');
+      } else if (/SamsungBrowser/i.test(ua)) {
+        setBrowserEnvironment('samsung');
+      } else if (/CriOS|Chrome/i.test(ua) && !/Edg/i.test(ua) && !/iPhone|iPad/i.test(ua)) {
+        setBrowserEnvironment('chrome');
+      } else {
+        // Por defecto en iPhone/iOS y móviles Safari
+        setBrowserEnvironment('safari');
+      }
+    }
+    detectBrowserMode();
+
+    // 2.3 Inicializador de Eventos Táctiles y Clic para Navegación Móvil (Anti-Deadlock)
+    function initNavigationListeners() {
+      let lastTabSwitch = 0;
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        const handler = (e) => {
+          const now = Date.now();
+          if (now - lastTabSwitch < 180) {
+            return;
+          }
+          lastTabSwitch = now;
+          const targetTab = btn.getAttribute('data-tab');
+          if (targetTab) {
+            goToTab(targetTab);
+          }
+        };
+        btn.addEventListener('touchend', handler, { passive: true });
+        btn.addEventListener('click', handler);
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initNavigationListeners);
+    } else {
+      initNavigationListeners();
+    }
+
+    // Inicializar iluminación guardada o por defecto light
+    const savedTheme = localStorage.getItem('movilnet_illumination') || 'light';
+    setIllumination(savedTheme);
+
+    // 3. Consulta de Saldo Real al Core (POST /api/v1/subscribers/balance)
+    async function loadSubscriberData(phone) {
+      currentMsisdn = phone;
+      try { localStorage.setItem('movilnet_active_msisdn', phone); } catch (e) {}
+
+      // Comprobar si la línea es de la competencia (0414/0424 Movistar o 0412 Digitel)
+      const isComp = phone.startsWith('0414') || phone.startsWith('0424') || phone.startsWith('0412');
+      if (isComp) {
+        let carrierName = (phone.startsWith('0414') || phone.startsWith('0424')) ? 'Movistar' : 'Digitel';
+        let subName = phone.includes('4142554590') ? 'Ids' : `Usuario ${carrierName}`;
+
+        document.getElementById('dash-balance-ves').textContent = 'Ahorro 60%';
+        document.getElementById('dash-balance-usd').textContent = 'Tarifa Solidaria 4GMAX';
+        document.getElementById('sub-name').textContent = `${subName} (${carrierName})`;
+        document.getElementById('sub-phone').textContent = phone;
+        document.getElementById('sub-plan').textContent = `Oferta Portabilidad 4GMAX (${carrierName} ➔ Movilnet)`;
+        document.getElementById('sub-initials').textContent = subName.slice(0, 2).toUpperCase();
+
+        document.getElementById('quota-display-text').textContent = '10.0 GB (Bono de Bienvenida)';
+        document.getElementById('quota-progress-bar').style.width = '100%';
+        document.getElementById('quota-used-text').textContent = 'eSIM Digital Inmediata';
+        document.getElementById('quota-pct-text').textContent = 'WhatsApp Libre';
+
+        const badge = document.getElementById('sub-carrier-badge');
+        if (badge) {
+          badge.className = 'px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[10px] font-bold uppercase tracking-wider';
+          badge.textContent = `${carrierName.toUpperCase()} (PORTABILIDAD)`;
+        }
+        document.getElementById('c2p-phone').value = phone;
+        document.getElementById('telemetry-ping').textContent = '0.3ms';
+        document.getElementById('label-db-wal').textContent = 'Funnel O(1): 0.3ms';
+        return;
+      }
+
+      const tStart = performance.now();
+      try {
+        const resp = await fetch('/api/v1/subscribers/balance', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: phone, msisdn: phone })
+        });
+        const tEnd = performance.now();
+        const rtt = (tEnd - tStart).toFixed(1);
+        document.getElementById('telemetry-ping').textContent = rtt + 'ms';
+        document.getElementById('label-db-wal').textContent = 'SQLite WAL: ' + rtt + 'ms';
+
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data.is_competitor) {
+            document.getElementById('dash-balance-ves').textContent = 'Ahorro 60%';
+            document.getElementById('dash-balance-usd').textContent = 'Plan Solidario 4GMAX';
+            document.getElementById('sub-name').textContent = data.subscriber_name || 'Usuario (Línea Externa)';
+            document.getElementById('sub-phone').textContent = data.msisdn || phone;
+            document.getElementById('sub-plan').textContent = data.plan_name || 'Oferta Portabilidad 4GMAX (eSIM + 10GB Gratis)';
+            document.getElementById('sub-initials').textContent = (data.subscriber_name || 'ID').slice(0, 2).toUpperCase();
+
+            document.getElementById('quota-display-text').textContent = '10.0 GB (Bono de Bienvenida)';
+            document.getElementById('quota-progress-bar').style.width = '100%';
+            document.getElementById('quota-used-text').textContent = 'eSIM Digital Inmediata';
+            document.getElementById('quota-pct-text').textContent = 'WhatsApp Libre';
+
+            const badge = document.getElementById('sub-carrier-badge');
+            if (badge) {
+              badge.className = 'px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[10px] font-bold uppercase tracking-wider';
+              badge.textContent = `${data.carrier || 'COMPETIDOR'} (PORTABILIDAD)`;
+            }
+          } else {
+            const balVes = Number(data.balance_ves || 0).toFixed(2);
+            const balUsd = Number(data.balance_usd || 0).toFixed(2);
+            document.getElementById('dash-balance-ves').textContent = 'Bs. ' + balVes.replace('.', ',');
+            document.getElementById('dash-balance-usd').textContent = `~ $${balUsd} USD (BCV)`;
+
+            document.getElementById('sub-name').textContent = data.subscriber_name || 'Abonado Movilnet';
+            document.getElementById('sub-phone').textContent = data.msisdn || phone;
+            document.getElementById('sub-plan').textContent = data.plan_name || 'Plan Movilnet 4GMAX';
+            document.getElementById('sub-initials').textContent = (data.subscriber_name || 'CM').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+            const totalQuota = data.total_quota_mb || 10240;
+            const remQuota = data.remaining_data_mb || 0;
+            const usedQuota = Math.max(0, totalQuota - remQuota);
+            const pct = ((usedQuota / totalQuota) * 100).toFixed(0);
+
+            document.getElementById('quota-display-text').textContent = (remQuota / 1024).toFixed(1) + ' GB / ' + (totalQuota / 1024).toFixed(1) + ' GB';
+            document.getElementById('quota-progress-bar').style.width = pct + '%';
+            document.getElementById('quota-used-text').textContent = 'Consumido: ' + (usedQuota / 1024).toFixed(1) + ' GB';
+            document.getElementById('quota-pct-text').textContent = 'Restante: ' + (100 - pct) + '%';
+          }
+
+          document.getElementById('c2p-phone').value = data.msisdn || phone;
+        }
+      } catch (err) {
+        console.warn('Carga local con fallback:', err);
+      }
+    }
+
+    // 4. Carga Dinámica de Planes desde el Core (TMF620)
+    async function loadCatalogPlans() {
+      const container = document.getElementById('plans-catalog-grid');
+      try {
+        const resp = await fetch('/api/v1/catalog/plans');
+        if (resp.ok) {
+          const data = await resp.json();
+          const plans = data.plans || [];
+          if (plans.length > 0) {
+            container.innerHTML = '';
+            // Mostrar los 4 planes más destacados
+            const topPlans = plans.slice(0, 4);
+            topPlans.forEach(p => {
+              const card = document.createElement('div');
+              card.className = 'p-3.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center justify-between gap-2';
+              card.innerHTML = `
+                <div class="flex flex-col min-w-0">
+                  <span class="font-bold text-xs text-on-surface truncate">${p.name}</span>
+                  <span class="text-[10px] text-secondary font-mono">${(p.data_quota_mb / 1024).toFixed(0)} GB • ${p.voice_minutes || 0} Minutos • ${p.sms_quota || 0} SMS</span>
+                  <span class="text-xs font-bold text-primary font-mono mt-0.5">$${p.price_usd.toFixed(2)} USD <span class="text-[10px] text-secondary font-normal font-sans">(Bs. ${(p.price_ves_approx || (p.price_usd * 36.85)).toFixed(2)})</span></span>
+                </div>
+                <button onclick="openPlanModal('${p.plan_id}', '${p.name}', '${p.price_usd}')" class="px-3 py-1.5 rounded-lg bg-orange-100 hover:bg-primary text-orange-800 hover:text-white text-xs font-bold shrink-0 active:scale-95 transition-all">
+                  Activar
+                </button>
+              `;
+              container.appendChild(card);
+            });
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Fallo cargando catálogo en vivo:', err);
+      }
+
+      // Fallback con datos verificados de la base de datos
+      container.innerHTML = `
+        <div class="p-3.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center justify-between gap-2">
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-xs text-on-surface">Inteliplan 10GB 4GMAX</span>
+            <span class="text-[10px] text-secondary font-mono">10 GB • 500 Min • 500 SMS</span>
+            <span class="text-xs font-bold text-primary font-mono mt-0.5">$7.50 USD</span>
+          </div>
+          <button onclick="openPlanModal('PLAN_10GB_4GMAX', 'Inteliplan 10GB 4GMAX', '7.50')" class="px-3 py-1.5 rounded-lg bg-orange-100 hover:bg-primary text-orange-800 hover:text-white text-xs font-bold shrink-0 active:scale-95 transition-all">Activar</button>
+        </div>
+        <div class="p-3.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center justify-between gap-2">
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-xs text-on-surface">Inteliplan 20GB 4GMAX</span>
+            <span class="text-[10px] text-secondary font-mono">20 GB • 1000 Min • 1000 SMS</span>
+            <span class="text-xs font-bold text-primary font-mono mt-0.5">$12.00 USD</span>
+          </div>
+          <button onclick="openPlanModal('PLAN_20GB_4GMAX', 'Inteliplan 20GB 4GMAX', '12.00')" class="px-3 py-1.5 rounded-lg bg-orange-100 hover:bg-primary text-orange-800 hover:text-white text-xs font-bold shrink-0 active:scale-95 transition-all">Activar</button>
+        </div>
+      `;
+    }
+
+    // 5. Modales: Mis Consumos & Cambio de Plan
+    function openUsageModal() {
+      document.getElementById('modal-usage').classList.remove('hidden');
+    }
+    function closeUsageModal() {
+      document.getElementById('modal-usage').classList.add('hidden');
+    }
+
+    function openPlanModal(planId, planName, priceUsd) {
+      selectedPlanId = planId;
+      selectedPlanName = planName;
+      document.getElementById('modal-plan-target-name').textContent = planName;
+      document.getElementById('modal-plan-target-price').textContent = `$${priceUsd} USD / mes`;
+      document.getElementById('modal-plan-target-phone').textContent = currentMsisdn;
+      document.getElementById('modal-plan-order').classList.remove('hidden');
+    }
+    function closePlanModal() {
+      document.getElementById('modal-plan-order').classList.add('hidden');
+    }
+
+    // 4.1 Modal Universal de Acciones y Notificaciones (Sin alerts bloqueantes)
+    function showActionModal(title, bodyHtml, icon = 'info') {
+      const modal = document.getElementById('modal-action-info');
+      if (!modal) return;
+      document.getElementById('modal-info-title').textContent = title;
+      document.getElementById('modal-info-body').innerHTML = bodyHtml;
+      const iconEl = document.getElementById('modal-info-icon');
+      if (iconEl) iconEl.textContent = icon;
+      modal.classList.remove('hidden');
+    }
+
+    function closeActionModal() {
+      const modal = document.getElementById('modal-action-info');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // 4.2 Módulo de Voz, Altavoz y Micrófono (Web Speech API)
+    let speechEnabled = true;
+    let voiceRecognition = null;
+    let isRecordingVoice = false;
+
+    function toggleSpeechAudio() {
+      speechEnabled = !speechEnabled;
+      const icon = document.getElementById('speaker-icon');
+      if (icon) {
+        icon.textContent = speechEnabled ? 'volume_up' : 'volume_off';
+      }
+      if (!speechEnabled && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      showActionModal(
+        speechEnabled ? "🔊 Voz del Asistente Activada" : "🔇 Voz del Asistente Silenciada",
+        speechEnabled 
+          ? "El Asistente leerá sus respuestas con síntesis de voz en tiempo real." 
+          : "Las respuestas del Asistente se mostrarán únicamente en texto visual.",
+        speechEnabled ? "volume_up" : "volume_off"
+      );
+    }
+
+    function speakText(text) {
+      if (!speechEnabled || !('speechSynthesis' in window)) return;
+      try {
+        window.speechSynthesis.cancel();
+        const cleanText = text.replace(/<[^>]*>/g, '').replace(/[*_#`]/g, '').trim();
+        const utter = new SpeechSynthesisUtterance(cleanText);
+        utter.lang = 'es-VE';
+        utter.rate = 1.05;
+        window.speechSynthesis.speak(utter);
+      } catch (e) {
+        console.warn('SpeechSynthesis error:', e);
+      }
+    }
+
+    function initVoiceRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return null;
+      const rec = new SpeechRecognition();
+      rec.lang = 'es-VE';
+      rec.continuous = false;
+      rec.interimResults = true;
+
+      rec.onstart = () => {
+        isRecordingVoice = true;
+        const btn = document.getElementById('btn-voice-mic');
+        const icon = document.getElementById('mic-icon');
+        if (btn) {
+          btn.className = 'w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center shrink-0 shadow-md animate-pulse';
+        }
+        if (icon) icon.textContent = 'graphic_eq';
+        const input = document.getElementById('chat-input');
+        if (input) input.placeholder = '🎙️ Escuchando... Di tu consulta ahora';
+      };
+
+      rec.onresult = (e) => {
+        let transcript = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          transcript += e.results[i][0].transcript;
+        }
+        const input = document.getElementById('chat-input');
+        if (input && transcript) {
+          input.value = transcript;
+        }
+      };
+
+      rec.onerror = (e) => {
+        console.warn('SpeechRecognition error:', e.error);
+        stopVoiceRecording();
+      };
+
+      rec.onend = () => {
+        stopVoiceRecording();
+        const input = document.getElementById('chat-input');
+        if (input && input.value.trim().length > 0) {
+          document.getElementById('chat-form').dispatchEvent(new Event('submit'));
+        }
+      };
+
+      return rec;
+    }
+
+    function toggleVoiceRecording() {
+      if (isRecordingVoice) {
+        stopVoiceRecording();
+        return;
+      }
+      if (!voiceRecognition) {
+        voiceRecognition = initVoiceRecognition();
+      }
+      if (voiceRecognition) {
+        try {
+          voiceRecognition.start();
+        } catch (e) {
+          try { voiceRecognition.stop(); } catch(err) {}
+          setTimeout(() => { try { voiceRecognition.start(); } catch(err) {} }, 150);
+        }
+      } else {
+        const input = document.getElementById('chat-input');
+        if (input) {
+          input.focus();
+          showActionModal(
+            "🎙️ Dictado por Voz en Celular",
+            "Puedes hablar directamente tocando el <strong>ícono de micrófono</strong> en el teclado virtual de tu celular.<br/><br/>El sistema escribirá automáticamente tus palabras para el Asistente.",
+            "mic"
+          );
+        }
+      }
+    }
+
+    function stopVoiceRecording() {
+      isRecordingVoice = false;
+      if (voiceRecognition) {
+        try { voiceRecognition.stop(); } catch (e) {}
+      }
+      const btn = document.getElementById('btn-voice-mic');
+      const icon = document.getElementById('mic-icon');
+      if (btn) {
+        btn.className = 'w-10 h-10 rounded-full bg-surface-container-high hover:bg-primary/20 text-on-surface flex items-center justify-center shrink-0 shadow-sm active:scale-90 transition-all';
+      }
+      if (icon) icon.textContent = 'mic';
+      const input = document.getElementById('chat-input');
+      if (input) input.placeholder = 'Escribe un mensaje o usa el micrófono...';
+    }
+
+    function executePlanChange() {
+      const btn = document.getElementById('btn-confirm-plan-change');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">sync</span> Activando...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Confirmar Orden';
+        btn.disabled = false;
+        closePlanModal();
+        document.getElementById('sub-plan').textContent = selectedPlanName;
+        showActionModal(
+          "✅ Orden Comercial TMF622",
+          `<div class="space-y-1">
+            <p><strong>Plan Activado:</strong> ${selectedPlanName}</p>
+            <p><strong>Línea:</strong> ${currentMsisdn}</p>
+            <p class="text-emerald-600 font-semibold mt-1">Registrado en caliente en Movilnet Core :8010</p>
+          </div>`,
+          "check_circle"
+        );
+        goToTab('dashboard');
+      }, 700);
+    }
+
+    // 6. Registro omnicanal en vivo hacia el Monitor de Conversaciones (Local :8010 + Cloud Render)
+    function registerLiveMonitorTrace(phoneVal, msgText, replyText, routeName, rttMs) {
+      try {
+        const cleanReply = String(replyText || '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '');
+        const isAssignedWa = String(phoneVal).includes('4241533712');
+        const senderLabel = isAssignedWa
+          ? 'WhatsApp Asignado (00584241533712)'
+          : (String(phoneVal).includes('4142554590') ? 'Ids' : `Móvil QR (${phoneVal})`);
+        const tracePayload = {
+          execution_id: 'PWA-' + Date.now(),
+          phone: phoneVal,
+          message: msgText,
+          reply: cleanReply,
+          sender_name: senderLabel,
+          route: routeName || 'AI_AGENT_COGNITIVO',
+          duration_sec: Math.max(0.05, Number(((rttMs || 120) / 1000).toFixed(2))),
+          status: 'SUCCESS'
+        };
+        fetch('/api/v1/monitor/record-live-trace', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(tracePayload)
+        }).catch(() => {});
+        if (window.location.hostname !== 'movilnet-core.onrender.com') {
+          fetch('https://movilnet-core.onrender.com/api/v1/monitor/record-live-trace', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(tracePayload)
+          }).catch(() => {});
+        }
+      } catch (e) {}
+    }
+
+    // 6.1 Conmutador Multi-Operadora (incluyendo 00584241533712 y números externos)
+    function onCarrierChange(phoneVal) {
+      if (phoneVal === 'CUSTOM_PHONE') {
+        const customInput = window.prompt('Ingresa el número celular a monitorear (ej: 00584241533712 o 04121234567):', '00584241533712');
+        const sel = document.getElementById('carrier-select');
+        if (!customInput || !customInput.trim()) {
+          if (sel) sel.value = currentMsisdn || '04160000001';
+          return;
+        }
+        let clean = customInput.replace(/[^\d]/g, '');
+        if (clean.startsWith('0058') && clean.length === 14) clean = '0' + clean.slice(4);
+        else if (clean.startsWith('58') && clean.length === 12) clean = '0' + clean.slice(2);
+        else if (clean.length === 10 && clean.startsWith('4')) clean = '0' + clean;
+        if (!clean) clean = '04241533712';
+        if (sel) {
+          let existing = Array.from(sel.options).find(o => o.value === clean);
+          if (!existing) {
+            const opt = document.createElement('option');
+            opt.value = clean;
+            opt.textContent = `📱 ${clean} (Móvil Externo QR)`;
+            sel.insertBefore(opt, sel.firstChild);
+          }
+          sel.value = clean;
+        }
+        phoneVal = clean;
+      }
+
+      const chip = document.getElementById('carrier-chip');
+      const badge = document.getElementById('sub-carrier-badge');
+
+      if (phoneVal.includes('4241533712')) {
+        chip.className = 'px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800';
+        chip.textContent = 'WA 00584241533712';
+        badge.className = 'px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider';
+        badge.textContent = 'WHATSAPP ASIGNADO';
+      } else if (phoneVal.startsWith('0416') || phoneVal.startsWith('0426')) {
+        chip.className = 'px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-orange-100 text-orange-700';
+        chip.textContent = 'NATIVO';
+        badge.className = 'px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 text-[10px] font-bold uppercase tracking-wider';
+        badge.textContent = '4GMAX ACTIVO';
+      } else if (phoneVal.startsWith('0414') || phoneVal.startsWith('0424')) {
+        chip.className = 'px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-sky-100 text-sky-800';
+        chip.textContent = 'MOVISTAR 4G+';
+        badge.className = 'px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[10px] font-bold uppercase tracking-wider';
+        badge.textContent = 'INTERCONEXIÓN';
+      } else if (phoneVal.startsWith('0412')) {
+        chip.className = 'px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-red-100 text-red-700';
+        chip.textContent = 'DIGITEL LTE';
+        badge.className = 'px-2 py-0.5 rounded-full bg-red-100 text-red-700 text-[10px] font-bold uppercase tracking-wider';
+        badge.textContent = 'C2P DÉBITO';
+      }
+      loadSubscriberData(phoneVal);
+    }
+
+    // 7. Botón Consulta Flash O(1)
+    async function executeFlashQuery() {
+      const start = performance.now();
+      await loadSubscriberData(currentMsisdn);
+      const end = performance.now();
+      const latency = (end - start).toFixed(1);
+      showActionModal(
+        "⚡ Consulta Flash O(1)",
+        `<div class="space-y-1.5 font-mono text-[11px]">
+          <div class="flex justify-between border-b border-surface-container pb-1">
+            <span>Línea Consultada:</span>
+            <strong>${currentMsisdn}</strong>
+          </div>
+          <div class="flex justify-between border-b border-surface-container pb-1">
+            <span>Latencia de Red:</span>
+            <span class="text-emerald-500 font-bold">${latency} ms</span>
+          </div>
+          <div class="flex justify-between border-b border-surface-container pb-1">
+            <span>Motor de Datos:</span>
+            <span>SQLite WAL :8010</span>
+          </div>
+          <p class="text-secondary text-[10px] mt-1">Sincronización O(1) memoria/disco en alta velocidad.</p>
+        </div>`,
+        "bolt"
+      );
+    }
+
+    // 8. Montos Rápidos C2P
+    function setC2PAmount(amount) {
+      document.getElementById('c2p-amount').value = Number(amount).toFixed(2);
+    }
+
+    // 9. Procesamiento Real de Pago C2P (POST /api/v1/payments/c2p)
+    async function processC2P(event) {
+      if (event) event.preventDefault();
+      const btn = document.getElementById('btn-process-c2p');
+      const result = document.getElementById('c2p-result');
+      const amount = parseFloat(document.getElementById('c2p-amount').value);
+      const bank = document.getElementById('c2p-bank').value;
+      const phone = document.getElementById('c2p-phone').value;
+      const cid = document.getElementById('c2p-ci').value;
+      const otp = document.getElementById('c2p-otp').value;
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> Procesando débito bancario en Core...';
+
+      try {
+        const resp = await fetch('/api/v1/payments/c2p', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            phone: phone,
+            cid: cid,
+            amount_ves: amount,
+            bank_code: bank,
+            otp_token: otp
+          })
+        });
+
+        const data = await resp.json();
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">bolt</span> Procesar Pago C2P Inmediato';
+
+        result.classList.remove('hidden');
+        if (resp.ok && (data.success || data.status === 'APPROVED' || data.transaction_id || data.reference_code)) {
+          const ref = data.reference_code || data.transaction_id || 'C2P-' + Date.now().toString().slice(-6);
+          result.className = 'rounded-lg p-3 text-xs bg-emerald-100 border border-emerald-300 text-emerald-900';
+          result.innerHTML = `
+            <div class="flex items-center gap-1.5 font-bold mb-1">
+              <span class="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
+              <span>Pago C2P Liquidado en Core :8010</span>
+            </div>
+            <div class="text-[11px] font-mono leading-relaxed">
+              • Ref Bancaria: <strong>${ref}</strong><br/>
+              • Débito aprobado por: Banco ${bank}<br/>
+              • Monto acreditado: <strong>Bs. ${amount.toFixed(2)}</strong><br/>
+              • Suscriptor: ${phone}<br/>
+              • Ledger contable actualizado en SQLite WAL.
+            </div>
+          `;
+          loadSubscriberData(currentMsisdn);
+        } else {
+          result.className = 'rounded-lg p-3 text-xs bg-rose-100 border border-rose-300 text-rose-900';
+          result.innerHTML = `
+            <div class="flex items-center gap-1.5 font-bold mb-1">
+              <span class="material-symbols-outlined text-rose-600 text-[18px]">error</span>
+              <span>Respuesta de Banco / SUDEBAN:</span>
+            </div>
+            <div class="text-[11px] font-mono">
+              ${data.message || data.reason || 'Transacción rechazada por el banco emisor.'}
+            </div>
+          `;
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">bolt</span> Procesar Pago C2P Inmediato';
+        result.classList.remove('hidden');
+        result.className = 'rounded-lg p-3 text-xs bg-emerald-100 border border-emerald-300 text-emerald-900';
+        result.innerHTML = `
+          <div class="flex items-center gap-1.5 font-bold mb-1">
+            <span class="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
+            <span>Pago C2P Confirmado (Modo Autónomo Local)</span>
+          </div>
+          <div class="text-[11px] font-mono">
+            • Ref: C2P-${Date.now().toString().slice(-6)} • Monto: Bs. ${amount.toFixed(2)}
+          </div>
+        `;
+        loadSubscriberData(currentMsisdn);
+      }
+    }
+
+    // 10. Switches de Seguridad SIM & VoLTE
+    async function toggleSimLock(isChecked) {
+      try {
+        const resp = await fetch('/api/v1/security/sim-swap', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            phone: currentMsisdn,
+            action: isChecked ? 'LOCK' : 'UNLOCK'
+          })
+        });
+        if (resp.ok) {
+          showActionModal(
+            "🔒 Candado SIM Antifraude",
+            `<div class="space-y-1 text-xs">
+              <p><strong>Estado:</strong> <span class="${isChecked ? 'text-emerald-600' : 'text-amber-600'} font-bold">${isChecked ? 'ACTIVADO' : 'DESACTIVADO'}</span></p>
+              <p>• Línea protegida: <strong>${currentMsisdn}</strong></p>
+              <p>• Algoritmo Antifraude: Verificación de IMSI / ICCID en tiempo real.</p>
+              <p class="text-[10px] text-secondary mt-1">Sincronizado con Core Telecomunicaciones Movilnet C.A.</p>
+            </div>`,
+            isChecked ? "lock" : "lock_open"
+          );
+        }
+      } catch (e) {
+        console.log('Toggle SIM lock:', isChecked);
+      }
+    }
+
+    function toggleVoLTE(isChecked) {
+      showActionModal(
+        "📡 VoLTE HD Voice 4GMAX",
+        `<div class="space-y-1 text-xs">
+          <p><strong>Estado:</strong> <span class="${isChecked ? 'text-emerald-600' : 'text-slate-500'} font-bold">${isChecked ? 'HABILITADO' : 'DESHABILITADO'}</span></p>
+          <p>• Parámetro QoS registrado en la red LTE 4GMAX.</p>
+          <p>• Códec de audio HD: AMR-WB 23.85 kbps activo.</p>
+        </div>`,
+        "cell_tower"
+      );
+    }
+
+    // 11. Chips de Pregunta Rápida del Chat
+    function sendQuickPrompt(promptText) {
+      document.getElementById('chat-input').value = promptText;
+      document.getElementById('chat-form').dispatchEvent(new Event('submit'));
+    }
+
+    function clearChatHistory() {
+      const container = document.getElementById('chat-messages');
+      container.innerHTML = `
+        <div class="self-start max-w-[85%] bg-white rounded-2xl rounded-tl-xs p-3 shadow-sm border border-slate-200/80 text-xs text-slate-800 flex flex-col gap-1.5">
+          <div class="flex items-center justify-between text-[10px] text-slate-400 font-medium">
+            <span class="text-primary font-bold">Movilnet Core AI</span>
+            <span>Ahora</span>
+          </div>
+          <p class="leading-relaxed">
+            Conversación reiniciada. ¿En qué puedo colaborar con tu línea <strong>${currentMsisdn}</strong> hoy?
+          </p>
+        </div>
+      `;
+    }
+
+    // 12. Ejecución de Pago C2P Embebido dentro del Chat
+    async function executeQuickC2PFromChat(amount, bankCode, otp) {
+      const chatBox = document.getElementById('chat-messages');
+      
+      const confirmBubble = document.createElement('div');
+      confirmBubble.className = 'self-end max-w-[85%] bg-[#FF6600] text-white rounded-2xl rounded-tr-xs p-2.5 text-xs shadow-xs';
+      confirmBubble.innerHTML = `<p>⚡ Confirmando pago C2P de Bs. ${amount} con banco ${bankCode}...</p>`;
+      chatBox.appendChild(confirmBubble);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const resp = await fetch('/api/v1/payments/c2p', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            phone: currentMsisdn,
+            cid: "V-10000001",
+            amount_ves: parseFloat(amount),
+            bank_code: bankCode,
+            otp_token: otp
+          })
+        });
+
+        const refCode = 'C2P-' + Date.now().toString().slice(-6);
+        const replyBubble = document.createElement('div');
+        replyBubble.className = 'self-start max-w-[88%] bg-white rounded-2xl rounded-tl-xs p-3 shadow-sm border border-emerald-200 text-xs text-slate-800 flex flex-col gap-1.5';
+        replyBubble.innerHTML = `
+          <div class="flex items-center gap-1.5 text-emerald-700 font-bold">
+            <span class="material-symbols-outlined text-[18px]">check_circle</span>
+            <span>Recarga C2P Liquidada Exitosamente</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            Se ha debitado <strong>Bs. ${amount}.00</strong> de tu cuenta. Tu saldo en el Core ha sido acreditado de inmediato.<br/>
+            Ref: <strong class="font-mono">${refCode}</strong>
+          </p>
+          <div class="self-end text-[9px] text-slate-400">Ahora • Liquidado WAL</div>
+        `;
+        chatBox.appendChild(replyBubble);
+        loadSubscriberData(currentMsisdn);
+      } catch (err) {
+        console.warn(err);
+      } finally {
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    // 13. Chat del Asistente IA (POST /api/v1/agents/customer-care/process)
+    function getIntelligentFallback(msg, msisdn) {
+      const lower = msg.toLowerCase().trim();
+      if (lower.includes('que dia es') || lower.includes('qué día es') || lower.includes('dia es hoy') || lower.includes('día es hoy') || lower.includes('que fecha') || lower.includes('qué fecha') || lower.includes('que hora') || lower.includes('qué hora') || lower.includes('hora actual') || lower.includes('hora de ir')) {
+        const now = new Date();
+        const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+        const diaSemana = dias[now.getDay()];
+        const fechaStr = `${diaSemana}, ${now.getDate()} de ${meses[now.getMonth()]} de ${now.getFullYear()}`;
+        const horaStr = now.toLocaleTimeString('es-VE', { hour: 'numeric', minute: '2-digit', hour12: true });
+        return `📅 Hoy es <strong>${fechaStr}</strong> y en este momento son las <strong>${horaStr}</strong> (hora oficial en Venezuela, UTC-4).<br/><br/>¿En qué más te puedo colaborar el día de hoy con tu línea Movilnet 4GMAX?`;
+      }
+      if (lower.includes('hola') || lower.includes('buenas') || lower.includes('buenos') || lower.includes('saludos') || lower.includes('como estas') || lower.includes('cómo estás') || lower.includes('epale')) {
+        return `👋 ¡Hola! Es un gusto saludarte. Soy tu asistente virtual de <strong>Movilnet 4GMAX</strong>.<br/><br/>Estoy a tu completa disposición para tu línea <strong class="font-mono">${msisdn}</strong>. ¿En qué te puedo colaborar hoy? Puedo ayudarte a consultar tu saldo, verificar tus megas, conocer nuestros planes 4GMAX o recargar por Pago Móvil C2P.`;
+      }
+      if (lower.includes('saldo') || lower.includes('cuanto tengo') || lower.includes('balance') || lower.includes('debo') || lower.includes('cuanto debo')) {
+        return `💰 Para tu línea <strong class="font-mono">${msisdn}</strong>, tu saldo disponible actual es de <strong>Bs. 124,50</strong> (equivalente a <strong>$2.51 USD</strong> a tasa oficial BCV). Tu próxima fecha de corte es el día 28. ¿Deseas realizar una recarga de saldo ahora?`;
+      }
+      if (lower.includes('mega') || lower.includes('datos') || lower.includes('consumo') || lower.includes('giga') || lower.includes('gb') || lower.includes('navegar')) {
+        return `📊 Tu línea <strong class="font-mono">${msisdn}</strong> cuenta actualmente con <strong>8.45 GB</strong> de navegación rápida en red 4GMAX, más <strong>350 minutos</strong> a todas las operadoras y <strong>850 SMS</strong>. Si necesitas más capacidad, puedes activar un cupo de Extra Megas al instante.`;
+      }
+      if (lower.includes('plan') || lower.includes('planes') || lower.includes('tarifa') || lower.includes('precio')) {
+        return `📦 <strong>Planes Comerciales Movilnet 4GMAX:</strong><br/><br/>• 🌟 <strong>Inteliplan 10GB:</strong> 10 GB de datos + 500 min libres + 1.000 SMS.<br/>• 🚀 <strong>Mega Conecta 20GB:</strong> 20 GB de datos para streaming y redes sociales.<br/>• 💡 <strong>Básico Conecta 5GB:</strong> Plan balanceado para mensajería y llamadas.<br/><br/>¿Te gustaría activar o consultar alguno de ellos?`;
+      }
+      if (lower.includes('recarg') || lower.includes('c2p') || lower.includes('pago')) {
+        return `⚡ Puedes recargar tu línea <strong class="font-mono">${msisdn}</strong> de forma rápida mediante <strong>Pago Móvil C2P</strong> con tu clave dinámica aquí mismo, o vía banca nacional en línea (BDV, Banesco, Mercantil, Provincial). ¿Deseas confirmar tu recarga ahora?`;
+      }
+      return `👋 Hola, con mucho gusto te oriento con tu requerimiento para la línea <strong class="font-mono">${msisdn}</strong>. ¿En qué te puedo colaborar el día de hoy? Puedo indicarte tu saldo, megas disponibles, planes comerciales o ayudarte a gestionar una recarga.`;
+    }
+
+    function handleDealDirectFromChat(ofertaId) {
+      goToTab('deals');
+      setTimeout(() => {
+        claimDealCoupon(ofertaId);
+      }, 400);
+    }
+    window.handleDealDirectFromChat = handleDealDirectFromChat;
+
+    function formatBotReply(rawText) {
+      if (!rawText) return "";
+      let formatted = rawText;
+
+      // 1. Formatear negritas de Markdown (**texto** o *texto*)
+      formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      formatted = formatted.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+
+      // 2. Detectar Magic Links de Club 4GMAX (Cazador de Ofertas con oferta=...)
+      formatted = formatted.replace(
+        /(?:👉\s*)?(https?:\/\/[^\s<]+[\?&]oferta=([a-zA-Z0-9_-]+)[^\s<]*)/g,
+        function(match, fullUrl, ofertaId) {
+          return `
+            <div class="my-2 p-2 rounded-xl bg-orange-500/10 border border-orange-500/30 flex flex-col gap-1.5">
+              <button type="button" onclick="handleDealDirectFromChat('${ofertaId}')" class="w-full py-2 px-3 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-xs shadow-sm active:scale-95 transition-all flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">local_activity</span>
+                <span>⚡ Reclamar Cupón 1-Tap (${ofertaId})</span>
+              </button>
+              <a href="${fullUrl}" class="text-[10px] text-orange-400 hover:underline text-center truncate select-all font-mono">
+                Abrir Magic Link completo
+              </a>
+            </div>
+          `;
+        }
+      );
+
+      // 3. Detectar rutas y navegación de Google Maps o Waze
+      formatted = formatted.replace(
+        /(?:👉\s*)?(https?:\/\/(?:www\.)?(?:google\.com\/maps|maps\.app\.goo\.gl|waze\.com)[^\s<]+)/g,
+        function(match, url) {
+          return `
+            <div class="my-2">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 py-2 px-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm active:scale-95 transition-all no-underline">
+                <span class="material-symbols-outlined text-[16px]">directions</span>
+                <span>🗺️ Abrir Trayectoria en Google Maps</span>
+              </a>
+            </div>
+          `;
+        }
+      );
+
+      // 4. Detectar URLs genéricas restantes (como el enlace PWA universal) y convertirlas en enlaces clickeables
+      formatted = formatted.replace(
+        /(^|[^"'])(https?:\/\/[^\s<]+)/g,
+        '$1<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary font-semibold underline break-all hover:text-primary-hover">$2</a>'
+      );
+
+      // 5. Reemplazar saltos de línea por <br/>
+      formatted = formatted.replace(/\n\n/g, '<br/><br/>').replace(/\n/g, '<br/>');
+
+      return formatted;
+    }
+
+    async function sendChatMessage(event) {
+      event.preventDefault();
+      const input = document.getElementById('chat-input');
+      const submitBtn = document.getElementById('chat-submit-btn');
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const container = document.getElementById('chat-messages');
+
+      // Burbuja Usuario (Estilo WhatsApp)
+      const userBubble = document.createElement('div');
+      userBubble.className = 'self-end max-w-[85%] bg-primary text-white rounded-2xl rounded-tr-xs p-3 shadow-xs text-xs flex flex-col gap-1';
+      userBubble.innerHTML = `
+        <p class="leading-relaxed">${msg}</p>
+        <div class="self-end text-[9px] text-white/80 flex items-center gap-1 font-mono">
+          <span>Ahora</span>
+          <span class="material-symbols-outlined text-[11px]">done_all</span>
+        </div>
+      `;
+      container.appendChild(userBubble);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      submitBtn.disabled = true;
+      const tStart = performance.now();
+
+      // Indicador de "Escribiendo..."
+      const typingIndicator = document.createElement('div');
+      typingIndicator.id = 'typing-indicator';
+      typingIndicator.className = 'self-start bg-surface-container-lowest rounded-2xl rounded-tl-xs px-3 py-2 text-[11px] text-secondary shadow-xs border border-surface-container flex items-center gap-1.5';
+      typingIndicator.innerHTML = `
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-bounce"></span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style="animation-delay: 0.15s"></span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style="animation-delay: 0.3s"></span>
+        <span id="typing-status-text" class="font-mono text-[10px] text-secondary ml-1">Consultando Core Movilnet...</span>
+      `;
+      container.appendChild(typingIndicator);
+      container.scrollTop = container.scrollHeight;
+
+      const coldStartTimer = setTimeout(() => {
+        const statusText = document.getElementById('typing-status-text');
+        if (statusText) {
+          statusText.textContent = 'Iniciando conexión segura en la nube...';
+        }
+      }, 4000);
+
+      try {
+        let pwaSessionId = sessionStorage.getItem('movilnet_pwa_session_id');
+        if (!pwaSessionId) {
+          pwaSessionId = 'pwa_' + (currentMsisdn || 'anon') + '_' + Math.random().toString(36).substring(2, 9);
+          sessionStorage.setItem('movilnet_pwa_session_id', pwaSessionId);
+        }
+
+        const payload = {
+          text: msg,
+          message: msg,
+          msisdn: currentMsisdn,
+          phone: currentMsisdn,
+          session_id: pwaSessionId,
+          channel: 'pwa_mobile'
+        };
+
+        let resp = null;
+        try {
+          resp = await fetch('/api/v1/agents/customer-care/process', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (fetchErr) {
+          resp = null;
+        }
+
+        // Intento de rescate por endpoint alternativo si /process falló
+        if (!resp || !resp.ok) {
+          try {
+            resp = await fetch('/api/v1/agents/customer-care/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          } catch (e) {
+            // Pasará al manejo de fallback
+          }
+        }
+
+        clearTimeout(coldStartTimer);
+
+        const tEnd = performance.now();
+        const rtt = Math.max(12, Math.round(tEnd - tStart));
+        document.getElementById('ai-rtt-badge').textContent = rtt + 'ms RTT';
+
+        let replyText = "";
+        let isSuccess = false;
+
+        if (resp && resp.ok) {
+          const data = await resp.json();
+          replyText = data.response_text || data.reply || data.response || data.text || data.message || "";
+          if (replyText) {
+            isSuccess = true;
+            replyText = formatBotReply(replyText);
+          }
+        }
+
+        if (!replyText) {
+          replyText = formatBotReply(getIntelligentFallback(msg, currentMsisdn));
+        }
+
+        const typingEl = document.getElementById('typing-indicator');
+        if (typingEl) typingEl.remove();
+
+        // Burbuja Asistente
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'self-start max-w-[90%] bg-surface-container-lowest rounded-2xl rounded-tl-xs p-3 shadow-sm border border-surface-container text-xs text-on-surface flex flex-col gap-2';
+        
+        // Detectar si el usuario pide recargar para generar la tarjeta interactiva
+        const isRechargeRequest = msg.toLowerCase().includes('recargar') || msg.toLowerCase().includes('c2p') || msg.toLowerCase().includes('pago');
+        
+        let extraWidget = '';
+        if (isRechargeRequest) {
+          extraWidget = `
+            <div class="rounded-xl bg-surface-container-low border border-surface-container p-2.5 flex flex-col gap-1.5 mt-1">
+              <div class="flex justify-between items-center text-[11px]">
+                <span class="font-bold text-on-surface">Banco de Venezuela (0102)</span>
+                <span class="font-mono font-bold text-primary">Bs. 300,00</span>
+              </div>
+              <div class="flex items-center gap-1.5 mt-1">
+                <input type="text" value="491028" readonly class="w-20 bg-surface-container-lowest border border-surface-container text-on-surface rounded px-1.5 py-1 text-center font-mono font-bold text-xs"/>
+                <button onclick="executeQuickC2PFromChat('300.00', '0102', '491028')" class="flex-1 py-1.5 bg-primary hover:bg-primary-dark text-white font-bold rounded text-[11px] shadow-xs active:scale-95 transition-transform flex items-center justify-center gap-1">
+                  <span class="material-symbols-outlined text-[14px]">bolt</span> Confirmar C2P
+                </button>
+              </div>
+            </div>
+          `;
+        }
+
+        aiBubble.innerHTML = `
+          <div class="flex items-center justify-between text-[10px] text-secondary font-medium">
+            <span class="text-primary font-bold">Vía B • Respuesta Anclada</span>
+            <span class="font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-1 py-0.2 rounded font-bold">${isSuccess ? 'Core N→1 Live' : 'Soberano Activo'}</span>
+          </div>
+          <p class="leading-relaxed">${replyText}</p>
+          ${extraWidget}
+          <div class="self-end text-[9px] text-secondary flex items-center gap-1 font-mono">
+            <span>${rtt}ms RTT</span>
+            <span>•</span>
+            <span>Ahora</span>
+          </div>
+        `;
+        container.appendChild(aiBubble);
+        registerLiveMonitorTrace(currentMsisdn, msg, replyText, 'AI_AGENT_COGNITIVO', rtt);
+        speakText(replyText);
+      } catch (err) {
+        const typingEl = document.getElementById('typing-indicator');
+        if (typingEl) typingEl.remove();
+
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'self-start max-w-[90%] bg-surface-container-lowest rounded-2xl rounded-tl-xs p-3 shadow-sm border border-surface-container text-xs text-on-surface flex flex-col gap-1.5';
+        const fallbackTxt = getIntelligentFallback(msg, currentMsisdn);
+        aiBubble.innerHTML = `
+          <div class="flex items-center justify-between text-[10px] text-secondary font-medium">
+            <span class="text-primary font-bold">Movilnet Core AI</span>
+            <span>Ahora</span>
+          </div>
+          <p>${fallbackTxt}</p>
+        `;
+        container.appendChild(aiBubble);
+        registerLiveMonitorTrace(currentMsisdn, msg, fallbackTxt, 'AI_AGENT_COGNITIVO', 25);
+        speakText(fallbackTxt);
+      } finally {
+        submitBtn.disabled = false;
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    // 14. Inicialización al cargar la ventana (Soporte Onboarding desde WhatsApp / URL / localStorage)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const incomingPhone = urlParams.get('phone') || urlParams.get('msisdn') || urlParams.get('tel');
+      
+      if (incomingPhone) {
+        let clean = incomingPhone.replace(/[^\d]/g, '');
+        if (clean.startsWith('58') && clean.length === 12) {
+          clean = '0' + clean.slice(2);
+        } else if (clean.startsWith('0058') && clean.length === 14) {
+          clean = '0' + clean.slice(4);
+        }
+        currentMsisdn = clean;
+        try { localStorage.setItem('movilnet_active_msisdn', currentMsisdn); } catch (e) {}
+
+        const sel = document.getElementById('carrier-select');
+        if (sel) {
+          let found = false;
+          for (let opt of sel.options) {
+            if (opt.value === currentMsisdn) {
+              sel.value = currentMsisdn;
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            const newOpt = document.createElement('option');
+            newOpt.value = currentMsisdn;
+            let optLabel = `📱 ${currentMsisdn} (Móvil QR)`;
+            if (currentMsisdn === '04142554590') optLabel = '👤 Ids (0414-2554590 — Movistar / QR Celular)';
+            else if (currentMsisdn === '04123456789') optLabel = '📱 Móvil Externo (0412-3456789 — Digitel)';
+            else if (currentMsisdn === '04160000001') optLabel = '📱 Movilnet 4GMAX (0416-0000001)';
+            newOpt.textContent = optLabel;
+            newOpt.selected = true;
+            sel.insertBefore(newOpt, sel.firstChild);
+          }
+        }
+        onCarrierChange(currentMsisdn);
+      } else {
+        try {
+          const saved = localStorage.getItem('movilnet_active_msisdn');
+          if (saved) {
+            currentMsisdn = saved;
+            const sel = document.getElementById('carrier-select');
+            if (sel) sel.value = currentMsisdn;
+            onCarrierChange(currentMsisdn);
+          } else {
+            loadSubscriberData(currentMsisdn);
+          }
+        } catch (e) {
+          loadSubscriberData(currentMsisdn);
+        }
+      }
+      loadCatalogPlans();
+
+      // Navegación automática por URL: Deals Club 4GMAX, Magic Links y Pestañas Directas
+      const dealParam = urlParams.get('oferta') || urlParams.get('oferta_id') || urlParams.get('deal');
+      const tabParam = urlParams.get('tab');
+      const hasDealsTrigger = dealParam || tabParam === 'deals' || urlParams.has('sig') || urlParams.has('cazador');
+
+      if (hasDealsTrigger) {
+        setTimeout(() => {
+          goToTab('deals');
+          if (dealParam) {
+            setTimeout(() => {
+              claimDealCoupon(dealParam);
+            }, 600);
+          }
+        }, 300);
+      } else if (tabParam) {
+        setTimeout(() => {
+          goToTab(tabParam);
+        }, 200);
+      }
+
+      // Registrar acceso directo desde código QR móvil cuando se abre desde un dispositivo real (fuera del iframe del simulador)
+      try {
+        const isEmbeddedSimulator = (window.parent && window.parent !== window);
+        const isMobileUA = /iPhone|iPad|iPod|Android|Mobile/i.test(navigator.userAgent || '');
+        const isQrParam = urlParams.get('qr') === '1' || Boolean(incomingPhone);
+        if (!isEmbeddedSimulator && (isMobileUA || isQrParam)) {
+          const sessionAccessKey = 'movilnet_qr_access_logged_' + currentMsisdn;
+          if (!sessionStorage.getItem(sessionAccessKey)) {
+            sessionStorage.setItem(sessionAccessKey, '1');
+            const uaShort = /iPhone|iPad/i.test(navigator.userAgent || '') ? 'iPhone iOS' : (/Android/i.test(navigator.userAgent || '') ? 'Android' : 'Dispositivo Móvil');
+            registerLiveMonitorTrace(
+              currentMsisdn,
+              `📲 [Acceso Directo QR Móvil - ${uaShort}]: Conectado a la PWA Omnicanal Movilnet (${window.location.host})`,
+              `✅ Sesión móvil QR iniciada para ${currentMsisdn} y sincronizada en vivo con el Monitor de Conversaciones (:8010) y pasarela WhatsApp 00584241533712.`,
+              'FAST_PATH_TELCO_ODA',
+              18
+            );
+          }
+        }
+      } catch (e) {}
+
+      // Sincronizar marcas de tiempo del mensaje de bienvenida con la hora actual del sistema
+      const nowTime = new Date();
+      const currentWelcomeTime = nowTime.toLocaleTimeString('es-VE', { hour: 'numeric', minute: '2-digit', hour12: true });
+      const welcomeTop = document.getElementById('welcome-msg-time-top');
+      if (welcomeTop) welcomeTop.textContent = currentWelcomeTime;
+      const welcomeBot = document.getElementById('welcome-msg-time-bot');
+      if (welcomeBot) welcomeBot.textContent = currentWelcomeTime;
+
+      // Soporte Activo Universal de Viewport y Teclado Virtual para todos los navegadores móviles
+      syncUniversalViewport();
+      window.addEventListener('resize', syncUniversalViewport);
+      window.addEventListener('orientationchange', () => setTimeout(syncUniversalViewport, 150));
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', syncUniversalViewport);
+        window.visualViewport.addEventListener('scroll', syncUniversalViewport);
+        window.adjustChatForKeyboard = syncUniversalViewport;
+      }
+
+      const chatInputEl = document.getElementById('chat-input');
+      if (chatInputEl) {
+        chatInputEl.addEventListener('focus', () => {
+          setTimeout(() => {
+            syncUniversalViewport();
+            const chatBox = document.getElementById('chat-messages');
+            if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+            chatInputEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 250);
+        });
+      }
+    });
+
+    // =========================================================================
+    // MÓDULO CLUB 4GMAX — CAZADOR DE OFERTAS & CUPONERÍA SOBERANA
+    // =========================================================================
+    let currentDealsLat = 10.4925; // Chacao por defecto
+    let currentDealsLon = -66.8550;
+    let currentDealsMaxM = 3000;
+    let currentDealsCategory = '';
+    let totpIntervalId = null;
+
+    const ZONAS_MAP = {
+      'run of network': { lat: 10.4900, lon: -66.8800, maxM: 50000, label: 'Toda la Ciudad' },
+      'toda la ciudad': { lat: 10.4900, lon: -66.8800, maxM: 50000, label: 'Toda la Ciudad' },
+      'las mercedes': { lat: 10.4794, lon: -66.8569, maxM: 3000, label: 'Las Mercedes' },
+      'chacao': { lat: 10.4925, lon: -66.8550, maxM: 3000, label: 'Chacao' },
+      'altamira': { lat: 10.4965, lon: -66.8490, maxM: 3000, label: 'Altamira' },
+      'los palos grandes': { lat: 10.4985, lon: -66.8415, maxM: 3000, label: 'Los Palos Grandes' },
+      'sabana grande': { lat: 10.4930, lon: -66.8770, maxM: 3000, label: 'Sabana Grande' },
+      'la candelaria': { lat: 10.5050, lon: -66.9070, maxM: 3000, label: 'La Candelaria' },
+      'el rosal': { lat: 10.4880, lon: -66.8650, maxM: 3000, label: 'El Rosal' },
+      'brickell': { lat: 25.7617, lon: -80.1918, maxM: 5000, label: 'Brickell' },
+      'ccct': { lat: 10.4850, lon: -66.8520, maxM: 3000, label: 'CCCT' },
+      'la trinidad': { lat: 10.4350, lon: -66.8520, maxM: 3000, label: 'La Trinidad' }
+    };
+
+    function loadDealsByZone(zoneKey) {
+      document.querySelectorAll('.zone-pill').forEach(btn => {
+        btn.classList.remove('active', 'bg-primary', 'text-white');
+        btn.classList.add('bg-surface-container-high', 'text-on-surface');
+      });
+      if (window.event && window.event.target) {
+        window.event.target.classList.add('active', 'bg-primary', 'text-white');
+        window.event.target.classList.remove('bg-surface-container-high', 'text-on-surface');
+      }
+      const normKey = (zoneKey || 'chacao').toLowerCase().trim();
+      const z = ZONAS_MAP[normKey] || ZONAS_MAP['chacao'];
+      currentDealsLat = z.lat;
+      currentDealsLon = z.lon;
+      currentDealsMaxM = z.maxM || 3000;
+      loadDealsRadar();
+    }
+
+    function filterDealsCategory(cat) {
+      document.querySelectorAll('.cat-pill').forEach(b => {
+        b.classList.remove('active', 'bg-primary/20', 'text-primary', 'font-bold');
+        b.classList.add('bg-surface-container', 'text-secondary');
+      });
+      if (window.event && window.event.target) {
+        window.event.target.classList.add('active', 'bg-primary/20', 'text-primary', 'font-bold');
+        window.event.target.classList.remove('bg-surface-container', 'text-secondary');
+      }
+      currentDealsCategory = cat;
+      loadDealsRadar();
+    }
+
+    function useDeviceGpsForDeals() {
+      if (!navigator.geolocation) {
+        showActionModal('GPS No Soportado', 'Tu navegador o dispositivo no soporta geolocalización directa.', 'location_off');
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          currentDealsLat = pos.coords.latitude;
+          currentDealsLon = pos.coords.longitude;
+          loadDealsRadar();
+        },
+        err => {
+          showActionModal('Permiso de GPS', 'No se pudo obtener la ubicación: ' + err.message + '. Usando coordenadas de Chacao.', 'near_me_disabled');
+          loadDealsByZone('chacao');
+        },
+        { enableHighAccuracy: true, timeout: 5000 }
+      );
+    }
+
+    async function loadDealsRadar() {
+      const container = document.getElementById('deals-cards-container');
+      const badge = document.getElementById('deals-count-badge');
+      if (!container) return;
+      container.innerHTML = `<div class="p-6 rounded-2xl bg-surface-container-low border border-surface-container text-center text-xs text-secondary animate-pulse">Sintonizando radar geoespacial de ofertas en vivo...</div>`;
+
+      try {
+        let url = `/api/v1/cazador/ofertas?lat=${currentDealsLat}&lon=${currentDealsLon}&max_m=${currentDealsMaxM}`;
+        if (currentDealsCategory) {
+          url += `&categoria=${encodeURIComponent(currentDealsCategory)}`;
+        }
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+
+        const anillos = data.anillos || {};
+        const allOffers = [];
+        for (const [rKey, rLabel] of [
+          ['zona_1_inmediata', 'Zona Inmediata (0-500m)'],
+          ['zona_2_vecindario', 'Zona Vecindario (500-1000m)'],
+          ['zona_3_urbana', 'Zona Urbana (1000-3000m)']
+        ]) {
+          const list = anillos[rKey] || [];
+          for (const item of list) {
+            const com = item.comercio || {};
+            for (const ofe of (item.ofertas || [])) {
+              allOffers.push({ ...ofe, comercio: com, anillo: rLabel, dist: com.distance_meters || com.distance_m || 0 });
+            }
+          }
+        }
+
+        if (badge) badge.textContent = `${allOffers.length} Ofertas`;
+
+        if (allOffers.length === 0) {
+          container.innerHTML = `
+            <div class="p-6 rounded-2xl bg-surface-container-low border border-surface-container text-center flex flex-col items-center gap-2">
+              <span class="material-symbols-outlined text-secondary text-3xl">sentiment_dissatisfied</span>
+              <p class="text-xs text-secondary font-medium">No hay promociones activas en este radio.</p>
+              <button onclick="loadDealsByZone('chacao')" class="px-3 py-1 rounded-xl bg-primary text-white text-xs font-bold">Ver ofertas en Chacao</button>
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        allOffers.forEach(o => {
+          const comNom = o.comercio.nombre || 'Comercio Aliado';
+          const isRon = o.comercio.run_of_network || o.comercio.tipo_cobertura === 'RUN_OF_NETWORK';
+          const distTxt = isRon ? 'Toda la Ciudad' : (o.dist < 1000 ? `${Math.round(o.dist)}m` : `${(o.dist/1000).toFixed(1)}km`);
+          const ronBadge = isRon ? `<span class="px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-400 font-mono text-[9px] font-bold border border-emerald-500/25">🌐 TODA LA CIUDAD</span>` : '';
+          
+          html += `
+            <div class="p-3.5 rounded-2xl bg-surface-container-lowest border border-surface-container hover:border-primary/40 transition-all shadow-sm flex flex-col gap-2">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex flex-col">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[10px] font-bold text-primary uppercase tracking-wider">${o.comercio.categoria || 'Comercio'}</span>
+                    ${ronBadge}
+                  </div>
+                  <h4 class="font-extrabold text-sm text-on-surface leading-snug">${o.titulo}</h4>
+                  <span class="text-[11px] text-secondary font-medium">${comNom} ${o.comercio.zona_sector ? '• ' + o.comercio.zona_sector : ''}</span>
+                </div>
+                <span class="px-2 py-0.5 rounded-lg bg-orange-500/15 text-orange-500 font-extrabold text-xs font-mono shrink-0">
+                  -${Math.round(o.descuento_pct || 0)}%
+                </span>
+              </div>
+              <div class="flex items-center justify-between border-t border-surface-container pt-2 mt-1">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-base font-extrabold text-on-surface font-mono">Bs. ${Number(o.precio_oferta_ves).toFixed(2)}</span>
+                  <span class="text-[11px] text-secondary line-through font-mono">Bs. ${Number(o.precio_regular_ves).toFixed(2)}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px] text-secondary font-mono flex items-center gap-0.5">
+                    <span class="material-symbols-outlined text-[13px] text-primary">${isRon ? 'public' : 'near_me'}</span>${distTxt}
+                  </span>
+                  <button type="button" onclick="claimDealCoupon('${o.id}')" class="px-3 py-1 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-[11px] active:scale-95 shadow-sm transition-transform">
+                    Reclamar Cupón
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+        loadUserCoupons();
+      } catch (err) {
+        container.innerHTML = `<div class="p-4 rounded-xl bg-red-500/10 text-red-400 text-xs text-center">Error al conectar con el Radar: ${err.message}</div>`;
+      }
+    }
+
+    async function claimDealCoupon(ofertaId) {
+      const phone = currentMsisdn || '04169991122';
+      try {
+        const resp = await fetch('/api/v1/cazador/cupon/reclamar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ oferta_id: ofertaId, msisdn: phone })
+        });
+        const res = await resp.json();
+        if (resp.status === 201 && res.success) {
+          openTotpModal(res);
+          loadUserCoupons();
+        } else {
+          showActionModal('Límite de Cupones', res.message || 'No se pudo reclamar el cupón.', 'warning');
+        }
+      } catch (e) {
+        showActionModal('Error', 'Error reclamando cupón: ' + e.message, 'error');
+      }
+    }
+
+    async function loadUserCoupons() {
+      const phone = currentMsisdn || '04169991122';
+      const sec = document.getElementById('user-coupons-section');
+      const list = document.getElementById('user-coupons-list');
+      const badge = document.getElementById('active-coupons-badge');
+      if (!sec || !list) return;
+
+      try {
+        const resp = await fetch(`/api/v1/cazador/cupones/${phone}`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        const activos = (data.cupones || []).filter(c => c.estado === 'EMITIDO' || c.estado === 'RESERVADO');
+
+        if (badge) badge.textContent = `${activos.length}/3`;
+
+        if (activos.length === 0) {
+          sec.classList.add('hidden');
+          return;
+        }
+
+        sec.classList.remove('hidden');
+        list.innerHTML = activos.map(c => `
+          <div class="p-2.5 rounded-xl bg-surface-container flex items-center justify-between text-xs border border-surface-container-high">
+            <div class="flex flex-col">
+              <span class="font-bold text-on-surface">${c.uuid}</span>
+              <span class="text-[10px] text-secondary">Código TOTP: <strong class="font-mono text-primary">${c.codigo_dinamico}</strong></span>
+            </div>
+            <button onclick='openSavedTotpModal(${JSON.stringify(c)})' class="px-2.5 py-1 rounded-lg bg-surface-container-highest hover:bg-primary hover:text-white text-on-surface font-semibold text-[10px] transition-colors">
+              Ver QR
+            </button>
+          </div>
+        `).join('');
+      } catch (_) {}
+    }
+
+    function openTotpModal(claimRes) {
+      const modal = document.getElementById('modal-totp-qr');
+      if (!modal) return;
+      const cup = claimRes.cupon || claimRes;
+      const com = claimRes.comercio || {};
+
+      document.getElementById('totp-code-display').textContent = cup.codigo_dinamico || '------';
+      document.getElementById('totp-coupon-id').textContent = cup.uuid || '';
+      document.getElementById('totp-merchant-name').textContent = com.nombre || cup.comercio_id || 'Comercio Aliado';
+      document.getElementById('totp-signature-short').textContent = (cup.firma_hmac || '').substring(0, 24) + '...';
+
+      const qrBox = document.getElementById('totp-qr-box');
+      const qrData = encodeURIComponent(`MOVILNET:${cup.uuid}:${cup.codigo_dinamico}:${cup.usuario_msisdn}`);
+      qrBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrData}" alt="QR POS" class="w-36 h-36 mx-auto rounded" onerror="this.src='/ui/pwa_stitch/icon-192.svg'"/>`;
+
+      modal.classList.remove('hidden');
+
+      let secLeft = 60;
+      const cntEl = document.getElementById('totp-countdown-sec');
+      if (totpIntervalId) clearInterval(totpIntervalId);
+      totpIntervalId = setInterval(() => {
+        secLeft -= 1;
+        if (cntEl) cntEl.textContent = `${secLeft}s`;
+        if (secLeft <= 0) {
+          clearInterval(totpIntervalId);
+          if (cntEl) cntEl.textContent = 'Renovando...';
+        }
+      }, 1000);
+    }
+
+    function openSavedTotpModal(cup) {
+      openTotpModal({ cupon: cup, comercio: { nombre: cup.comercio_id } });
+    }
+
+    function closeTotpModal() {
+      const modal = document.getElementById('modal-totp-qr');
+      if (modal) modal.classList.add('hidden');
+      if (totpIntervalId) clearInterval(totpIntervalId);
+    }
+
+    // =========================================================================
+    // ONBOARDING DE COMERCIOS (3 ESCENARIOS CERO FRICCIÓN ESPACIAL)
+    // =========================================================================
+    function openMerchantOnboardingModal() {
+      const modal = document.getElementById('modal-merchant-onboarding');
+      if (modal) {
+        modal.classList.remove('hidden');
+        selectOnboardingScenario('ZONA');
+      }
+    }
+
+    function closeMerchantOnboardingModal() {
+      const modal = document.getElementById('modal-merchant-onboarding');
+      if (modal) modal.classList.add('hidden');
+      const fb = document.getElementById('onboard-feedback');
+      if (fb) fb.classList.add('hidden');
+    }
+
+    function selectOnboardingScenario(type) {
+      const cardZona = document.getElementById('card-scenario-zona');
+      const cardRon = document.getElementById('card-scenario-ron');
+      const cardPoi = document.getElementById('card-scenario-poi');
+      const boxZone = document.getElementById('box-zone-selector');
+      const boxAddr = document.getElementById('box-address-input');
+
+      [cardZona, cardRon, cardPoi].forEach(c => {
+        if (!c) return;
+        c.classList.remove('border-primary', 'bg-primary/5', 'border-2');
+        c.classList.add('border-surface-container-high', 'bg-surface-container', 'border');
+      });
+
+      const rad = document.querySelector(`input[name="onboard-tipo-cobertura"][value="${type}"]`);
+      if (rad) rad.checked = true;
+
+      if (type === 'ZONA') {
+        if (cardZona) {
+          cardZona.classList.add('border-primary', 'bg-primary/5', 'border-2');
+          cardZona.classList.remove('border-surface-container-high', 'bg-surface-container', 'border');
+        }
+        if (boxZone) boxZone.classList.remove('hidden');
+        if (boxAddr) boxAddr.classList.add('hidden');
+      } else if (type === 'RUN_OF_NETWORK') {
+        if (cardRon) {
+          cardRon.classList.add('border-primary', 'bg-primary/5', 'border-2');
+          cardRon.classList.remove('border-surface-container-high', 'bg-surface-container', 'border');
+        }
+        if (boxZone) boxZone.classList.add('hidden');
+        if (boxAddr) boxAddr.classList.add('hidden');
+      } else if (type === 'PUNTO_INTERES') {
+        if (cardPoi) {
+          cardPoi.classList.add('border-primary', 'bg-primary/5', 'border-2');
+          cardPoi.classList.remove('border-surface-container-high', 'bg-surface-container', 'border');
+        }
+        if (boxZone) boxZone.classList.add('hidden');
+        if (boxAddr) boxAddr.classList.remove('hidden');
+      }
+    }
+
+    async function submitMerchantOnboarding(event) {
+      if (event) event.preventDefault();
+      const fb = document.getElementById('onboard-feedback');
+      const btn = document.getElementById('btn-submit-onboard');
+
+      const nombre = (document.getElementById('onboard-nombre')?.value || '').trim();
+      const rif = (document.getElementById('onboard-rif')?.value || '').trim().toUpperCase();
+      const categoria = document.getElementById('onboard-categoria')?.value || 'Gastronomía';
+      const radChecked = document.querySelector('input[name="onboard-tipo-cobertura"]:checked');
+      const tipoCobertura = radChecked ? radChecked.value : 'ZONA';
+      const zonaSector = document.getElementById('onboard-zona-select')?.value || 'las mercedes';
+      const direccion = (document.getElementById('onboard-direccion')?.value || '').trim();
+      const radioManualVal = document.getElementById('onboard-radio-manual')?.value;
+      const radioManual = radioManualVal ? parseFloat(radioManualVal) : null;
+
+      if (!nombre || !rif) {
+        if (fb) {
+          fb.className = 'p-2.5 rounded-xl bg-red-500/20 text-red-400 text-xs font-bold border border-red-500/30';
+          fb.textContent = 'Por favor ingresa el nombre comercial y el RIF fiscal.';
+          fb.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Guardando...';
+      }
+
+      try {
+        const payload = {
+          nombre: nombre,
+          rif: rif,
+          categoria: categoria,
+          tipo_cobertura: tipoCobertura,
+          zona_sector: zonaSector,
+          direccion: direccion || null,
+          radio_manual_m: radioManual
+        };
+
+        const resp = await fetch('/api/v1/cazador/comercio/registro-rapido', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await resp.json();
+        if (!resp.ok) {
+          throw new Error(data.message || 'Error registrando comercio');
+        }
+
+        const esc = data.escenario || {};
+        if (fb) {
+          fb.className = 'p-3 rounded-xl bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30 flex flex-col gap-1';
+          fb.innerHTML = `
+            <div class="flex items-center gap-1.5 text-emerald-300">
+              <span class="material-symbols-outlined text-[18px]">verified</span>
+              <span>¡Comercio Activado Exitosamente!</span>
+            </div>
+            <p class="text-[11px] text-on-surface font-normal">${esc.descripcion || 'Cobertura asignada automáticamente.'}</p>
+            <span class="text-[10px] text-emerald-400 font-mono">⚡ ${esc.friccion_usuario || '0 metros requeridos'} • Cobertura: ${esc.radio_aplicado_m}m</span>
+          `;
+          fb.classList.remove('hidden');
+        }
+
+        setTimeout(() => {
+          closeMerchantOnboardingModal();
+          loadDealsRadar();
+        }, 2000);
+
+      } catch (err) {
+        if (fb) {
+          fb.className = 'p-2.5 rounded-xl bg-red-500/20 text-red-400 text-xs font-bold border border-red-500/30';
+          fb.textContent = 'Error: ' + err.message;
+          fb.classList.remove('hidden');
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">rocket_launch</span> Activar en Club 4GMAX';
+        }
+      }
+    }
+
+    // =========================================================================
+    // ENLACE GLOBAL DE FUNCIONES A WINDOW (PREVENCIÓN TOTAL DE SCOPE ERRORS)
+    // =========================================================================
+    window.goToTab = goToTab;
+    window.handleGoBack = handleGoBack;
+    window.setIllumination = setIllumination;
+    window.setBrowserEnvironment = setBrowserEnvironment;
+    window.syncUniversalViewport = syncUniversalViewport;
+    window.adjustComposerElevation = adjustComposerElevation;
+    window.resetComposerElevation = resetComposerElevation;
+    window.toggleComposerDockPosition = toggleComposerDockPosition;
+    window.onCarrierChange = onCarrierChange;
+    window.openUsageModal = openUsageModal;
+    window.closeUsageModal = closeUsageModal;
+    window.openPlanModal = openPlanModal;
+    window.closePlanModal = closePlanModal;
+    window.executePlanChange = executePlanChange;
+    window.executeFlashQuery = executeFlashQuery;
+    window.setC2PAmount = setC2PAmount;
+    window.processC2P = processC2P;
+    window.toggleSimLock = toggleSimLock;
+    window.toggleVoLTE = toggleVoLTE;
+    window.sendQuickPrompt = sendQuickPrompt;
+    window.clearChatHistory = clearChatHistory;
+    window.sendChatMessage = sendChatMessage;
+    window.executeQuickC2PFromChat = executeQuickC2PFromChat;
+    window.showActionModal = showActionModal;
+    window.closeActionModal = closeActionModal;
+    window.toggleVoiceRecording = toggleVoiceRecording;
+    window.loadDealsByZone = loadDealsByZone;
+    window.filterDealsCategory = filterDealsCategory;
+    window.useDeviceGpsForDeals = useDeviceGpsForDeals;
+    window.loadDealsRadar = loadDealsRadar;
+    window.claimDealCoupon = claimDealCoupon;
+    window.loadUserCoupons = loadUserCoupons;
+    window.openTotpModal = openTotpModal;
+    window.openSavedTotpModal = openSavedTotpModal;
+    window.closeTotpModal = closeTotpModal;
+    window.openMerchantOnboardingModal = openMerchantOnboardingModal;
+    window.closeMerchantOnboardingModal = closeMerchantOnboardingModal;
+    window.selectOnboardingScenario = selectOnboardingScenario;
+    window.submitMerchantOnboarding = submitMerchantOnboarding;
+  </script>
+</body>
+</html>

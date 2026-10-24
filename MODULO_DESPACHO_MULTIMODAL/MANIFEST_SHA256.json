@@ -1,0 +1,309 @@
+{
+  "title": "Manifiesto Criptográfico de Artefactos de Software — Módulo Despacho Multimodal",
+  "entity": "Telecomunicaciones Movilnet C.A.",
+  "generated_at": "2026-10-23 21:11:24 VET",
+  "total_files": 60,
+  "merkle_root_sha256": "27fbd6802c8cffa72469c27e2ed976194a5aebb62f56dbe9f1f51dfb87e41910",
+  "files": {
+    ".env.example": {
+      "sha256": "2567ba3ccd7df081fe4f2318c0499eb5958e45654a920d5d4d1cb66f42df0107",
+      "size_bytes": 1010,
+      "last_modified": "2026-10-18T11:43:50.753583"
+    },
+    ".gitignore": {
+      "sha256": "434d2b5df3eaa325d4a29e1e11a1e0755b6576aa50b1ad36a3a34b77abad2fd0",
+      "size_bytes": 219,
+      "last_modified": "2026-10-18T11:43:48.176255"
+    },
+    "INICIAR_MODULO_MULTIMODAL.command": {
+      "sha256": "beb29c810878c17a6699e5de1e9dd25db9ee9f708d84d0d37781dcb58e6bcca7",
+      "size_bytes": 1043,
+      "last_modified": "2026-10-18T10:52:53.737410"
+    },
+    "PROBAR_MODULO_MULTIMODAL.command": {
+      "sha256": "a2646089253a67612ebaa8f6725072cff4b44df5ecb4505c4ddf2af33e7f48a6",
+      "size_bytes": 1698,
+      "last_modified": "2026-10-19T09:19:06.395871"
+    },
+    "PUNTO_DE_CONTROL_SESION_ACTIVA.md": {
+      "sha256": "74f80cc952e63c559bf3d8b827e6066fff211ff696a9b9580f605c6216f77daf",
+      "size_bytes": 3362,
+      "last_modified": "2026-10-19T09:21:12.788454"
+    },
+    "README.md": {
+      "sha256": "bfeefaf39d5ee30a4c1712b703483de73faebd3d00ec0edc064eb516c3e3cc4b",
+      "size_bytes": 7916,
+      "last_modified": "2026-10-18T11:44:05.680526"
+    },
+    "application/media_processor.py": {
+      "sha256": "650dde0e2dad1327d67bf02a4d745ff2a55b65bd55473bf70ff39d3ff8beecaf",
+      "size_bytes": 3540,
+      "last_modified": "2026-10-18T11:49:34.988074"
+    },
+    "application/multimodal_orchestrator.py": {
+      "sha256": "a974c459a8808957db1db494641c43588819f6e2213a1cdb30f291735be590eb",
+      "size_bytes": 6570,
+      "last_modified": "2026-10-18T11:49:57.490203"
+    },
+    "application/rich_response_builder.py": {
+      "sha256": "18921d0f528c8b71ceff7f9c98fa293855f3549d1d9f2e0940b1180f6822768d",
+      "size_bytes": 2639,
+      "last_modified": "2026-10-18T10:52:53.748284"
+    },
+    "application/transcription_engine.py": {
+      "sha256": "17edfb9f222a8d0877ca46ff33ffecf087e9c4ce85574f134ee723d37fbca478",
+      "size_bytes": 4228,
+      "last_modified": "2026-10-18T11:49:25.070734"
+    },
+    "application/vault_service.py": {
+      "sha256": "9bf6c4a3309db4c068e492ddc4dd9c193c8807d898593f4d965bc1050ff5ab25",
+      "size_bytes": 5444,
+      "last_modified": "2026-10-23T21:09:44.062520"
+    },
+    "application/voucher_parser.py": {
+      "sha256": "df90848bcd4f40de0b6d7913959d8416e545e1abbeba70ec1edaa8551339b52c",
+      "size_bytes": 14919,
+      "last_modified": "2026-10-19T08:36:48.845955"
+    },
+    "config/n8n_workflows/DEV_STAGE_Movilnet_Despacho_Multimodal_Sandbox.json": {
+      "sha256": "90b3d8af787b892b1f8e656aed65c1668fcfc781ddc557e3ee570d077c52c89f",
+      "size_bytes": 5308,
+      "last_modified": "2026-10-18T12:00:53.037787"
+    },
+    "docs/BITACORA_TECNICA.md": {
+      "sha256": "fbe2fa905a0934456cfd82f73caba32f6f541de2660c0bbd23a172fc6e431cc9",
+      "size_bytes": 20658,
+      "last_modified": "2026-10-19T09:21:00.353015"
+    },
+    "docs/DICCIONARIO_BASE_DATOS_Y_CAMPOS.md": {
+      "sha256": "7d88582759a448d9119b97f75ce6bef6f7a3ece40b4f46089c03a014525f9b57",
+      "size_bytes": 13324,
+      "last_modified": "2026-10-18T11:43:50.805973"
+    },
+    "docs/ESPECIFICACION_AGENTES_MCP_Y_ORQUESTADOR.md": {
+      "sha256": "af6bf87ec6e0570dc5640677dc75e1b5e3c684ae2f299ba664a1a964f3fa5d18",
+      "size_bytes": 7542,
+      "last_modified": "2026-10-18T10:52:53.735156"
+    },
+    "docs/ESPECIFICACION_SANDBOX_N8N_DEV_STAGE.md": {
+      "sha256": "076a07ccf93a023f4e16250b9699ee02293a3b678e70526c72da2901fa96091d",
+      "size_bytes": 4794,
+      "last_modified": "2026-10-18T12:01:10.163154"
+    },
+    "docs/GUIA_PORTABILIDAD_MULTIPROYECTO.md": {
+      "sha256": "cfba0d9d5687cf8df34bc935d73e5044d7eda3ca3a18801271a5c883c185b1ca",
+      "size_bytes": 5123,
+      "last_modified": "2026-10-18T10:52:53.733907"
+    },
+    "docs/HISTORIAL_CHATS_181026_ORIGEN_Y_CONCEPCION.md": {
+      "sha256": "876a468c6f841f065e67609a40b19867d0227581c3f246236a2a6f97a8f22875",
+      "size_bytes": 13942,
+      "last_modified": "2026-10-18T10:52:53.735914"
+    },
+    "docs/MODELO_CONCEPTUAL_Y_ARQUITECTURA.md": {
+      "sha256": "78c7f83ba4d4237fa7f9c620f6bd129e0af0467e9d8efcf3b9b8150610150a60",
+      "size_bytes": 10591,
+      "last_modified": "2026-10-18T10:52:53.736412"
+    },
+    "domain/enums.py": {
+      "sha256": "5d35e987ecfb2d926adf1c4912c89224523b4098f1d6b5cda058ee2c4709d55d",
+      "size_bytes": 924,
+      "last_modified": "2026-10-18T10:52:53.754712"
+    },
+    "domain/invariants.py": {
+      "sha256": "8a62713b81feb2bd73a0164f4a0907022dbd19f37335e1819ae66542e00bac3f",
+      "size_bytes": 5238,
+      "last_modified": "2026-10-18T10:52:53.755716"
+    },
+    "domain/models.py": {
+      "sha256": "bd076de9bd3c3efb7895a46c7d73268897e39a8cf927673b05cff26b4b6cb322",
+      "size_bytes": 2871,
+      "last_modified": "2026-10-23T21:08:18.471106"
+    },
+    "infrastructure/apple_vision_ocr.swift": {
+      "sha256": "22203762b71e4f182036e48dd4d51433bb82136cbd53a4a118f8485d7f238003",
+      "size_bytes": 1845,
+      "last_modified": "2026-10-18T11:34:01.909468"
+    },
+    "infrastructure/database.py": {
+      "sha256": "24d97c3a08fc5f1c4ff0879cbe88ecfa5b07d98a23ce0b7bf28cff764af726ee",
+      "size_bytes": 4063,
+      "last_modified": "2026-10-18T10:52:53.752273"
+    },
+    "infrastructure/ocr_backends.py": {
+      "sha256": "2e549047d342a4790b778ca0e6a7553d3542a90969020478eaee15c7464e22d0",
+      "size_bytes": 9307,
+      "last_modified": "2026-10-18T11:35:34.911389"
+    },
+    "infrastructure/repository.py": {
+      "sha256": "3e045b83ee842656d64080d266e35c7474b1daba29d8112737e2cc947a1e49ed",
+      "size_bytes": 10024,
+      "last_modified": "2026-10-23T21:08:58.831957"
+    },
+    "infrastructure/storage_engine.py": {
+      "sha256": "24cdb471965e0912027793e8312d12fa317cccae2e0a430d4d64febbee9ce3e3",
+      "size_bytes": 4443,
+      "last_modified": "2026-10-18T11:46:38.235859"
+    },
+    "infrastructure/stt_backends.py": {
+      "sha256": "d5c4d16a47a3264e9bcc2d1778bf8396f1a18e229ad85f82ea0b941ad473fd51",
+      "size_bytes": 11329,
+      "last_modified": "2026-10-18T11:51:18.032317"
+    },
+    "infrastructure/whatsapp_client.py": {
+      "sha256": "a9bbd11f7af2a72132e03f062c7f5ceafc2fb5126aae0694f29efee8ce7d8858",
+      "size_bytes": 22139,
+      "last_modified": "2026-10-18T11:59:40.424114"
+    },
+    "requirements.txt": {
+      "sha256": "83d813f74833afc42bcce5b7878377c99aa6e64be29f2b040fc78ee9c8232df9",
+      "size_bytes": 480,
+      "last_modified": "2026-10-18T10:52:53.721569"
+    },
+    "scripts/benchmark_multimodal.py": {
+      "sha256": "997e7630fdaca00dcebb5259cb3e6c702107e377adf6c1265ef74e2f88c48e45",
+      "size_bytes": 2663,
+      "last_modified": "2026-10-18T10:52:53.747295"
+    },
+    "scripts/benchmark_multimodal_e2e.py": {
+      "sha256": "e3079394835d9525bd673e0109472f299a014cca301367304eacba7d5c02beec",
+      "size_bytes": 10163,
+      "last_modified": "2026-10-19T09:17:18.926228"
+    },
+    "scripts/cleanup_expired_vaults.py": {
+      "sha256": "38a48ca74246a0f988e5bbeec07ec88c1124d984ce9a72b5619b82cab83c1cd2",
+      "size_bytes": 1755,
+      "last_modified": "2026-10-18T10:52:53.746840"
+    },
+    "scripts/generate_sha256_manifest.py": {
+      "sha256": "0afb2e1ac15f58a935b9fd025cccfd4ed353722bf3b270a4ff727b9dcb9307ce",
+      "size_bytes": 11984,
+      "last_modified": "2026-10-19T09:18:19.408720"
+    },
+    "scripts/init_multimodal_db.py": {
+      "sha256": "e60f5ff8b2a7255fee4503d78a483bf16a4dee91f3a1d0496b1f3c28e0e59ab7",
+      "size_bytes": 1950,
+      "last_modified": "2026-10-18T10:52:53.746284"
+    },
+    "scripts/simulate_n8n_stage_webhook.py": {
+      "sha256": "13d9f9602c6170f90dc60210310f7f796bce3b231b08d2f0766f998d35e6aaa3",
+      "size_bytes": 6781,
+      "last_modified": "2026-10-18T12:02:26.362664"
+    },
+    "service/server.py": {
+      "sha256": "027520e1126166165fb262473a5c8100e3d15c5a4c25cfa8af6e89146596d971",
+      "size_bytes": 8985,
+      "last_modified": "2026-10-19T09:16:51.524598"
+    },
+    "tests/fakes.py": {
+      "sha256": "0a7e6cbd77307e614d5c8df917dd90da0ed7def2649d8dbcdf7edf7dbdc670b8",
+      "size_bytes": 2087,
+      "last_modified": "2026-10-18T11:48:55.425541"
+    },
+    "tests/fixtures/make_bank_fixtures.swift": {
+      "sha256": "a9f471a6700aa19396cfaab382ebf1c5dfe1bcb670ed406ef79c642937634b6d",
+      "size_bytes": 5133,
+      "last_modified": "2026-10-19T08:37:11.069160"
+    },
+    "tests/fixtures/make_voucher_fixture.swift": {
+      "sha256": "2ac12ffac82da86a0c1a9f82cab0cd7f09bf56685db72ad884845a4752435510",
+      "size_bytes": 1655,
+      "last_modified": "2026-10-18T11:35:17.425748"
+    },
+    "tests/fixtures/voucher_bancamiga.png": {
+      "sha256": "704643a83d70ce549f077674deaa8d0aa4d5c0e38b1f1af147afaca34f598fa6",
+      "size_bytes": 62417,
+      "last_modified": "2026-10-19T08:39:25.571057"
+    },
+    "tests/fixtures/voucher_banesco.png": {
+      "sha256": "8d9c4859459e2e3668606aa9264f5701bd5b82526ec9b127ba13a1068d887ddb",
+      "size_bytes": 60180,
+      "last_modified": "2026-10-19T08:39:25.558308"
+    },
+    "tests/fixtures/voucher_bdv.png": {
+      "sha256": "7e9a1431ef7f587da9b4993dc98d1eb1b54edb931d58a8b86d84905cf191ded2",
+      "size_bytes": 60438,
+      "last_modified": "2026-10-19T08:39:25.544462"
+    },
+    "tests/fixtures/voucher_mercantil.png": {
+      "sha256": "f0394c88808eefaf890bd6bb670bdf8162085dfd90cf8044d5397d981c12d675",
+      "size_bytes": 59084,
+      "last_modified": "2026-10-19T08:39:25.582865"
+    },
+    "tests/fixtures/voucher_provincial.png": {
+      "sha256": "c5d92b09e9720b4ae9fff4067bda1d898854e0f9cd09bb764a02b0cadd0279b8",
+      "size_bytes": 55470,
+      "last_modified": "2026-10-19T08:39:25.598499"
+    },
+    "tests/fixtures/voucher_sintetico.png": {
+      "sha256": "d8adde001106416d8295f645fbf52d3c22f093f8af4080b57f461d535fdce89d",
+      "size_bytes": 40780,
+      "last_modified": "2026-10-18T11:39:47.877281"
+    },
+    "tests/test_autonomous_service.py": {
+      "sha256": "955e3b0438457f2d36e9aec25bb0feefcd18db51744ed6b498bab149d23247c1",
+      "size_bytes": 4399,
+      "last_modified": "2026-10-18T11:54:02.720256"
+    },
+    "tests/test_bank_vouchers_real.py": {
+      "sha256": "b0bdb541478dd6bccc772dae44a38fd8b6ed884497e8514509c8a9577632c2bf",
+      "size_bytes": 8062,
+      "last_modified": "2026-10-19T08:40:43.309991"
+    },
+    "tests/test_benchmark_e2e.py": {
+      "sha256": "4cdcaaf5c7798d7c312d650c3ea5b0d1255c68f575a95325e87f0d318ff7db44",
+      "size_bytes": 1953,
+      "last_modified": "2026-10-19T09:17:43.706310"
+    },
+    "tests/test_manifest_integrity.py": {
+      "sha256": "4bb43c0da0e5353ddc455163ff76bdbdf2ee979719a7d36418f2383d9d389b12",
+      "size_bytes": 1284,
+      "last_modified": "2026-10-19T09:18:36.457147"
+    },
+    "tests/test_mcp_tools.py": {
+      "sha256": "632c6507fbfa9d3fe6771b294cc58abf5c47f0a7e3241b0cb796d62fe20593ac",
+      "size_bytes": 4896,
+      "last_modified": "2026-10-18T11:53:02.758819"
+    },
+    "tests/test_media_pipeline.py": {
+      "sha256": "340c7151c47ce27be390634b84b6395b506371b127cddf143965243b2bbc8615",
+      "size_bytes": 7595,
+      "last_modified": "2026-10-18T11:50:35.357052"
+    },
+    "tests/test_n8n_stage_contract.py": {
+      "sha256": "6463df542763e16565537d9557ca5881af00e6ac085003cfde85645f848bb2af",
+      "size_bytes": 5667,
+      "last_modified": "2026-10-18T12:04:41.756080"
+    },
+    "tests/test_ocr_backends.py": {
+      "sha256": "0f903af2f2928db23f5c1fd59856a2557c76a941369bb426016320e81ca372a1",
+      "size_bytes": 5710,
+      "last_modified": "2026-10-23T21:10:17.112490"
+    },
+    "tests/test_orchestrator_ocr.py": {
+      "sha256": "cb4af27fa52721ebb1147afd52e7b71284e5aa383fbb9b08709a395fa24acdfe",
+      "size_bytes": 4737,
+      "last_modified": "2026-10-18T11:51:54.282248"
+    },
+    "tests/test_stt_backends.py": {
+      "sha256": "368d95d05f4cbdb6b867feacaab74e4a0053def001e49e8c6712e8abbf2f1599",
+      "size_bytes": 5034,
+      "last_modified": "2026-10-18T11:50:48.613933"
+    },
+    "tests/test_vault_invariants.py": {
+      "sha256": "9ee04202386933070fd8c80ec28166bff611c5e09f625f4e59701c3399c28a5a",
+      "size_bytes": 3332,
+      "last_modified": "2026-10-18T10:52:53.724348"
+    },
+    "tests/test_voucher_parser.py": {
+      "sha256": "6b7dfeb318d4d26b2a966355b3467cfe54a409117e8b1e876f001cfe674dc9b6",
+      "size_bytes": 2631,
+      "last_modified": "2026-10-18T11:30:18.769961"
+    },
+    "tests/test_whatsapp_client.py": {
+      "sha256": "55a562e90848c405344b5124bf6dbe7970cd5cbe8afe6f0eb858fdaefef04e1d",
+      "size_bytes": 8277,
+      "last_modified": "2026-10-18T12:00:07.895392"
+    }
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "metadata_simulacion": {
+    "fecha_ejecucion": "2026-10-23 21:16:07",
+    "duracion_segundos": 0.37,
+    "territorio": "Gran Caracas, Venezuela",
+    "total_abonados_simulados": 50
+  },
+  "metricas_adquisicion_radar": {
+    "total_busquedas_radar": 25,
+    "busquedas_exitosas": 25,
+    "total_impactos_ofertas": 1787,
+    "promedio_ofertas_por_busqueda": 71.48,
+    "distribucion_anillos": {
+      "zona_1_inmediata": 126,
+      "zona_2_vecindario": 207,
+      "zona_3_urbana": 524
+    }
+  },
+  "metricas_conversion_cupones": {
+    "intentos_reclamo": 15,
+    "cupones_emitidos_exitosos": 15,
+    "reclamos_bloqueados_por_cuota_max_3": 0,
+    "tasa_conversion_reclamo_pct": 100.0,
+    "total_cupones_canjeados_en_pos": 12,
+    "tasa_redencion_pos_pct": 80.0
+  },
+  "seguridad_y_blindaje_anti_fraude": {
+    "intentos_ataque_replay_simulados": 5,
+    "ataques_bloqueados_por_boveda_y_fsm": 5,
+    "ataques_exitosos_fuga": 0,
+    "efectividad_cortafuegos_pct": 100.0
+  },
+  "balance_economico_y_split_transaccional": {
+    "volumen_bruto_facturado_ves": 2621.9,
+    "ingreso_comision_movilnet_ves_20pct": 524.38,
+    "ingreso_neto_comercios_ves_80pct": 2097.52,
+    "total_transacciones_asentadas": 11,
+    "ticket_promedio_cupon_ves": 218.49
+  },
+  "transacciones_recientes": [
+    {
+      "transaccion_id": "TX-02D338A5",
+      "cupon_id": "CUP-4319DA71",
+      "msisdn": "04161028027",
+      "comercio_id": "COM-007",
+      "oferta_titulo": "Pack Delicateses y Embutidos Importados (Prolicor Sabana Grande)",
+      "monto_total_ves": 290.0,
+      "comision_movilnet_ves": 58.0,
+      "neto_comercio_ves": 232.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-D8CCECBA",
+      "cupon_id": "CUP-03332B89",
+      "msisdn": "04261210522",
+      "comercio_id": "COM-CCS-BOYE-05",
+      "oferta_titulo": "Desayuno Tradicional Arepa Reina Pepiada o Jamón y Queso + Jugo de Naranja Natural (Panadería)",
+      "monto_total_ves": 125.0,
+      "comision_movilnet_ves": 25.0,
+      "neto_comercio_ves": 100.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-FBC74809",
+      "cupon_id": "CUP-0D27071A",
+      "msisdn": "04163118118",
+      "comercio_id": "COM-CCS-PARA-02",
+      "oferta_titulo": "Kit Primeros Auxilios & Salud Familiar (Alcohol + Gasas + Curitas + Betadine) (Farmatodo)",
+      "monto_total_ves": 158.05,
+      "comision_movilnet_ves": 31.61,
+      "neto_comercio_ves": 126.44,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-F2E19DFA",
+      "cupon_id": "CUP-9823207D",
+      "msisdn": "04261273607",
+      "comercio_id": "COM-CCS-BOYE-06",
+      "oferta_titulo": "Cambio de Aceite Mineral/Semisintético + Filtro de Aceite Instalado (Ferretería)",
+      "monto_total_ves": 434.6,
+      "comision_movilnet_ves": 86.92,
+      "neto_comercio_ves": 347.68,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-12226116",
+      "cupon_id": "CUP-387140E4",
+      "msisdn": "04269001446",
+      "comercio_id": "COM-CCS-SBER-03",
+      "oferta_titulo": "Plato Degustación Criollo (Pabellón Criollo Completo + Jugo de Papelón con Limón) (Ristorante)",
+      "monto_total_ves": 196.2,
+      "comision_movilnet_ves": 39.24,
+      "neto_comercio_ves": 156.96,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-5E06D9B4",
+      "cupon_id": "CUP-A88699E9",
+      "msisdn": "04161028027",
+      "comercio_id": "COM-CCS-MONT-06",
+      "oferta_titulo": "Servicio de Alineación Delantera + Balanceo 4 Ruedas Computarizado (Centro)",
+      "monto_total_ves": 257.5,
+      "comision_movilnet_ves": 51.5,
+      "neto_comercio_ves": 206.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-B5514C5E",
+      "cupon_id": "CUP-FB50931C",
+      "msisdn": "04163678690",
+      "comercio_id": "COM-CCS-HATI-06",
+      "oferta_titulo": "Kit Herramientas Básicas para el Hogar (Destornilladores + Martillo + Pinza) (Artesanías)",
+      "monto_total_ves": 220.0,
+      "comision_movilnet_ves": 44.0,
+      "neto_comercio_ves": 176.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-653BB4A4",
+      "cupon_id": "CUP-BB641988",
+      "msisdn": "04262711892",
+      "comercio_id": "COM-030",
+      "oferta_titulo": "Recarga Promocional Prepago Plan Movilnet (Movilnet Sede Principal El Recreo)",
+      "monto_total_ves": 95.0,
+      "comision_movilnet_ves": 19.0,
+      "neto_comercio_ves": 76.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-4DA5C6C8",
+      "cupon_id": "CUP-1270B111",
+      "msisdn": "04161028027",
+      "comercio_id": "COM-CCS-SBER-02",
+      "oferta_titulo": "Pack Cuidado Pediátrico (Pañales Etapa 3 + Toallitas Húmedas + Crema) (Locatel)",
+      "monto_total_ves": 277.95,
+      "comision_movilnet_ves": 55.59,
+      "neto_comercio_ves": 222.36,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-25B7EF7A",
+      "cupon_id": "CUP-C2264CE9",
+      "msisdn": "04262711892",
+      "comercio_id": "COM-CCS-PARA-03",
+      "oferta_titulo": "Combo Parrilla Especial 2 Personas (Carne Solomo + Chorizo + Arepitas + Guasacaca) (Restaurante)",
+      "monto_total_ves": 402.8,
+      "comision_movilnet_ves": 80.56,
+      "neto_comercio_ves": 322.24,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    },
+    {
+      "transaccion_id": "TX-88A459B1",
+      "cupon_id": "CUP-3A9C4F60",
+      "msisdn": "04262711892",
+      "comercio_id": "COM-CCS-CALI-02",
+      "oferta_titulo": "Combo Alivio Gripal (Antigripal Noche/Día + Vitamina C Efervescente) (Farmatodo)",
+      "monto_total_ves": 164.8,
+      "comision_movilnet_ves": 32.96,
+      "neto_comercio_ves": 131.84,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-23 21:16:07"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "name": "[DEV_STAGE] Movilnet_Despacho_Multimodal_Sandbox",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "multimodal_media_v1",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "node-webhook-stage-trigger",
+      "name": "Webhook Stage Inbound (/webhook-stage/multimodal_media_v1)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ],
+      "webhookId": "stage-multimodal-movilnet-2026"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalizador de Entrada Multimodal — Sandbox Movilnet (:8025)\n// Gobernanza: Invariante Zero-PII y Aislamiento Hermético de Producción\n\nconst items = $input.all();\nconst output = [];\n\nfor (const item of items) {\n  const json = item.json || {};\n  const binary = item.binary || {};\n\n  // Detección de teléfono de origen\n  let phone = json.phone_number || json.from || json.sender || (json.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.from) || \"+584166251587\";\n  if (typeof phone === 'string' && !phone.startsWith('+') && phone.length === 11) {\n    phone = '+58' + phone.substring(1);\n  }\n\n  // Detección de archivo y payload\n  let filename = json.filename || \"inbound_asset.bin\";\n  let fileBase64 = \"\";\n  let mediaType = \"DOCUMENT\";\n\n  // Si n8n recibió datos binarios directos en la petición multipart/form-data\n  const firstBinaryKey = Object.keys(binary)[0];\n  if (firstBinaryKey && binary[firstBinaryKey]) {\n    const binObj = binary[firstBinaryKey];\n    filename = binObj.fileName || filename;\n    fileBase64 = binObj.data || \"\";\n    const mime = (binObj.mimeType || \"\").toLowerCase();\n    if (mime.includes(\"audio\") || mime.includes(\"ogg\")) mediaType = \"AUDIO\";\n    else if (mime.includes(\"image\")) mediaType = \"IMAGE\";\n    else if (mime.includes(\"video\")) mediaType = \"VIDEO\";\n    else mediaType = \"DOCUMENT\";\n  } else if (json.file_base64) {\n    fileBase64 = json.file_base64;\n    filename = json.filename || \"archivo.bin\";\n  } else if (json.text_simulation) {\n    filename = \"nota_voz.ogg\";\n  }\n\n  output.push({\n    json: {\n      phone_number: phone,\n      filename: filename,\n      file_base64: fileBase64,\n      text_simulation: json.text_simulation || \"\",\n      channel: \"WHATSAPP_SANDBOX_STAGE\",\n      timestamp_iso: new Date().toISOString()\n    }\n  });\n}\n\nreturn output;"
+      },
+      "id": "node-code-normalizer",
+      "name": "Normalizar Payload Multimodal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MULTIMODAL_API_URL || 'http://127.0.0.1:8025/api/v1/multimodal/process' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"phone_number\": \"{{ $json.phone_number }}\",\n  \"filename\": \"{{ $json.filename }}\",\n  \"file_base64\": \"{{ $json.file_base64 }}\",\n  \"text_simulation\": \"{{ $json.text_simulation }}\"\n}",
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "node-http-multimodal-core",
+      "name": "Llamada Core Multimodal Staging (:8025)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              {
+                "name": "X-Movilnet-Staging-Env",
+                "value": "DEV_STAGE_8025"
+              }
+            ]
+          }
+        }
+      },
+      "id": "node-respond-webhook",
+      "name": "Responder Webhook Stage",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Stage Inbound (/webhook-stage/multimodal_media_v1)": {
+      "main": [
+        [
+          {
+            "node": "Normalizar Payload Multimodal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizar Payload Multimodal": {
+      "main": [
+        [
+          {
+            "node": "Llamada Core Multimodal Staging (:8025)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Llamada Core Multimodal Staging (:8025)": {
+      "main": [
+        [
+          {
+            "node": "Responder Webhook Stage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Caracas",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "tags": [
+    {
+      "name": "MOVILNET_MULTIMODAL_STAGE"
+    },
+    {
+      "name": "PORT_8025"
+    }
+  ]
+}

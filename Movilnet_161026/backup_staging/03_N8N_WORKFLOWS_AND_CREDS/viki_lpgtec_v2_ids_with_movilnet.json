@@ -1,0 +1,5291 @@
+{
+  "updatedAt": "2026-10-05T19:41:48.839Z",
+  "createdAt": "2026-10-05T19:38:21.049Z",
+  "id": "sNMbtiEiTkuQ9OCY",
+  "name": "Viki_LPGTEC_v2_ids_Movilnet_Connected",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "messages_upsert",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        528,
+        -416
+      ],
+      "id": "43204eea-7024-4a06-af1d-e30aff74b38f",
+      "name": "Webhook",
+      "webhookId": "4a6f76ff-c715-4a53-a8be-39ea46beab52"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "22b46036-97c0-42e6-a9c6-22754e57ef24",
+                    "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                    "rightValue": "texto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "texto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "32ccbf5f-1198-447d-8f72-c0577e7f0732",
+                    "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                    "rightValue": "imagen",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "imagen"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e66906b2-671b-4162-bcf1-94e2bfc3f5a7",
+                    "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                    "rightValue": "=audio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "76450a89-250d-4eb7-851f-844bb7c3e72a",
+                    "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                    "rightValue": "=video",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "video"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "56500a0d-184c-4dbb-9526-3fadd4134e4e",
+                    "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                    "rightValue": "pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "pdf"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1392,
+        -528
+      ],
+      "id": "6c36376e-aef5-48a6-ba72-ba8ee2c105b7",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "28b24f3b-4510-46f6-b1a6-89cdf9e64858",
+              "name": "content.parts[0].text",
+              "value": "={{ $json.body.data.message.extended }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2544,
+        -672
+      ],
+      "id": "58f177e6-c125-49c5-bcad-999c1c9136a9",
+      "name": "Captura Texto"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dac10c31-9f63-43c2-891c-98a363fcba1f",
+              "leftValue": "={{ $json.body.data.key.fromMe }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        752,
+        -416
+      ],
+      "id": "3d3cc812-e4fe-4daf-86e6-8a91c845e102",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        896,
+        -240
+      ],
+      "id": "2f1808fc-217f-40aa-b195-1cc9d8fa0ee2",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "content": "RECEPCIÓN DE MENSAJE WHATSAPP\n",
+        "height": 640,
+        "width": 1088,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -704
+      ],
+      "id": "ece88ad6-f9ed-427b-9cb2-035ad4b91f09",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "PROCESAMIENTO DE MENSAJE\n\n",
+        "height": 640,
+        "width": 1084,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1712,
+        -704
+      ],
+      "id": "ce07ea20-fef5-47f6-a752-ff87369c0230",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "482110e8-8758-480d-9533-57ec4ceae3cb",
+              "name": "body.server_url",
+              "value": "={{ $('Webhook').item.json.body.server_url }}",
+              "type": "string"
+            },
+            {
+              "id": "e16b77c4-8108-4d73-988a-fa3c69cad6e8",
+              "name": "body.instance",
+              "value": "={{ $('Webhook').item.json.body.instance }}",
+              "type": "string"
+            },
+            {
+              "id": "e46a0a66-4848-4979-91dc-367bbb4e533b",
+              "name": "body.apikey",
+              "value": "={{ $('Webhook').item.json.body.apikey }}",
+              "type": "string"
+            },
+            {
+              "id": "dc6e0b0a-74b7-492b-976a-39e805497749",
+              "name": "message_id",
+              "value": "={{ $('Webhook').item.json.body.data.key.id }}",
+              "type": "string"
+            },
+            {
+              "id": "3d7e6439-fce1-49e7-ad4e-89b8f3d449ab",
+              "name": "=body.data.key.remoteJid",
+              "value": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "fb6ec7ec-2879-4dfe-9e77-85718bf59d54",
+              "name": "body.data.messageType",
+              "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? 'pdf'\n    : $('Webhook').item.json.body.data.message.imageMessage\n      ? 'imagen'\n      : $('Webhook').item.json.body.data.message.audioMessage\n        ? 'audio'\n        : $('Webhook').item.json.body.data.message.videoMessage\n          ? 'video'\n          : $('Webhook').item.json.body.data.message.conversation\n            ? 'texto'\n            : ''\n}}\n",
+              "type": "string"
+            },
+            {
+              "id": "85c8bf02-be85-4c14-ba3b-32943f742870",
+              "name": "body.data.message.extended",
+              "value": "={{ $('Webhook').item.json.body.data.message.extendedTextMessage?.text || '' }}{{ $('Webhook').item.json.body.data.message.imageMessage?.caption || '' }}{{ $('Webhook').item.json.body.data.message.conversation || '' }}",
+              "type": "object"
+            },
+            {
+              "id": "34eb6293-cc14-4f97-8ad8-f101676c7813",
+              "name": "body.date_time",
+              "value": "={{ $('Webhook').item.json.body.date_time.toDateTime().toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "26bb01aa-d746-4b11-8057-09f089945462",
+              "name": "body.data.pushName",
+              "value": "={{ $('Webhook').item.json.body.data.pushName ?? $('Edit Fields').item.json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "a72a6268-8c07-4252-97eb-c8b6cf1ce3e4",
+              "name": "body.data.message.documentMessage.mimetype",
+              "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.mimetype\n    : $('Webhook').item.json.body.data.message.imageMessage\n      ? $('Webhook').item.json.body.data.message.imageMessage.mimetype\n      : $('Webhook').item.json.body.data.message.audioMessage\n        ? $('Webhook').item.json.body.data.message.audioMessage.mimetype\n        : $('Webhook').item.json.body.data.message.videoMessage\n          ? $('Webhook').item.json.body.data.message.videoMessage.mimetype\n          : ''\n}}",
+              "type": "string"
+            },
+            {
+              "id": "a9dd7f8e-733d-4809-b1ac-715ae8404e64",
+              "name": "body.data.message.documentMessage.url",
+              "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.url\n    : $('Webhook').item.json.body.data.message.imageMessage\n      ? $('Webhook').item.json.body.data.message.imageMessage.url\n      : $('Webhook').item.json.body.data.message.audioMessage\n        ? $('Webhook').item.json.body.data.message.audioMessage.url\n        : $('Webhook').item.json.body.data.message.videoMessage\n          ? $('Webhook').item.json.body.data.message.videoMessage.url\n          : ''\n}}",
+              "type": "string"
+            },
+            {
+              "id": "909f0f47-c332-41ec-acf8-0dd1d12808fb",
+              "name": "body.data.message.documentMessage.title",
+              "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.title\n    : ''\n}}",
+              "type": "string"
+            },
+            {
+              "id": "3a05ea50-3a35-4146-a586-35bce3f3ef4d",
+              "name": "body.data.message.documentMessage.pageCount",
+              "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.pageCount\n    : ''\n}}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1024,
+        -432
+      ],
+      "id": "2303b11a-f03d-4876-a759-7c3a1570db2c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $json.body.apikey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message.key.id",
+              "value": "={{ $json.message_id }}"
+            },
+            {
+              "name": "convertToMp4",
+              "value": "={{Boolean(false)}} "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1888,
+        -400
+      ],
+      "id": "3f2d46f7-bb52-4eae-bce9-3aa1763c5c4f",
+      "name": "Capturar Audio",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hOZ72gWOEbGZaT5y",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "base64",
+        "options": {
+          "fileName": "Content",
+          "mimeType": "={{ $json.mimetype }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        -416
+      ],
+      "id": "3e686a75-3db3-42bc-9c7d-4d75dd59b741",
+      "name": "Convertir Audio"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "inputType": "binary",
+        "simplify": "={{ true }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2288,
+        -400
+      ],
+      "id": "4c727192-f9be-4034-9dea-5d8a1930cd06",
+      "name": "Transcribe a recording",
+      "notesInFlow": false,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "u4iDqvngcoIkUfY3",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $json.body.apikey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message.key.id",
+              "value": "={{ $json.message_id }}"
+            },
+            {
+              "name": "convertToMp4",
+              "value": "={{Boolean(false)}} "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2016,
+        -560
+      ],
+      "id": "3f2f8db2-f07c-4cac-98b0-d57ef8b07b30",
+      "name": "Capturar Imagen",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hOZ72gWOEbGZaT5y",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "base64",
+        "options": {
+          "fileName": "Content",
+          "mimeType": "={{ $json.mimetype }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2192,
+        -560
+      ],
+      "id": "eebacf58-814d-41ab-bd19-599adda6e946",
+      "name": "Convertir Imagen"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2400,
+        -560
+      ],
+      "id": "c4f9b21d-2c60-4190-9c3a-a583952db218",
+      "name": "Analyze image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "V3FRjXf9WBCa0Zju",
+          "name": "Google Gemini(PaLM) Api account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $json.body.apikey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message.key.id",
+              "value": "={{ $json.message_id }}"
+            },
+            {
+              "name": "convertToMp4",
+              "value": "={{Boolean(false)}} "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1792,
+        -256
+      ],
+      "id": "46c97ba3-70ec-4187-bc5f-71a2a5148452",
+      "name": "Capturar Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hOZ72gWOEbGZaT5y",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "base64",
+        "options": {
+          "fileName": "Content",
+          "mimeType": "={{ $json.mimetype }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1968,
+        -256
+      ],
+      "id": "c87e5ec6-4d6d-449e-b4b6-2b6e8995e4d2",
+      "name": "Convertir Video"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash"
+        },
+        "text": "What's in this video? Describe it, transcribe audio",
+        "inputType": "binary",
+        "options": {
+          "maxOutputTokens": 300
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2208,
+        -256
+      ],
+      "id": "36c8af7b-78d6-4375-879d-ae8d9d025952",
+      "name": "Analyze video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "u4iDqvngcoIkUfY3",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0f980bd7-037a-4f9b-b5a3-b4583481fe0e",
+              "name": "Content",
+              "value": "={{ $json.content.parts[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2608,
+        -272
+      ],
+      "id": "ce6a648c-2c1d-4c4f-958c-2f94a344c07d",
+      "name": "Chat"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Usuario: {{ $('Edit Fields').item.json.body.data.pushName ?? $('Edit Fields').item.json.body.data.key.remoteJid }}\nFecha: {{ $now }}\nMensaje: {{ $json.Content }}",
+        "options": {
+          "systemMessage": "=Eres VIKI, asistente personal por WhatsApp.\n\nResponde siempre en español, con claridad y con el mínimo de palabras posible.\nNo uses saludos, despedidas, explicaciones ni texto innecesario.\nNo repitas la pregunta.\nResponde en una sola frase salvo que la tarea exija más.\n\nUsa herramientas solo cuando hagan falta:\n- Recetas de Cocina: recetas.\n- BaseDeDatosContactos: añadir, buscar, actualizar o eliminar contactos.\n- ListadePrecios: precios de productos.\n- BCV oficial / BCV Euros: tasas oficiales.\n- Tasa paralela: solo con clave 2306 o password 2306.\n\nPrecios:\n- Nunca menciones costo en dólares.\n- Nunca menciones dólar paralelo.\n- Devuelve solo el precio final en bolívares.\n- Formato: Bs. 1.000,00\n\nTasas:\n- Sin clave, responde solo la tasa BCV oficial.\n- Paralela solo con clave 2306.\n- Si falta la clave para paralela, responde: Indica la clave.\n- Redondea a dos decimales.\n- Diferencial cambiario = tasa paralela / tasa oficial.\n\nFormato obligatorio para tasas:\n- Con nombre: “[Nombre], la tasa [BCV|paralela|euro] de hoy dd/mm/aaaa es Bs. 0,00 por dólar.”\n- Sin nombre: “La tasa [BCV|paralela|euro] de hoy dd/mm/aaaa es Bs. 0,00 por dólar.”\n- No agregues ninguna otra oración.\n- Usa la fecha actual recibida en el mensaje\n\nPara tasas, no uses “para el día de hoy”; usa “de hoy dd/mm/aaaa”.\n\nSi hay ambigüedad, pide solo la aclaratoria mínima."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        3904,
+        800
+      ],
+      "id": "8a570284-74c6-42a7-8edc-2b4f8e1d1f43",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        3840,
+        1072
+      ],
+      "id": "2e8f4253-a32a-4ebb-910a-5f43c46419ae",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "V3FRjXf9WBCa0Zju",
+          "name": "Google Gemini(PaLM) Api account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of items) {\n    // 1. Detección de Fallback o Error de Proveedor Externo\n    const rawOutput = item.json.output;\n    const hasError = item.json.error || \n                     item.json.is_fallback_triggered ||\n                     (typeof rawOutput === 'string' && (rawOutput.includes('503') || rawOutput.includes('Service Unavailable') || rawOutput.includes('high demand')));\n\n    let sourceText = \"\";\n    if (hasError) {\n        sourceText = \"En este momento nuestros servicios de consulta general presentan alta demanda. Si deseas consultar saldo, planes o recargas de Movilnet, escribe 'Saldo' o 'Planes'.\";\n    } else {\n        sourceText = item.json.output || item.json.Content || \"En este momento nuestros servicios de consulta general presentan alta demanda. Si deseas consultar saldo, planes o recargas de Movilnet, escribe 'Saldo' o 'Planes'.\";\n    }\n    \n    if (sourceText && typeof sourceText !== 'string') {\n        sourceText = JSON.stringify(sourceText);\n    }\n    \n    let cleanText = sourceText;\n\n    // 2. Normalizar saltos de línea (Windows \r\n -> \n)\n    cleanText = cleanText.replace(/\r\n/g, '\n');\n\n    // 3. Limpieza de Markdown conservando la estructura de lista\n    cleanText = cleanText.replace(/\\*\\*\\*([^*]+)\\*\\*\\*/g, '');\n    cleanText = cleanText.replace(/\\*\\*([^*]+)\\*\\*/g, '');\n    cleanText = cleanText.replace(/\\_([^_]+)\\_/g, '');\n    cleanText = cleanText.replace(/\\*([^*]+)\\*/g, '');\n    cleanText = cleanText.replace(/^#+\\s?/gm, '');\n\n    // 4. Limpieza de espacios manteniendo la separación de viñetas y saltos\n    cleanText = cleanText.replace(/[ \t]+/g, ' ');\n    cleanText = cleanText.replace(/\n\\s+/g, '\n');\n    cleanText = cleanText.trim();\n\n    // 5. Fallback por si el resultado es vacío\n    if (!cleanText || cleanText === \"\" || cleanText === \"undefined\") {\n        cleanText = \"En este momento nuestros servicios de consulta general presentan alta demanda. Si deseas consultar saldo, planes o recargas de Movilnet, escribe 'Saldo' o 'Planes'.\";\n    }\n\n    // 6. Cadencia de Mecanografía Humana Adaptativa Anti-Baneo Meta\n    const charCount = cleanText.length;\n    let baseDelay = 800;\n    if (charCount > 250) {\n        baseDelay = 1800;\n    } else if (charCount > 100) {\n        baseDelay = 1400;\n    } else if (charCount > 50) {\n        baseDelay = 1100;\n    }\n    const jitter = Math.floor(Math.random() * 300) - 120;\n    const dynamicDelay = Math.min(Math.max(baseDelay + jitter, 650), 2200);\n    item.json.human_delay_ms = dynamicDelay;\n\n    // Guardar en la propiedad de salida\n    item.json.final_text = cleanText;\n}\n\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4864,
+        736
+      ],
+      "id": "b1561deb-4d7d-4bcd-bd7a-af24293ae655",
+      "name": "Code",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($('Webhook').item.json.body.server_url || 'http://evolution:8080') }}/message/sendText/{{ ($('Edit Fields').item.json.body.instance || $('Webhook').item.json.body.instance || 'Viki LPGTEC') }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $('Webhook').item.json.body.apikey || '957EEABBC570-4C60-8EDB-949655A34113' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n  \"number\": $('Webhook').item.json.body.data.key.remoteJid.replace(/@.*/, ''),\n  \"options\": {\n    \"delay\": ($json.human_delay_ms || 1200),\n    \"presence\": \"composing\",\n    \"linkPreview\": false\n  },\n  \"text\": $json.final_text\n}) }}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5328,
+        704
+      ],
+      "id": "eae440d5-dcfb-4cc9-8726-1ecfa6380bd8",
+      "name": "HTTP Request",
+      "executeOnce": false
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        4896,
+        928
+      ],
+      "id": "a40a8fe7-36c9-4a72-8a16-882fef7255c2",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "content": "Razonamiento AI y envío de Mensaje\n",
+        "height": 608,
+        "width": 1792,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3792,
+        592
+      ],
+      "id": "f79915ca-44ca-4e86-883f-da833aeed114",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ 'SESSION:E164:' + $('Webhook').item.json.body.data.key.remoteJid.replace(/@.*/, '').replace(/[^0-9]/g, '') }}",
+        "contextWindowLength": 6
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        3936,
+        1056
+      ],
+      "id": "57375e85-48f8-4744-ba96-4cf289675b0d",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "BKa6ccyE51qcTM7E",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "127a055a-c47c-4c8a-bf2b-e84628fe720d",
+              "leftValue": "={{ $json.Content.toLowerCase() .trim() }}",
+              "rightValue": "/(dime las noticias)/i",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2864,
+        -384
+      ],
+      "id": "7ebe663e-c4b1-4878-ad03-515dd673607f",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "url": "=https://news.google.com/rss",
+        "options": {
+          "customFields": "=",
+          "ignoreSSL": false
+        }
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        3200,
+        -1024
+      ],
+      "id": "8e73508e-a13b-428a-8bd3-7c3ef2642444",
+      "name": "RSS Read",
+      "alwaysOutputData": false,
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c23f4630-023a-4fd1-afaa-f8d6ee2c5ac9",
+              "name": "output",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "9b93d8b1-040e-4782-a0fe-be7a49c2ff4a",
+              "name": "link",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3360,
+        -1024
+      ],
+      "id": "76eed637-7f93-4b70-a5e7-3b27823d36e5",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of items) {\n  // Asegúrate de que la propiedad 'output' existe y es una cadena de texto\n  if (item.json.output && typeof item.json.output === 'string') {\n    let cleanText = item.json.output;\n\n    // 1. Reemplazar saltos de línea y retornos de carro\n    cleanText = cleanText.replace(/(\\n|\\r)/g, ' ');\n\n    // 2. Eliminar negritas (**) y cursivas (_) o (***)\n    cleanText = cleanText.replace(/\\*\\*[^*]+\\*\\*/g, (match) => match.replace(/\\*\\*/g, ''));\n    cleanText = cleanText.replace(/_[^_]+_/g, (match) => match.replace(/_/g, ''));\n    cleanText = cleanText.replace(/\\*\\*\\*[^*]+\\*\\*\\*/g, (match) => match.replace(/\\*\\*\\*/g, ''));\n\n    // 3. Eliminar otros marcadores de Markdown (por ejemplo, títulos #, listas -, etc.)\n    cleanText = cleanText.replace(/#+\\s?/g, '');\n    cleanText = cleanText.replace(/-\\s/g, '');\n     cleanText = cleanText.replace(/\"/g, '');\n\n    // 4. Recortar espacios en blanco al inicio y al final\n    cleanText = cleanText.trim();\n    \n     // Asigna el texto limpio a una nueva propiedad\n    item.json.final_text = cleanText;\n  }\n}\n\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3792,
+        -1024
+      ],
+      "id": "93d3cca7-fadf-4cf6-b07e-bb973bc60c06",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        3552,
+        -1024
+      ],
+      "id": "40c12f64-9ac6-425b-807c-80684bd5e44b",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "toolDescription": "BCV",
+        "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        3712,
+        1008
+      ],
+      "id": "aecc6b11-52d9-40f2-90f2-aab52414cc39",
+      "name": "BCV oficial"
+    },
+    {
+      "parameters": {
+        "toolDescription": "BCV",
+        "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        3504,
+        1040
+      ],
+      "id": "4f02a765-98e6-48b8-999b-f914c209e2be",
+      "name": "BCV paralelo"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        4816,
+        1056
+      ],
+      "id": "015c2b07-8f47-472a-bdcc-2ca826d71b33",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "gQlkhGgsIfxPyFbe",
+          "name": "SerpAPI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1nMP8_xw7D-2VQCACWc8hlROyADPjdIjt9SxGxIX2CQM",
+          "mode": "list",
+          "cachedResultName": "ListaPrecios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nMP8_xw7D-2VQCACWc8hlROyADPjdIjt9SxGxIX2CQM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nMP8_xw7D-2VQCACWc8hlROyADPjdIjt9SxGxIX2CQM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        4288,
+        1056
+      ],
+      "id": "be7ee368-6fb2-4caa-9619-8c8d2737162b",
+      "name": "ListadePrecios",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "2butbRek9DnxwcMM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "m2hmP7U1aAyuUmew",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/m2hmP7U1aAyuUmew",
+          "cachedResultName": "Recetas"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        4176,
+        1040
+      ],
+      "id": "7ca3b9a9-f3c3-4080-9d52-02c02e7c91fc",
+      "name": "Recetas"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "lTTTFJh5l79115yZ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/lTTTFJh5l79115yZ",
+          "cachedResultName": "Sistema de Gestión de Contactos"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "{{ $json.query }}": "={{ $json.Content }}"
+          },
+          "matchingColumns": [
+            "{{ $json.query }}"
+          ],
+          "schema": [
+            {
+              "id": "{{ $json.query }}",
+              "displayName": "{{ $json.query }}",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        4032,
+        1040
+      ],
+      "id": "38d4d9df-2795-4a0a-88a5-df3a6234e38d",
+      "name": "Call 'Sistema de Gestión de Contactos'1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message.key.id",
+              "value": "={{ $json.message_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1824,
+        -64
+      ],
+      "id": "bfebe067-17db-4ab2-b7f1-2e1332384faf",
+      "name": "HTTP Request1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hOZ72gWOEbGZaT5y",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.lpgtec.net/pdf2text/index.php",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "={{ $json.mimetype }}",
+        "body": "={{ $json.base64 }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2032,
+        -64
+      ],
+      "id": "7d1d87ca-6006-4478-ac31-ee092ac7d570",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1c43dc02-16d8-417a-aabc-7b6ab2769e90",
+              "name": "=content.parts[0].text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2240,
+        -64
+      ],
+      "id": "a97c4f81-c861-4500-8193-1dff7c9de467",
+      "name": "Captura PDF"
+    },
+    {
+      "parameters": {
+        "toolDescription": "BCV",
+        "url": "https://ve.dolarapi.com/v1/euros/oficial",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        4704,
+        1072
+      ],
+      "id": "8a5c86aa-ddb3-47e0-a79d-ef067ceda55a",
+      "name": "BCV Euros"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "lTTTFJh5l79115yZ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/lTTTFJh5l79115yZ",
+          "cachedResultName": "Sistema de Gestión de Contactos"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "{{ $json.query }}": "={{ $json.Content }}"
+          },
+          "matchingColumns": [
+            "{{ $json.query }}"
+          ],
+          "schema": [
+            {
+              "id": "{{ $json.query }}",
+              "displayName": "{{ $json.query }}",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        4160,
+        1184
+      ],
+      "id": "4e2e9ec4-841e-4b08-a26e-3ae876f889c6",
+      "name": "Call 'Sistema de Gestión de Contactos'"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0a63aa16-f630-47cb-b407-78ee6c847276",
+                    "leftValue": "={{\n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /(diferencial|brecha)/.test(t) &&\n      /(cambiari|bcv|oficial|paralela|dolar)/.test(t);\n  })()\n}}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "diferencial_cambiario"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7a0402c2-682f-40d0-a020-56cdccf5c230",
+                    "leftValue": "={{   (() => {     const t = ($json.Content || '')       .toLowerCase()       .normalize('NFD')       .replace(/[\\u0300-\\u036f]/g, '');      const hayMontoUsd =       /(?:\\$|usd|dolares?|dolar)\\s*\\d/.test(t) ||       /\\b\\d+(?:[.,]\\d+)?\\s*(?:\\$|usd|dolares?|dolar)\\b/.test(t);      const esParalela = /(paralela|paralelo)/.test(t);     const tieneClave = /(clave|password)\\s*:?\\s*2306\\b/.test(t);      return hayMontoUsd && esParalela && tieneClave;   })() }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "conversion_paralela_autorizada"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d729519b-5e71-40f9-9c3d-9f477cba5fee",
+                    "leftValue": "={{   (() => {     const t = ($json.Content || '')       .toLowerCase()       .normalize('NFD')       .replace(/[\\u0300-\\u036f]/g, '');      const hayMontoUsd =       /(?:\\$|usd|dolares?|dolar)\\s*\\d/.test(t) ||       /\\b\\d+(?:[.,]\\d+)?\\s*(?:\\$|usd|dolares?|dolar)\\b/.test(t);      return hayMontoUsd &&       /(paralela|paralelo)/.test(t) &&       !/(clave|password)\\s*:?\\s*2306\\b/.test(t);   })() }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "conversion_paralela_sin_clave"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4f8d99ac-44b4-4fbd-9181-9d2a9efd1ee5",
+                    "leftValue": "={{    (() => {     const t = ($json.Content || '')       .toLowerCase()       .normalize('NFD')       .replace(/[\\u0300-\\u036f]/g, '');      return (       /(?:\\$|usd|dolares?|dolar)\\s*\\d/.test(t) ||       /\\b\\d+(?:[.,]\\d+)?\\s*(?:\\$|usd|dolares?|dolar)\\b/.test(t)     ) &&     /(a\\s*(?:bs|bolivares?)|en\\s*(?:bs|bolivares?)|tasa|bcv|convert|equival|cuanto)/.test(t);   })() }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "conversion_bcv"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7c29332d-0db1-4263-96a5-b4b54261cf16",
+                    "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /(paralela|paralelo)/.test(t) &&\n      /(tasa|dolar|cambio|divisa)/.test(t) &&\n      /(clave|password)\\s*:?\\s*2306\\b/.test(t);\n  })()\n}}",
+                    "rightValue": "\\b(tasa|d[oó]lar|paralel[ao])\\b.*\\b(clave|password)\\s*2306\\b",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "tasa_paralela_autorizada"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c1c2e63f-79ed-4190-9408-1b4502a028d0",
+                    "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /(paralela|paralelo)/.test(t) &&\n      /(tasa|dolar|cambio|divisa)/.test(t) &&\n      !/(clave|password)\\s*:?\\s*2306\\b/.test(t);\n  })()\n}}",
+                    "rightValue": "\\b(tasa|d[oó]lar|paralel[ao])\\b.*\\bparalel[ao]\\",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "tasa_paralela_sin_clave"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "cd8e0134-31bc-46aa-8812-b7e254808763",
+                    "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /\\beuros?\\b/.test(t) &&\n      /(tasa|cambio|precio|valor|hoy|bcv)/.test(t);\n  })()\n}}",
+                    "rightValue": "\\b(tasa|euro)\\b.*\\b(euro|euros)\\b|\\b(euro|euros)\\b.*\\b(tasa|hoy)\\b",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "tasa_euro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0c3778e0-66eb-4bd3-b7a1-148bc5c37c16",
+                    "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    const esConsultaDeTasa = /(tasa|dolar|bcv|tipo de cambio)/.test(t);\n    const esParalela = /(paralela|paralelo)/.test(t);\n    const esEuro = /\\beuros?\\b/.test(t);\n\n    return esConsultaDeTasa && !esParalela && !esEuro;\n  })()\n}}",
+                    "rightValue": "\\b(tasa|d[oó]lar|bcv)\\b",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "tasa_oficial"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "ai_agent"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        3040,
+        -256
+      ],
+      "id": "87a181eb-795c-4b52-9a9f-26f0dc2e9114",
+      "name": "Router - Consultas determinísticas"
+    },
+    {
+      "parameters": {
+        "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3408,
+        -304
+      ],
+      "id": "71ae334e-773b-4631-b886-8aec13538a80",
+      "name": "BCV paralelo v2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0702a28f-25ad-47de-a4ac-02dc0a85af37",
+              "name": "Content",
+              "value": "={{ \n  (($('Edit Fields').item.json.body.data.pushName ?? '') + ', ').replace(/^,\\s*/, '') +\n  'la tasa paralela de hoy ' +\n  $now.toFormat('dd/LL/yyyy') +\n  ' es Bs. ' +\n  Number($json.promedio ?? $json.venta ?? $json.compra).toLocaleString('es-VE', {\n    minimumFractionDigits: 2,\n    maximumFractionDigits: 2\n  }) +\n  ' por dólar.'\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3616,
+        -304
+      ],
+      "id": "4c0388be-e128-4aec-9dfb-2ce5c4d1682a",
+      "name": "Respuesta - Tasa Paralela"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fa82026d-1df0-4c2d-a0c7-ca54074b4143",
+              "name": "Content",
+              "value": "Indica la clave.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3632,
+        -32
+      ],
+      "id": "3a73c45f-e392-411b-b163-e5d88740b6ad",
+      "name": "Respuesta - Solicitar Clave Paralela"
+    },
+    {
+      "parameters": {
+        "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3568,
+        272
+      ],
+      "id": "6a0c7a23-cfeb-4f51-9475-e55fe3a87448",
+      "name": "BCV oficial v2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3e1416d-206a-4637-8904-a3622002354f",
+              "name": "Content",
+              "value": "={{ \n  (($('Edit Fields').item.json.body.data.pushName ?? '') + ', ').replace(/^,\\s*/, '') +\n  'la tasa BCV de hoy ' +\n  $now.toFormat('dd/LL/yyyy') +\n  ' es Bs. ' +\n  Number($json.promedio ?? $json.venta ?? $json.compra).toLocaleString('es-VE', {\n    minimumFractionDigits: 2,\n    maximumFractionDigits: 2\n  }) +\n  ' por dólar.'\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3760,
+        272
+      ],
+      "id": "d93751d3-e991-46b0-accf-668de22b4966",
+      "name": "Respuesta - Tasa Oficial"
+    },
+    {
+      "parameters": {
+        "url": "https://ve.dolarapi.com/v1/euros/oficial",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3552,
+        112
+      ],
+      "id": "c16d3053-ae3c-4123-97df-0496eac97bcc",
+      "name": "BCV Euros v2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "24f4dc19-93b5-4f84-8791-3b536ade09f5",
+              "name": "Content",
+              "value": "={{ \n  (($('Edit Fields').item.json.body.data.pushName ?? '') + ', ').replace(/^,\\s*/, '') +\n  'la tasa del euro de hoy ' +\n  $now.toFormat('dd/LL/yyyy') +\n  ' es Bs. ' +\n  Number($json.promedio ?? $json.venta ?? $json.compra).toLocaleString('es-VE', {\n    minimumFractionDigits: 2,\n    maximumFractionDigits: 2\n  }) +\n  ' por euro.'\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3712,
+        112
+      ],
+      "id": "36efa2a0-2a8e-42a4-b398-8343601f7694",
+      "name": "Respuesta - Tasa Euro"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4000,
+        -112
+      ],
+      "id": "735370c5-a2f1-415a-9873-266d3b2b894a",
+      "name": "Merge - Respuestas 2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4112,
+        160
+      ],
+      "id": "eb89a1ca-1f3a-4579-b6dc-ef226ded956f",
+      "name": "Merge - Respuestas 3"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4272,
+        -32
+      ],
+      "id": "78a344c4-76ee-4dd7-b6e3-d258a5da15f9",
+      "name": "Merge - Respuestas 4"
+    },
+    {
+      "parameters": {
+        "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3376,
+        -464
+      ],
+      "id": "dab497ce-6499-45a3-ab88-0bff57bd3ff5",
+      "name": "BCV oficial - Conversión"
+    },
+    {
+      "parameters": {
+        "jsCode": "const mensaje = $('Router - Consultas determinísticas').item.json.Content || '';\nconst limpio = mensaje\n  .toLowerCase()\n  .replace(/\\./g, '')\n  .replace(',', '.');\n\nconst match = limpio.match(/(?:\\$|usd|dolares?|dolar)\\s*(\\d+(?:\\.\\d+)?)/) ||\n              limpio.match(/(\\d+(?:\\.\\d+)?)\\s*(?:\\$|usd|dolares?|dolar)/);\n\nif (!match) {\n  return {\n    json: {\n      Content: 'Indica el monto en dólares.'\n    }\n  };\n}\n\nconst montoUsd = Number(match[1]);\nconst tasa = Number($json.promedio ?? $json.venta ?? $json.compra);\n\nif (!Number.isFinite(montoUsd) || !Number.isFinite(tasa)) {\n  return {\n    json: {\n      Content: 'No pude calcular la conversión.'\n    }\n  };\n}\n\nconst totalBs = montoUsd * tasa;\nconst nombre = $('Edit Fields').item.json.body.data.pushName ?? '';\n\nreturn {\n  json: {\n    Content: `${nombre ? `${nombre}, ` : ''}$${montoUsd.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} equivalen a Bs. ${totalBs.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}.`\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3600,
+        -464
+      ],
+      "id": "8afde4c6-7010-42f9-966e-06875bfbbe1b",
+      "name": "Calcular conversión BCV"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4640,
+        320
+      ],
+      "id": "517a9110-8f9b-42c2-a416-002bd6548935",
+      "name": "Merge - Respuestas 5"
+    },
+    {
+      "parameters": {
+        "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3296,
+        -832
+      ],
+      "id": "ec616bd5-2abe-4a94-bbcc-af67fdfc990f",
+      "name": "BCV oficial - Diferencial"
+    },
+    {
+      "parameters": {
+        "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3296,
+        -640
+      ],
+      "id": "56b422fa-b79b-416c-9534-b74f8b273443",
+      "name": "BCV paralelo - diferencial"
+    },
+    {
+      "parameters": {
+        "jsCode": "const oficial = Number($json.tasa_bcv);\nconst paralela = Number($json.tasa_paralela);\n\nif (!Number.isFinite(oficial) || !Number.isFinite(paralela) || oficial <= 0) {\n  return {\n    json: {\n      Content: 'No pude obtener ambas tasas para calcular el diferencial.'\n    }\n  };\n}\n\nconst diferencial = paralela / oficial;\nconst porcentaje = (diferencial - 1) * 100;\n\nreturn {\n  json: {\n    Content:\n      `Diferencial: ${porcentaje.toLocaleString('es-VE', {\n        minimumFractionDigits: 2,\n        maximumFractionDigits: 2\n      })}%. ` +\n      `Paralela: Bs. ${paralela.toLocaleString('es-VE', {\n        minimumFractionDigits: 2,\n        maximumFractionDigits: 2\n      })}; ` +\n      `BCV: Bs. ${oficial.toLocaleString('es-VE', {\n        minimumFractionDigits: 2,\n        maximumFractionDigits: 2\n      })}.`\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4000,
+        -640
+      ],
+      "id": "a1949751-4b3d-44c8-8fbf-7e11a52db562",
+      "name": "Calcular diferencial cambiario"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4480,
+        -96
+      ],
+      "id": "84dfce91-f4c9-469e-bd79-1df79de34da5",
+      "name": "Merge - Respuestas 6"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3808,
+        -640
+      ],
+      "id": "6d523a68-d7ed-4137-8b92-07924d47ccf9",
+      "name": "Merge - diferencial"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "09b3dd5d-9584-4126-a4cb-2ec92a9d2670",
+              "name": "tasa_bcv",
+              "value": "={{ $json.promedio }}",
+              "type": "number"
+            },
+            {
+              "id": "2b37b703-b81e-4cc7-b85d-eac6b874b62b",
+              "name": "fecha_bcv",
+              "value": "={{ $json.fechaActualizacion }}",
+              "type": "string"
+            },
+            {
+              "id": "3d7c91d8-92a4-4a4a-97a0-28b6cc99a54b",
+              "name": "fuente_bcv",
+              "value": "={{ $json.fuente }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3584,
+        -800
+      ],
+      "id": "70fb8313-3db5-4023-8b0f-bd23557712a1",
+      "name": "Edit Fields - Oficial"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "09b3dd5d-9584-4126-a4cb-2ec92a9d2670",
+              "name": "tasa_paralela",
+              "value": "={{ $json.promedio }}",
+              "type": "number"
+            },
+            {
+              "id": "b714a6ce-df44-4bf5-b65e-6910805e580f",
+              "name": "fecha_paralela",
+              "value": "={{ $json.fechaActualizacion }}",
+              "type": "string"
+            },
+            {
+              "id": "327aec45-566c-4f3a-8cf3-d83ebd502f41",
+              "name": "fuente_paralela",
+              "value": "={{ $json.fuente }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3568,
+        -640
+      ],
+      "id": "c60d91c3-bbab-4d31-bc5a-5c87f396d198",
+      "name": "Edit Fields - Paralelo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const mensaje = $('Router - Consultas determinísticas').item.json.Content || '';\n\nconst texto = mensaje\n  .toLowerCase()\n  .normalize('NFD')\n  .replace(/[\\u0300-\\u036f]/g, '')\n  .replace(/\\./g, '')\n  .replace(',', '.');\n\nconst match =\n  texto.match(/(?:\\$|usd|dolares?|dolar)\\s*(\\d+(?:\\.\\d+)?)/) ||\n  texto.match(/(\\d+(?:\\.\\d+)?)\\s*(?:\\$|usd|dolares?|dolar)/);\n\nif (!match) {\n  return { json: { Content: 'Indica el monto en dólares.' } };\n}\n\nconst montoUsd = Number(match[1]);\nconst tasa = Number($json.promedio ?? $json.venta ?? $json.compra ?? $json.price);\n\nif (!Number.isFinite(montoUsd) || !Number.isFinite(tasa)) {\n  return { json: { Content: 'No pude calcular la conversión.' } };\n}\n\nconst totalBs = montoUsd * tasa;\n\nreturn {\n  json: {\n    Content: `$${montoUsd.toLocaleString('es-VE', {\n      minimumFractionDigits: 2,\n      maximumFractionDigits: 2,\n    })} a tasa paralela equivalen a Bs. ${totalBs.toLocaleString('es-VE', {\n      minimumFractionDigits: 2,\n      maximumFractionDigits: 2,\n    })}.`\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3664,
+        -160
+      ],
+      "id": "4a991745-9f2e-47cd-a9fd-7122caa956bf",
+      "name": "Calcular conversión Paralela"
+    },
+    {
+      "parameters": {
+        "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3472,
+        -160
+      ],
+      "id": "f1d695bd-348b-42c3-a84d-b103ce09c3c2",
+      "name": "BCV paralelo Conversion"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4432,
+        272
+      ],
+      "id": "d518e4a9-b4a5-4e23-9ffb-8bd01043b2bc",
+      "name": "Merge - Respuestas 7"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3840,
+        -320
+      ],
+      "id": "355b78df-c4b5-4394-b736-3f96dff35cf8",
+      "name": "Merge - Respuestas 8"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.1.137:8000/api/v1/n8n/webhook-ingest",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{\n  {\n    \"event\": \"messages.upsert\",\n    \"instance\": $('Edit Fields').item.json.body.instance,\n    \"data\": {\n      \"key\": {\n        \"remoteJid\": $('Edit Fields').item.json.body.data.key.remoteJid,\n        \"id\": $('Edit Fields').item.json.message_id\n      },\n      \"pushName\": $('Edit Fields').item.json.body.data.pushName,\n      \"message\": {\n        \"conversation\": $json.Content\n      }\n    }\n  }\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3680,
+        460
+      ],
+      "id": "movilnet-core-fastpath-oda-01",
+      "name": "Movilnet Core - Fast-Path ODA"
+    }
+  ],
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Captura Texto",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Capturar Imagen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Capturar Audio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Capturar Video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Captura Texto": {
+      "main": [
+        [
+          {
+            "node": "Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Capturar Audio": {
+      "main": [
+        [
+          {
+            "node": "Convertir Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convertir Audio": {
+      "main": [
+        [
+          {
+            "node": "Transcribe a recording",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Capturar Imagen": {
+      "main": [
+        [
+          {
+            "node": "Convertir Imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convertir Imagen": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Capturar Video": {
+      "main": [
+        [
+          {
+            "node": "Convertir Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convertir Video": {
+      "main": [
+        [
+          {
+            "node": "Analyze video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe a recording": {
+      "main": [
+        [
+          {
+            "node": "Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze video": {
+      "main": [
+        [
+          {
+            "node": "Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 7",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Router - Consultas determinísticas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV oficial": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV paralelo": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ListadePrecios": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recetas": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Sistema de Gestión de Contactos'1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Captura PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Captura PDF": {
+      "main": [
+        [
+          {
+            "node": "Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV Euros": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Router - Consultas determinísticas": {
+      "main": [
+        [
+          {
+            "node": "BCV paralelo - diferencial",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "BCV oficial - Diferencial",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BCV paralelo Conversion",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta - Solicitar Clave Paralela",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BCV oficial - Conversión",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BCV paralelo v2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta - Solicitar Clave Paralela",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BCV Euros v2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BCV oficial v2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV paralelo v2": {
+      "main": [
+        [
+          {
+            "node": "Respuesta - Tasa Paralela",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV oficial v2": {
+      "main": [
+        [
+          {
+            "node": "Respuesta - Tasa Oficial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV Euros v2": {
+      "main": [
+        [
+          {
+            "node": "Respuesta - Tasa Euro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respuesta - Tasa Paralela": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respuesta - Solicitar Clave Paralela": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 8",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Respuesta - Tasa Oficial": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge - Respuestas 2": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respuesta - Tasa Euro": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge - Respuestas 3": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 4",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge - Respuestas 4": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 6",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "BCV oficial - Conversión": {
+      "main": [
+        [
+          {
+            "node": "Calcular conversión BCV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge - Respuestas 5": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV paralelo - diferencial": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields - Paralelo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BCV oficial - Diferencial": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields - Oficial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular conversión BCV": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular diferencial cambiario": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge - Respuestas 6": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge - diferencial": {
+      "main": [
+        [
+          {
+            "node": "Calcular diferencial cambiario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields - Oficial": {
+      "main": [
+        [
+          {
+            "node": "Merge - diferencial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields - Paralelo": {
+      "main": [
+        [
+          {
+            "node": "Merge - diferencial",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "BCV paralelo Conversion": {
+      "main": [
+        [
+          {
+            "node": "Calcular conversión Paralela",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular conversión Paralela": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge - Respuestas 7": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 5",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge - Respuestas 8": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Movilnet Core - Fast-Path ODA": {
+      "main": [
+        [
+          {
+            "node": "Merge - Respuestas 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Caracas",
+    "callerPolicy": "workflowsFromSameOwner",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "user-agent": "axios/1.10.0",
+            "content-length": "974",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "host": "n8n:5678",
+            "connection": "keep-alive"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "messages.upsert",
+            "instance": "Viki LPGTEC",
+            "data": {
+              "key": {
+                "remoteJid": "584160000001@s.whatsapp.net",
+                "fromMe": false,
+                "id": "3A77A7A5A92774D6C3B3",
+                "senderPn": "584160000001@s.whatsapp.net",
+                "previousRemoteJid": "188364414275735@lid"
+              },
+              "pushName": "Francisco Landaeta",
+              "status": "DELIVERY_ACK",
+              "message": {
+                "conversation": "Calcular diferencial cambiario",
+                "messageContextInfo": {
+                  "deviceListMetadata": {
+                    "senderKeyHash": "hCM+P2tUNHCRoA==",
+                    "senderTimestamp": "1790880345",
+                    "recipientKeyHash": "42I/zMxpoU+/mQ==",
+                    "recipientTimestamp": "1789664834"
+                  },
+                  "deviceListMetadataVersion": 2,
+                  "messageSecret": "5NOTT935cqPn+im8a9y8yKyuFKxuvHUoco5K2uw2UvY="
+                }
+              },
+              "messageType": "conversation",
+              "messageTimestamp": 1791164792,
+              "instanceId": "ece0ce1e-b572-4449-a095-eed9109c4e2d",
+              "source": "ios"
+            },
+            "destination": "http://n8n:5678/webhook/messages_upsert",
+            "date_time": "2026-10-04T22:46:32.253Z",
+            "sender": "584241533712@s.whatsapp.net",
+            "server_url": "http://evolution:8080",
+            "apikey": "957EEABBC570-4C60-8EDB-949655A34113"
+          },
+          "webhookUrl": "https://n8n.lpgtec.net/webhook/messages_upsert",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "versionId": "6c0ee481-ab8f-46c2-b097-8c49fbd4a6fa",
+  "activeVersionId": "6c0ee481-ab8f-46c2-b097-8c49fbd4a6fa",
+  "versionCounter": 2,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-10-05T19:38:21.057Z",
+      "createdAt": "2026-10-05T19:38:21.057Z",
+      "role": "workflow:owner",
+      "workflowId": "sNMbtiEiTkuQ9OCY",
+      "projectId": "kuIhhBU75oSJBrNO",
+      "project": {
+        "updatedAt": "2025-09-04T03:35:13.404Z",
+        "createdAt": "2025-09-04T03:32:48.850Z",
+        "id": "kuIhhBU75oSJBrNO",
+        "name": "Francisco Landaeta <flandaetar@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "8a21fec4-b0b7-4881-87f5-ee59a4116215"
+      }
+    }
+  ],
+  "tags": [],
+  "parentFolder": null,
+  "activeVersion": {
+    "updatedAt": "2026-10-05T19:38:57.000Z",
+    "createdAt": "2026-10-05T19:38:32.686Z",
+    "versionId": "6c0ee481-ab8f-46c2-b097-8c49fbd4a6fa",
+    "workflowId": "sNMbtiEiTkuQ9OCY",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "messages_upsert",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          528,
+          -416
+        ],
+        "id": "43204eea-7024-4a06-af1d-e30aff74b38f",
+        "name": "Webhook",
+        "webhookId": "4a6f76ff-c715-4a53-a8be-39ea46beab52"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "22b46036-97c0-42e6-a9c6-22754e57ef24",
+                      "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                      "rightValue": "texto",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "texto"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "32ccbf5f-1198-447d-8f72-c0577e7f0732",
+                      "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                      "rightValue": "imagen",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "imagen"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "e66906b2-671b-4162-bcf1-94e2bfc3f5a7",
+                      "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                      "rightValue": "=audio",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "audio"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "76450a89-250d-4eb7-851f-844bb7c3e72a",
+                      "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                      "rightValue": "=video",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "video"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "56500a0d-184c-4dbb-9526-3fadd4134e4e",
+                      "leftValue": "={{ $json.body.data.messageType.toString() }}",
+                      "rightValue": "pdf",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "pdf"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          1392,
+          -528
+        ],
+        "id": "6c36376e-aef5-48a6-ba72-ba8ee2c105b7",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "28b24f3b-4510-46f6-b1a6-89cdf9e64858",
+                "name": "content.parts[0].text",
+                "value": "={{ $json.body.data.message.extended }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2544,
+          -672
+        ],
+        "id": "58f177e6-c125-49c5-bcad-999c1c9136a9",
+        "name": "Captura Texto"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "dac10c31-9f63-43c2-891c-98a363fcba1f",
+                "leftValue": "={{ $json.body.data.key.fromMe }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "false",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          752,
+          -416
+        ],
+        "id": "3d3cc812-e4fe-4daf-86e6-8a91c845e102",
+        "name": "If"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          896,
+          -240
+        ],
+        "id": "2f1808fc-217f-40aa-b195-1cc9d8fa0ee2",
+        "name": "No Operation, do nothing"
+      },
+      {
+        "parameters": {
+          "content": "RECEPCIÓN DE MENSAJE WHATSAPP\n",
+          "height": 640,
+          "width": 1088,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          496,
+          -704
+        ],
+        "id": "ece88ad6-f9ed-427b-9cb2-035ad4b91f09",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "PROCESAMIENTO DE MENSAJE\n\n",
+          "height": 640,
+          "width": 1084,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1712,
+          -704
+        ],
+        "id": "ce07ea20-fef5-47f6-a752-ff87369c0230",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "482110e8-8758-480d-9533-57ec4ceae3cb",
+                "name": "body.server_url",
+                "value": "={{ $('Webhook').item.json.body.server_url }}",
+                "type": "string"
+              },
+              {
+                "id": "e16b77c4-8108-4d73-988a-fa3c69cad6e8",
+                "name": "body.instance",
+                "value": "={{ $('Webhook').item.json.body.instance }}",
+                "type": "string"
+              },
+              {
+                "id": "e46a0a66-4848-4979-91dc-367bbb4e533b",
+                "name": "body.apikey",
+                "value": "={{ $('Webhook').item.json.body.apikey }}",
+                "type": "string"
+              },
+              {
+                "id": "dc6e0b0a-74b7-492b-976a-39e805497749",
+                "name": "message_id",
+                "value": "={{ $('Webhook').item.json.body.data.key.id }}",
+                "type": "string"
+              },
+              {
+                "id": "3d7e6439-fce1-49e7-ad4e-89b8f3d449ab",
+                "name": "=body.data.key.remoteJid",
+                "value": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+                "type": "string"
+              },
+              {
+                "id": "fb6ec7ec-2879-4dfe-9e77-85718bf59d54",
+                "name": "body.data.messageType",
+                "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? 'pdf'\n    : $('Webhook').item.json.body.data.message.imageMessage\n      ? 'imagen'\n      : $('Webhook').item.json.body.data.message.audioMessage\n        ? 'audio'\n        : $('Webhook').item.json.body.data.message.videoMessage\n          ? 'video'\n          : $('Webhook').item.json.body.data.message.conversation\n            ? 'texto'\n            : ''\n}}\n",
+                "type": "string"
+              },
+              {
+                "id": "85c8bf02-be85-4c14-ba3b-32943f742870",
+                "name": "body.data.message.extended",
+                "value": "={{ $('Webhook').item.json.body.data.message.extendedTextMessage?.text || '' }}{{ $('Webhook').item.json.body.data.message.imageMessage?.caption || '' }}{{ $('Webhook').item.json.body.data.message.conversation || '' }}",
+                "type": "object"
+              },
+              {
+                "id": "34eb6293-cc14-4f97-8ad8-f101676c7813",
+                "name": "body.date_time",
+                "value": "={{ $('Webhook').item.json.body.date_time.toDateTime().toISO() }}",
+                "type": "string"
+              },
+              {
+                "id": "26bb01aa-d746-4b11-8057-09f089945462",
+                "name": "body.data.pushName",
+                "value": "={{ $('Webhook').item.json.body.data.pushName ?? $('Edit Fields').item.json.body.data.key.remoteJid }}",
+                "type": "string"
+              },
+              {
+                "id": "a72a6268-8c07-4252-97eb-c8b6cf1ce3e4",
+                "name": "body.data.message.documentMessage.mimetype",
+                "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.mimetype\n    : $('Webhook').item.json.body.data.message.imageMessage\n      ? $('Webhook').item.json.body.data.message.imageMessage.mimetype\n      : $('Webhook').item.json.body.data.message.audioMessage\n        ? $('Webhook').item.json.body.data.message.audioMessage.mimetype\n        : $('Webhook').item.json.body.data.message.videoMessage\n          ? $('Webhook').item.json.body.data.message.videoMessage.mimetype\n          : ''\n}}",
+                "type": "string"
+              },
+              {
+                "id": "a9dd7f8e-733d-4809-b1ac-715ae8404e64",
+                "name": "body.data.message.documentMessage.url",
+                "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.url\n    : $('Webhook').item.json.body.data.message.imageMessage\n      ? $('Webhook').item.json.body.data.message.imageMessage.url\n      : $('Webhook').item.json.body.data.message.audioMessage\n        ? $('Webhook').item.json.body.data.message.audioMessage.url\n        : $('Webhook').item.json.body.data.message.videoMessage\n          ? $('Webhook').item.json.body.data.message.videoMessage.url\n          : ''\n}}",
+                "type": "string"
+              },
+              {
+                "id": "909f0f47-c332-41ec-acf8-0dd1d12808fb",
+                "name": "body.data.message.documentMessage.title",
+                "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.title\n    : ''\n}}",
+                "type": "string"
+              },
+              {
+                "id": "3a05ea50-3a35-4146-a586-35bce3f3ef4d",
+                "name": "body.data.message.documentMessage.pageCount",
+                "value": "={{\n  $('Webhook').item.json.body.data.message.documentMessage\n    ? $('Webhook').item.json.body.data.message.documentMessage.pageCount\n    : ''\n}}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {
+            "ignoreConversionErrors": true
+          }
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1024,
+          -432
+        ],
+        "id": "2303b11a-f03d-4876-a759-7c3a1570db2c",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "={{ $json.body.apikey }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "message.key.id",
+                "value": "={{ $json.message_id }}"
+              },
+              {
+                "name": "convertToMp4",
+                "value": "={{Boolean(false)}} "
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1888,
+          -400
+        ],
+        "id": "3f2d46f7-bb52-4eae-bce9-3aa1763c5c4f",
+        "name": "Capturar Audio",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hOZ72gWOEbGZaT5y",
+            "name": "Header Auth account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "toBinary",
+          "sourceProperty": "base64",
+          "options": {
+            "fileName": "Content",
+            "mimeType": "={{ $json.mimetype }}"
+          }
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          2080,
+          -416
+        ],
+        "id": "3e686a75-3db3-42bc-9c7d-4d75dd59b741",
+        "name": "Convertir Audio"
+      },
+      {
+        "parameters": {
+          "resource": "audio",
+          "modelId": {
+            "__rl": true,
+            "value": "models/gemini-2.5-flash",
+            "mode": "list",
+            "cachedResultName": "models/gemini-2.5-flash"
+          },
+          "inputType": "binary",
+          "simplify": "={{ true }}",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1,
+        "position": [
+          2288,
+          -400
+        ],
+        "id": "4c727192-f9be-4034-9dea-5d8a1930cd06",
+        "name": "Transcribe a recording",
+        "notesInFlow": false,
+        "credentials": {
+          "googlePalmApi": {
+            "id": "u4iDqvngcoIkUfY3",
+            "name": "Google Gemini(PaLM) Api account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "={{ $json.body.apikey }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "message.key.id",
+                "value": "={{ $json.message_id }}"
+              },
+              {
+                "name": "convertToMp4",
+                "value": "={{Boolean(false)}} "
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2016,
+          -560
+        ],
+        "id": "3f2f8db2-f07c-4cac-98b0-d57ef8b07b30",
+        "name": "Capturar Imagen",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hOZ72gWOEbGZaT5y",
+            "name": "Header Auth account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "toBinary",
+          "sourceProperty": "base64",
+          "options": {
+            "fileName": "Content",
+            "mimeType": "={{ $json.mimetype }}"
+          }
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          2192,
+          -560
+        ],
+        "id": "eebacf58-814d-41ab-bd19-599adda6e946",
+        "name": "Convertir Imagen"
+      },
+      {
+        "parameters": {
+          "resource": "image",
+          "operation": "analyze",
+          "modelId": {
+            "__rl": true,
+            "value": "models/gemini-2.5-flash",
+            "mode": "list",
+            "cachedResultName": "models/gemini-2.5-flash"
+          },
+          "inputType": "binary",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1,
+        "position": [
+          2400,
+          -560
+        ],
+        "id": "c4f9b21d-2c60-4190-9c3a-a583952db218",
+        "name": "Analyze image",
+        "credentials": {
+          "googlePalmApi": {
+            "id": "V3FRjXf9WBCa0Zju",
+            "name": "Google Gemini(PaLM) Api account 3"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "={{ $json.body.apikey }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "message.key.id",
+                "value": "={{ $json.message_id }}"
+              },
+              {
+                "name": "convertToMp4",
+                "value": "={{Boolean(false)}} "
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1792,
+          -256
+        ],
+        "id": "46c97ba3-70ec-4187-bc5f-71a2a5148452",
+        "name": "Capturar Video",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hOZ72gWOEbGZaT5y",
+            "name": "Header Auth account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "toBinary",
+          "sourceProperty": "base64",
+          "options": {
+            "fileName": "Content",
+            "mimeType": "={{ $json.mimetype }}"
+          }
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          1968,
+          -256
+        ],
+        "id": "c87e5ec6-4d6d-449e-b4b6-2b6e8995e4d2",
+        "name": "Convertir Video"
+      },
+      {
+        "parameters": {
+          "resource": "video",
+          "operation": "analyze",
+          "modelId": {
+            "__rl": true,
+            "value": "models/gemini-2.0-flash",
+            "mode": "list",
+            "cachedResultName": "models/gemini-2.0-flash"
+          },
+          "text": "What's in this video? Describe it, transcribe audio",
+          "inputType": "binary",
+          "options": {
+            "maxOutputTokens": 300
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1,
+        "position": [
+          2208,
+          -256
+        ],
+        "id": "36c8af7b-78d6-4375-879d-ae8d9d025952",
+        "name": "Analyze video",
+        "credentials": {
+          "googlePalmApi": {
+            "id": "u4iDqvngcoIkUfY3",
+            "name": "Google Gemini(PaLM) Api account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "0f980bd7-037a-4f9b-b5a3-b4583481fe0e",
+                "name": "Content",
+                "value": "={{ $json.content.parts[0].text }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {
+            "dotNotation": false
+          }
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2608,
+          -272
+        ],
+        "id": "ce6a648c-2c1d-4c4f-958c-2f94a344c07d",
+        "name": "Chat"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Usuario: {{ $('Edit Fields').item.json.body.data.pushName ?? $('Edit Fields').item.json.body.data.key.remoteJid }}\nFecha: {{ $now }}\nMensaje: {{ $json.Content }}",
+          "options": {
+            "systemMessage": "=Eres VIKI, asistente personal por WhatsApp.\n\nResponde siempre en español, con claridad y con el mínimo de palabras posible.\nNo uses saludos, despedidas, explicaciones ni texto innecesario.\nNo repitas la pregunta.\nResponde en una sola frase salvo que la tarea exija más.\n\nUsa herramientas solo cuando hagan falta:\n- Recetas de Cocina: recetas.\n- BaseDeDatosContactos: añadir, buscar, actualizar o eliminar contactos.\n- ListadePrecios: precios de productos.\n- BCV oficial / BCV Euros: tasas oficiales.\n- Tasa paralela: solo con clave 2306 o password 2306.\n\nPrecios:\n- Nunca menciones costo en dólares.\n- Nunca menciones dólar paralelo.\n- Devuelve solo el precio final en bolívares.\n- Formato: Bs. 1.000,00\n\nTasas:\n- Sin clave, responde solo la tasa BCV oficial.\n- Paralela solo con clave 2306.\n- Si falta la clave para paralela, responde: Indica la clave.\n- Redondea a dos decimales.\n- Diferencial cambiario = tasa paralela / tasa oficial.\n\nFormato obligatorio para tasas:\n- Con nombre: “[Nombre], la tasa [BCV|paralela|euro] de hoy dd/mm/aaaa es Bs. 0,00 por dólar.”\n- Sin nombre: “La tasa [BCV|paralela|euro] de hoy dd/mm/aaaa es Bs. 0,00 por dólar.”\n- No agregues ninguna otra oración.\n- Usa la fecha actual recibida en el mensaje\n\nPara tasas, no uses “para el día de hoy”; usa “de hoy dd/mm/aaaa”.\n\nSi hay ambigüedad, pide solo la aclaratoria mínima."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 2.2,
+        "position": [
+          3904,
+          800
+        ],
+        "id": "8a570284-74c6-42a7-8edc-2b4f8e1d1f43",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "typeVersion": 1,
+        "position": [
+          3840,
+          1072
+        ],
+        "id": "2e8f4253-a32a-4ebb-910a-5f43c46419ae",
+        "name": "Google Gemini Chat Model",
+        "credentials": {
+          "googlePalmApi": {
+            "id": "V3FRjXf9WBCa0Zju",
+            "name": "Google Gemini(PaLM) Api account 3"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "for (const item of items) {\n    // 1. Obtener el texto de origen\n    let sourceText = item.json.output || item.json.Content || \"\";\n    \n    if (sourceText && typeof sourceText !== 'string') {\n        sourceText = JSON.stringify(sourceText);\n    }\n    \n    let cleanText = sourceText;\n\n    // 2. Normalizar saltos de línea (Windows \\r\\n -> \\n)\n    cleanText = cleanText.replace(/\\r\\n/g, '\\n');\n\n    // 3. Limpieza de Markdown conservando la estructura de lista\n    cleanText = cleanText.replace(/\\*\\*\\*([^*]+)\\*\\*\\*/g, '$1'); // Negrita + Cursiva ***\n    cleanText = cleanText.replace(/\\*\\*([^*]+)\\*\\*/g, '$1');     // Negrita **\n    cleanText = cleanText.replace(/\\_([^_]+)\\_/g, '$1');        // Cursiva _\n    cleanText = cleanText.replace(/\\*([^*]+)\\*/g, '$1');        // Cursiva *\n    cleanText = cleanText.replace(/^#+\\s?/gm, '');              // Encabezados Markdown (# Title)\n\n    // 4. Limpieza de espacios manteniendo la separación de viñetas y saltos\n    cleanText = cleanText.replace(/[ \\t]+/g, ' ');   // Espacios dobles horizontales\n    cleanText = cleanText.replace(/\\n\\s+/g, '\\n');   // Espacios al inicio de cada línea\n    cleanText = cleanText.trim();\n\n    // 5. Fallback por si el resultado es vacío\n    if (!cleanText || cleanText === \"\" || cleanText === \"undefined\") {\n        cleanText = \"Respuesta generada.\";\n    }\n\n    // Guardar en la propiedad de salida\n    item.json.final_text = cleanText;\n}\n\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4864,
+          736
+        ],
+        "id": "b1561deb-4d7d-4bcd-bd7a-af24293ae655",
+        "name": "Code",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ $('Webhook').item.json.body.server_url }}/message/sendText/{{ $('Edit Fields').item.json.body.instance }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "={{ $('Webhook').item.json.body.apikey }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "={{\n  {\n    \"instanceId\": $('Webhook').item.json.body.instance,\n    \"number\": $('Webhook').item.json.body.data.key.remoteJid,\n    \"options\": {\n      \"delay\": 3500\n    },\n    \"text\": $json.final_text\n  }\n}}",
+          "options": {
+            "redirect": {
+              "redirect": {
+                "followRedirects": false
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          5328,
+          704
+        ],
+        "id": "eae440d5-dcfb-4cc9-8726-1ecfa6380bd8",
+        "name": "HTTP Request",
+        "executeOnce": false
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "typeVersion": 1,
+        "position": [
+          4896,
+          928
+        ],
+        "id": "a40a8fe7-36c9-4a72-8a16-882fef7255c2",
+        "name": "Calculator"
+      },
+      {
+        "parameters": {
+          "content": "Razonamiento AI y envío de Mensaje\n",
+          "height": 608,
+          "width": 1792,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3792,
+          592
+        ],
+        "id": "f79915ca-44ca-4e86-883f-da833aeed114",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('Edit Fields').item.json.body.data.pushName ?? $('Edit Fields').item.json.body.data.key.remoteJid }}",
+          "contextWindowLength": 50
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+        "typeVersion": 1.3,
+        "position": [
+          3936,
+          1056
+        ],
+        "id": "57375e85-48f8-4744-ba96-4cf289675b0d",
+        "name": "Postgres Chat Memory",
+        "credentials": {
+          "postgres": {
+            "id": "BKa6ccyE51qcTM7E",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "127a055a-c47c-4c8a-bf2b-e84628fe720d",
+                "leftValue": "={{ $json.Content.toLowerCase() .trim() }}",
+                "rightValue": "/(dime las noticias)/i",
+                "operator": {
+                  "type": "string",
+                  "operation": "regex"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2864,
+          -384
+        ],
+        "id": "7ebe663e-c4b1-4878-ad03-515dd673607f",
+        "name": "If1"
+      },
+      {
+        "parameters": {
+          "url": "=https://news.google.com/rss",
+          "options": {
+            "customFields": "=",
+            "ignoreSSL": false
+          }
+        },
+        "type": "n8n-nodes-base.rssFeedRead",
+        "typeVersion": 1.2,
+        "position": [
+          3200,
+          -1024
+        ],
+        "id": "8e73508e-a13b-428a-8bd3-7c3ef2642444",
+        "name": "RSS Read",
+        "alwaysOutputData": false,
+        "notesInFlow": false
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "c23f4630-023a-4fd1-afaa-f8d6ee2c5ac9",
+                "name": "output",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "9b93d8b1-040e-4782-a0fe-be7a49c2ff4a",
+                "name": "link",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3360,
+          -1024
+        ],
+        "id": "76eed637-7f93-4b70-a5e7-3b27823d36e5",
+        "name": "Edit Fields1"
+      },
+      {
+        "parameters": {
+          "jsCode": "for (const item of items) {\n  // Asegúrate de que la propiedad 'output' existe y es una cadena de texto\n  if (item.json.output && typeof item.json.output === 'string') {\n    let cleanText = item.json.output;\n\n    // 1. Reemplazar saltos de línea y retornos de carro\n    cleanText = cleanText.replace(/(\\n|\\r)/g, ' ');\n\n    // 2. Eliminar negritas (**) y cursivas (_) o (***)\n    cleanText = cleanText.replace(/\\*\\*[^*]+\\*\\*/g, (match) => match.replace(/\\*\\*/g, ''));\n    cleanText = cleanText.replace(/_[^_]+_/g, (match) => match.replace(/_/g, ''));\n    cleanText = cleanText.replace(/\\*\\*\\*[^*]+\\*\\*\\*/g, (match) => match.replace(/\\*\\*\\*/g, ''));\n\n    // 3. Eliminar otros marcadores de Markdown (por ejemplo, títulos #, listas -, etc.)\n    cleanText = cleanText.replace(/#+\\s?/g, '');\n    cleanText = cleanText.replace(/-\\s/g, '');\n     cleanText = cleanText.replace(/\"/g, '');\n\n    // 4. Recortar espacios en blanco al inicio y al final\n    cleanText = cleanText.trim();\n    \n     // Asigna el texto limpio a una nueva propiedad\n    item.json.final_text = cleanText;\n  }\n}\n\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3792,
+          -1024
+        ],
+        "id": "93d3cca7-fadf-4cf6-b07e-bb973bc60c06",
+        "name": "Code1"
+      },
+      {
+        "parameters": {
+          "maxItems": 5
+        },
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          3552,
+          -1024
+        ],
+        "id": "40c12f64-9ac6-425b-807c-80684bd5e44b",
+        "name": "Limit"
+      },
+      {
+        "parameters": {
+          "toolDescription": "BCV",
+          "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.2,
+        "position": [
+          3712,
+          1008
+        ],
+        "id": "aecc6b11-52d9-40f2-90f2-aab52414cc39",
+        "name": "BCV oficial"
+      },
+      {
+        "parameters": {
+          "toolDescription": "BCV",
+          "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.2,
+        "position": [
+          3504,
+          1040
+        ],
+        "id": "4f02a765-98e6-48b8-999b-f914c209e2be",
+        "name": "BCV paralelo"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+        "typeVersion": 1,
+        "position": [
+          4816,
+          1056
+        ],
+        "id": "015c2b07-8f47-472a-bdcc-2ca826d71b33",
+        "name": "SerpAPI",
+        "credentials": {
+          "serpApi": {
+            "id": "gQlkhGgsIfxPyFbe",
+            "name": "SerpAPI account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1nMP8_xw7D-2VQCACWc8hlROyADPjdIjt9SxGxIX2CQM",
+            "mode": "list",
+            "cachedResultName": "ListaPrecios",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nMP8_xw7D-2VQCACWc8hlROyADPjdIjt9SxGxIX2CQM/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Sheet1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nMP8_xw7D-2VQCACWc8hlROyADPjdIjt9SxGxIX2CQM/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          4288,
+          1056
+        ],
+        "id": "be7ee368-6fb2-4caa-9619-8c8d2737162b",
+        "name": "ListadePrecios",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "2butbRek9DnxwcMM",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "m2hmP7U1aAyuUmew",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/m2hmP7U1aAyuUmew",
+            "cachedResultName": "Recetas"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2.2,
+        "position": [
+          4176,
+          1040
+        ],
+        "id": "7ca3b9a9-f3c3-4080-9d52-02c02e7c91fc",
+        "name": "Recetas"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "lTTTFJh5l79115yZ",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/lTTTFJh5l79115yZ",
+            "cachedResultName": "Sistema de Gestión de Contactos"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "{{ $json.query }}": "={{ $json.Content }}"
+            },
+            "matchingColumns": [
+              "{{ $json.query }}"
+            ],
+            "schema": [
+              {
+                "id": "{{ $json.query }}",
+                "displayName": "{{ $json.query }}",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2.2,
+        "position": [
+          4032,
+          1040
+        ],
+        "id": "38d4d9df-2795-4a0a-88a5-df3a6234e38d",
+        "name": "Call 'Sistema de Gestión de Contactos'1"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ $json.body.server_url }}/chat/getBase64FromMediaMessage/{{ $json.body.instance }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "message.key.id",
+                "value": "={{ $json.message_id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          1824,
+          -64
+        ],
+        "id": "bfebe067-17db-4ab2-b7f1-2e1332384faf",
+        "name": "HTTP Request1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hOZ72gWOEbGZaT5y",
+            "name": "Header Auth account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://www.lpgtec.net/pdf2text/index.php",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "={{ $json.mimetype }}",
+          "body": "={{ $json.base64 }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2032,
+          -64
+        ],
+        "id": "7d1d87ca-6006-4478-ac31-ee092ac7d570",
+        "name": "HTTP Request2"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1c43dc02-16d8-417a-aabc-7b6ab2769e90",
+                "name": "=content.parts[0].text",
+                "value": "={{ $json.text }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {
+            "dotNotation": true
+          }
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2240,
+          -64
+        ],
+        "id": "a97c4f81-c861-4500-8193-1dff7c9de467",
+        "name": "Captura PDF"
+      },
+      {
+        "parameters": {
+          "toolDescription": "BCV",
+          "url": "https://ve.dolarapi.com/v1/euros/oficial",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.2,
+        "position": [
+          4704,
+          1072
+        ],
+        "id": "8a5c86aa-ddb3-47e0-a79d-ef067ceda55a",
+        "name": "BCV Euros"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "lTTTFJh5l79115yZ",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/lTTTFJh5l79115yZ",
+            "cachedResultName": "Sistema de Gestión de Contactos"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "{{ $json.query }}": "={{ $json.Content }}"
+            },
+            "matchingColumns": [
+              "{{ $json.query }}"
+            ],
+            "schema": [
+              {
+                "id": "{{ $json.query }}",
+                "displayName": "{{ $json.query }}",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2.2,
+        "position": [
+          4160,
+          1184
+        ],
+        "id": "4e2e9ec4-841e-4b08-a26e-3ae876f889c6",
+        "name": "Call 'Sistema de Gestión de Contactos'"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "0a63aa16-f630-47cb-b407-78ee6c847276",
+                      "leftValue": "={{\n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /(diferencial|brecha)/.test(t) &&\n      /(cambiari|bcv|oficial|paralela|dolar)/.test(t);\n  })()\n}}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "diferencial_cambiario"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "7a0402c2-682f-40d0-a020-56cdccf5c230",
+                      "leftValue": "={{   (() => {     const t = ($json.Content || '')       .toLowerCase()       .normalize('NFD')       .replace(/[\\u0300-\\u036f]/g, '');      const hayMontoUsd =       /(?:\\$|usd|dolares?|dolar)\\s*\\d/.test(t) ||       /\\b\\d+(?:[.,]\\d+)?\\s*(?:\\$|usd|dolares?|dolar)\\b/.test(t);      const esParalela = /(paralela|paralelo)/.test(t);     const tieneClave = /(clave|password)\\s*:?\\s*2306\\b/.test(t);      return hayMontoUsd && esParalela && tieneClave;   })() }}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "conversion_paralela_autorizada"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "d729519b-5e71-40f9-9c3d-9f477cba5fee",
+                      "leftValue": "={{   (() => {     const t = ($json.Content || '')       .toLowerCase()       .normalize('NFD')       .replace(/[\\u0300-\\u036f]/g, '');      const hayMontoUsd =       /(?:\\$|usd|dolares?|dolar)\\s*\\d/.test(t) ||       /\\b\\d+(?:[.,]\\d+)?\\s*(?:\\$|usd|dolares?|dolar)\\b/.test(t);      return hayMontoUsd &&       /(paralela|paralelo)/.test(t) &&       !/(clave|password)\\s*:?\\s*2306\\b/.test(t);   })() }}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "conversion_paralela_sin_clave"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "4f8d99ac-44b4-4fbd-9181-9d2a9efd1ee5",
+                      "leftValue": "={{    (() => {     const t = ($json.Content || '')       .toLowerCase()       .normalize('NFD')       .replace(/[\\u0300-\\u036f]/g, '');      return (       /(?:\\$|usd|dolares?|dolar)\\s*\\d/.test(t) ||       /\\b\\d+(?:[.,]\\d+)?\\s*(?:\\$|usd|dolares?|dolar)\\b/.test(t)     ) &&     /(a\\s*(?:bs|bolivares?)|en\\s*(?:bs|bolivares?)|tasa|bcv|convert|equival|cuanto)/.test(t);   })() }}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "conversion_bcv"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "7c29332d-0db1-4263-96a5-b4b54261cf16",
+                      "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /(paralela|paralelo)/.test(t) &&\n      /(tasa|dolar|cambio|divisa)/.test(t) &&\n      /(clave|password)\\s*:?\\s*2306\\b/.test(t);\n  })()\n}}",
+                      "rightValue": "\\b(tasa|d[oó]lar|paralel[ao])\\b.*\\b(clave|password)\\s*2306\\b",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "tasa_paralela_autorizada"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "c1c2e63f-79ed-4190-9408-1b4502a028d0",
+                      "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /(paralela|paralelo)/.test(t) &&\n      /(tasa|dolar|cambio|divisa)/.test(t) &&\n      !/(clave|password)\\s*:?\\s*2306\\b/.test(t);\n  })()\n}}",
+                      "rightValue": "\\b(tasa|d[oó]lar|paralel[ao])\\b.*\\bparalel[ao]\\",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "tasa_paralela_sin_clave"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "cd8e0134-31bc-46aa-8812-b7e254808763",
+                      "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    return /\\beuros?\\b/.test(t) &&\n      /(tasa|cambio|precio|valor|hoy|bcv)/.test(t);\n  })()\n}}",
+                      "rightValue": "\\b(tasa|euro)\\b.*\\b(euro|euros)\\b|\\b(euro|euros)\\b.*\\b(tasa|hoy)\\b",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "tasa_euro"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "0c3778e0-66eb-4bd3-b7a1-148bc5c37c16",
+                      "leftValue": "={{ \n  (() => {\n    const t = ($json.Content || '')\n      .toLowerCase()\n      .normalize('NFD')\n      .replace(/[\\u0300-\\u036f]/g, '');\n\n    const esConsultaDeTasa = /(tasa|dolar|bcv|tipo de cambio)/.test(t);\n    const esParalela = /(paralela|paralelo)/.test(t);\n    const esEuro = /\\beuros?\\b/.test(t);\n\n    return esConsultaDeTasa && !esParalela && !esEuro;\n  })()\n}}",
+                      "rightValue": "\\b(tasa|d[oó]lar|bcv)\\b",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "tasa_oficial"
+              }
+            ]
+          },
+          "looseTypeValidation": true,
+          "options": {
+            "fallbackOutput": "extra",
+            "renameFallbackOutput": "ai_agent"
+          }
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          3040,
+          -256
+        ],
+        "id": "87a181eb-795c-4b52-9a9f-26f0dc2e9114",
+        "name": "Router - Consultas determinísticas"
+      },
+      {
+        "parameters": {
+          "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          3408,
+          -304
+        ],
+        "id": "71ae334e-773b-4631-b886-8aec13538a80",
+        "name": "BCV paralelo v2"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "0702a28f-25ad-47de-a4ac-02dc0a85af37",
+                "name": "Content",
+                "value": "={{ \n  (($('Edit Fields').item.json.body.data.pushName ?? '') + ', ').replace(/^,\\s*/, '') +\n  'la tasa paralela de hoy ' +\n  $now.toFormat('dd/LL/yyyy') +\n  ' es Bs. ' +\n  Number($json.promedio ?? $json.venta ?? $json.compra).toLocaleString('es-VE', {\n    minimumFractionDigits: 2,\n    maximumFractionDigits: 2\n  }) +\n  ' por dólar.'\n}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3616,
+          -304
+        ],
+        "id": "4c0388be-e128-4aec-9dfb-2ce5c4d1682a",
+        "name": "Respuesta - Tasa Paralela"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fa82026d-1df0-4c2d-a0c7-ca54074b4143",
+                "name": "Content",
+                "value": "Indica la clave.",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3632,
+          -32
+        ],
+        "id": "3a73c45f-e392-411b-b163-e5d88740b6ad",
+        "name": "Respuesta - Solicitar Clave Paralela"
+      },
+      {
+        "parameters": {
+          "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          3568,
+          272
+        ],
+        "id": "6a0c7a23-cfeb-4f51-9475-e55fe3a87448",
+        "name": "BCV oficial v2"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e3e1416d-206a-4637-8904-a3622002354f",
+                "name": "Content",
+                "value": "={{ \n  (($('Edit Fields').item.json.body.data.pushName ?? '') + ', ').replace(/^,\\s*/, '') +\n  'la tasa BCV de hoy ' +\n  $now.toFormat('dd/LL/yyyy') +\n  ' es Bs. ' +\n  Number($json.promedio ?? $json.venta ?? $json.compra).toLocaleString('es-VE', {\n    minimumFractionDigits: 2,\n    maximumFractionDigits: 2\n  }) +\n  ' por dólar.'\n}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3760,
+          272
+        ],
+        "id": "d93751d3-e991-46b0-accf-668de22b4966",
+        "name": "Respuesta - Tasa Oficial"
+      },
+      {
+        "parameters": {
+          "url": "https://ve.dolarapi.com/v1/euros/oficial",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          3552,
+          112
+        ],
+        "id": "c16d3053-ae3c-4123-97df-0496eac97bcc",
+        "name": "BCV Euros v2"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "24f4dc19-93b5-4f84-8791-3b536ade09f5",
+                "name": "Content",
+                "value": "={{ \n  (($('Edit Fields').item.json.body.data.pushName ?? '') + ', ').replace(/^,\\s*/, '') +\n  'la tasa del euro de hoy ' +\n  $now.toFormat('dd/LL/yyyy') +\n  ' es Bs. ' +\n  Number($json.promedio ?? $json.venta ?? $json.compra).toLocaleString('es-VE', {\n    minimumFractionDigits: 2,\n    maximumFractionDigits: 2\n  }) +\n  ' por euro.'\n}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3712,
+          112
+        ],
+        "id": "36efa2a0-2a8e-42a4-b398-8343601f7694",
+        "name": "Respuesta - Tasa Euro"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4000,
+          -112
+        ],
+        "id": "735370c5-a2f1-415a-9873-266d3b2b894a",
+        "name": "Merge - Respuestas 2"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4112,
+          160
+        ],
+        "id": "eb89a1ca-1f3a-4579-b6dc-ef226ded956f",
+        "name": "Merge - Respuestas 3"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4272,
+          -32
+        ],
+        "id": "78a344c4-76ee-4dd7-b6e3-d258a5da15f9",
+        "name": "Merge - Respuestas 4"
+      },
+      {
+        "parameters": {
+          "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          3376,
+          -464
+        ],
+        "id": "dab497ce-6499-45a3-ab88-0bff57bd3ff5",
+        "name": "BCV oficial - Conversión"
+      },
+      {
+        "parameters": {
+          "jsCode": "const mensaje = $('Router - Consultas determinísticas').item.json.Content || '';\nconst limpio = mensaje\n  .toLowerCase()\n  .replace(/\\./g, '')\n  .replace(',', '.');\n\nconst match = limpio.match(/(?:\\$|usd|dolares?|dolar)\\s*(\\d+(?:\\.\\d+)?)/) ||\n              limpio.match(/(\\d+(?:\\.\\d+)?)\\s*(?:\\$|usd|dolares?|dolar)/);\n\nif (!match) {\n  return {\n    json: {\n      Content: 'Indica el monto en dólares.'\n    }\n  };\n}\n\nconst montoUsd = Number(match[1]);\nconst tasa = Number($json.promedio ?? $json.venta ?? $json.compra);\n\nif (!Number.isFinite(montoUsd) || !Number.isFinite(tasa)) {\n  return {\n    json: {\n      Content: 'No pude calcular la conversión.'\n    }\n  };\n}\n\nconst totalBs = montoUsd * tasa;\nconst nombre = $('Edit Fields').item.json.body.data.pushName ?? '';\n\nreturn {\n  json: {\n    Content: `${nombre ? `${nombre}, ` : ''}$${montoUsd.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} equivalen a Bs. ${totalBs.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}.`\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3600,
+          -464
+        ],
+        "id": "8afde4c6-7010-42f9-966e-06875bfbbe1b",
+        "name": "Calcular conversión BCV"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4640,
+          320
+        ],
+        "id": "517a9110-8f9b-42c2-a416-002bd6548935",
+        "name": "Merge - Respuestas 5"
+      },
+      {
+        "parameters": {
+          "url": "https://ve.dolarapi.com/v1/dolares/oficial",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          3296,
+          -832
+        ],
+        "id": "ec616bd5-2abe-4a94-bbcc-af67fdfc990f",
+        "name": "BCV oficial - Diferencial"
+      },
+      {
+        "parameters": {
+          "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          3296,
+          -640
+        ],
+        "id": "56b422fa-b79b-416c-9534-b74f8b273443",
+        "name": "BCV paralelo - diferencial"
+      },
+      {
+        "parameters": {
+          "jsCode": "const oficial = Number($json.tasa_bcv);\nconst paralela = Number($json.tasa_paralela);\n\nif (!Number.isFinite(oficial) || !Number.isFinite(paralela) || oficial <= 0) {\n  return {\n    json: {\n      Content: 'No pude obtener ambas tasas para calcular el diferencial.'\n    }\n  };\n}\n\nconst diferencial = paralela / oficial;\nconst porcentaje = (diferencial - 1) * 100;\n\nreturn {\n  json: {\n    Content:\n      `Diferencial: ${porcentaje.toLocaleString('es-VE', {\n        minimumFractionDigits: 2,\n        maximumFractionDigits: 2\n      })}%. ` +\n      `Paralela: Bs. ${paralela.toLocaleString('es-VE', {\n        minimumFractionDigits: 2,\n        maximumFractionDigits: 2\n      })}; ` +\n      `BCV: Bs. ${oficial.toLocaleString('es-VE', {\n        minimumFractionDigits: 2,\n        maximumFractionDigits: 2\n      })}.`\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4000,
+          -640
+        ],
+        "id": "a1949751-4b3d-44c8-8fbf-7e11a52db562",
+        "name": "Calcular diferencial cambiario"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4480,
+          -96
+        ],
+        "id": "84dfce91-f4c9-469e-bd79-1df79de34da5",
+        "name": "Merge - Respuestas 6"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineByPosition",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          3808,
+          -640
+        ],
+        "id": "6d523a68-d7ed-4137-8b92-07924d47ccf9",
+        "name": "Merge - diferencial"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "09b3dd5d-9584-4126-a4cb-2ec92a9d2670",
+                "name": "tasa_bcv",
+                "value": "={{ $json.promedio }}",
+                "type": "number"
+              },
+              {
+                "id": "2b37b703-b81e-4cc7-b85d-eac6b874b62b",
+                "name": "fecha_bcv",
+                "value": "={{ $json.fechaActualizacion }}",
+                "type": "string"
+              },
+              {
+                "id": "3d7c91d8-92a4-4a4a-97a0-28b6cc99a54b",
+                "name": "fuente_bcv",
+                "value": "={{ $json.fuente }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3584,
+          -800
+        ],
+        "id": "70fb8313-3db5-4023-8b0f-bd23557712a1",
+        "name": "Edit Fields - Oficial"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "09b3dd5d-9584-4126-a4cb-2ec92a9d2670",
+                "name": "tasa_paralela",
+                "value": "={{ $json.promedio }}",
+                "type": "number"
+              },
+              {
+                "id": "b714a6ce-df44-4bf5-b65e-6910805e580f",
+                "name": "fecha_paralela",
+                "value": "={{ $json.fechaActualizacion }}",
+                "type": "string"
+              },
+              {
+                "id": "327aec45-566c-4f3a-8cf3-d83ebd502f41",
+                "name": "fuente_paralela",
+                "value": "={{ $json.fuente }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3568,
+          -640
+        ],
+        "id": "c60d91c3-bbab-4d31-bc5a-5c87f396d198",
+        "name": "Edit Fields - Paralelo"
+      },
+      {
+        "parameters": {
+          "jsCode": "const mensaje = $('Router - Consultas determinísticas').item.json.Content || '';\n\nconst texto = mensaje\n  .toLowerCase()\n  .normalize('NFD')\n  .replace(/[\\u0300-\\u036f]/g, '')\n  .replace(/\\./g, '')\n  .replace(',', '.');\n\nconst match =\n  texto.match(/(?:\\$|usd|dolares?|dolar)\\s*(\\d+(?:\\.\\d+)?)/) ||\n  texto.match(/(\\d+(?:\\.\\d+)?)\\s*(?:\\$|usd|dolares?|dolar)/);\n\nif (!match) {\n  return { json: { Content: 'Indica el monto en dólares.' } };\n}\n\nconst montoUsd = Number(match[1]);\nconst tasa = Number($json.promedio ?? $json.venta ?? $json.compra ?? $json.price);\n\nif (!Number.isFinite(montoUsd) || !Number.isFinite(tasa)) {\n  return { json: { Content: 'No pude calcular la conversión.' } };\n}\n\nconst totalBs = montoUsd * tasa;\n\nreturn {\n  json: {\n    Content: `$${montoUsd.toLocaleString('es-VE', {\n      minimumFractionDigits: 2,\n      maximumFractionDigits: 2,\n    })} a tasa paralela equivalen a Bs. ${totalBs.toLocaleString('es-VE', {\n      minimumFractionDigits: 2,\n      maximumFractionDigits: 2,\n    })}.`\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3664,
+          -160
+        ],
+        "id": "4a991745-9f2e-47cd-a9fd-7122caa956bf",
+        "name": "Calcular conversión Paralela"
+      },
+      {
+        "parameters": {
+          "url": "https://ve.dolarapi.com/v1/dolares/paralelo",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          3472,
+          -160
+        ],
+        "id": "f1d695bd-348b-42c3-a84d-b103ce09c3c2",
+        "name": "BCV paralelo Conversion"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4432,
+          272
+        ],
+        "id": "d518e4a9-b4a5-4e23-9ffb-8bd01043b2bc",
+        "name": "Merge - Respuestas 7"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          3840,
+          -320
+        ],
+        "id": "355b78df-c4b5-4394-b736-3f96dff35cf8",
+        "name": "Merge - Respuestas 8"
+      }
+    ],
+    "connections": {
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "Captura Texto",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Capturar Imagen",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Capturar Audio",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Capturar Video",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Captura Texto": {
+        "main": [
+          [
+            {
+              "node": "Chat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Capturar Audio": {
+        "main": [
+          [
+            {
+              "node": "Convertir Audio",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convertir Audio": {
+        "main": [
+          [
+            {
+              "node": "Transcribe a recording",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Capturar Imagen": {
+        "main": [
+          [
+            {
+              "node": "Convertir Imagen",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convertir Imagen": {
+        "main": [
+          [
+            {
+              "node": "Analyze image",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Capturar Video": {
+        "main": [
+          [
+            {
+              "node": "Convertir Video",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convertir Video": {
+        "main": [
+          [
+            {
+              "node": "Analyze video",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Analyze image": {
+        "main": [
+          [
+            {
+              "node": "Chat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Transcribe a recording": {
+        "main": [
+          [
+            {
+              "node": "Chat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Analyze video": {
+        "main": [
+          [
+            {
+              "node": "Chat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Chat": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Google Gemini Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 7",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Code": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Calculator": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Postgres Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "RSS Read",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Router - Consultas determinísticas",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "RSS Read": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields1": {
+        "main": [
+          [
+            {
+              "node": "Limit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code1": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limit": {
+        "main": [
+          [
+            {
+              "node": "Code1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV oficial": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV paralelo": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "SerpAPI": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ListadePrecios": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Recetas": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'Sistema de Gestión de Contactos'1": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request1": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request2": {
+        "main": [
+          [
+            {
+              "node": "Captura PDF",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Captura PDF": {
+        "main": [
+          [
+            {
+              "node": "Chat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV Euros": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Router - Consultas determinísticas": {
+        "main": [
+          [
+            {
+              "node": "BCV paralelo - diferencial",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "BCV oficial - Diferencial",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "BCV paralelo Conversion",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta - Solicitar Clave Paralela",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "BCV oficial - Conversión",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "BCV paralelo v2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta - Solicitar Clave Paralela",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "BCV Euros v2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "BCV oficial v2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV paralelo v2": {
+        "main": [
+          [
+            {
+              "node": "Respuesta - Tasa Paralela",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV oficial v2": {
+        "main": [
+          [
+            {
+              "node": "Respuesta - Tasa Oficial",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV Euros v2": {
+        "main": [
+          [
+            {
+              "node": "Respuesta - Tasa Euro",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respuesta - Tasa Paralela": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 8",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respuesta - Solicitar Clave Paralela": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 8",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Respuesta - Tasa Oficial": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 2",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge - Respuestas 2": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respuesta - Tasa Euro": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 3",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge - Respuestas 3": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 4",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge - Respuestas 4": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 6",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "BCV oficial - Conversión": {
+        "main": [
+          [
+            {
+              "node": "Calcular conversión BCV",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge - Respuestas 5": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV paralelo - diferencial": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields - Paralelo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BCV oficial - Diferencial": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields - Oficial",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Calcular conversión BCV": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Calcular diferencial cambiario": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge - Respuestas 6": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge - diferencial": {
+        "main": [
+          [
+            {
+              "node": "Calcular diferencial cambiario",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields - Oficial": {
+        "main": [
+          [
+            {
+              "node": "Merge - diferencial",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields - Paralelo": {
+        "main": [
+          [
+            {
+              "node": "Merge - diferencial",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "BCV paralelo Conversion": {
+        "main": [
+          [
+            {
+              "node": "Calcular conversión Paralela",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Calcular conversión Paralela": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge - Respuestas 7": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 5",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge - Respuestas 8": {
+        "main": [
+          [
+            {
+              "node": "Merge - Respuestas 2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Francisco Landaeta",
+    "name": "Version 6c0ee481",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-10-05T19:38:57.407Z",
+        "id": 168,
+        "workflowId": "sNMbtiEiTkuQ9OCY",
+        "versionId": "6c0ee481-ab8f-46c2-b097-8c49fbd4a6fa",
+        "event": "activated",
+        "userId": "8a21fec4-b0b7-4881-87f5-ee59a4116215"
+      }
+    ]
+  },
+  "scopes": [
+    "workflow:create",
+    "workflow:delete",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update",
+    "workflow:updateRedactionSetting"
+  ],
+  "checksum": "dc16b532a6f395f1cd52c6cb238a9d6cf42489f4fd940752db1a1aff0c0cd52e"
+}

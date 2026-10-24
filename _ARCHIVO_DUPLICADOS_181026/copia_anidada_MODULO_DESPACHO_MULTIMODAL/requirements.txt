@@ -1,0 +1,11 @@
+# ==============================================================================
+# DEPENDENCIAS DEL MÓDULO AUTÓNOMO DE DESPACHO MULTIMODAL
+# Nota: La lógica central, servidor HTTP y pruebas operan al 100% con la
+# librería estándar de Python 3 (Zero Hard Dependencies).
+# ==============================================================================
+
+# Opcionales para producción avanzada:
+# pydantic>=2.5.0
+# reportlab>=4.0.0
+# openai>=1.10.0
+# google-generativeai>=0.4.0

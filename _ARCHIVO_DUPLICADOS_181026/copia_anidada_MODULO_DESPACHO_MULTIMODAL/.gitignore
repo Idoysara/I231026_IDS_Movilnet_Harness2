@@ -1,0 +1,12 @@
+# Base de datos local
+*.db
+*.db-wal
+*.db-shm
+
+# Bóvedas de usuario en disco
+vaults/usr_*
+
+# Python bytecode y caches
+__pycache__/
+*.pyc
+.pytest_cache/

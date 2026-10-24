@@ -1,0 +1,34 @@
+{
+  "certificate_id": "FASE4-PASO2-CERT-1529E341CA67",
+  "project": "AI_Movilnet_300926",
+  "phase": "Fase 4: Diseño y Desarrollo de Interfaces de Usuario (UI / UX / IX / AX), Dashboard Ejecutivo y Despliegue Final",
+  "step": "Paso 2: Dashboard Web Ejecutivo de Operaciones (NOC / CCO) en Tiempo Real",
+  "organization": "Telecomunicaciones Movilnet C.A.",
+  "status": "CERTIFICADO_Y_APROBADO_100%",
+  "timestamp_utc": "2026-10-02T15:17:57.352313+00:00",
+  "wcag_standard": "WCAG 2.1 Level AAA (Dark Mode Operativo)",
+  "monitored_subscribers": 4000000,
+  "telemetry_modules": [
+    "KPIs 4M Abonados (Prepago, Pospago, Corporativo, Jubilado)",
+    "Monitoreo Enjambre Swarm L5 en Vivo (Agentes N1, N2, N3, N4)",
+    "Sala de Control Financiero C2P Pago Móvil y Oráculo Oficial BCV",
+    "Consola de Seguridad EIR, Lista Negra GSMA y Anti SIM-Swap < 72h",
+    "Infraestructura Radioeléctrica 4GMAX y Calidad Regulatoria CONATEL"
+  ],
+  "tests_summary": {
+    "step_tests": 8,
+    "step_passed": 8,
+    "global_tests": 219,
+    "global_passed": 219,
+    "duration_seconds": 5.135
+  },
+  "file_hashes": {
+    "ui/dashboard/noc_dashboard.html": "8e5234ce74c59a156e879957e3bb3bb30b15b04796321729993a9aec59367604",
+    "ui/dashboard/css/noc_dashboard.css": "487eeb1325ef7632666624025704473ab47685e4aafde2a2e5a31d03b5594eed",
+    "ui/dashboard/js/noc_dashboard.js": "3c2481bd07e4031da0011aa943fbb7378401b420fe1d281ad226ba83c742dcbf",
+    "tests/test_phase4_step2_noc_dashboard.py": "93b82c189e283438123d4443f309ea42ac1bb5566f10794c67f95aee786ba783",
+    "api/service.py": "62b737d5d17c16ae1fa1e3659cc58ab122cf14687a1f6536404cad2e25e6c1b0",
+    "api/openapi.json": "c4cd6c0287a51e2af2fdffa84310532901ae33502ae457db0e527cdcce0161be"
+  },
+  "sha256_cryptographic_seal": "1529e341ca674177d5954afe7776d25049ad8b1606a6b600ae9d309e2677f037"
+}

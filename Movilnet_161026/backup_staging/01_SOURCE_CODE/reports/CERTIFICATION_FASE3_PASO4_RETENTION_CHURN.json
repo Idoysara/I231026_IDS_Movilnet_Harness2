@@ -1,0 +1,50 @@
+{
+  "certificate_id": "FASE3-PASO4-CERT-58F42856AD7B",
+  "phase": "FASE_3_AI_CORE_AND_MULTI_AGENT_SWARM",
+  "step": "PASO_4_RETENTION_CHURN_AGENT_TMF680_ML",
+  "project": "AI_Movilnet_300926",
+  "status": "CERTIFICADO_Y_APROBADO_100%",
+  "timestamp": "2026-10-02T01:19:31.020839+00:00",
+  "verdict": "Agente Nivel 4 (Retención Proactiva, Fidelización & Churn ML) diseñado, construido, integrado con motor Scikit-Learn 1.7.2 calibrado, fallback analítico de contingencia, persistencia SQLite/WAL en churn_metrics, OpenAPI 3.1.0 (23 paths, 29 schemas), Webhook Bridge y Workflow Omnicanal n8n (5 workflows activos en manifiesto), verificado con 16/16 pruebas unitarias e integración aprobadas, 197/197 pruebas globales aprobadas, cero fallos y latencia promedio de 0.88 ms (SLA Telco < 20 ms).",
+  "metrics": {
+    "phase3_step4_tests": 16,
+    "global_tests_run": 197,
+    "failures": 0,
+    "errors": 0,
+    "success_rate_pct": 100.0,
+    "churn_ml_avg_latency_ms": 0.887,
+    "churn_ml_p95_latency_ms": 3.404,
+    "churn_ml_min_latency_ms": 0.399,
+    "nba_offer_selection_latency_ms": 0.115,
+    "security_secrets_detected": 0,
+    "total_openapi_paths": 23,
+    "total_openapi_schemas": 29,
+    "n8n_workflows_deployed": 5
+  },
+  "deliverables": [
+    "api/agents/agent_retention_churn.py (Agente Nivel 4, ChurnPredictorML Scikit-Learn, RetentionOfferEngine NBA, Cupones Criptográficos)",
+    "api/agents/__init__.py (Exportación formal de RetentionChurnAgent y modelos TMF680)",
+    "db/repository.py (Métodos de consulta de histórico de churn y extracción de features analíticos)",
+    "api/service.py (Endpoints /predict, /offer, /status, especificación formal OpenAPI 3.1.0)",
+    "api/openapi.json (Contrato formal OpenAPI 3.1.0 con 23 paths canónicos y 29 esquemas TM Forum ODA)",
+    "api/webhook_bridge.py (Integración omnicanal con eventos crm.retention.evaluate delegados a RetentionChurnAgent)",
+    "api/n8n_workflows/movilnet_retention_churn_workflow.json (Workflow omnicanal n8n de 6 nodos activo)",
+    "reports/n8n_deployment_manifest.json (Manifiesto de despliegue validado con 5 workflows omnicanal)",
+    "tests/test_phase3_step4_retention_churn.py (Suite de 16 pruebas automatizadas: ML, NBA, Cupones, Swarm, SLA)",
+    "reports/CERTIFICATION_FASE3_PASO4_RETENTION_CHURN.json (Certificado Oficial de Homologación)",
+    "STATE.md (Estado del enjambre Swarm Nivel 5 actualizado con Agente N4 y 197 tests)",
+    "docs/BITACORA_MOVILNET.md (Capítulo 62 registrado)"
+  ],
+  "supported_capabilities": [
+    "Predicción probabilística de abandono (Churn Risk) basada en Ridge Regression calibrada y modelo analítico de contingencia",
+    "Segmentación tetramodal de riesgo: LOW (<0.30), MEDIUM (0.30-0.60), HIGH (0.60-0.80) y CRITICAL (>=0.80)",
+    "Generación de factores explicativos e interpretables (Explainable AI / XAI) por vector de consumo, recargas y reclamos",
+    "Motor Next-Best-Action (NBA) según estándar TM Forum TMF680 con selección personalizada de paquetes de retención",
+    "Emisión y validación criptográfica de cupones de descuento y bonos de datos (RET-YYYYMMDD-XXXXXX) con prevención de doble gasto",
+    "Persistencia transaccional inmutable en SQLite WAL (tabla churn_metrics) para trazabilidad analítica de retención",
+    "Interoperabilidad Swarm Nivel 5: recepción de handoffs desde Agente N1 (Insatisfacción) y Agente N3 (Reposición SIM post-EIR)",
+    "Interoperabilidad Swarm Nivel 5: validación y canje de cupones durante recargas C2P con Agente N2 (Fintech C2P)",
+    "Despacho omnicanal adaptativo con formato Markdown, emojis y botones CTA interactivos para WhatsApp, Telegram y SMS"
+  ],
+  "sha256_cryptographic_seal": "e0f2de3d2182f4746fea7f4aa427ad06099e5c10ecdbc293c148153e47112540"
+}

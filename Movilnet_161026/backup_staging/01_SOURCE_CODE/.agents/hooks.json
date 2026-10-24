@@ -1,0 +1,11 @@
+{
+  "quality-guardian": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python3 ../AI_Movilnet_300926-main/scripts/hook_pre_invocation.py",
+        "timeout": 5
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Mi Movilnet PWA — Autoservicio Móvil",
+  "short_name": "Mi Movilnet",
+  "description": "Portal Oficial de Autoservicio Móvil del Abonado — Telecomunicaciones Movilnet C.A.",
+  "start_url": "/ui/pwa/",
+  "scope": "/ui/pwa/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#002B49",
+  "theme_color": "#002B49",
+  "categories": ["utilities", "finance", "telecommunications"],
+  "icons": [
+    {
+      "src": "/ui/pwa/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ui/pwa/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

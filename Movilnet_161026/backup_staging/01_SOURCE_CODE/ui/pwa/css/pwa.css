@@ -1,0 +1,793 @@
+/**
+ * pwa.css — Estilos Móviles Carrier-Grade de Autoservicio Mi Movilnet PWA
+ * Proyecto: AI_Movilnet_300926 — Telecomunicaciones Movilnet C.A.
+ * Estándar: WCAG 2.1 Nivel AAA | Mobile-First | Targets Táctiles >= 44px
+ */
+
+/* ==========================================================================
+   1. SISTEMA DE TEMAS TRI-MODAL (LIGHT / MEDIUM / DARK) — WCAG 2.1 AAA
+   ========================================================================== */
+:root,
+[data-theme="light"],
+body.theme-light {
+  --pwa-bg: #F4F6F9;
+  --pwa-surface: #FFFFFF;
+  --pwa-surface-subtle: #F8FAFC;
+  --pwa-input-bg: #FFFFFF;
+  --pwa-blue-nav: #002B49;
+  --pwa-orange: #FF6A13;
+  --pwa-4gmax: #00558C;
+  --pwa-cyan: #00A3E0;
+  --pwa-text-primary: #0F172A;
+  --pwa-text-secondary: #475569;
+  --pwa-text-muted: #64748B;
+  --pwa-border: #E2E8F0;
+  --pwa-radius: 12px;
+  --pwa-success: #15803D;
+  --pwa-success-bg: #DCFCE7;
+  --pwa-danger: #B91C1C;
+  --pwa-danger-bg: #FEE2E2;
+  --pwa-header-bg: #002B49;
+  --pwa-card-header: #002B49;
+  --pwa-tab-bg: #FFFFFF;
+  --pwa-chat-bg: #F8FAFC;
+  --pwa-msg-bg: #FFFFFF;
+  --pwa-msg-border: #E2E8F0;
+  --pwa-card-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  --pwa-theme-bar-bg: rgba(255, 255, 255, 0.12);
+  --pwa-theme-btn-color: rgba(255, 255, 255, 0.75);
+  --pwa-theme-btn-active-bg: #FFFFFF;
+  --pwa-theme-btn-active-color: #002B49;
+}
+
+[data-theme="medium"],
+body.theme-medium {
+  --pwa-bg: #1B2431;
+  --pwa-surface: #243041;
+  --pwa-surface-subtle: #1F2A3A;
+  --pwa-input-bg: #1F2A3A;
+  --pwa-blue-nav: #16202D;
+  --pwa-orange: #FF7A29;
+  --pwa-4gmax: #0A6CB0;
+  --pwa-cyan: #38BDF8;
+  --pwa-text-primary: #F1F5F9;
+  --pwa-text-secondary: #CBD5E1;
+  --pwa-text-muted: #94A3B8;
+  --pwa-border: #334358;
+  --pwa-radius: 12px;
+  --pwa-success: #22C55E;
+  --pwa-success-bg: #064E3B;
+  --pwa-danger: #EF4444;
+  --pwa-danger-bg: #450A0A;
+  --pwa-header-bg: #16202D;
+  --pwa-card-header: #38BDF8;
+  --pwa-tab-bg: #243041;
+  --pwa-chat-bg: #1B2431;
+  --pwa-msg-bg: #29384C;
+  --pwa-msg-border: #3A4D67;
+  --pwa-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --pwa-theme-bar-bg: rgba(255, 255, 255, 0.10);
+  --pwa-theme-btn-color: rgba(255, 255, 255, 0.7);
+  --pwa-theme-btn-active-bg: #38BDF8;
+  --pwa-theme-btn-active-color: #0F172A;
+}
+
+[data-theme="dark"],
+body.theme-dark {
+  --pwa-bg: #080D12;
+  --pwa-surface: #0F1721;
+  --pwa-surface-subtle: #141E29;
+  --pwa-input-bg: #141E29;
+  --pwa-blue-nav: #05080C;
+  --pwa-orange: #FF6A13;
+  --pwa-4gmax: #00558C;
+  --pwa-cyan: #00A3E0;
+  --pwa-text-primary: #F8FAFC;
+  --pwa-text-secondary: #94A3B8;
+  --pwa-text-muted: #64748B;
+  --pwa-border: #1E2D3D;
+  --pwa-radius: 12px;
+  --pwa-success: #22C55E;
+  --pwa-success-bg: #052E16;
+  --pwa-danger: #EF4444;
+  --pwa-danger-bg: #450A0A;
+  --pwa-header-bg: #05080C;
+  --pwa-card-header: #00A3E0;
+  --pwa-tab-bg: #0F1721;
+  --pwa-chat-bg: #080D12;
+  --pwa-msg-bg: #141E29;
+  --pwa-msg-border: #1E2D3D;
+  --pwa-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  --pwa-theme-bar-bg: rgba(255, 255, 255, 0.08);
+  --pwa-theme-btn-color: rgba(255, 255, 255, 0.65);
+  --pwa-theme-btn-active-bg: #00A3E0;
+  --pwa-theme-btn-active-color: #05080C;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--pwa-bg);
+  color: var(--pwa-text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px; /* Espacio para barra de navegación inferior */
+}
+
+/* Enlace Accesible de Salto */
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 10px;
+  background: var(--pwa-orange);
+  color: #FFFFFF;
+  padding: 10px 16px;
+  font-weight: 700;
+  z-index: 9999;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 10px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--pwa-orange);
+  outline-offset: 2px;
+}
+
+/* Header de la App */
+.pwa-header {
+  background: var(--pwa-header-bg);
+  color: #FFFFFF;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.25s ease;
+}
+
+.pwa-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pwa-logo-box {
+  background: var(--pwa-orange);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.pwa-brand-text h1 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.pwa-brand-text p {
+  font-size: 0.72rem;
+  color: var(--pwa-cyan);
+}
+
+.pwa-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Selector Tri-Modal Light / Medium / Dark */
+.pwa-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: var(--pwa-theme-bar-bg);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  color: var(--pwa-theme-btn-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.theme-btn:hover {
+  color: #FFFFFF;
+}
+
+.theme-btn.active {
+  background: var(--pwa-theme-btn-active-bg);
+  color: var(--pwa-theme-btn-active-color);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.theme-icon {
+  font-size: 0.85rem;
+}
+
+.theme-text {
+  font-size: 0.72rem;
+}
+
+@media (max-width: 480px) {
+  .theme-text {
+    display: none;
+  }
+  .theme-btn {
+    padding: 6px;
+  }
+}
+
+.pwa-phone-chip {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Contenedor Principal */
+.pwa-container {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Tarjeta Principal de Saldo OCS */
+.pwa-balance-card {
+  background: linear-gradient(135deg, #002B49 0%, #00558C 100%);
+  color: #FFFFFF;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 10px 20px rgba(0, 43, 73, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.pwa-balance-card::after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+}
+
+.pwa-balance-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.pwa-plan-name {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #93C5FD;
+  font-weight: 700;
+}
+
+.pwa-line-status {
+  background: #15803D;
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.pwa-balance-val {
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-family: monospace;
+  margin-bottom: 4px;
+}
+
+.pwa-balance-usd {
+  font-size: 0.9rem;
+  color: #BAE6FD;
+  margin-bottom: 16px;
+}
+
+.pwa-quota-wrap {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pwa-quota-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+}
+
+.pwa-quota-progress {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pwa-quota-fill {
+  height: 100%;
+  background: var(--pwa-orange);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Tarjetas de Acciones Rápidas (Grid 2 columnas) */
+.pwa-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.pwa-action-btn {
+  background: var(--pwa-surface);
+  border: 1px solid var(--pwa-border);
+  border-radius: var(--pwa-radius);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  cursor: pointer;
+  min-height: 84px;
+  transition: all 0.2s ease;
+  color: var(--pwa-text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.pwa-action-btn:hover, .pwa-action-btn:focus-visible {
+  border-color: var(--pwa-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.pwa-action-icon {
+  font-size: 1.4rem;
+}
+
+/* Formularios y Secciones Interactivas */
+.pwa-card {
+  background: var(--pwa-surface);
+  border: 1px solid var(--pwa-border);
+  border-radius: var(--pwa-radius);
+  padding: 18px;
+  box-shadow: var(--pwa-card-shadow);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.pwa-card-header {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--pwa-card-header);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pwa-form-group {
+  margin-bottom: 14px;
+}
+
+.pwa-form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--pwa-text-secondary);
+  margin-bottom: 6px;
+}
+
+.pwa-input, .pwa-select {
+  width: 100%;
+  min-height: 48px; /* WCAG AAA Touch Target */
+  padding: 10px 14px;
+  border: 1px solid var(--pwa-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--pwa-text-primary);
+  background: var(--pwa-input-bg);
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.pwa-input:focus, .pwa-select:focus {
+  border-color: var(--pwa-orange);
+  outline: none;
+}
+
+.pwa-btn-submit {
+  width: 100%;
+  min-height: 48px;
+  background: var(--pwa-orange);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pwa-btn-submit:hover {
+  background: #E55B0A;
+}
+
+.pwa-btn-submit:disabled {
+  background: #CBD5E1;
+  cursor: not-allowed;
+}
+
+/* Chat Asistente IA Integrado */
+.pwa-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 260px;
+  border: 1px solid var(--pwa-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--pwa-chat-bg);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.pwa-chat-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--pwa-chat-bg);
+}
+
+.pwa-msg {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.pwa-msg.assistant {
+  background: var(--pwa-msg-bg);
+  border: 1px solid var(--pwa-msg-border);
+  color: var(--pwa-text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+.pwa-msg.user {
+  background: var(--pwa-blue-nav);
+  color: #FFFFFF;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.pwa-chat-input-wrap {
+  display: flex;
+  border-top: 1px solid var(--pwa-border);
+  background: var(--pwa-input-bg);
+}
+
+.pwa-chat-input {
+  flex: 1;
+  min-height: 44px;
+  border: none;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  background: transparent;
+  color: var(--pwa-text-primary);
+}
+.pwa-chat-input:focus {
+  outline: none;
+}
+
+.pwa-chat-send {
+  background: var(--pwa-blue-nav);
+  color: #FFFFFF;
+  border: none;
+  padding: 0 16px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+/* Barra de Navegación Inferior (PWA Tab Bar) */
+.pwa-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: var(--pwa-tab-bg);
+  border-top: 1px solid var(--pwa-border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.pwa-tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  color: var(--pwa-text-muted);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  gap: 3px;
+  transition: color 0.2s ease;
+  min-height: 44px;
+}
+
+.pwa-tab-item.active {
+  color: var(--pwa-orange);
+}
+
+.pwa-tab-icon {
+  font-size: 1.25rem;
+}
+
+/* ==========================================================================
+   VENTANAS FLOTANTES Y MODALES MULTI-APLICACIÓN (PWA APPS & CHAT OVERLAYS)
+   ========================================================================== */
+.pwa-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 15, 30, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 16px;
+}
+
+.pwa-modal-backdrop.open,
+.pwa-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pwa-app-window {
+  background: #FFFFFF;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 440px; /* Tamaño Celular por defecto */
+  height: 90vh;
+  max-height: 740px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: scale(0.95) translateY(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* Modos de visualización de dispositivo para ventana independiente */
+.pwa-app-window.device-phone {
+  max-width: 390px;
+  max-height: 720px;
+  border-radius: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 0 8px #1E293B; /* Marco simulador smartphone */
+}
+
+.pwa-app-window.device-tablet {
+  max-width: 760px;
+  max-height: 820px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 0 12px #334155; /* Marco simulador tablet */
+}
+
+.pwa-modal-backdrop.open .pwa-app-window,
+.pwa-modal-backdrop.active .pwa-app-window {
+  transform: scale(1) translateY(0);
+}
+
+/* Barra de control de modo de pantalla (Celular / Tablet) */
+.device-toggle-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 3px 6px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+}
+
+.device-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  padding: 3px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.device-toggle-btn.active {
+  background: #FFFFFF;
+  color: #002B49;
+}
+
+/* Header de Ventana WhatsApp */
+.pwa-app-window.whatsapp {
+  background-color: #EFEAE2;
+  background-image: radial-gradient(#D5D0C9 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.pwa-app-window.whatsapp .app-win-header {
+  background-color: #075E54;
+  color: #FFFFFF;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Header de Ventana Telegram */
+.pwa-app-window.telegram {
+  background-color: #0E1621;
+  background-image: radial-gradient(#17212B 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.pwa-app-window.telegram .app-win-header {
+  background-color: #17212B;
+  color: #FFFFFF;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Encabezado General de Ventana */
+.app-win-header {
+  background-color: #002B49;
+  color: #FFFFFF;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-win-close {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.app-win-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.app-win-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.app-win-footer {
+  padding: 12px 16px;
+  background: #F0F2F5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Burbujas WhatsApp en ventana emergente */
+.pwa-app-window.whatsapp .chat-bubble {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  box-shadow: 0 1px 1.5px rgba(0,0,0,0.13);
+}
+
+.pwa-app-window.whatsapp .chat-bubble.bot {
+  background-color: #FFFFFF;
+  color: #111B21;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+
+.pwa-app-window.whatsapp .chat-bubble.user {
+  background-color: #E7FFDB;
+  color: #111B21;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+}
+
+/* Burbujas Telegram en ventana emergente */
+.pwa-app-window.telegram .chat-bubble {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+
+.pwa-app-window.telegram .chat-bubble.bot {
+  background-color: #182533;
+  color: #F5F5F5;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.pwa-app-window.telegram .chat-bubble.user {
+  background-color: #2B5278;
+  color: #FFFFFF;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+

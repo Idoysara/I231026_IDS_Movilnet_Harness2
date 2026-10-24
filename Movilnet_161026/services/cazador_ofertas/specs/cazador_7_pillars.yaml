@@ -1,0 +1,101 @@
+# 🏛️ ESPECIFICACIÓN FORMAL DE LOS 7 PILARES — FASE 0 (GENESIS)
+# Proyecto: 28_Cazador_Ofertas (Club Movilnet / Super-App Soberana de Proximidad)
+# Sello de Arquitectura: CERT-CAZADOR-PENTARCHY-20261018
+
+proyecto:
+  id: "28_Cazador_Ofertas"
+  nombre: "Cazador de Ofertas Movilnet"
+  version: "1.0.0"
+  puerto_api: 8030
+  puerto_pwa: 3005
+  modalidad_arquetipo: "hybrid"
+  modalidades_secundarias:
+    - "physical_inventory"    # Comercios y restaurantes con stock limitado
+    - "financial_and_saas"    # Cuponería, billetera de ahorro y Carrier Billing
+
+pilar_1_identidad_y_mision:
+  proposito: "Democratizar el ahorro cotidiano en Venezuela mediante una plataforma de ofertas por mensajería y proximidad geolocalizada, anclada en la red de Movilnet."
+  publico_objetivo:
+    b2c: "Abonados móviles de prepago y pospago (0416/0426) que buscan maximizar su presupuesto."
+    b2b: "Comercios, supermercados, farmacias y profesionales que requieren afluencia inmediata sin gastar en publicidad tradicional."
+    carrier: "Movilnet como telco de valor añadido que reduce churn y monetiza transacciones."
+
+pilar_2_actores_del_sistema:
+  - id: "cazador_b2c"
+    rol: "Usuario Final"
+    permisos: ["explorar_ofertas", "activar_radar_gps", "reclamar_cupon_dinamico", "pagar_carrier_billing"]
+  - id: "comercio_b2b"
+    rol: "Merchant / Proveedor"
+    permisos: ["publicar_oferta_multimodal", "escanear_qr_offline", "quemar_cupon", "ver_metricas_ventas"]
+  - id: "carrier_telco"
+    rol: "Operadora de Red"
+    permisos: ["validar_sim_hlr", "debitar_saldo_idempotente", "difundir_smpp_alertas", "liquidar_split_20"]
+
+pilar_3_canales_y_ergonomia:
+  deflector_mensajeria:
+    canales: ["WhatsApp", "Telegram", "SMS"]
+    funcion: "Click-to-Chat de entrada rápida; envía enlace mágico (Magic Link) a la PWA sin costos por mensaje de Meta."
+  pwa_soberana:
+    tecnologia: "Next.js 15 / Tailwind / Service Workers"
+    capacidades: ["Offline-First", "Zero-Rating de datos", "Visualizador de mapa radar", "Renderizador de QR TOTP"]
+  scanner_pos:
+    tipo: "Módulo web para comerciantes"
+    latencia: "<0.5s de validación criptográfica en caja"
+  automatizacion_omnicanal_n8n:
+    motor: "n8n Workflow Automation"
+    archivo_workflow: "n8n/cazador_ofertas_n8n_workflow.json"
+    nodos_totales: 11
+    canales: ["WhatsApp Meta Cloud / Whapify", "Telegram Bot API", "PWA Webhook"]
+    gateway_backend: "POST :8030/api/deflector/n8n"
+    capacidades:
+      - "Normalización polimórfica en Code Node JavaScript"
+      - "Filtro IF de exclusividad Movilnet 0416/0426 con rechazo HTTP 403"
+      - "Despacho con botones interactivos WebApp para Telegram y Magic Links Zero-Rating"
+
+pilar_4_invariantes_matematicas_y_guardas:
+  invariante_1_solvencia:
+    regla: "Fondo de Maniobra (FM) = Activo Corriente - Pasivo Corriente > 0"
+  invariante_2_margen_bruto:
+    regla: "Margen Bruto = (Precio_Venta - Costo_Directo) / Precio_Venta >= 0.35 (35%)"
+    rechazo: "Toda oferta con margen <35% es bloqueada en el kernel."
+  invariante_3_geofencing_3_anillos:
+    zona_1_inmediata: 500   # metros
+    zona_2_vecindario: 1000 # metros
+    zona_3_urbana: 3000     # metros
+  invariante_4_seguridad_qr:
+    algoritmo: "TOTP + HMAC-SHA256"
+    rotacion_segundos: 60
+    proteccion: "Anti-screenshot y Anti-replay (quema de hash al canjear)"
+  invariante_5_idempotencia:
+    formato: "Idempotency-Key = SHA256(msisdn + plan_id + timestamp_ventana)"
+    efecto: "Protección contra cobros duplicados en redes 3G/4G inestables"
+  invariante_6_grounding_real_b2c:
+    regla: "Prohibición Absoluta de Alucinación (Zero-Hallucination B2C Guard)"
+    condicion: "Toda oferta, comercio, precio y descuento expuesto al consumidor debe residir físicamente en la base de datos auditada."
+    accion_rechazo: "Si la oferta no existe en el catálogo verificado o no hay coincidencias en el radar, el sistema ejecuta Fallo Limpio (Clean Fail) y se niega a inventar ofertas sintéticas."
+
+
+pilar_5_catalogo_y_rubros:
+  giros_prioritarios:
+    - "Alimentos y Supermercados"
+    - "Restaurantes y Comida Rápida"
+    - "Farmacias y Salud"
+    - "Belleza y Cuidado Personal"
+    - "Servicios Profesionales y Técnicos"
+    - "Calzado y Vestimenta"
+
+pilar_6_modelo_financiero_y_split:
+  fuentes_ingreso:
+    carrier_billing: "Pases VIP Cazador Pro ($1.00 - $3.00/mes descontado de saldo prepago/pospago)"
+    suscripciones_b2b: "Comercios destacados en radar ($20.00 - $60.00/mes)"
+    publicidad_geocercada: "Alertas relámpago 1 a N por SMS SMPP interno ($0.02 por impacto)"
+  split_transaccional:
+    comision_carrier_movilnet: 0.20 # 20%
+    liquidacion_comercio_plataforma: 0.80 # 80%
+
+pilar_7_topologia_e_infraestructura:
+  backend_core: "FastAPI (Python) en puerto :8030"
+  base_datos_geoespacial: "PostgreSQL 16 + PostGIS + pgvector (Índices GIST)"
+  cache_y_colas: "Redis Cluster + BullMQ (bloqueo atómico SETNX)"
+  broker_alta_concurrencia: "Centrifugo / EMQX (500k conexiones simultáneas)"
+  mcp_suite: "ecosistema_simbiotico_mcp_skills (4 servidores integrados)"

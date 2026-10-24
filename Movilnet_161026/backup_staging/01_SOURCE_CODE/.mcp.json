@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "n8n-mcp": {
+      "type": "http",
+      "url": "https://n8n.lpgtec.net/mcp-server/http",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTIxZmVjNC1iMGI3LTQ4ODEtODdmNS1lZTU5YTQxMTYyMTUiLCJpc3MiOiJuOG4iLCJhdWQiOiJtY3Atc2VydmVyLWFwaSIsImp0aSI6ImE0YjUyM2U3LTI5NDYtNDg5MC1iZmEzLTdiMjM2MWJlZTEyOSIsImlhdCI6MTc5MTI0MjAyMn0.3pgNsTbw3OIomltKfjshf0u3artgdrrXMnoNpZswmEc"
+      }
+    }
+  }
+}

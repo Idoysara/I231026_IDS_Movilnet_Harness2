@@ -1,0 +1,6 @@
+# Sumas de Verificación Criptográfica SHA-256 — Movilnet_161026 (Actualización PWA Universal)
+# Fecha de Emisión: 2026-10-23 01:40:18 UTC
+
+146b5ee7ab4cfa85e481ccdfce7b7db2a2ceb64d8aea8d6ac91136151edf4fb9  CORE_MOVILNET_EXPORT_161026.tar.gz
+845a5a95c33901d9c73483e6328b62e8054039a4af723ede8048e1db7ba21cba  CORE_MOVILNET_EXPORT_161026.zip
+53996e6a83adb251f3df367cf0d459e12751ea98875a66d498a18b644b6cc868  local_movilnet.db

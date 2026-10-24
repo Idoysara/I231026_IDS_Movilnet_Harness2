@@ -1,0 +1,234 @@
+{
+  "metadata_simulacion": {
+    "fecha_ejecucion": "2026-10-22 06:14:57",
+    "duracion_segundos": 1.16,
+    "territorio": "Gran Caracas, Venezuela",
+    "total_abonados_simulados": 50
+  },
+  "metricas_adquisicion_radar": {
+    "total_busquedas_radar": 100,
+    "busquedas_exitosas": 100,
+    "total_impactos_ofertas": 2682,
+    "promedio_ofertas_por_busqueda": 26.82,
+    "distribucion_anillos": {
+      "zona_1_inmediata": 260,
+      "zona_2_vecindario": 345,
+      "zona_3_urbana": 1401
+    }
+  },
+  "metricas_conversion_cupones": {
+    "intentos_reclamo": 40,
+    "cupones_emitidos_exitosos": 38,
+    "reclamos_bloqueados_por_cuota_max_3": 2,
+    "tasa_conversion_reclamo_pct": 95.0,
+    "total_cupones_canjeados_en_pos": 28,
+    "tasa_redencion_pos_pct": 73.68
+  },
+  "seguridad_y_blindaje_anti_fraude": {
+    "intentos_ataque_replay_simulados": 8,
+    "ataques_bloqueados_por_boveda_y_fsm": 8,
+    "ataques_exitosos_fuga": 0,
+    "efectividad_cortafuegos_pct": 100.0
+  },
+  "balance_economico_y_split_transaccional": {
+    "volumen_bruto_facturado_ves": 3735.0,
+    "ingreso_comision_movilnet_ves_20pct": 747.0,
+    "ingreso_neto_comercios_ves_80pct": 2988.0,
+    "total_transacciones_asentadas": 16,
+    "ticket_promedio_cupon_ves": 133.39
+  },
+  "transacciones_recientes": [
+    {
+      "transaccion_id": "TX-A040FAE1",
+      "cupon_id": "CUP-130F5E48",
+      "msisdn": "04169375710",
+      "comercio_id": "COM-017",
+      "oferta_titulo": "Menú Ejecutivo Degustación 3 Tiempos (Restaurante La Castañuela)",
+      "monto_total_ves": 270.0,
+      "comision_movilnet_ves": 54.0,
+      "neto_comercio_ves": 216.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-25EF0A3D",
+      "cupon_id": "CUP-69673131",
+      "msisdn": "04163341057",
+      "comercio_id": "COM-003",
+      "oferta_titulo": "Combo Despensa Familiar (Arroz, Pasta, Harina, Aceite) (Automercados Plaza's Las Mercedes)",
+      "monto_total_ves": 245.0,
+      "comision_movilnet_ves": 49.0,
+      "neto_comercio_ves": 196.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-167B62AB",
+      "cupon_id": "CUP-9B268533",
+      "msisdn": "04165137722",
+      "comercio_id": "COM-004",
+      "oferta_titulo": "Combo Despensa Familiar (Arroz, Pasta, Harina, Aceite) (Supermercados Unicasa)",
+      "monto_total_ves": 245.0,
+      "comision_movilnet_ves": 49.0,
+      "neto_comercio_ves": 196.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-D905581E",
+      "cupon_id": "CUP-6846FD45",
+      "msisdn": "04262110460",
+      "comercio_id": "COM-017",
+      "oferta_titulo": "Menú Ejecutivo Degustación 3 Tiempos (Restaurante La Castañuela)",
+      "monto_total_ves": 270.0,
+      "comision_movilnet_ves": 54.0,
+      "neto_comercio_ves": 216.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-4A8A55CF",
+      "cupon_id": "CUP-0F2BE079",
+      "msisdn": "04161538552",
+      "comercio_id": "COM-002",
+      "oferta_titulo": "Pack Multivitamínico C + Zinc Forte 60 Tabletas",
+      "monto_total_ves": 280.0,
+      "comision_movilnet_ves": 56.0,
+      "neto_comercio_ves": 224.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-4A169DB9",
+      "cupon_id": "CUP-D22F2404",
+      "msisdn": "04268187926",
+      "comercio_id": "COM-008",
+      "oferta_titulo": "Kit Botiquín Primeros Auxilios y Vitaminas (Farmatodo Las Mercedes)",
+      "monto_total_ves": 140.0,
+      "comision_movilnet_ves": 28.0,
+      "neto_comercio_ves": 112.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-9A55A837",
+      "cupon_id": "CUP-C46039F9",
+      "msisdn": "04268187926",
+      "comercio_id": "COM-016",
+      "oferta_titulo": "Menú Ejecutivo Degustación 3 Tiempos (Ávila Burger Tolón)",
+      "monto_total_ves": 270.0,
+      "comision_movilnet_ves": 54.0,
+      "neto_comercio_ves": 216.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-5B702864",
+      "cupon_id": "CUP-03A54600",
+      "msisdn": "04261533224",
+      "comercio_id": "COM-018",
+      "oferta_titulo": "Menú Ejecutivo Degustación 3 Tiempos (Pastas Morandi)",
+      "monto_total_ves": 270.0,
+      "comision_movilnet_ves": 54.0,
+      "neto_comercio_ves": 216.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-9FD48906",
+      "cupon_id": "CUP-5D7AA25D",
+      "msisdn": "04267073292",
+      "comercio_id": "COM-015",
+      "oferta_titulo": "Combo Almuerzo Familiar (Pollo + Acompañantes) (McDonald's El Rosal)",
+      "monto_total_ves": 210.0,
+      "comision_movilnet_ves": 42.0,
+      "neto_comercio_ves": 168.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-6982BE4F",
+      "cupon_id": "CUP-50CA784C",
+      "msisdn": "04266960453",
+      "comercio_id": "COM-010",
+      "oferta_titulo": "Kit Botiquín Primeros Auxilios y Vitaminas (Locatel La Castellana)",
+      "monto_total_ves": 140.0,
+      "comision_movilnet_ves": 28.0,
+      "neto_comercio_ves": 112.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-14EC71BD",
+      "cupon_id": "CUP-6255B164",
+      "msisdn": "04161538552",
+      "comercio_id": "COM-005",
+      "oferta_titulo": "Combo Despensa Familiar (Arroz, Pasta, Harina, Aceite) (Río Supermarket Caracas)",
+      "monto_total_ves": 245.0,
+      "comision_movilnet_ves": 49.0,
+      "neto_comercio_ves": 196.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-BA27A2F9",
+      "cupon_id": "CUP-8348BE7F",
+      "msisdn": "04267730428",
+      "comercio_id": "COM-009",
+      "oferta_titulo": "Kit Botiquín Primeros Auxilios y Vitaminas (Farmatodo Chacao Plaza)",
+      "monto_total_ves": 140.0,
+      "comision_movilnet_ves": 28.0,
+      "neto_comercio_ves": 112.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:56"
+    },
+    {
+      "transaccion_id": "TX-5D738278",
+      "cupon_id": "CUP-308424EF",
+      "msisdn": "04161768805",
+      "comercio_id": "COM-017",
+      "oferta_titulo": "Menú Ejecutivo Degustación 3 Tiempos (Restaurante La Castañuela)",
+      "monto_total_ves": 270.0,
+      "comision_movilnet_ves": 54.0,
+      "neto_comercio_ves": 216.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:57"
+    },
+    {
+      "transaccion_id": "TX-0BC004E4",
+      "cupon_id": "CUP-5298B74C",
+      "msisdn": "04266770619",
+      "comercio_id": "COM-008",
+      "oferta_titulo": "Kit Botiquín Primeros Auxilios y Vitaminas (Farmatodo Las Mercedes)",
+      "monto_total_ves": 140.0,
+      "comision_movilnet_ves": 28.0,
+      "neto_comercio_ves": 112.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:57"
+    },
+    {
+      "transaccion_id": "TX-6E938474",
+      "cupon_id": "CUP-A54FBE0E",
+      "msisdn": "04165479144",
+      "comercio_id": "COM-026",
+      "oferta_titulo": "Exoneración de Comisión Cuenta Jurídica / POS Pyme (Ciudad Banesco (Sede Principal))",
+      "monto_total_ves": 390.0,
+      "comision_movilnet_ves": 78.0,
+      "neto_comercio_ves": 312.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:57"
+    },
+    {
+      "transaccion_id": "TX-1848382C",
+      "cupon_id": "CUP-D1C5D14B",
+      "msisdn": "04167350753",
+      "comercio_id": "COM-015",
+      "oferta_titulo": "Combo Almuerzo Familiar (Pollo + Acompañantes) (McDonald's El Rosal)",
+      "monto_total_ves": 210.0,
+      "comision_movilnet_ves": 42.0,
+      "neto_comercio_ves": 168.0,
+      "split_ratio": "20% / 80%",
+      "timestamp": "2026-10-22 06:14:57"
+    }
+  ]
+}

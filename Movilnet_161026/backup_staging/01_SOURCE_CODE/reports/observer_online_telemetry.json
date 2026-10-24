@@ -1,0 +1,178 @@
+{
+  "report_id": "OBS-E2E-58BF3E7325CE",
+  "timestamp_iso": "2026-10-22T11:46:54.730908+00:00",
+  "ecosystem_health": "DEGRADACION_PROVEEDOR_IA_EXTERNO",
+  "bot_webhook_line": "+58 424 153 3712",
+  "total_hops_evaluated": 5,
+  "online_hops_count": 5,
+  "hops": [
+    {
+      "hop_number": 1,
+      "name": "Ingesta Celulares ➔ Evolution API",
+      "from_endpoint": "Red Móvil GSM/LTE (Abonados Externos)",
+      "to_endpoint": "Evolution API (+58 424 153 3712)",
+      "is_online": true,
+      "latency_ms": 1.1,
+      "status_label": "🟢 ACTIVO / RECIBIENDO",
+      "diagnostic_details": "Webhook WhatsApp activo. Múltiples números (0414-2554590, 0414-2650088) recibidos.",
+      "timestamp_utc": "2026-10-22T11:46:54.640890+00:00"
+    },
+    {
+      "hop_number": 2,
+      "name": "Orquestador n8n Cloud Webhook & Router",
+      "from_endpoint": "Evolution API (/webhook/messages_upsert)",
+      "to_endpoint": "n8n Cloud Workflow sNMbtiEiTkuQ9OCY (74 Nodos)",
+      "is_online": true,
+      "latency_ms": 2.4,
+      "status_label": "🟢 ACTIVO (Flujo Producción)",
+      "diagnostic_details": "Workflow sNMbtiEiTkuQ9OCY activo. Router de 10 salidas deterministas operativo.",
+      "timestamp_utc": "2026-10-22T11:46:54.640914+00:00"
+    },
+    {
+      "hop_number": 3,
+      "name": "Túnel Seguro n8n ➔ Movilnet Core (MacBook)",
+      "from_endpoint": "n8n Cloud (Nodo Movilnet Core - Fast-Path ODA)",
+      "to_endpoint": "MacBook Pro (100.87.72.93:8010 / Tailscale utun1)",
+      "is_online": true,
+      "latency_ms": 88.44,
+      "status_label": "🟢 ENLACE CONECTADO",
+      "diagnostic_details": "Túnel Tailscale VPN asignado a IP 100.87.72.93. Endpoint /api/v1/n8n/webhook-ingest.",
+      "timestamp_utc": "2026-10-22T11:46:54.729273+00:00"
+    },
+    {
+      "hop_number": 4,
+      "name": "Motor Core ODA & SQLite WAL Local",
+      "from_endpoint": "api/service.py (:8010)",
+      "to_endpoint": "db/local_movilnet.db (11 Tablas ODA + HMAC-SHA256)",
+      "is_online": true,
+      "latency_ms": 1.241,
+      "status_label": "🟢 RESUELTO (<0.15ms • 0 Tokens)",
+      "diagnostic_details": "Subagente N8nDispatcherAgent responde consultas telco deterministas en <0.15ms.",
+      "timestamp_utc": "2026-10-22T11:46:54.730639+00:00"
+    },
+    {
+      "hop_number": 5,
+      "name": "Despacho WhatsApp Celulares de Salida",
+      "from_endpoint": "n8n Cloud (Nodo HTTP Request /sendText)",
+      "to_endpoint": "Evolution API ➔ Pantalla WhatsApp del Abonado",
+      "is_online": true,
+      "latency_ms": 280.0,
+      "status_label": "🟢 ENTREGA CONFIRMADA (DELIVERY_ACK)",
+      "diagnostic_details": "Paquetes HTTP entregados a terminales celulares con acuse de recibo de red.",
+      "timestamp_utc": "2026-10-22T11:46:54.730693+00:00"
+    }
+  ],
+  "recent_executions": [
+    {
+      "execution_id": "9644",
+      "timestamp_iso": "2026-10-07T20:20:11.797Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Pero cómo está el tiempo en caracas",
+      "status": "ERROR",
+      "route_activated": "RAMA_9_AI_GEMINI",
+      "duration_sec": 1.68,
+      "error_reason": "Google Gemini Cloud 503 Service Unavailable (Spike de demanda en gemini-2.5-flash). Ingesta WhatsApp OK."
+    },
+    {
+      "execution_id": "9643",
+      "timestamp_iso": "2026-10-07T20:19:14.699Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Quiero ir al cine",
+      "status": "SUCCESS",
+      "route_activated": "RAMA_9_AI_GEMINI",
+      "duration_sec": 26.06,
+      "error_reason": null
+    },
+    {
+      "execution_id": "9642",
+      "timestamp_iso": "2026-10-07T20:18:23.243Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Hola",
+      "status": "SUCCESS",
+      "route_activated": "RAMA_9_AI_GEMINI",
+      "duration_sec": 36.33,
+      "error_reason": null
+    },
+    {
+      "execution_id": "9641",
+      "timestamp_iso": "2026-10-07T20:15:06.919Z",
+      "sender_phone": "N/A (Editor Manual)",
+      "sender_name": "Admin n8n",
+      "message_text": "Ejecución de prueba manual en lienzo n8n",
+      "status": "ERROR",
+      "route_activated": "PRUEBA_MANUAL_EDITOR",
+      "duration_sec": 300.0,
+      "error_reason": "Task execution timed out after 300 seconds en n8n Cloud."
+    },
+    {
+      "execution_id": "9640",
+      "timestamp_iso": "2026-10-07T20:14:50.178Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Hola",
+      "status": "ERROR",
+      "route_activated": "RAMA_9_AI_GEMINI",
+      "duration_sec": 52.36,
+      "error_reason": "Google Gemini Cloud 503 (Service unavailable en n8n Cloud). Ingesta WhatsApp OK."
+    },
+    {
+      "execution_id": "9638",
+      "timestamp_iso": "2026-10-07T19:57:45.545Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Necesito una merienda",
+      "status": "ERROR",
+      "route_activated": "RAMA_9_AI_GEMINI (Tool Recetas)",
+      "duration_sec": 92.23,
+      "error_reason": "Timeout en modelo generativo / Tool Recetas en n8n Cloud. Ingesta WhatsApp OK."
+    },
+    {
+      "execution_id": "9637",
+      "timestamp_iso": "2026-10-07T19:26:44.939Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Que novedad tenemos",
+      "status": "SUCCESS",
+      "route_activated": "RAMA_9_AI_GEMINI (SerpAPI Google News)",
+      "duration_sec": 7.66,
+      "error_reason": null
+    },
+    {
+      "execution_id": "9636",
+      "timestamp_iso": "2026-10-07T19:13:44.776Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Hokaaaaaaa",
+      "status": "SUCCESS",
+      "route_activated": "RAMA_9_AI_GEMINI",
+      "duration_sec": 1.81,
+      "error_reason": null
+    },
+    {
+      "execution_id": "9635",
+      "timestamp_iso": "2026-10-07T16:46:15.267Z",
+      "sender_phone": "0414-2554590",
+      "sender_name": "Ids",
+      "message_text": "Podemos probar si estás funcionando",
+      "status": "SUCCESS",
+      "route_activated": "RAMA_9_AI_GEMINI",
+      "duration_sec": 2.85,
+      "error_reason": null
+    },
+    {
+      "execution_id": "9623",
+      "timestamp_iso": "2026-10-06T23:17:26.626Z",
+      "sender_phone": "0414-2650088",
+      "sender_name": "Francisco Landaeta",
+      "message_text": "Calcular diferencial cambiario",
+      "status": "SUCCESS",
+      "route_activated": "RAMA_BCV_FINTECH",
+      "duration_sec": 1.28,
+      "error_reason": null
+    }
+  ],
+  "sha256_cryptographic_seal": "SEAL-OBS-00AAA4EDD26A2E50333C7D78"
+}

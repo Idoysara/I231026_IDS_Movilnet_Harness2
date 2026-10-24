@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Dashboard Administrador NOC & Monitoreo de Ingesta Webhook con Funnel Marketing de Portabilidad — Telecomunicaciones Movilnet C.A.">
+  <title>Panel Administrador NOC — Monitoreo Webhook +58 424 153 3712 | Movilnet 4GMAX</title>
+  
+  <style>
+    :root {
+      --movilnet-orange: #FF6600;
+      --movilnet-orange-light: #FF8533;
+      --movilnet-dark: #0B0E14;
+      --movilnet-card: #151B26;
+      --movilnet-border: #242D3D;
+      --movistar-blue: #00A9E0;
+      --digitel-red: #E21836;
+      --accent-green: #00C853;
+      --accent-purple: #8B5CF6;
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--movilnet-dark);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    /* HEADER */
+    .admin-header {
+      background: linear-gradient(180deg, #1A2232 0%, var(--movilnet-dark) 100%);
+      border-bottom: 1px solid var(--movilnet-border);
+      padding: 18px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      background: var(--movilnet-orange);
+      color: #fff;
+      font-weight: 900;
+      font-size: 20px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
+    }
+
+    .brand-info h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .header-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+    }
+
+    .badge-live {
+      background: rgba(0, 200, 83, 0.15);
+      color: var(--accent-green);
+      border-color: rgba(0, 200, 83, 0.3);
+    }
+
+    .badge-bot {
+      background: rgba(255, 102, 0, 0.15);
+      color: var(--movilnet-orange-light);
+      border-color: rgba(255, 102, 0, 0.3);
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: pulseAnim 2s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .main-container {
+      max-width: 1400px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* KPI GRID */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-card {
+      background: var(--movilnet-card);
+      border: 1px solid var(--movilnet-border);
+      border-radius: 12px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: #3B475D;
+    }
+
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .kpi-card.movilnet::before { background: var(--movilnet-orange); }
+    .kpi-card.movistar::before { background: var(--movistar-blue); }
+    .kpi-card.digitel::before { background: var(--digitel-red); }
+    .kpi-card.conversion::before { background: var(--accent-green); }
+    .kpi-card.latency::before { background: var(--accent-purple); }
+
+    .kpi-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 8px 0 4px 0;
+    }
+
+    .kpi-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* FILA DOBLE: FUNNEL & SIMULADOR */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .two-col-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--movilnet-card);
+      border: 1px solid var(--movilnet-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--movilnet-border);
+      padding-bottom: 12px;
+    }
+
+    .panel-header h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* FUNNEL MARKETING BARS */
+    .carrier-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .carrier-bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .carrier-bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .bar-track {
+      background: rgba(255, 255, 255, 0.08);
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+
+    .bar-fill.movilnet { background: var(--movilnet-orange); }
+    .bar-fill.movistar { background: var(--movistar-blue); }
+    .bar-fill.digitel { background: var(--digitel-red); }
+
+    /* FUNNEL STAGES */
+    .funnel-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .funnel-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .funnel-step {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed var(--movilnet-border);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .funnel-step-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .funnel-step-val {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--movilnet-orange-light);
+      margin: 4px 0;
+    }
+
+    .funnel-step-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* SIMULADOR DE PRUEBAS */
+    .sim-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    select, input, textarea {
+      background: #0B0E14;
+      border: 1px solid var(--movilnet-border);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s ease;
+      width: 100%;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--movilnet-orange);
+    }
+
+    .quick-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--movilnet-border);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip:hover {
+      background: var(--movilnet-orange);
+      color: #fff;
+      border-color: var(--movilnet-orange);
+    }
+
+    .btn-fire {
+      background: linear-gradient(135deg, var(--movilnet-orange) 0%, #D84315 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-fire:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+    }
+
+    .btn-fire:active {
+      transform: translateY(1px);
+    }
+
+    /* RESULTADO SIMULACIÓN */
+    .sim-result-box {
+      background: #0B0E14;
+      border: 1px solid var(--movilnet-border);
+      border-radius: 8px;
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.85rem;
+    }
+
+    .sim-result-box.show {
+      display: flex;
+    }
+
+    /* TABLA LIVE STREAMING */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--movilnet-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+
+    th {
+      background: #101622;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--movilnet-border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--movilnet-border);
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-movilnet { background: rgba(255, 102, 0, 0.15); color: #FF944D; border: 1px solid rgba(255, 102, 0, 0.3); }
+    .badge-movistar { background: rgba(0, 169, 224, 0.15); color: #38BDF8; border: 1px solid rgba(0, 169, 224, 0.3); }
+    .badge-digitel { background: rgba(226, 24, 54, 0.15); color: #F87171; border: 1px solid rgba(226, 24, 54, 0.3); }
+    .badge-route-fast { background: rgba(0, 200, 83, 0.15); color: #4ADE80; border: 1px solid rgba(0, 200, 83, 0.3); }
+    .badge-route-funnel { background: rgba(139, 92, 246, 0.15); color: #C084FC; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-route-ai { background: rgba(234, 179, 8, 0.15); color: #FACC15; border: 1px solid rgba(234, 179, 8, 0.3); }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border: 1px solid var(--movilnet-border);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+      border-color: var(--movilnet-orange);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="admin-header">
+    <div class="brand-title">
+      <div class="brand-logo">M</div>
+      <div class="brand-info">
+        <h1>
+          MOVILNET C.A. — PANEL ADMINISTRADOR NOC
+          <span class="badge badge-live"><span class="pulse"></span> EN VIVO</span>
+        </h1>
+        <p>Monitoreo de Ingesta Webhook Celulares / Tablets & Funnel Marketing de Portabilidad</p>
+      </div>
+    </div>
+
+    <div class="header-badges">
+      <a href="/ui/monitor/conversatorio.html" class="badge" style="background: rgba(255,102,0,0.2); color: #FFA500; border: 1px solid rgba(255,102,0,0.6); text-decoration: none; font-weight: 700;">💬 Conversatorio 2 Columnas</a>
+      <span class="badge badge-bot">📱 Bot Receptor: +58 424 153 3712 (00584241533712)</span>
+      <span class="badge" style="background: rgba(255,255,255,0.05); color: #9CA3AF;">Puerto Local: 8010</span>
+      <button onclick="fetchFeed()" class="chip" style="background: var(--movilnet-orange); color: #fff;">🔄 Refrescar Feed</button>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="main-container">
+
+    <!-- 1. FILA DE KPIS -->
+    <section class="kpi-grid">
+      <article class="kpi-card movilnet">
+        <div class="kpi-label">
+          <span>Abonados Movilnet</span>
+          <span>4M BASE</span>
+        </div>
+        <div id="kpi-movilnet-count" class="kpi-value">1</div>
+        <div class="kpi-sub">Fast-Path ODA (<span id="kpi-movilnet-pct">50%</span> tráfico)</div>
+      </article>
+
+      <article class="kpi-card movistar">
+        <div class="kpi-label">
+          <span>Leads Movistar</span>
+          <span>COMPETENCIA</span>
+        </div>
+        <div id="kpi-movistar-count" class="kpi-value">1</div>
+        <div class="kpi-sub">Prefijos 0414 / 0424</div>
+      </article>
+
+      <article class="kpi-card digitel">
+        <div class="kpi-label">
+          <span>Leads Digitel</span>
+          <span>COMPETENCIA</span>
+        </div>
+        <div id="kpi-digitel-count" class="kpi-value">0</div>
+        <div class="kpi-sub">Prefijo 0412</div>
+      </article>
+
+      <article class="kpi-card conversion">
+        <div class="kpi-label">
+          <span>Funnel Portabilidad</span>
+          <span>CONVERSIÓN</span>
+        </div>
+        <div id="kpi-conversion-rate" class="kpi-value">50.0%</div>
+        <div class="kpi-sub"><span id="kpi-conversions-total">1</span> Leads interesados en eSIM</div>
+      </article>
+
+      <article class="kpi-card latency">
+        <div class="kpi-label">
+          <span>Latencia Servidor</span>
+          <span>FAST-PATH</span>
+        </div>
+        <div id="kpi-avg-latency" class="kpi-value">0.15 ms</div>
+        <div class="kpi-sub">Procesamiento local MacBook Pro :8010</div>
+      </article>
+    </section>
+
+    <!-- 2. DOS COLUMNAS: FUNNEL & SIMULADOR -->
+    <div class="two-col-grid">
+      
+      <!-- COLUMNA 1: DISTRIBUCIÓN & FUNNEL -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>📊 Filtro Inteligente de Operadoras & Embudo de Portabilidad</h2>
+          <span class="badge badge-bot">Tráfico Segmentado</span>
+        </div>
+
+        <div class="carrier-bars">
+          <!-- Movilnet -->
+          <div class="carrier-bar-item">
+            <div class="carrier-bar-header">
+              <span style="color: var(--movilnet-orange);">Movilnet 4GMAX (Base 4 Millones)</span>
+              <span id="bar-pct-movilnet">50%</span>
+            </div>
+            <div class="bar-track">
+              <div id="bar-fill-movilnet" class="bar-fill movilnet" style="width: 50%;"></div>
+            </div>
+          </div>
+
+          <!-- Movistar -->
+          <div class="carrier-bar-item">
+            <div class="carrier-bar-header">
+              <span style="color: var(--movistar-blue);">Movistar Venezuela (Competencia)</span>
+              <span id="bar-pct-movistar">50%</span>
+            </div>
+            <div class="bar-track">
+              <div id="bar-fill-movistar" class="bar-fill movistar" style="width: 50%;"></div>
+            </div>
+          </div>
+
+          <!-- Digitel -->
+          <div class="carrier-bar-item">
+            <div class="carrier-bar-header">
+              <span style="color: var(--digitel-red);">Digitel 4G LTE (Competencia)</span>
+              <span id="bar-pct-digitel">0%</span>
+            </div>
+            <div class="bar-track">
+              <div id="bar-fill-digitel" class="bar-fill digitel" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px;">
+          <h3 style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">EMBUDO DE CONVERSIÓN DE PORTABILIDAD:</h3>
+          <div class="funnel-steps">
+            <div class="funnel-step">
+              <div class="funnel-step-title">1. Detección</div>
+              <div class="funnel-step-val" id="funnel-step-1">100%</div>
+              <div class="funnel-step-desc">Identifica 0414/0412</div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-title">2. Ahorro 60%</div>
+              <div class="funnel-step-val" id="funnel-step-2">100%</div>
+              <div class="funnel-step-desc">Oferta vs Tarifa</div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-title">3. Bono 10GB</div>
+              <div class="funnel-step-val" id="funnel-step-3">75%</div>
+              <div class="funnel-step-desc">Gancho Bienvenida</div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-title">4. Cierre eSIM</div>
+              <div class="funnel-step-val" id="funnel-step-4" style="color: var(--accent-green);">50%</div>
+              <div class="funnel-step-desc">Portabilidad Activa</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMNA 2: SIMULADOR MULTIDISPOSITIVO -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>📱 Consola de Simulación Multidispositivo (Pruebas Inbound)</h2>
+          <span class="badge" style="background: rgba(255,255,255,0.05); color:#fff;">Emulador Ingest</span>
+        </div>
+
+        <form id="sim-form" class="sim-form" onsubmit="event.preventDefault(); triggerSimulation();">
+          <div class="input-row">
+            <div class="form-group" style="flex: 1;">
+              <label>Dispositivo Emulado:</label>
+              <select id="sim-device">
+                <option value="Celular Android">📱 Celular Android (Samsung/Xiaomi)</option>
+                <option value="iPhone iOS">🍏 iPhone (iOS 18)</option>
+                <option value="Tablet iPad">📟 iPad / Tablet Android</option>
+                <option value="Webhook n8n">☁️ Webhook n8n Cloud</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="flex: 1;">
+              <label>Operadora / Teléfono:</label>
+              <select id="sim-preset-phone" onchange="applyPhonePreset()">
+                <option value="04160000001">🟠 Movilnet (04160000001 - Base 4M)</option>
+                <option value="04142554590" selected>🔵 Movistar (04142554590 - Ismael)</option>
+                <option value="04129998877">🔴 Digitel (04129998877 - Competencia)</option>
+                <option value="CUSTOM">✍️ Número Personalizado...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Número MSISDN a Enviar:</label>
+            <input type="text" id="sim-phone" value="04142554590" required placeholder="Ej: 04142554590 o 04160000001">
+          </div>
+
+          <div class="form-group">
+            <label>Mensaje Inbound:</label>
+            <textarea id="sim-message" rows="2" required placeholder="Escribe el mensaje del cliente...">saldo</textarea>
+            
+            <div class="quick-chips">
+              <span class="chip" onclick="setSimMsg('saldo')">💰 saldo</span>
+              <span class="chip" onclick="setSimMsg('cuantos megas me quedan')">📶 megas</span>
+              <span class="chip" onclick="setSimMsg('mi contrato')">📄 contrato</span>
+              <span class="chip" onclick="setSimMsg('quiero cambiarme a movilnet con esim')">🎯 quiero portabilidad</span>
+              <span class="chip" onclick="setSimMsg('Podemos probar si estás funcionando')">🤖 prueba IA</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-fire">
+            <span>⚡ Disparar al Webhook (+58 424 153 3712 / 00584241533712)</span>
+          </button>
+
+          <!-- RESPUESTA DEL CORE -->
+          <div id="sim-result" class="sim-result-box">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong style="color: var(--movilnet-orange-light);">Respuesta Inmediata del Core:</strong>
+              <span id="sim-res-latency" class="badge badge-live">0.15 ms</span>
+            </div>
+            <div id="sim-res-route" style="font-size: 0.75rem; color: var(--text-muted);"></div>
+            <div id="sim-res-text" style="color: #fff; background: rgba(255,255,255,0.05); padding: 8px; border-radius: 6px; margin-top: 4px;"></div>
+          </div>
+        </form>
+      </section>
+
+    </div>
+
+    <!-- 3. TABLA STREAMING FEED -->
+    <section class="panel">
+      <div class="panel-header">
+        <h2>📡 Feed de Entradas en Tiempo Real (Live Ingest Webhook)</h2>
+        <div style="display: flex; gap: 8px;">
+          <select id="filter-carrier" style="width: auto; padding: 4px 10px; font-size: 0.8rem;" onchange="fetchFeed()">
+            <option value="ALL">Todas las Operadoras</option>
+            <option value="MOVILNET">Solo Movilnet (Base 4M)</option>
+            <option value="MOVISTAR">Solo Movistar</option>
+            <option value="DIGITEL">Solo Digitel</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Hora (VET)</th>
+              <th>Dispositivo</th>
+              <th>Teléfono</th>
+              <th>Operadora</th>
+              <th>Mensaje Inbound</th>
+              <th>Pipeline Activado</th>
+              <th>Latencia</th>
+              <th>Respuesta Emitida</th>
+            </tr>
+          </thead>
+          <tbody id="feed-tbody">
+            <tr>
+              <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 20px;">Cargando telemetría...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- NAVEGACIÓN Y ACCESOS RÁPIDOS -->
+    <nav class="nav-links">
+      <a href="/ui/pwa/index.html" target="_blank">📱 Abrir Autoservicio PWA Clientes</a>
+      <a href="https://n8n.lpgtec.net/workflow/sNMbtiEiTkuQ9OCY" target="_blank">☁️ Ver Workflow n8n en Producción</a>
+      <a href="/api/v1/health" target="_blank">🩺 Endpoint de Salud Core</a>
+    </nav>
+
+  </main>
+
+  <script>
+    function setSimMsg(txt) {
+      document.getElementById('sim-message').value = txt;
+    }
+
+    function applyPhonePreset() {
+      const val = document.getElementById('sim-preset-phone').value;
+      if (val !== 'CUSTOM') {
+        document.getElementById('sim-phone').value = val;
+      }
+    }
+
+    async function triggerSimulation() {
+      const device = document.getElementById('sim-device').value;
+      const phone = document.getElementById('sim-phone').value.trim();
+      const message = document.getElementById('sim-message').value.trim();
+
+      try {
+        const res = await fetch('/api/v1/admin/simulate-inbound', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            phone: phone,
+            message: message,
+            device_type: device,
+            sender_name: phone === '04142554590' ? 'Ismael (Ids)' : 'Usuario Prueba'
+          })
+        });
+
+        const data = await res.json();
+        if (data.success && data.event) {
+          const ev = data.event;
+          const box = document.getElementById('sim-result');
+          box.classList.add('show');
+          document.getElementById('sim-res-latency').innerText = ev.latency_ms + ' ms';
+          document.getElementById('sim-res-route').innerText = 'Ruta: ' + ev.pipeline_route + ' | Operadora: ' + ev.carrier_label;
+          document.getElementById('sim-res-text').innerText = ev.reply_text;
+          fetchFeed();
+        }
+      } catch (err) {
+        alert('Error conectando con el servidor en :8010: ' + err.message);
+      }
+    }
+
+    async function fetchFeed() {
+      try {
+        const filter = document.getElementById('filter-carrier').value;
+        const res = await fetch('/api/v1/admin/webhook-feed?carrier=' + filter);
+        const data = await res.json();
+
+        if (data.metrics) {
+          const m = data.metrics;
+          document.getElementById('kpi-movilnet-count').innerText = m.movilnet_subscribers;
+          document.getElementById('kpi-movilnet-pct').innerText = m.movilnet_share_pct + '%';
+          document.getElementById('kpi-movistar-count').innerText = m.movistar_leads;
+          document.getElementById('kpi-digitel-count').innerText = m.digitel_leads;
+          document.getElementById('kpi-conversion-rate').innerText = m.funnel_conversion_rate_pct + '%';
+          document.getElementById('kpi-conversions-total').innerText = m.funnel_conversions;
+          document.getElementById('kpi-avg-latency').innerText = m.avg_latency_ms + ' ms';
+
+          // Barras
+          const total = m.total_inbound_messages || 1;
+          const movPct = Math.round(m.movilnet_subscribers / total * 100);
+          const starPct = Math.round(m.movistar_leads / total * 100);
+          const digPct = Math.round(m.digitel_leads / total * 100);
+
+          document.getElementById('bar-pct-movilnet').innerText = movPct + '%';
+          document.getElementById('bar-fill-movilnet').style.width = movPct + '%';
+          document.getElementById('bar-pct-movistar').innerText = starPct + '%';
+          document.getElementById('bar-fill-movistar').style.width = starPct + '%';
+          document.getElementById('bar-pct-digitel').innerText = digPct + '%';
+          document.getElementById('bar-fill-digitel').style.width = digPct + '%';
+        }
+
+        if (data.feed) {
+          const tbody = document.getElementById('feed-tbody');
+          if (data.feed.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 20px;">No hay eventos registrados para este filtro.</td></tr>';
+            return;
+          }
+
+          let html = '';
+          data.feed.forEach(ev => {
+            const timeStr = ev.timestamp ? new Date(ev.timestamp).toLocaleTimeString() : 'N/D';
+            let carrierBadge = 'badge-movilnet';
+            if (ev.carrier === 'MOVISTAR') carrierBadge = 'badge-movistar';
+            if (ev.carrier === 'DIGITEL') carrierBadge = 'badge-digitel';
+
+            let routeBadge = 'badge-route-fast';
+            if (ev.pipeline_route.includes('FUNNEL')) routeBadge = 'badge-route-funnel';
+            if (ev.pipeline_route.includes('AI')) routeBadge = 'badge-route-ai';
+
+            html += `<tr>
+              <td style="white-space: nowrap; font-family: monospace;">${timeStr}</td>
+              <td style="white-space: nowrap;">${ev.device_type}</td>
+              <td style="white-space: nowrap; font-weight: 600;">${ev.phone_number}</td>
+              <td><span class="badge ${carrierBadge}">${ev.carrier}</span></td>
+              <td style="max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${ev.message_text}">${ev.message_text}</td>
+              <td><span class="badge ${routeBadge}">${ev.pipeline_route}</span></td>
+              <td style="font-family: monospace; color: var(--accent-green);">${ev.latency_ms} ms</td>
+              <td style="max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #D1D5DB;" title="${ev.reply_text}">${ev.reply_text}</td>
+            </tr>`;
+          });
+          tbody.innerHTML = html;
+        }
+
+      } catch (err) {
+        console.error('Error cargando feed:', err);
+      }
+    }
+
+    // Carga inicial y auto-refresco cada 4 segundos
+    fetchFeed();
+    setInterval(fetchFeed, 4000);
+  </script>
+</body>
+</html>

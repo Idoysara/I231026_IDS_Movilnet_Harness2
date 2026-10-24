@@ -1,0 +1,49 @@
+{
+  "certification_id": "FASE0-CERT-6CFBDE45D91A",
+  "project": "AI_Movilnet_300926",
+  "suite": "Telco Discovery Inception Suite v1.0.0",
+  "timestamp": "2026-10-01T07:28:33.454889",
+  "overall_status": "CERTIFICADO ✅",
+  "authorized_for_phase1": true,
+  "test_summary": {
+    "total": 41,
+    "passed": 41,
+    "failed": 0,
+    "pass_rate": "100.0%"
+  },
+  "scope": {
+    "global_components": [
+      "skills/telco-discovery-inception/SKILL.md (reutilizable en cualquier proyecto Telco)"
+    ],
+    "project_components": [
+      "mcp/discovery_tools.py (AI_Movilnet_300926 - Movilnet Venezuela)",
+      "tests/test_discovery_mcp.py",
+      "scripts/audit_perimeter_waf.py",
+      "scripts/generate_discovery_matrix.py",
+      "docs/FASE_0_LEVANTAMIENTO_INFORMACION.md"
+    ]
+  },
+  "certified_files": [
+    {
+      "file": "Proyectos_IDS_Skills_Antigravity/AI_Movilnet_300926/mcp/discovery_tools.py",
+      "sha256": "1ffd3221dfc21d33",
+      "size_bytes": 35100
+    },
+    {
+      "file": "Proyectos_IDS_Skills_Antigravity/AI_Movilnet_300926/tests/test_discovery_mcp.py",
+      "sha256": "4e273ceaec47b88e",
+      "size_bytes": 18629
+    },
+    {
+      "file": "skills/telco-discovery-inception/SKILL.md",
+      "sha256": "2adde0fe3ce42003",
+      "size_bytes": 9867
+    }
+  ],
+  "suite_sha256": "6cfbde45d91a42060e3be87c",
+  "github_references": [
+    "https://github.com/tmforum-rand/Open_API_And_Data_Model (TMF620/678/632/676)",
+    "https://github.com/schemacrawler/SchemaCrawler",
+    "https://github.com/stoplightio/prism"
+  ]
+}

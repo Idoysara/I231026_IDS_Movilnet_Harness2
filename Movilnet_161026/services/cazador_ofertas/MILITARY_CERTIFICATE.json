@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ids-core.local/schemas/military-certificate-v1.json",
+  "certification_id": "MIL-C94F230A607F",
+  "project_name": "28_Cazador_Ofertas",
+  "target_directory": "/Users/personal/Desktop/IDS_CORE/pruebas_clientes/28_Cazador_Ofertas",
+  "timestamp": "2026-10-19T08:41:59.230090",
+  "duration_ms": 215.45,
+  "verdict": "TIER-1 COMBAT READY (CERTIFICADO)",
+  "status": "CERTIFIED_MILITARY_TIER_1",
+  "scores": {
+    "total_readiness_score": 100,
+    "hexakernel_purity_score": 25,
+    "security_owasp_score": 25,
+    "fsm_invariants_score": 25,
+    "deepseek_r1_intelligence_score": 25
+  },
+  "metrics": {
+    "python_files": 51,
+    "ast_syntax_errors": 0,
+    "domain_leakages": 0,
+    "io_direct_calls_in_domain": 0,
+    "owasp_vulnerabilities": 0
+  },
+  "cryptographic_tree_sha256": "c94f230a607fb17914a8e6d4199b0f1cd2dc493e0d8a42288b681b2199b04ab1",
+  "signature": {
+    "authority": "IDS_CORE Military Auditor Engine (DeepSeek Harness & AST Metal)",
+    "tamper_proof_seal": "3c3325422192579fe8d181a1f55e8a7e02da641f554c81b4297d1ca9dd785d27"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "certificate_id": "FASE4-PASO4-CERT-9E5A0C2BAD8B",
+  "project": "AI_Movilnet_300926",
+  "phase": "Fase 4: Dise\u00f1o y Desarrollo de Interfaces de Usuario (UI / UX / IX / AX), Dashboard Ejecutivo y Despliegue Final",
+  "step": "Paso 4: Auditor\u00eda Integral de Accesibilidad (a11y) & Suite E2E Omnicanal con Tr\u00e1fico Masivo",
+  "organization": "Telecomunicaciones Movilnet C.A.",
+  "status": "CERTIFICADO_Y_APROBADO_100%",
+  "timestamp_utc": "2026-10-03T09:52:59.324779+00:00",
+  "wcag_compliance": "WCAG 2.1 Level AAA (Contrast >= 7.0:1, Tap Targets >= 44px, WAI-ARIA 1.2, Focus States)",
+  "omnichannel_stress_results": {
+    "total_requests": 100,
+    "concurrency_workers": 10,
+    "success_rate_pct": 100.0,
+    "channels_covered": [
+      "WhatsApp Business API",
+      "Telegram Bot",
+      "PWA Balance OCS",
+      "PWA C2P Recharge"
+    ],
+    "sla_avg_latency_ms": 18.28,
+    "sla_p95_latency_ms": 48.71,
+    "throughput_tps": 505.29
+  },
+  "tests_summary": {
+    "step_tests": 8,
+    "step_passed": 8,
+    "global_tests": 235,
+    "global_passed": 235,
+    "duration_seconds": 4.739
+  },
+  "file_hashes": {
+    "scripts/run_e2e_real_channels_stress.py": "7b48409d190ecc3da1c179ce30ad04c19ac0cb35c9602ebb10559a9d1dbabaf8",
+    "tests/test_phase4_step4_e2e_a11y.py": "b9fcb2a06e2a2f1da6f90480fc9f81e2dc56c589fce215c69b21b7038e058c79",
+    "api/webhook_bridge.py": "df8b85f02555fa325b54589c42099b9bc42d7cc39933fa0081a73395a432b98c",
+    "ui/pwa/css/pwa.css": "91317d2ad78fc43354153c6024c66c96bd672265b4769a172be7b5a554fd3a82",
+    "ui/dashboard/css/noc_dashboard.css": "487eeb1325ef7632666624025704473ab47685e4aafde2a2e5a31d03b5594eed",
+    "ui/css/movilnet_components.css": "daeb7ee387d280e69383e3f7b248acc5f4950b14e3b186b077b2ea7a4c2e8c4e"
+  },
+  "sha256_cryptographic_seal": "9e5a0c2bad8bff0db1b9abff9c7d2ea2456c4bf068800a1581b2795e85deade0"
+}

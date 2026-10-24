@@ -1,0 +1,17 @@
+transaccion_id,cupon_id,msisdn,comercio_id,oferta_titulo,monto_total_ves,comision_movilnet_ves,neto_comercio_ves,split_ratio,timestamp
+TX-A040FAE1,CUP-130F5E48,04169375710,COM-017,Menú Ejecutivo Degustación 3 Tiempos (Restaurante La Castañuela),270.0,54.0,216.0,20% / 80%,2026-10-22 06:14:56
+TX-25EF0A3D,CUP-69673131,04163341057,COM-003,"Combo Despensa Familiar (Arroz, Pasta, Harina, Aceite) (Automercados Plaza's Las Mercedes)",245.0,49.0,196.0,20% / 80%,2026-10-22 06:14:56
+TX-167B62AB,CUP-9B268533,04165137722,COM-004,"Combo Despensa Familiar (Arroz, Pasta, Harina, Aceite) (Supermercados Unicasa)",245.0,49.0,196.0,20% / 80%,2026-10-22 06:14:56
+TX-D905581E,CUP-6846FD45,04262110460,COM-017,Menú Ejecutivo Degustación 3 Tiempos (Restaurante La Castañuela),270.0,54.0,216.0,20% / 80%,2026-10-22 06:14:56
+TX-4A8A55CF,CUP-0F2BE079,04161538552,COM-002,Pack Multivitamínico C + Zinc Forte 60 Tabletas,280.0,56.0,224.0,20% / 80%,2026-10-22 06:14:56
+TX-4A169DB9,CUP-D22F2404,04268187926,COM-008,Kit Botiquín Primeros Auxilios y Vitaminas (Farmatodo Las Mercedes),140.0,28.0,112.0,20% / 80%,2026-10-22 06:14:56
+TX-9A55A837,CUP-C46039F9,04268187926,COM-016,Menú Ejecutivo Degustación 3 Tiempos (Ávila Burger Tolón),270.0,54.0,216.0,20% / 80%,2026-10-22 06:14:56
+TX-5B702864,CUP-03A54600,04261533224,COM-018,Menú Ejecutivo Degustación 3 Tiempos (Pastas Morandi),270.0,54.0,216.0,20% / 80%,2026-10-22 06:14:56
+TX-9FD48906,CUP-5D7AA25D,04267073292,COM-015,Combo Almuerzo Familiar (Pollo + Acompañantes) (McDonald's El Rosal),210.0,42.0,168.0,20% / 80%,2026-10-22 06:14:56
+TX-6982BE4F,CUP-50CA784C,04266960453,COM-010,Kit Botiquín Primeros Auxilios y Vitaminas (Locatel La Castellana),140.0,28.0,112.0,20% / 80%,2026-10-22 06:14:56
+TX-14EC71BD,CUP-6255B164,04161538552,COM-005,"Combo Despensa Familiar (Arroz, Pasta, Harina, Aceite) (Río Supermarket Caracas)",245.0,49.0,196.0,20% / 80%,2026-10-22 06:14:56
+TX-BA27A2F9,CUP-8348BE7F,04267730428,COM-009,Kit Botiquín Primeros Auxilios y Vitaminas (Farmatodo Chacao Plaza),140.0,28.0,112.0,20% / 80%,2026-10-22 06:14:56
+TX-5D738278,CUP-308424EF,04161768805,COM-017,Menú Ejecutivo Degustación 3 Tiempos (Restaurante La Castañuela),270.0,54.0,216.0,20% / 80%,2026-10-22 06:14:57
+TX-0BC004E4,CUP-5298B74C,04266770619,COM-008,Kit Botiquín Primeros Auxilios y Vitaminas (Farmatodo Las Mercedes),140.0,28.0,112.0,20% / 80%,2026-10-22 06:14:57
+TX-6E938474,CUP-A54FBE0E,04165479144,COM-026,Exoneración de Comisión Cuenta Jurídica / POS Pyme (Ciudad Banesco (Sede Principal)),390.0,78.0,312.0,20% / 80%,2026-10-22 06:14:57
+TX-1848382C,CUP-D1C5D14B,04167350753,COM-015,Combo Almuerzo Familiar (Pollo + Acompañantes) (McDonald's El Rosal),210.0,42.0,168.0,20% / 80%,2026-10-22 06:14:57

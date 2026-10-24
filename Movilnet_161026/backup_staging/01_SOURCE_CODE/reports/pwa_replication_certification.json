@@ -1,0 +1,30 @@
+{
+  "report_id": "REP-PWA-REPLICA-0CF5739C",
+  "timestamp_utc": "2026-10-12T12:39:16Z",
+  "source_workspace": "/Users/ismael/Desktop/Movilnet_051026",
+  "destination_workspace": "/Users/ismael/Desktop/121026_CORE_MOVILNET/Movilnet_121026/Movilnet_PWA",
+  "total_files_copied": 863,
+  "total_files_verified": 863,
+  "corrupted_files_count": 0,
+  "total_megabytes_transferred": 36.99,
+  "integrity_status": "CERTIFIED_100_PERCENT_MATCH",
+  "sample_verified_files": [
+    "api/service.py",
+    "api/ai_resilience.py",
+    "api/webhook_bridge.py",
+    "api/openapi.json",
+    "api/agents/agent_geo_spatial.py",
+    "api/agents/agent_customer_care.py",
+    "api/agents/agent_commercial_directory.py",
+    "api/agents/agent_fintech_c2p.py",
+    "api/agents/__init__.py",
+    "api/agents/agent_n8n_dispatcher.py",
+    "api/agents/agent_retention_churn.py",
+    "api/agents/agent_marketing_funnel.py",
+    "api/agents/agent_emergency_eir.py",
+    "api/agents/agent_geo_validation.py",
+    "api/schemas/tmforum/README.md"
+  ],
+  "pwa_activation_ready": true,
+  "sha256_seal": "SHA256:5d93d2a84a2ed7928e0173e741afe5cf2c999d59853ed9cd1ed433a1387c8425"
+}

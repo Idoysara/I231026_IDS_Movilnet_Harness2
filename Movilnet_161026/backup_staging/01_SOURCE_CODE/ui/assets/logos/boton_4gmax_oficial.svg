@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" fill="none">
+  <defs>
+    <linearGradient id="grad4g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="gradOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF3838"/>
+      <stop offset="100%" stop-color="#FF8533"/>
+    </linearGradient>
+  </defs>
+  <!-- Cápsula Contenedora -->
+  <rect x="2" y="2" width="156" height="44" rx="22" fill="url(#grad4g)" stroke="#334155" stroke-width="1.5"/>
+  <rect x="5" y="5" width="150" height="38" rx="19" stroke="url(#gradOrange)" stroke-width="1.2" fill="none" opacity="0.6"/>
+  <!-- Rayo / Símbolo 4GMAX -->
+  <path d="M 28 14 L 20 27 L 27 27 L 23 35 L 34 22 L 27 22 Z" fill="#FF8533"/>
+  <!-- Texto 4GMAX -->
+  <text x="42" y="30" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-size="18" font-weight="900" letter-spacing="1px">4G<tspan fill="#FF3838">MAX</tspan></text>
+</svg>

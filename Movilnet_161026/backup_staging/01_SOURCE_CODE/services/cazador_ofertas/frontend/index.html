@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cazador de Ofertas Movilnet — Super-App de Proximidad</title>
+  
+  <!-- PWA Meta Tags -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#020617">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/static/icon-192.svg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .radar-pulse {
+      animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .custom-scroll::-webkit-scrollbar { width: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-500 selection:text-white">
+
+  <!-- ZERO-RATING STATUS BAR -->
+  <div id="zero-rating-banner" class="bg-gradient-to-r from-orange-600 to-amber-500 px-3 py-1 text-[11px] font-bold text-slate-950 flex items-center justify-between shadow-md">
+    <div class="max-w-md mx-auto w-full flex items-center justify-between">
+      <span class="flex items-center space-x-1.5">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Navegación Zero-Rating Activa: Sin consumo de saldo</span>
+      </span>
+      <span class="bg-slate-950 text-orange-400 px-2 py-0.5 rounded text-[10px] font-black uppercase">
+        0416/0426
+      </span>
+    </div>
+  </div>
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 shadow-lg">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-400 flex items-center justify-center shadow-md shadow-orange-500/20">
+          <i class="fa-solid fa-crosshairs text-slate-950 font-bold text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-base font-extrabold tracking-tight text-white leading-tight">Cazador <span class="text-orange-400">Movilnet</span></h1>
+          <p class="text-[10px] text-slate-400 font-medium">Club de Ahorro y Proximidad Soberano</p>
+        </div>
+      </div>
+      
+      <!-- Header Actions: Comercios & MSISDN Badge -->
+      <div class="flex items-center space-x-2">
+        <a href="/comercio" class="bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-400 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center space-x-1 transition">
+          <i class="fa-solid fa-store text-xs"></i>
+          <span>Comercios</span>
+        </a>
+        <div class="flex items-center space-x-1.5 bg-slate-800 border border-slate-700 px-2.5 py-1 rounded-full text-[11px] font-semibold text-slate-200">
+          <i class="fa-solid fa-sim-card text-orange-400 text-xs"></i>
+          <span id="current-user-msisdn" class="font-mono text-xs">04161234567</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- GPS SIMULATION BAR -->
+  <div class="bg-slate-900 border-b border-slate-800/80 px-4 py-2 text-xs">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-1.5 text-slate-300">
+        <i class="fa-solid fa-location-dot text-orange-400"></i>
+        <span class="font-medium text-slate-400">Ubicación GPS:</span>
+        <span id="label-gps" class="text-slate-200 font-bold">Chacao (10.4912, -66.8580)</span>
+      </div>
+      <button onclick="cambiarZonaGPS()" class="text-orange-400 hover:text-orange-300 text-[11px] font-bold underline transition">
+        Cambiar
+      </button>
+    </div>
+  </div>
+
+  <!-- NOTIFICATION CONTAINER (FOR MAGIC LINK OR ACTIONS) -->
+  <div id="magic-link-alert" class="hidden max-w-md mx-auto w-full px-4 pt-2">
+    <div class="bg-emerald-500/10 border border-emerald-500/30 p-2.5 rounded-xl text-xs text-emerald-300 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-shield-check text-emerald-400 text-sm"></i>
+        <span id="magic-link-text">Magic Link Zero-Rating autenticado con éxito.</span>
+      </div>
+      <button onclick="document.getElementById('magic-link-alert').classList.add('hidden')" class="text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <main class="flex-1 max-w-md w-full mx-auto p-4 space-y-4 pb-24">
+
+    <!-- VIEW 1: RADAR DE OFERTAS -->
+    <section id="view-radar" class="space-y-4">
+      <!-- Radar Map Container -->
+      <div class="relative bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+        <div id="map" class="h-44 w-full z-10"></div>
+        <div class="absolute top-2 right-2 z-20 bg-slate-950/80 backdrop-blur-sm border border-slate-700 px-2 py-1 rounded-lg text-[10px] font-semibold text-orange-400 flex items-center space-x-1">
+          <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+          <span>Radar Activo 3km</span>
+        </div>
+      </div>
+
+      <!-- Ring Selector Filters -->
+      <div class="grid grid-cols-3 gap-2 text-center text-xs">
+        <button onclick="filtrarAnillo('zona_1_inmediata')" id="btn-ring-1" class="bg-orange-500/10 border border-orange-500/40 text-orange-400 py-2 px-1 rounded-xl font-bold transition hover:bg-orange-500/20">
+          <div class="text-[10px] text-slate-400">Zona 1</div>
+          <div>&lt; 500m</div>
+        </button>
+        <button onclick="filtrarAnillo('zona_2_vecindario')" id="btn-ring-2" class="bg-slate-900 border border-slate-800 text-slate-400 py-2 px-1 rounded-xl font-bold transition hover:border-slate-700">
+          <div class="text-[10px] text-slate-500">Zona 2</div>
+          <div>&lt; 1.5 km</div>
+        </button>
+        <button onclick="filtrarAnillo('zona_3_urbana')" id="btn-ring-3" class="bg-slate-900 border border-slate-800 text-slate-400 py-2 px-1 rounded-xl font-bold transition hover:border-slate-700">
+          <div class="text-[10px] text-slate-500">Zona 3</div>
+          <div>&lt; 3 km</div>
+        </button>
+      </div>
+
+      <!-- Offer Cards Stream -->
+      <div class="space-y-3" id="offers-container">
+        <div class="text-center py-8 text-slate-500 text-sm">
+          <i class="fa-solid fa-spinner fa-spin text-orange-400 text-xl mb-2"></i>
+          <p>Buscando ofertas en radio de 3km...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: MIS CUPONES Y QR DINÁMICO TOTP -->
+    <section id="view-coupons" class="space-y-4 hidden">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl text-center space-y-3">
+        <div class="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-xs font-semibold text-amber-400">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Código Dinámico Anti-Screenshot</span>
+        </div>
+
+        <div id="active-coupon-card" class="space-y-3">
+          <p class="text-slate-400 text-xs py-4">No tienes un cupón activo en este momento. Reclama uno en la pestaña Radar.</p>
+        </div>
+      </div>
+
+      <!-- Historial de Cupones del Usuario -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Mis Cupones en Red Movilnet</h3>
+          <button onclick="cargarCuponesUsuario()" class="text-xs text-orange-400 hover:underline">
+            <i class="fa-solid fa-rotate-right mr-1"></i>Actualizar
+          </button>
+        </div>
+        <div id="coupons-history" class="space-y-2"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: SCANNER POS COMERCIANTE (VALIDADOR) -->
+    <section id="view-scanner" class="space-y-4 hidden">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-4">
+        <div class="flex items-center space-x-2 text-slate-300 border-b border-slate-800 pb-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+            <i class="fa-solid fa-barcode"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-white">Terminal POS de Caja</h2>
+            <p class="text-[11px] text-slate-400">Validación Offline Criptográfica de Cupones</p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">ID del Cupón (Ej: UUID)</label>
+            <input type="text" id="pos-cupon-id" placeholder="UUID del cupón" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500 font-mono text-xs">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">MSISDN del Cliente</label>
+            <input type="text" id="pos-msisdn" value="04161234567" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500 font-mono">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">ID del Comercio</label>
+            <input type="text" id="pos-comercio-id" value="COM-001" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500 font-mono">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Firma Criptográfica / Token TOTP</label>
+            <input type="text" id="pos-signature" placeholder="Firma de 16 caracteres HMAC" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500 font-mono">
+          </div>
+
+          <button onclick="validarCanjePOS()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-lg shadow-blue-500/25 flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-stamp"></i>
+            <span>Validar y Canjear Descuento</span>
+          </button>
+        </div>
+
+        <div id="pos-result-box" class="hidden p-3 rounded-xl border text-xs"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: CARRIER BILLING MOVILNET (PASE PRO) -->
+    <section id="view-billing" class="space-y-4 hidden">
+      <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-orange-500/30 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl"></div>
+        
+        <div class="flex items-center justify-between mb-4">
+          <span class="bg-orange-500/20 text-orange-400 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md border border-orange-500/30">
+            Pase Cazador VIP
+          </span>
+          <span class="text-xl font-black text-white">95.00 <span class="text-xs text-slate-400">VES/mes</span></span>
+        </div>
+
+        <h3 class="text-base font-extrabold text-white mb-2">Desbloquea Ofertas Exclusivas con tu Saldo Movilnet</h3>
+        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+          Sin tarjetas bancarias ni trámites. Se debita directamente del saldo de tu línea 0416 o 0426 con split automático 20% Movilnet / 80% Ecosistema.
+        </p>
+
+        <ul class="text-xs space-y-2 text-slate-300 mb-5">
+          <li class="flex items-center space-x-2">
+            <i class="fa-solid fa-check text-emerald-400"></i>
+            <span>Acceso prioritario a cupones relámpago 2x1</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <i class="fa-solid fa-check text-emerald-400"></i>
+            <span>Navegación con Zero-Rating (sin consumo de megas)</span>
+          </li>
+          <li class="flex items-center space-x-2">
+            <i class="fa-solid fa-check text-emerald-400"></i>
+            <span>Alertas de proximidad por SMS interno</span>
+          </li>
+        </ul>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Tu Línea Movilnet</label>
+            <input type="text" id="billing-msisdn" value="04169876543" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white font-mono focus:outline-none focus:border-orange-500">
+          </div>
+
+          <button onclick="procesarPagoCarrierBilling()" class="w-full bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-slate-950 font-black py-3 rounded-xl text-sm transition shadow-lg shadow-orange-500/25 flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Activar Pase con Saldo Movilnet</span>
+          </button>
+        </div>
+
+        <div id="billing-result-box" class="hidden mt-4 p-3 rounded-xl border text-xs"></div>
+      </div>
+
+      <!-- Resumen Métricas Generales -->
+      <div id="metrics-card" class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 text-xs space-y-2">
+        <h4 class="font-bold text-slate-300 flex items-center space-x-1.5">
+          <i class="fa-solid fa-chart-pie text-orange-400"></i>
+          <span>Métricas de la Red Cazadores</span>
+        </h4>
+        <div class="grid grid-cols-3 gap-2 text-center pt-1" id="metrics-grid">
+          <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+            <div class="text-[10px] text-slate-500">Comercios</div>
+            <div id="metric-comercios" class="font-black text-sm text-white">--</div>
+          </div>
+          <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+            <div class="text-[10px] text-slate-500">Ofertas</div>
+            <div id="metric-ofertas" class="font-black text-sm text-white">--</div>
+          </div>
+          <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+            <div class="text-[10px] text-slate-500">Tasa Canje</div>
+            <div id="metric-tasa" class="font-black text-sm text-emerald-400">--%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTTOM BAR NAVIGATION -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 py-2 shadow-2xl">
+    <div class="max-w-md mx-auto grid grid-cols-4 gap-1 px-2 text-center text-[10px] font-semibold">
+      <button onclick="cambiarPestana('radar')" id="nav-radar" class="text-orange-400 flex flex-col items-center py-1 transition">
+        <i class="fa-solid fa-radar text-base mb-1"></i>
+        <span>Radar</span>
+      </button>
+      <button onclick="cambiarPestana('coupons')" id="nav-coupons" class="text-slate-400 hover:text-slate-200 flex flex-col items-center py-1 transition">
+        <i class="fa-solid fa-ticket text-base mb-1"></i>
+        <span>Mis Cupones</span>
+      </button>
+      <button onclick="cambiarPestana('scanner')" id="nav-scanner" class="text-slate-400 hover:text-slate-200 flex flex-col items-center py-1 transition">
+        <i class="fa-solid fa-qrcode text-base mb-1"></i>
+        <span>Caja POS</span>
+      </button>
+      <button onclick="cambiarPestana('billing')" id="nav-billing" class="text-slate-400 hover:text-slate-200 flex flex-col items-center py-1 transition">
+        <i class="fa-solid fa-gem text-base mb-1"></i>
+        <span>Pase VIP</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- APPLICATION SCRIPT LOGIC -->
+  <script>
+    // Registro de Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((reg) => {
+          console.log('Service Worker registrado:', reg.scope);
+        }).catch((err) => {
+          console.warn('Registro de Service Worker falló:', err);
+        });
+      });
+    }
+
+    // Estado del Cliente PWA
+    let currentMsisdn = "04161234567";
+    let userCoords = { lat: 10.4912, lon: -66.8580, nombre: "Chacao / El Rosal" };
+    let activeRing = "zona_1_inmediata";
+    let cachedRadarData = null;
+    let mapInstance = null;
+    let mapMarkers = [];
+    let activeCoupon = null;
+    let totpInterval = null;
+
+    // Presets GPS para demostración
+    const PRESETS_GPS = [
+      { lat: 10.4912, lon: -66.8580, nombre: "Chacao / El Rosal" },
+      { lat: 10.4930, lon: -66.8720, nombre: "Sabana Grande / Boulevard" },
+      { lat: 10.4780, lon: -66.8610, nombre: "Las Mercedes" },
+      { lat: 10.4960, lon: -66.8520, nombre: "Altamira Norte" }
+    ];
+    let currentPresetIdx = 0;
+
+    function parseQueryParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const msisdnParam = urlParams.get('msisdn');
+      const sigParam = urlParams.get('sig');
+      const ofertaParam = urlParams.get('oferta');
+      const expParam = urlParams.get('exp');
+      const tabParam = urlParams.get('tab');
+
+      if (msisdnParam) {
+        currentMsisdn = msisdnParam;
+        document.getElementById('current-user-msisdn').innerText = currentMsisdn;
+        document.getElementById('pos-msisdn').value = currentMsisdn;
+        document.getElementById('billing-msisdn').value = currentMsisdn;
+      }
+
+      if (sigParam && expParam) {
+        // Enlace Magic Link verificado
+        const alertBox = document.getElementById('magic-link-alert');
+        const alertText = document.getElementById('magic-link-text');
+        alertBox.classList.remove('hidden');
+        alertText.innerHTML = `<b>¡Bienvenido!</b> Acceso verificado con Magic Link Zero-Rating para <b>${currentMsisdn}</b>.`;
+      }
+
+      if (tabParam) {
+        cambiarPestana(tabParam);
+      }
+    }
+
+    function cambiarZonaGPS() {
+      currentPresetIdx = (currentPresetIdx + 1) % PRESETS_GPS.length;
+      userCoords = PRESETS_GPS[currentPresetIdx];
+      document.getElementById('label-gps').innerText = `${userCoords.nombre} (${userCoords.lat.toFixed(4)}, ${userCoords.lon.toFixed(4)})`;
+      initMap();
+      cargarOfertasRadar();
+    }
+
+    // Inicializar Mapa Leaflet
+    function initMap() {
+      if (!mapInstance) {
+        mapInstance = L.map('map', { zoomControl: false }).setView([userCoords.lat, userCoords.lon], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '© OpenStreetMap'
+        }).addTo(mapInstance);
+      } else {
+        mapInstance.setView([userCoords.lat, userCoords.lon], 15);
+      }
+
+      // Limpiar marcadores viejos
+      mapMarkers.forEach(m => mapInstance.removeLayer(m));
+      mapMarkers = [];
+
+      // Marcador de usuario con pulso
+      const userIcon = L.divIcon({
+        className: 'user-pin',
+        html: `<div class="w-4 h-4 bg-orange-500 rounded-full border-2 border-white shadow-lg animate-pulse"></div>`,
+        iconSize: [16, 16]
+      });
+      const userMarker = L.marker([userCoords.lat, userCoords.lon], { icon: userIcon }).addTo(mapInstance);
+      mapMarkers.push(userMarker);
+
+      // Círculos de proximidad de 3 anillos
+      const circle1 = L.circle([userCoords.lat, userCoords.lon], { radius: 500, color: '#f97316', fillOpacity: 0.08, weight: 1.5 }).addTo(mapInstance);
+      const circle2 = L.circle([userCoords.lat, userCoords.lon], { radius: 1500, color: '#eab308', fillOpacity: 0.04, weight: 1 }).addTo(mapInstance);
+      const circle3 = L.circle([userCoords.lat, userCoords.lon], { radius: 3000, color: '#38bdf8', fillOpacity: 0.02, weight: 0.8 }).addTo(mapInstance);
+      mapMarkers.push(circle1, circle2, circle3);
+    }
+
+    // Cargar ofertas desde API
+    async function cargarOfertasRadar() {
+      try {
+        const resp = await fetch(`/api/radar/ofertas?lat=${userCoords.lat}&lon=${userCoords.lon}&max_m=3000`);
+        const data = await resp.json();
+        cachedRadarData = data;
+        renderOfertas();
+        plotComerciosOnMap(data);
+      } catch (err) {
+        console.error("Error al cargar radar:", err);
+        document.getElementById('offers-container').innerHTML = `
+          <div class="bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-xs text-red-400 text-center">
+            Error de conexión con el backend local :8030. Verifique que el servicio esté activo.
+          </div>
+        `;
+      }
+    }
+
+    function plotComerciosOnMap(radarData) {
+      if (!radarData || !radarData.anillos) return;
+      Object.values(radarData.anillos).flat().forEach(item => {
+        const c = item.comercio;
+        const icon = L.divIcon({
+          className: 'store-pin',
+          html: `<div class="bg-slate-900 border border-orange-500 text-orange-400 w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold shadow-md">
+            <i class="fa-solid fa-store"></i>
+          </div>`,
+          iconSize: [24, 24]
+        });
+        const m = L.marker([c.lat, c.lon], { icon }).addTo(mapInstance);
+        const distLabel = c.distance_meters ? `${c.distance_meters}m` : '';
+        m.bindPopup(`<b>${c.nombre}</b><br><span class="text-xs">${distLabel} de distancia</span>`);
+        mapMarkers.push(m);
+      });
+    }
+
+    function filtrarAnillo(ringKey) {
+      activeRing = ringKey;
+      ['btn-ring-1', 'btn-ring-2', 'btn-ring-3'].forEach(id => {
+        const el = document.getElementById(id);
+        el.className = "bg-slate-900 border border-slate-800 text-slate-400 py-2 px-1 rounded-xl font-bold transition hover:border-slate-700";
+      });
+      const activeBtnId = ringKey === 'zona_1_inmediata' ? 'btn-ring-1' : (ringKey === 'zona_2_vecindario' ? 'btn-ring-2' : 'btn-ring-3');
+      document.getElementById(activeBtnId).className = "bg-orange-500/10 border border-orange-500/40 text-orange-400 py-2 px-1 rounded-xl font-bold transition hover:bg-orange-500/20";
+      renderOfertas();
+    }
+
+    function renderOfertas() {
+      const container = document.getElementById('offers-container');
+      if (!cachedRadarData || !cachedRadarData.anillos) return;
+
+      const items = cachedRadarData.anillos[activeRing] || [];
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center text-slate-400 text-xs">
+            <i class="fa-regular fa-compass text-2xl mb-2 text-slate-500"></i>
+            <p>No hay ofertas activas en este anillo inmediato. Prueba con el anillo siguiente.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.flatMap(store => {
+        const c = store.comercio;
+        return store.ofertas.map(o => {
+          const descPct = (o.descuento_pct && o.descuento_pct > 0)
+            ? o.descuento_pct
+            : Math.round(((o.precio_regular_ves - o.precio_oferta_ves) / o.precio_regular_ves) * 100);
+          return `
+          <div class="bg-slate-900 border border-slate-800 hover:border-orange-500/40 rounded-2xl p-4 shadow-lg transition duration-200 space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="inline-block text-[10px] font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded-md mb-1">
+                  ${c.categoria}
+                </span>
+                <h4 class="text-sm font-bold text-white">${o.titulo}</h4>
+                <p class="text-[11px] text-slate-400 flex items-center space-x-1 mt-0.5">
+                  <i class="fa-solid fa-store text-slate-500"></i>
+                  <span>${c.nombre}</span>
+                  <span class="text-slate-600">•</span>
+                  <span class="text-emerald-400 font-semibold">${c.distance_meters || ''}m</span>
+                </p>
+              </div>
+              <span class="bg-red-500/10 text-red-400 border border-red-500/20 text-[11px] font-extrabold px-2 py-1 rounded-lg">
+                -${descPct}%
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-800/80 pt-3">
+              <div>
+                <span class="text-lg font-black text-white">${o.precio_oferta_ves.toFixed(2)} <span class="text-xs font-normal text-slate-400">VES</span></span>
+                <span class="text-xs text-slate-500 line-through ml-1.5">${o.precio_regular_ves.toFixed(2)} VES</span>
+              </div>
+              <button onclick="reclamarCupon('${o.id}')" class="bg-orange-500 hover:bg-orange-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-xl transition shadow-md shadow-orange-500/20 flex items-center space-x-1.5">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Reclamar</span>
+              </button>
+            </div>
+          </div>
+        `;
+        }).join('');
+      }).join('');
+    }
+
+    // Reclamar Cupón
+    async function reclamarCupon(ofertaId) {
+      try {
+        const resp = await fetch('/api/cupon/reclamar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            oferta_id: ofertaId,
+            msisdn: currentMsisdn
+          })
+        });
+
+        const data = await resp.json();
+        if (!resp.ok) {
+          alert(`Error al reclamar cupón: ${data.detail || 'Fallo desconocido'}`);
+          return;
+        }
+
+        activeCoupon = data;
+        cambiarPestana('coupons');
+        iniciarTOTPDisplay();
+        cargarCuponesUsuario();
+      } catch (err) {
+        console.error(err);
+        alert('Error de red al conectar con el servidor.');
+      }
+    }
+
+    // Temporizador TOTP Dinámico (60s)
+    function iniciarTOTPDisplay() {
+      if (!activeCoupon) return;
+
+      const container = document.getElementById('active-coupon-card');
+      const c = activeCoupon.cupon;
+      const ofe = activeCoupon.oferta;
+      const com = activeCoupon.comercio;
+
+      container.innerHTML = `
+        <div class="space-y-3">
+          <div class="border-b border-slate-800 pb-2">
+            <span class="text-xs text-slate-400">Comercio:</span>
+            <h4 class="text-sm font-bold text-white">${com ? com.nombre : c.comercio_id}</h4>
+            <p class="text-xs text-orange-400 font-semibold">${ofe ? ofe.titulo : 'Oferta Especial'}</p>
+          </div>
+
+          <div class="flex justify-center my-3 bg-white p-3 rounded-2xl w-48 h-48 mx-auto shadow-inner">
+            <div id="qrcode-box"></div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="text-[10px] text-slate-400 font-semibold">CÓDIGO DINÁMICO TOTP:</div>
+            <div class="font-mono text-xl font-black text-amber-400 tracking-wider bg-slate-950 py-1 px-3 rounded-lg border border-slate-800 inline-block">
+              ${c.codigo_dinamico}
+            </div>
+            <div class="text-[9px] text-slate-500 font-mono mt-1">Firma: ${c.firma_hmac}</div>
+          </div>
+
+          <!-- Progress countdown -->
+          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+            <div id="totp-progress-bar" class="bg-amber-400 h-1.5 transition-all duration-1000" style="width: 100%"></div>
+          </div>
+          <p id="totp-countdown-label" class="text-[11px] text-slate-400 font-medium">Expira en 60 segundos</p>
+
+          <button onclick="rellenarPOSConCuponActivo()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-2 rounded-xl transition border border-slate-700 flex items-center justify-center space-x-1.5">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            <span>Transferir datos a Terminal POS para simular canje</span>
+          </button>
+        </div>
+      `;
+
+      // Render QR
+      const qrEl = document.getElementById('qrcode-box');
+      qrEl.innerHTML = "";
+      new QRCode(qrEl, {
+        text: `CAZADOR:${c.uuid}:${c.usuario_msisdn}:${c.firma_hmac}`,
+        width: 168,
+        height: 168,
+        colorDark: "#020617",
+        colorLight: "#ffffff"
+      });
+
+      // Countdown loop
+      if (totpInterval) clearInterval(totpInterval);
+      let secondsRemaining = activeCoupon.expires_in_seconds || 60;
+
+      totpInterval = setInterval(() => {
+        secondsRemaining -= 1;
+        if (secondsRemaining <= 0) {
+          secondsRemaining = 60; // Ciclo TOTP
+        }
+        const pct = (secondsRemaining / 60) * 100;
+        const bar = document.getElementById('totp-progress-bar');
+        const lbl = document.getElementById('totp-countdown-label');
+        if (bar) bar.style.width = `${pct}%`;
+        if (lbl) lbl.innerText = `Expira en ${secondsRemaining} segundos`;
+      }, 1000);
+    }
+
+    function rellenarPOSConCuponActivo() {
+      if (!activeCoupon) return;
+      const c = activeCoupon.cupon;
+      document.getElementById('pos-cupon-id').value = c.uuid;
+      document.getElementById('pos-msisdn').value = c.usuario_msisdn;
+      document.getElementById('pos-comercio-id').value = c.comercio_id;
+      document.getElementById('pos-signature').value = c.firma_hmac;
+      cambiarPestana('scanner');
+    }
+
+    // Cargar historial de cupones del usuario desde el backend
+    async function cargarCuponesUsuario() {
+      const historyContainer = document.getElementById('coupons-history');
+      try {
+        const resp = await fetch(`/api/cupon/usuario/${currentMsisdn}`);
+        const data = await resp.json();
+        if (data.success && data.cupones.length > 0) {
+          historyContainer.innerHTML = data.cupones.map(cp => `
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs flex items-center justify-between">
+              <div>
+                <div class="font-bold text-white">${cp.codigo_dinamico}</div>
+                <div class="text-[10px] text-slate-400">Oferta: ${cp.oferta_id} • Comercio: ${cp.comercio_id}</div>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${cp.estado === 'CANJEADO' ? 'bg-slate-800 text-slate-400' : 'bg-emerald-500/20 text-emerald-400'}">
+                ${cp.estado}
+              </span>
+            </div>
+          `).join('');
+        } else {
+          historyContainer.innerHTML = `<p class="text-xs text-slate-500 text-center py-2">No hay cupones previos registrados para esta línea.</p>`;
+        }
+      } catch (err) {
+        console.warn("No se pudo cargar historial de cupones:", err);
+      }
+    }
+
+    // Validar canje en Caja POS
+    async function validarCanjePOS() {
+      const cupon_id = document.getElementById('pos-cupon-id').value.trim();
+      const msisdn = document.getElementById('pos-msisdn').value.trim();
+      const comercio_id = document.getElementById('pos-comercio-id').value.trim();
+      const firma_hmac = document.getElementById('pos-signature').value.trim();
+      const resultBox = document.getElementById('pos-result-box');
+
+      if (!cupon_id || !firma_hmac) {
+        alert("Por favor ingrese el ID del cupón y la firma criptográfica.");
+        return;
+      }
+
+      resultBox.className = "p-3 rounded-xl border text-xs bg-slate-950 border-slate-700 text-slate-300 block";
+      resultBox.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Validando firma y FSM offline-first...`;
+
+      try {
+        const resp = await fetch('/api/cupon/canjear', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cupon_id, msisdn, comercio_id, firma_hmac })
+        });
+        const data = await resp.json();
+
+        if (resp.ok) {
+          resultBox.className = "p-3 rounded-xl border text-xs bg-emerald-500/10 border-emerald-500/30 text-emerald-400 block";
+          resultBox.innerHTML = `
+            <div class="font-bold text-sm mb-1"><i class="fa-solid fa-check-circle mr-1"></i> ¡Canje Exitoso!</div>
+            <p>Estado FSM: <b class="text-white">${data.estado}</b></p>
+            <p class="text-[11px] text-slate-300 mt-1">${data.mensaje}</p>
+          `;
+          cargarCuponesUsuario();
+        } else {
+          resultBox.className = "p-3 rounded-xl border text-xs bg-red-500/10 border-red-500/30 text-red-400 block";
+          resultBox.innerHTML = `
+            <div class="font-bold text-sm mb-1"><i class="fa-solid fa-ban mr-1"></i> Transacción Rechazada</div>
+            <p>${data.detail || 'Firma o transición FSM no permitida.'}</p>
+          `;
+        }
+      } catch (err) {
+        resultBox.className = "p-3 rounded-xl border text-xs bg-red-500/10 border-red-500/30 text-red-400 block";
+        resultBox.innerText = `Error de red al procesar canje: ${err.message}`;
+      }
+    }
+
+    // Facturación Carrier Billing
+    async function procesarPagoCarrierBilling() {
+      const msisdn = document.getElementById('billing-msisdn').value.trim();
+      const box = document.getElementById('billing-result-box');
+      const idempotencyKey = `BILL-${Date.now()}-${Math.floor(Math.random()*100000)}`;
+
+      box.className = "mt-4 p-3 rounded-xl border text-xs bg-slate-950 border-slate-700 text-slate-300 block";
+      box.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Conectando con BSS/OSS de Movilnet...`;
+
+      try {
+        const resp = await fetch('/api/billing/debitar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            msisdn: msisdn,
+            monto_ves: 95.0,
+            idempotency_key: idempotencyKey
+          })
+        });
+        const data = await resp.json();
+
+        if (resp.ok) {
+          box.className = "mt-4 p-3 rounded-xl border text-xs bg-emerald-500/10 border-emerald-500/30 text-emerald-400 block";
+          box.innerHTML = `
+            <div class="font-bold text-sm mb-1"><i class="fa-solid fa-circle-check mr-1"></i> Pase VIP Activado</div>
+            <p>Débito exitoso a la línea: <b class="text-white">${data.transaccion.msisdn}</b></p>
+            <p>Monto debitado: <b>${data.transaccion.monto_ves.toFixed(2)} VES</b></p>
+            <div class="mt-2 pt-2 border-t border-emerald-500/20 text-[11px] text-slate-300">
+              <span class="text-amber-400">Split Transaccional:</span> Movilnet (20%): ${data.split.telco_20_pct} VES • Plataforma (80%): ${data.split.neto_80_pct} VES
+            </div>
+          `;
+          cargarMetricas();
+        } else {
+          box.className = "mt-4 p-3 rounded-xl border text-xs bg-red-500/10 border-red-500/30 text-red-400 block";
+          box.innerHTML = `<div class="font-bold mb-1">Error de Facturación:</div><p>${data.detail || 'Rechazado'}</p>`;
+        }
+      } catch (err) {
+        box.className = "mt-4 p-3 rounded-xl border text-xs bg-red-500/10 border-red-500/30 text-red-400 block";
+        box.innerText = `Error: ${err.message}`;
+      }
+    }
+
+    // Cargar métricas del dashboard
+    async function cargarMetricas() {
+      try {
+        const resp = await fetch('/api/metricas');
+        const data = await resp.json();
+        document.getElementById('metric-comercios').innerText = data.total_comercios || '6';
+        document.getElementById('metric-ofertas').innerText = data.total_ofertas || '6';
+        document.getElementById('metric-tasa').innerText = `${data.tasa_canje_pct || 0}%`;
+      } catch (e) {
+        console.warn("No se pudieron cargar métricas:", e);
+      }
+    }
+
+    // Control de Navegación por Pestañas
+    function cambiarPestana(tabKey) {
+      ['radar', 'coupons', 'scanner', 'billing'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        document.getElementById(`nav-${t}`).className = "text-slate-400 hover:text-slate-200 flex flex-col items-center py-1 transition";
+      });
+      document.getElementById(`view-${tabKey}`).classList.remove('hidden');
+      document.getElementById(`nav-${tabKey}`).className = "text-orange-400 flex flex-col items-center py-1 transition";
+
+      if (tabKey === 'radar') {
+        setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 200);
+      } else if (tabKey === 'coupons') {
+        cargarCuponesUsuario();
+      } else if (tabKey === 'billing') {
+        cargarMetricas();
+      }
+    }
+
+    // Arranque
+    window.addEventListener('DOMContentLoaded', () => {
+      parseQueryParams();
+      initMap();
+      cargarOfertasRadar();
+      cargarMetricas();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "name": "Cazador de Ofertas Movilnet",
+  "short_name": "Cazador",
+  "description": "Super-App Soberana de Proximidad, Cuponería TOTP y Descuentos Exclusivos Movilnet 0416/0426",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "categories": ["shopping", "finance", "lifestyle"],
+  "icons": [
+    {
+      "src": "/static/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Radar de Ofertas",
+      "short_name": "Radar",
+      "description": "Buscar ofertas geolocalizadas a menos de 3km",
+      "url": "/?tab=radar"
+    },
+    {
+      "name": "Mis Cupones",
+      "short_name": "Cupones",
+      "description": "Ver código dinámico QR TOTP",
+      "url": "/?tab=coupons"
+    },
+    {
+      "name": "Terminal POS Caja",
+      "short_name": "Caja POS",
+      "description": "Validación y canje de cupones para comercios",
+      "url": "/?tab=scanner"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: movilnet-core
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python api/service.py
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: FORCE_OFFLINE
+        value: "false"
+      - key: N8N_BASE_URL
+        value: https://n8n.lpgtec.net
+      - key: N8N_WEBHOOK_URL
+        value: https://n8n.lpgtec.net/webhook/messages_upsert4
+      - key: MOVILNET_PUBLIC_URL
+        value: https://movilnet-core.onrender.com

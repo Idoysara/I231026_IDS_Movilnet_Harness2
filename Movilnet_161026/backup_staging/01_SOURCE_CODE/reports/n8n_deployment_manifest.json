@@ -1,0 +1,120 @@
+{
+  "deployment_timestamp": "2026-10-22T11:46:59Z",
+  "overall_status": "SUCCESS",
+  "target_environment": "DOCKER_N8N_5678",
+  "total_workflows_scanned": 10,
+  "total_deployed_successfully": 10,
+  "validation_errors": 0,
+  "workflows": [
+    {
+      "filename": "movilnet_c2p_payment_workflow.json",
+      "workflow_name": "Movilnet Omnicanal — Pasarela Financiera Pago Móvil C2P",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 5,
+      "connections_count": 4,
+      "sha256_hash": "6bd9acc40556c417d102ddb244ba1b7dbd8c029b64ef1042ee2e072c587952f0",
+      "assigned_id": "WFL-LOCAL-6BD9ACC4",
+      "webhook_path": "movilnet-c2p-webhook"
+    },
+    {
+      "filename": "movilnet_incident_eir_lock_workflow.json",
+      "workflow_name": "Movilnet Omnicanal — Gestión de Emergencias & Bloqueo EIR",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 6,
+      "connections_count": 5,
+      "sha256_hash": "5f96b21c56516096682c0a7eda1ebeb23afe76876c6ee8dc950730784219c327",
+      "assigned_id": "WFL-LOCAL-5F96B21C",
+      "webhook_path": "movilnet-eir-lock-webhook"
+    },
+    {
+      "filename": "movilnet_retention_churn_workflow.json",
+      "workflow_name": "Movilnet Omnicanal — Retención Proactiva, Fidelización & Churn ML",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 6,
+      "connections_count": 5,
+      "sha256_hash": "8561282bea64766ccc7da662a8bc8e1d9735f582d6d7065f588680c5fcdfdf06",
+      "assigned_id": "WFL-LOCAL-8561282B",
+      "webhook_path": "movilnet-retention-churn-webhook"
+    },
+    {
+      "filename": "movilnet_telegram_ai_workflow.json",
+      "workflow_name": "Movilnet Omnicanal — Canal Telegram Bot Oficial",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 7,
+      "connections_count": 6,
+      "sha256_hash": "e7afad7334cae7c03af0de47392d412cd6eb446851f79fd66586fcafd76e18dd",
+      "assigned_id": "WFL-LOCAL-E7AFAD73",
+      "webhook_path": "movilnet-telegram-webhook"
+    },
+    {
+      "filename": "movilnet_whatsapp_ai_workflow.json",
+      "workflow_name": "Movilnet WhatsApp AI & Fast-Path Engine",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": false,
+      "nodes_count": 8,
+      "connections_count": 7,
+      "sha256_hash": "e51979e5c12522d18f343b0330a8077e3f3b749ac564285103c724e4a722a74e",
+      "assigned_id": "WFL-LOCAL-E51979E5",
+      "webhook_path": "movilnet-whatsapp-webhook"
+    },
+    {
+      "filename": "viki_lpgtec_v2_ids_aaa_certified.json",
+      "workflow_name": "Viki_LPGTEC_v2_ids_Movilnet_Google_Suite_Full",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 74,
+      "connections_count": 67,
+      "sha256_hash": "63ed1f58e28bf41a77fb14109d424d261bc0166e9969b58f19587c71afde924d",
+      "assigned_id": "WFL-LOCAL-63ED1F58",
+      "webhook_path": "messages_upsert"
+    },
+    {
+      "filename": "viki_lpgtec_v2_ids_instant_dispatch.json",
+      "workflow_name": "Viki_LPGTEC_v2_ids_Movilnet_Google_Suite_Full",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 82,
+      "connections_count": 74,
+      "sha256_hash": "f812fb52ed06a9defecbf9d7d6ba911bc59dfaaa2062abebe5e67addb2319145",
+      "assigned_id": "WFL-LOCAL-F812FB52",
+      "webhook_path": "messages_upsert4"
+    },
+    {
+      "filename": "viki_lpgtec_v2_ids_live.json",
+      "workflow_name": "Viki_LPGTEC_v2_ids",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 66,
+      "connections_count": 60,
+      "sha256_hash": "b0bf10471882c94ee9d76a28a5c6424e41790c5692439191adc273e40a164b12",
+      "assigned_id": "WFL-LOCAL-B0BF1047",
+      "webhook_path": "messages_upsert"
+    },
+    {
+      "filename": "viki_lpgtec_v2_ids_with_google_suite.json",
+      "workflow_name": "Viki_LPGTEC_v2_ids_Movilnet_Google_Suite_Full",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 74,
+      "connections_count": 67,
+      "sha256_hash": "8f56b05c1f1027691965b11d87aa49638d9e00b0fb8ff43be776965d1a2b2958",
+      "assigned_id": "WFL-LOCAL-8F56B05C",
+      "webhook_path": "messages_upsert"
+    },
+    {
+      "filename": "viki_lpgtec_v2_ids_with_movilnet.json",
+      "workflow_name": "Viki_LPGTEC_v2_ids_Movilnet_Connected",
+      "status": "DEPLOYED_READY_CERTIFIED",
+      "active": true,
+      "nodes_count": 67,
+      "connections_count": 61,
+      "sha256_hash": "44e89b165589928655668ed0d2e5573ffc380e12084763508e7445aafde6eca2",
+      "assigned_id": "WFL-LOCAL-44E89B16",
+      "webhook_path": "messages_upsert"
+    }
+  ]
+}

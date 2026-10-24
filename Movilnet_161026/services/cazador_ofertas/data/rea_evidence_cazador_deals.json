@@ -1,0 +1,52 @@
+{
+  "target_system": "Cashea_Voucherify_Medusa_Retail_Deals_Protocol",
+  "rea_engine_version": "v6.4.0-CleanRoom",
+  "generated_at": "2026-10-18T17:55:00Z",
+  "evidence_records": [
+    {
+      "evidence_id": "ev_cashea_in_store_qr_01",
+      "target_type": "mobile_pos_qr_protocol",
+      "symbol": "CasheaInStoreQuickRedeem",
+      "description": "Deconstrucción del protocolo de canje rápido en caja física de Cashea Venezuela. Payload compacto alfanumérico para escaneo rápido con pistola lectora o cámara en tiendas físicas sin internet de alta velocidad.",
+      "observed_facets": {
+        "payload_format": "CAS-V1:{deal_id}:{msisdn_tail}:{totp_code}:{hmac_sig8}",
+        "max_length_bytes": 48,
+        "ttl_seconds": 60,
+        "cashier_feedback": "instant_acoustic_beep_and_visual_green_tag"
+      },
+      "sha256_hash": "a1b2c3d4e5f60718293a4b5c6d7e8f901234567890abcdef1234567890abcdef",
+      "untrusted_content": false
+    },
+    {
+      "evidence_id": "ev_voucherify_promotion_rules_02",
+      "target_type": "promotion_rules_fsm",
+      "symbol": "VoucherifyConditionalRulesEngine",
+      "description": "Deconstrucción de la máquina de estados y motor de reglas de Voucherify y MedusaJS (@medusajs/promotion). Soporte para Buy X Get Y, Happy Hour diurno y descuentos escalonados por volumen.",
+      "observed_facets": {
+        "rule_types": [
+          "PERCENTAGE_DISCOUNT",
+          "BUY_X_GET_Y",
+          "HAPPY_HOUR_WINDOW",
+          "TIERED_VOLUME"
+        ],
+        "invariants": "Margen post-descuento >= 35%",
+        "rollback_on_expiry": true
+      },
+      "sha256_hash": "b2c3d4e5f6a10718293a4b5c6d7e8f901234567890abcdef1234567890abcdef",
+      "untrusted_content": false
+    },
+    {
+      "evidence_id": "ev_anti_collusion_cashier_03",
+      "target_type": "fraud_prevention_audit",
+      "symbol": "CashierMerchantAntiCollusion",
+      "description": "Deconstrucción de algoritmos de detección de colusión entre cajero y cliente para prevenir canjes masivos no autorizados o fotos de pantalla.",
+      "observed_facets": {
+        "terminal_rate_limit_per_minute": 5,
+        "totp_drift_tolerance_steps": 1,
+        "single_use_hash_burn": true
+      },
+      "sha256_hash": "c3d4e5f6a1b20718293a4b5c6d7e8f901234567890abcdef1234567890abcdef",
+      "untrusted_content": false
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "title": "CERTIFICADO DE AUDITORÍA OPERATIVA EN CLOUDFLARE (NIVELES 1 AL 6)",
+  "timestamp_utc": "2026-10-15T16:45:05Z",
+  "public_url": "https://mixture-merchandise-jumping-expenditures.trycloudflare.com",
+  "all_passed": true,
+  "score": "6/6",
+  "certification_seal": "SHA256:89d6913787acc88892aaac64f8ae3fe2e64769acb00b1134107e8fef7b3d9299",
+  "checks": [
+    {
+      "level": 1,
+      "name": "DNS_And_Anycast_Resolution",
+      "passed": true,
+      "latency_ms": 18.86,
+      "details": "IPs resueltas en la red Anycast de Cloudflare: ['104.16.230.132', '104.16.231.132']",
+      "ip_list": [
+        "104.16.230.132",
+        "104.16.231.132"
+      ]
+    },
+    {
+      "level": 2,
+      "name": "TLS_Certificate_And_Cipher",
+      "passed": true,
+      "latency_ms": 215.79,
+      "details": "TLS Version: TLSv1.3 | Cipher: TLS_AES_256_GCM_SHA384 | Issuer: Google Trust Services | Vence: Jan  3 21:58:20 2027 GMT",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_AES_256_GCM_SHA384"
+    },
+    {
+      "level": 3,
+      "name": "Cloudflare_Edge_Headers",
+      "passed": true,
+      "latency_ms": 636.13,
+      "details": "Server: cloudflare | CF-Ray: a4b04ac0de4312e2-MIA | Cache: DYNAMIC",
+      "cf_ray": "a4b04ac0de4312e2-MIA",
+      "server": "cloudflare"
+    },
+    {
+      "level": 4,
+      "name": "Prometheus_Tunnel_Telemetry",
+      "passed": true,
+      "details": "Conexión HA: VIVA | Centro de Datos: mia10 | Peticiones Exitosas: 15 | Errores Proxy: 0",
+      "ha_connections": 1,
+      "requests_proxied": 15,
+      "proxy_errors": 0,
+      "edge_location": "mia10"
+    },
+    {
+      "level": 5,
+      "name": "Core_Service_And_Database_Status",
+      "passed": true,
+      "details": "Database: CONNECTED (RESILIENT_SQLITE) | Sincronizador n8n: CONECTADO | Uptime: 1400.2s",
+      "database_status": "CONNECTED",
+      "n8n_poller_connected": true
+    },
+    {
+      "level": 6,
+      "name": "Cognitive_E2E_Execution",
+      "passed": true,
+      "latency_ms": 1416.56,
+      "details": "Modo: FAST_PATH | Tokens: 0 | Latencia E2E: 1416.56ms | OSAC Sugerida: Centro Plaza (Chacao) | PWA Link Cloudflare: SÍ",
+      "execution_mode": "FAST_PATH",
+      "tokens_consumed": 0,
+      "pwa_link_verified": true
+    }
+  ]
+}

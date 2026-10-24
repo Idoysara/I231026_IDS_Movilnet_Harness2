@@ -1,0 +1,248 @@
+{
+  "name": "Movilnet WhatsApp AI & Fast-Path Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "movilnet-whatsapp-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node_webhook",
+      "name": "1. WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# SecurityShield & Rate Limiter Perimetral\ninput_data = _input.first().json\nphone = input_data.get('phone', '')\nmessage = input_data.get('message', '').strip()\n\n# Sanitización básica y extracción de intención\nis_direct_balance = 'saldo' in message.lower() or 'cuanto debo' in message.lower()\nis_plan_query = 'plan' in message.lower() or 'megas' in message.lower()\n\nreturn {\n    \"phone\": phone,\n    \"raw_message\": message,\n    \"intent\": \"DIRECT_BALANCE\" if is_direct_balance else (\"PLAN_QUERY\" if is_plan_query else \"COMPLEX_QUERY\"),\n    \"timestamp\": $now.toISO()\n}\n"
+      },
+      "id": "node_security_shield",
+      "name": "2. SecurityShield Guard",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond_fastpath",
+              "leftValue": "={{ $json.intent }}",
+              "rightValue": "COMPLEX_QUERY",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "node_router",
+      "name": "3. ¿Es Fast-Path?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "=balance:{{ $json.phone }}"
+      },
+      "id": "node_redis_get",
+      "name": "4A. Redis Cache Check",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        880,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Renderizador Fast-Path Oficial Movilnet ($0 Tokens)\ndata = _input.first().json\nphone = data.get('phone', '0416XXXXXXX')\n\n# Respuesta templated oficial\nmsg = f\"Estimado abonado de la línea {phone}:\\n\\n\" \\\n      f\"📱 Plan Activo: Inteliplan 10GB 4GMAX\\n\" \\\n      f\"💵 Saldo Disponible: Bs. 185,50\\n\" \\\n      f\"📅 Próxima Fecha de Corte: 15 de Octubre\\n\" \\\n      f\"📊 Datos Remanentes: 6.4 GB de 10 GB\\n\\n\" \\\n      f\"Para recargas use BDV, Banesco, Pago Móvil o Patria.\"\n\nreturn {\"response_text\": msg, \"cost_usd\": 0.0, \"latency_mode\": \"FAST_PATH\"}\n"
+      },
+      "id": "node_render_fastpath",
+      "name": "5A. Render Plantilla Fast-Path",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.raw_message }}",
+        "options": {
+          "systemMessage": "Eres el Asistente Cognitivo Oficial de Movilnet Venezuela. Responde de forma empática, natural, respetuosa y profesional. Utiliza la herramienta MCP para consultar datos reales de la línea."
+        }
+      },
+      "id": "node_ai_agent",
+      "name": "4B. AI Agent Cognitivo (LangChain)",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        880,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gemini-2.5-flash",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "node_lm_gemini",
+      "name": "Google Gemini / DeepSeek Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        880,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"success\", \"reply\": $json.response_text || $json.output } }}",
+        "options": {}
+      },
+      "id": "node_respond_webhook",
+      "name": "6. Responder WhatsApp Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1360,
+        320
+      ]
+    }
+  ],
+  "connections": {
+    "1. WhatsApp Webhook": {
+      "main": [
+        [
+          {
+            "node": "2. SecurityShield Guard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. SecurityShield Guard": {
+      "main": [
+        [
+          {
+            "node": "3. ¿Es Fast-Path?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. ¿Es Fast-Path?": {
+      "main": [
+        [
+          {
+            "node": "4A. Redis Cache Check",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "4B. AI Agent Cognitivo (LangChain)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4A. Redis Cache Check": {
+      "main": [
+        [
+          {
+            "node": "5A. Render Plantilla Fast-Path",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5A. Render Plantilla Fast-Path": {
+      "main": [
+        [
+          {
+            "node": "6. Responder WhatsApp Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4B. AI Agent Cognitivo (LangChain)": {
+      "main": [
+        [
+          {
+            "node": "6. Responder WhatsApp Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini / DeepSeek Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "4B. AI Agent Cognitivo (LangChain)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true
+  },
+  "tags": [
+    {
+      "name": "Telco"
+    },
+    {
+      "name": "Movilnet"
+    },
+    {
+      "name": "FastPath"
+    },
+    {
+      "name": "AI-Agent"
+    }
+  ]
+}

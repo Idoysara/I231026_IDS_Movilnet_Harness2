@@ -1,0 +1,21 @@
+# AI_Movilnet_300926 — Dependencias Oficiales del Proyecto
+# ==========================================================
+
+# 1. API & Web Service
+fastapi>=0.109.0
+uvicorn>=0.27.0
+pydantic>=2.5.0
+requests>=2.31.0
+
+# 2. Pasarela Multi-Modelo (Model Gateway)
+litellm>=1.20.0
+
+# 3. Base de Datos & Caché
+redis>=5.0.0
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.0
+
+# 4. Pruebas & Calidad (QA & SAST)
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
+flake8>=6.1.0

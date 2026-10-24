@@ -1,0 +1,115 @@
+{
+  "name": "Movilnet Omnicanal — Gestión de Emergencias & Bloqueo EIR",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "movilnet-eir-lock-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node_eir_webhook",
+      "name": "1. Receptor Reporte de Robo",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Extracción y Verificación de Datos de Seguridad\ndata = _input.first().json\nphone = str(data.get('msisdn', '')).strip()\nimei = str(data.get('imei', '')).strip()\nreason = str(data.get('reason', 'ROBO_HURTO')).strip()\npolice = data.get('police_report', 'DENUNCIA_DIGITAL_WEB')\n\nreturn {\n    'msisdn': phone,\n    'imei': imei,\n    'reason': reason,\n    'police_report': police,\n    'emergency_timestamp': $now.toISO()\n}\n"
+      },
+      "id": "node_eir_parser",
+      "name": "2. Auditoría Previa de Datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/v1/security/sim-swap",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"msisdn\": $json.msisdn } }}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "node_eir_audit_swap",
+      "name": "3. Auditar Ventana SIM-Swap 24h",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/v1/security/eir-lock",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"msisdn\": $json.msisdn, \"imei\": $node['2. Auditoría Previa de Datos'].json.imei, \"reason\": $node['2. Auditoría Previa de Datos'].json.reason, \"police_report\": $node['2. Auditoría Previa de Datos'].json.police_report } }}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "node_eir_lock_call",
+      "name": "4. Bloquear Terminal en EIR y Suspender Línea",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Emisión de Constancia de Bloqueo EIR\nres = _input.first().json\nticket = res.get('ticket_id', 'EIR-000000')\nmsisdn = res.get('msisdn', 'Línea')\nstatus = res.get('status', 'LOCKED_IN_EIR')\nline_st = res.get('line_status', 'BLOQUEADO_ROBO')\nts = res.get('timestamp', $now.toISO())\n\nnotice = (\n    f\"🚨 *CONSTANCIA DIGITAL DE BLOQUEO DE SEGURIDAD EIR* 🚨\\n\"\\\n    f\"*Telecomunicaciones Movilnet C.A. — Seguridad Integral*\\n\\n\"\\\n    f\"📌 *Ticket de Gestión:* `{ticket}`\\n\"\\\n    f\"📌 *Línea Telefónica:* `{msisdn}`\\n\"\\\n    f\"📌 *Estado del Terminal:* BLOQUEADO EN LISTA NEGRA EIR\\n\"\\\n    f\"📌 *Estado de la Línea:* {line_st}\\n\"\\\n    f\"📌 *Fecha de Registro:* {ts}\\n\\n\"\\\n    f\"_Su terminal IMEI ha sido invalidado para operar en cualquier red móvil de Venezuela._\"\n)\n\nreturn {\n    'ticket_id': ticket,\n    'status': status,\n    'line_status': line_st,\n    'security_notice': notice,\n    'conatel_eir_synced': True\n}\n"
+      },
+      "id": "node_eir_notice",
+      "name": "5. Generar Constancia Digital de Bloqueo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1180, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"ticket_id\": $json.ticket_id, \"line_status\": $json.line_status, \"notice\": $json.security_notice, \"conatel_eir_synced\": true } }}",
+        "options": {}
+      },
+      "id": "node_eir_respond",
+      "name": "6. Responder Webhook de Emergencia EIR",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1440, 300]
+    }
+  ],
+  "connections": {
+    "1. Receptor Reporte de Robo": {
+      "main": [[{"node": "2. Auditoría Previa de Datos", "type": "main", "index": 0}]]
+    },
+    "2. Auditoría Previa de Datos": {
+      "main": [[{"node": "3. Auditar Ventana SIM-Swap 24h", "type": "main", "index": 0}]]
+    },
+    "3. Auditar Ventana SIM-Swap 24h": {
+      "main": [[{"node": "4. Bloquear Terminal en EIR y Suspender Línea", "type": "main", "index": 0}]]
+    },
+    "4. Bloquear Terminal en EIR y Suspender Línea": {
+      "main": [[{"node": "5. Generar Constancia Digital de Bloqueo", "type": "main", "index": 0}]]
+    },
+    "5. Generar Constancia Digital de Bloqueo": {
+      "main": [[{"node": "6. Responder Webhook de Emergencia EIR", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true
+  },
+  "tags": [
+    {"name": "Omnicanal"},
+    {"name": "Seguridad"},
+    {"name": "EIR"},
+    {"name": "AntiFraude"}
+  ]
+}

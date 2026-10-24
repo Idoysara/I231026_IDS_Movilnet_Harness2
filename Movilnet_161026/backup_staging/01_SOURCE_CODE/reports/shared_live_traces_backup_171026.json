@@ -1,0 +1,135 @@
+[
+  {
+    "trace_id": "TRACE-SIM-1792238406919",
+    "execution_id": "SIM-1792238406",
+    "workflow_id": "sNMbtiEiTkuQ9OCY",
+    "started_at": "2026-10-17T12:00:06.909554+00:00",
+    "stopped_at": "2026-10-17T12:00:06.919017+00:00",
+    "total_duration_sec": 0.19,
+    "status": "SUCCESS",
+    "bot_number": "+58 424 153 3712",
+    "user_phone": "04121234567",
+    "user_push_name": "Maria Digitel",
+    "carrier": "DIGITEL",
+    "carrier_label": "Digitel 4G LTE",
+    "is_competitor": true,
+    "user_message": "Hola, qué planes tienen?",
+    "bot_reply": "📦 **Catálogo de Planes Oficiales Movilnet 4GMAX:**\n\n🔹 **Inteliplan 10GB 4GMAX**\n   - Datos: `10 GB` | Voz: `500 min` | Ref: `$7.50`\n🔹 **Inteliplan 20GB 4GMAX**\n   - Datos: `20 GB` | Voz: `1000 min` | Ref: `$12.00`\n🔹 **Plan Básico Conecta 5GB**\n   - Datos: `5 GB` | Voz: `250 min` | Ref: `$4.00`\n🔹 **Plan Ligero 3GB**\n   - Datos: `3 GB` | Voz: `150 min` | Ref: `$2.50`\n\n¿Deseas activar alguno de estos planes en tu línea?\n\n🌐 *Portal PWA 4GMAX (Acceso libre por Wi-Fi o Plan de Datos desde cualquier operadora):*\nhttps://one21026-ids-movilnet-pwa.onrender.com/ui/pwa_stitch/index.html?carrier=DIGITEL&phone=04121234567&token=697aecbeb95a677b\n🎁 Incluye 1.000 tokens de bienvenida y solicitud de eSIM digital inmediata.",
+    "intent_detected": "TELCO_FASTPATH",
+    "pipeline_route": "FAST_PATH_TELCO_ODA",
+    "steps": [
+      {
+        "step_index": 1,
+        "node_name": "Webhook (messages.upsert)",
+        "phase_category": "1. Ingesta Perimetral",
+        "status": "success",
+        "execution_time_ms": 1.2,
+        "description": "Recibió mensaje desde Xiaomi Redmi Note en la línea bot +58 424 153 3712",
+        "input_summary": {
+          "device": "Xiaomi Redmi Note",
+          "raw_phone": "04121234567"
+        },
+        "output_summary": {
+          "normalized_phone": "04121234567",
+          "message": "Hola, qué planes tienen?"
+        }
+      },
+      {
+        "step_index": 2,
+        "node_name": "If (fromMe == false)",
+        "phase_category": "1. Ingesta Perimetral",
+        "status": "success",
+        "execution_time_ms": 0.8,
+        "description": "Comprobó fromMe == false (mensaje genuino de usuario)",
+        "input_summary": {},
+        "output_summary": {
+          "condition_passed": true
+        }
+      },
+      {
+        "step_index": 3,
+        "node_name": "Edit Fields & Switch",
+        "phase_category": "2. Normalización de Medio",
+        "status": "success",
+        "execution_time_ms": 3.5,
+        "description": "Identificó operadora Digitel 4G LTE y pushName 'Maria Digitel'",
+        "input_summary": {},
+        "output_summary": {
+          "carrier": "DIGITEL",
+          "is_competitor": true
+        }
+      },
+      {
+        "step_index": 4,
+        "node_name": "Router - Consultas determinísticas",
+        "phase_category": "3. Enrutamiento de Intención",
+        "status": "success",
+        "execution_time_ms": 4.1,
+        "description": "Intercepción determinística en frontera: CATALOGO_PLANES. Cable directo :8010 (0 tokens)",
+        "input_summary": {},
+        "output_summary": {
+          "branch_activated": "Rama 8: Movilnet Core - Fast-Path (CATALOGO_PLANES)",
+          "pipeline_route": "FAST_PATH_TELCO_ODA"
+        }
+      },
+      {
+        "step_index": 5,
+        "node_name": "💻 Movilnet Core - Fast-Path ODA (:8010)",
+        "phase_category": "4. Procesamiento Core",
+        "status": "success",
+        "execution_time_ms": 1.1439200000000205,
+        "description": "Resolución determinista instantánea en SQLite WAL con Blind Index HMAC-SHA256 (0 tokens)",
+        "input_summary": {},
+        "output_summary": {
+          "handled": true,
+          "intent": "CATALOGO_PLANES",
+          "latency_ms": 1.1439200000000205,
+          "cost_tokens": 0.0
+        }
+      },
+      {
+        "step_index": 6,
+        "node_name": "Merge 5 & Code (Sanitización Markdown)",
+        "phase_category": "5. Sanitización de Salida",
+        "status": "success",
+        "execution_time_ms": 2.1,
+        "description": "Sanitizó caracteres especiales para WhatsApp y unificó salida hacia el canal de mensajería",
+        "input_summary": {},
+        "output_summary": {
+          "ready_for_whatsapp": true
+        }
+      },
+      {
+        "step_index": 7,
+        "node_name": "HTTP Request (Evolution API /sendText)",
+        "phase_category": "6. Despacho Final al Celular",
+        "status": "success",
+        "execution_time_ms": 180.0,
+        "description": "Entregó mensaje en pantalla de 04121234567 (Xiaomi Redmi Note)",
+        "input_summary": {},
+        "output_summary": {
+          "number": "04121234567",
+          "delivery_status": "DELIVERY_ACK"
+        }
+      }
+    ],
+    "process_timers": {
+      "t1_user_sent_ts": "2026-10-17T12:00:06.759554+00:00",
+      "t2_n8n_in_ts": "2026-10-17T12:00:06.909554+00:00",
+      "t3_core_resolved_ts": "2026-10-17T12:00:06.926554+00:00",
+      "t4_n8n_out_ts": "2026-10-17T12:00:06.919017+00:00",
+      "t5_evolution_queued_ts": "2026-10-17T12:00:06.939017+00:00",
+      "t6_meta_server_ack_ts": "2026-10-17T12:00:07.119017+00:00",
+      "t7_phone_delivered_ts": "2026-10-17T12:00:07.469017+00:00",
+      "t8_user_read_ts": "2026-10-17T12:00:08.669017+00:00",
+      "delta_inbound_sec": 0.15,
+      "delta_processing_sec": 0.009,
+      "delta_outbound_queue_sec": 0.2,
+      "delta_delivery_sec": 0.35,
+      "delta_e2e_total_sec": 0.709,
+      "delivery_state": "DELIVERY_ACK",
+      "delivery_badge": "✓✓ Entregado (E2E: 0.709s | n8n: 0.009s | Red: 0.7s)",
+      "queue_wait_sec": 0.0
+    }
+  }
+]

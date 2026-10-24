@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-10-23T01:40:18.183752+00:00",
+  "project": "Telecomunicaciones Movilnet C.A. — Core PWA Swarm L5",
+  "version": "161026-pwa-universal-prod",
+  "governance": "Universal Best Practices Engineering Rule (Pilares I al VII)",
+  "inviolable_rule": "regla-inviolable-enlace-pwa-universal.md (Obligatorio en todo mensaje)",
+  "pwa_official_url": "https://one21026-ids-movilnet-pwa.onrender.com/ui/pwa_stitch/index.html",
+  "artifacts": {
+    "tar_gz": {
+      "filename": "CORE_MOVILNET_EXPORT_161026.tar.gz",
+      "sha256": "146b5ee7ab4cfa85e481ccdfce7b7db2a2ceb64d8aea8d6ac91136151edf4fb9",
+      "size_bytes": 71982946,
+      "size_mb": 68.65
+    },
+    "zip": {
+      "filename": "CORE_MOVILNET_EXPORT_161026.zip",
+      "sha256": "845a5a95c33901d9c73483e6328b62e8054039a4af723ede8048e1db7ba21cba",
+      "size_bytes": 73326091,
+      "size_mb": 69.93
+    },
+    "database": {
+      "filename": "local_movilnet.db",
+      "sha256": "53996e6a83adb251f3df367cf0d459e12751ea98875a66d498a18b644b6cc868"
+    }
+  },
+  "certification_verdict": "APROBADO_100_PASS_PRODUCCION"
+}

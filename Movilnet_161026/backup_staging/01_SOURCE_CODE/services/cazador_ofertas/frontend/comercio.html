@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Comercios y Servicios — Cazador de Ofertas Movilnet</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-6 py-3.5 shadow-lg">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center shadow-md shadow-orange-500/20">
+          <i class="fa-solid fa-store text-slate-950 font-bold text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-base font-extrabold tracking-tight text-white leading-tight">
+            Portal de Comercios <span class="text-orange-400">y Servicios</span>
+          </h1>
+          <p class="text-xs text-slate-400 font-medium">Panel Autoservicio B2B — Red Movilnet & SuperOfertas</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-3">
+        <a href="/" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-crosshairs text-orange-400"></i>
+          <span>Ver Radar B2C</span>
+        </a>
+        <a href="/docs" target="_blank" class="bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-code"></i>
+          <span>API Docs</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-6 space-y-6">
+
+    <!-- KPI SUMMARY CARDS -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-lg">
+        <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+          <span>Comercios Activos</span>
+          <i class="fa-solid fa-shop text-orange-400"></i>
+        </div>
+        <div id="stat-comercios" class="text-2xl font-black text-white">--</div>
+        <p class="text-[11px] text-emerald-400 mt-1"><i class="fa-solid fa-shield-check mr-1"></i>Verificados SENIAT</p>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-lg">
+        <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+          <span>Ofertas en Radar</span>
+          <i class="fa-solid fa-tags text-orange-400"></i>
+        </div>
+        <div id="stat-ofertas" class="text-2xl font-black text-white">--</div>
+        <p class="text-[11px] text-slate-400 mt-1">Margen &ge; 35% garantizado</p>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-lg">
+        <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+          <span>Cupones Reclamados</span>
+          <i class="fa-solid fa-ticket text-orange-400"></i>
+        </div>
+        <div id="stat-cupones" class="text-2xl font-black text-white">--</div>
+        <p class="text-[11px] text-amber-400 mt-1">Tráfico móvil activo</p>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-lg">
+        <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+          <span>Split Transaccional</span>
+          <i class="fa-solid fa-coins text-emerald-400"></i>
+        </div>
+        <div class="text-2xl font-black text-emerald-400">80% / 20%</div>
+        <p class="text-[11px] text-slate-400 mt-1">80% Neto Comercio / 20% Telco</p>
+      </div>
+    </section>
+
+    <!-- WORKSPACE TWO COLUMNS -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- LEFT COLUMN: PUBLICADOR DE OFERTA CON GUARDAS DE MARGEN (7 COLS) -->
+      <section class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold text-white">Publicar Nueva Oferta o Promoción</h2>
+              <p class="text-xs text-slate-400">Blindada con la Invariante II de Rentabilidad (Margen &ge; 35%)</p>
+            </div>
+          </div>
+          <button onclick="toggleModalComercio()" class="text-xs bg-slate-800 hover:bg-slate-700 text-orange-400 font-bold px-2.5 py-1.5 rounded-lg border border-slate-700 transition">
+            <i class="fa-solid fa-building-circle-plus mr-1"></i>Nuevo Comercio
+          </button>
+        </div>
+
+        <form id="form-oferta" onsubmit="publicarOferta(event)" class="space-y-4">
+          
+          <!-- Comercio Emisor -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Comercio o Empresa Emisora *</label>
+            <select id="oferta-comercio" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500 font-medium">
+              <option value="">Cargando comercios afiliados...</option>
+            </select>
+          </div>
+
+          <!-- Título de la Oferta -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Título de la Promoción o Servicio *</label>
+            <input type="text" id="oferta-titulo" required minlength="5" placeholder="Ej: 2x1 Hamburguesa Especial + Bebida (Arturo's)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
+          </div>
+
+          <!-- Tipo de Regla Promocional REA -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Modalidad de Promoción REA</label>
+              <select id="oferta-tipo-regla" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
+                <option value="PERCENTAGE">Descuento Porcentual Directo</option>
+                <option value="BUY_X_GET_Y">2x1 (Buy 1 Get 1 Free / BOGO)</option>
+                <option value="HAPPY_HOUR_WINDOW">Happy Hour (Horario Valle)</option>
+                <option value="TIERED_VOLUME">Descuento por Volumen (3x2)</option>
+                <option value="MIN_BASKET_AMOUNT">Consumo Mínimo Requerido</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Horario de Validez</label>
+              <input type="text" id="oferta-horario" value="10:00 - 20:00" placeholder="Ej: 14:00 - 18:00" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
+            </div>
+          </div>
+
+          <!-- PRECIOS Y COSTOS: SIMULADOR DE MARGEN EN TIEMPO REAL -->
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-bold border-b border-slate-800/80 pb-2">
+              <span class="flex items-center space-x-1.5 text-orange-400">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Simulador de Precios y Margen Soberano (Invariante II)</span>
+              </span>
+              <span id="label-descuento-calc" class="text-slate-400 font-mono">Descuento: --%</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Precio Regular (VES) *</label>
+                <input type="number" step="0.01" id="oferta-regular" required min="1" placeholder="100.00" oninput="calcularMargen()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-sm text-white focus:outline-none focus:border-orange-500 font-mono font-bold">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Precio Oferta (VES) *</label>
+                <input type="number" step="0.01" id="oferta-promo" required min="1" placeholder="65.00" oninput="calcularMargen()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-sm text-white focus:outline-none focus:border-orange-500 font-mono font-bold text-orange-400">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Costo Directo (VES) *</label>
+                <input type="number" step="0.01" id="oferta-costo" required min="0" placeholder="30.00" oninput="calcularMargen()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-sm text-white focus:outline-none focus:border-orange-500 font-mono font-bold">
+              </div>
+            </div>
+
+            <!-- RESULTADO DEL MARGEN CON VALIDACIÓN MATEMÁTICA -->
+            <div id="box-margen" class="p-3 rounded-lg border text-xs flex items-center justify-between bg-slate-900/60 border-slate-700">
+              <div>
+                <div class="text-[10px] text-slate-400 font-medium">Margen Bruto de Contribución:</div>
+                <div id="valor-margen" class="text-base font-black text-slate-300">-- %</div>
+              </div>
+              <div id="badge-margen" class="text-right">
+                <span class="text-[11px] text-slate-400">Introduce precios y costo para auditar</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stock y Disponibilidad -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Cupos / Stock Disponible *</label>
+              <input type="number" id="oferta-stock" required min="1" value="25" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500 font-mono">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Código ID de Oferta</label>
+              <input type="text" id="oferta-id" placeholder="Auto-generado (ej: OFE-R901)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-400 font-mono">
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="btn-submit-oferta" class="w-full bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-slate-950 font-black py-3 rounded-xl text-sm transition shadow-lg shadow-orange-500/25 flex items-center justify-center space-x-2 disabled:opacity-40 disabled:cursor-not-allowed">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <span>Publicar Oferta en Radar Movilnet</span>
+          </button>
+        </form>
+
+        <div id="alert-publicacion" class="hidden p-3 rounded-xl border text-xs"></div>
+      </section>
+
+      <!-- RIGHT COLUMN: OFERTAS PUBLICADAS EN EL CATÁLOGO (5 COLS) -->
+      <section class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+              <i class="fa-solid fa-list-check"></i>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold text-white">Ofertas Publicadas en Vivo</h2>
+              <p class="text-xs text-slate-400">Catálogo persistido en SQLite</p>
+            </div>
+          </div>
+          <button onclick="cargarOfertas()" class="text-xs text-orange-400 hover:underline">
+            <i class="fa-solid fa-rotate-right mr-1"></i>Refrescar
+          </button>
+        </div>
+
+        <div id="lista-ofertas-container" class="space-y-3 max-h-[560px] overflow-y-auto pr-1">
+          <div class="text-center py-8 text-slate-500 text-xs">
+            <i class="fa-solid fa-spinner fa-spin text-orange-400 text-lg mb-2"></i>
+            <p>Cargando ofertas activas...</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- MODAL: REGISTRAR NUEVO COMERCIO O SERVICIO -->
+  <div id="modal-comercio" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+          <i class="fa-solid fa-store text-orange-400"></i>
+          <span>Afiliar Nuevo Comercio o Servicio</span>
+        </h3>
+        <button onclick="toggleModalComercio()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="form-comercio" onsubmit="registrarComercio(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Nombre Comercial o Razón Social *</label>
+          <input type="text" id="com-nombre" required placeholder="Ej: Clínica Veterinaria El Bosque" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-orange-500">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">RIF Fiscal Verificado *</label>
+          <input type="text" id="com-rif" required placeholder="Ej: J-12345678-9" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-orange-500 font-mono">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Categoría / Giro del Negocio *</label>
+          <select id="com-categoria" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-orange-500">
+            <option value="Restaurantes y Comida Rápida">Restaurantes y Comida Rápida</option>
+            <option value="Supermercados y Víveres">Supermercados y Víveres</option>
+            <option value="Farmacias y Salud">Farmacias y Salud</option>
+            <option value="Clínicas y Odontología">Clínicas y Odontología</option>
+            <option value="Colegios y Academias">Colegios y Academias</option>
+            <option value="Servicios Profesionales">Servicios Profesionales</option>
+            <option value="Centros Comerciales y Tiendas">Centros Comerciales y Tiendas</option>
+            <option value="Talleres y Repuestos">Talleres y Repuestos</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Latitud (WGS84) *</label>
+            <input type="number" step="0.000001" id="com-lat" required value="10.491200" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-orange-500 font-mono">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Longitud (WGS84) *</label>
+            <input type="number" step="0.000001" id="com-lon" required value="-66.858000" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-orange-500 font-mono">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold py-2.5 rounded-lg text-xs transition shadow-md shadow-orange-500/20">
+          Afiliar y Guardar Comercio
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-slate-900/60 py-4 px-6 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <span>Cazador de Ofertas Movilnet &bull; Puerto Soberano :8030</span>
+      <span class="text-orange-400 font-medium">Invariante II: Margen &ge; 35% Automático</span>
+    </div>
+  </footer>
+
+  <script>
+    let comerciosCache = [];
+    let margenValido = false;
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', () => {
+      cargarMetricas();
+      cargarComercios();
+      cargarOfertas();
+    });
+
+    // Cargar métricas
+    async function cargarMetricas() {
+      try {
+        const res = await fetch('/api/metricas');
+        const data = await res.json();
+        document.getElementById('stat-comercios').innerText = data.total_comercios || 0;
+        document.getElementById('stat-ofertas').innerText = data.total_ofertas || 0;
+        document.getElementById('stat-cupones').innerText = data.total_cupones_emitidos || 0;
+      } catch (e) {
+        console.error('Error cargando métricas:', e);
+      }
+    }
+
+    // Cargar Comercios en Dropdown
+    async function cargarComercios() {
+      try {
+        const res = await fetch('/api/comercios');
+        comerciosCache = await res.json();
+        const select = document.getElementById('oferta-comercio');
+        select.innerHTML = '<option value="">-- Selecciona el Comercio Aliado --</option>' +
+          comerciosCache.map(c => `<option value="${c.id}">${c.nombre} (${c.categoria}) - ${c.rif}</option>`).join('');
+      } catch (e) {
+        console.error('Error cargando comercios:', e);
+      }
+    }
+
+    // Cargar Ofertas Activas
+    async function cargarOfertas() {
+      const container = document.getElementById('lista-ofertas-container');
+      try {
+        const res = await fetch('/api/ofertas');
+        const ofertas = await res.json();
+        if (ofertas.length === 0) {
+          container.innerHTML = '<p class="text-xs text-slate-500 py-6 text-center">No hay ofertas registradas aún.</p>';
+          return;
+        }
+
+        container.innerHTML = ofertas.slice().reverse().map(o => {
+          const com = comerciosCache.find(c => c.id === o.comercio_id);
+          const comNombre = com ? com.nombre : o.comercio_id;
+          const margenPct = o.margen_pct !== undefined 
+            ? o.margen_pct 
+            : Math.round(((o.precio_oferta_ves - (o.costo_directo_ves || 0)) / o.precio_oferta_ves) * 100);
+          const descPct = o.descuento_pct > 0 
+            ? o.descuento_pct 
+            : Math.round(((o.precio_regular_ves - o.precio_oferta_ves) / o.precio_regular_ves) * 100);
+
+          return `
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5 space-y-2 hover:border-slate-700 transition">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h4 class="text-xs font-bold text-white">${o.titulo}</h4>
+                  <p class="text-[11px] text-slate-400 flex items-center space-x-1 mt-0.5">
+                    <i class="fa-solid fa-store text-slate-500"></i>
+                    <span>${comNombre}</span>
+                  </p>
+                </div>
+                <span class="bg-red-500/10 text-red-400 border border-red-500/20 text-[10px] font-extrabold px-1.5 py-0.5 rounded">
+                  -${descPct}%
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-800/60">
+                <div>
+                  <span class="font-mono font-black text-white text-sm">${o.precio_oferta_ves.toFixed(2)} VES</span>
+                  <span class="font-mono text-slate-500 line-through text-[11px] ml-1">${o.precio_regular_ves.toFixed(2)}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-bold">
+                    Margen ${margenPct}%
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-mono">Stock: ${o.stock_disponible}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (e) {
+        container.innerHTML = '<p class="text-xs text-red-400 py-4 text-center">Error cargando ofertas.</p>';
+      }
+    }
+
+    // Calculador de Margen en Vivo (Invariante II)
+    function calcularMargen() {
+      const regular = parseFloat(document.getElementById('oferta-regular').value);
+      const promo = parseFloat(document.getElementById('oferta-promo').value);
+      const costo = parseFloat(document.getElementById('oferta-costo').value);
+      const box = document.getElementById('box-margen');
+      const valLabel = document.getElementById('valor-margen');
+      const badge = document.getElementById('badge-margen');
+      const descLabel = document.getElementById('label-descuento-calc');
+      const btn = document.getElementById('btn-submit-oferta');
+
+      if (isNaN(regular) || isNaN(promo) || isNaN(costo) || regular <= 0 || promo <= 0) {
+        valLabel.innerText = '-- %';
+        badge.innerHTML = '<span class="text-slate-400 text-[11px]">Introduce precios y costo</span>';
+        box.className = 'p-3 rounded-lg border text-xs flex items-center justify-between bg-slate-900/60 border-slate-700';
+        descLabel.innerText = 'Descuento: --%';
+        margenValido = false;
+        btn.disabled = true;
+        return;
+      }
+
+      // Validar que oferta sea menor a regular
+      if (promo >= regular) {
+        valLabel.innerText = 'ERROR';
+        badge.innerHTML = '<span class="text-red-400 font-bold text-[11px]"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Precio de oferta debe ser MENOR al regular</span>';
+        box.className = 'p-3 rounded-lg border text-xs flex items-center justify-between bg-red-500/10 border-red-500/40';
+        margenValido = false;
+        btn.disabled = true;
+        return;
+      }
+
+      // Calcular descuento %
+      const descPct = Math.round(((regular - promo) / regular) * 100);
+      descLabel.innerText = `Descuento: -${descPct}%`;
+
+      // Calcular Margen Bruto: (P_promo - Costo) / P_promo
+      const margen = ((promo - costo) / promo) * 100;
+      valLabel.innerText = `${margen.toFixed(1)} %`;
+
+      if (margen >= 35.0) {
+        margenValido = true;
+        btn.disabled = false;
+        box.className = 'p-3 rounded-lg border text-xs flex items-center justify-between bg-emerald-500/10 border-emerald-500/40';
+        badge.innerHTML = `
+          <div class="text-emerald-400 font-extrabold flex items-center space-x-1">
+            <i class="fa-solid fa-shield-check"></i>
+            <span>Invariante II Aprobada (&ge; 35%)</span>
+          </div>
+          <div class="text-[10px] text-slate-400">Protege la solvencia del comercio</div>
+        `;
+      } else {
+        margenValido = false;
+        btn.disabled = true;
+        box.className = 'p-3 rounded-lg border text-xs flex items-center justify-between bg-red-500/10 border-red-500/40';
+        badge.innerHTML = `
+          <div class="text-red-400 font-extrabold flex items-center space-x-1">
+            <i class="fa-solid fa-ban"></i>
+            <span>Margen Insuficiente (&lt; 35%)</span>
+          </div>
+          <div class="text-[10px] text-red-300">Ajusta el precio o el costo para evitar pérdidas</div>
+        `;
+      }
+    }
+
+    // Publicar Oferta
+    async function publicarOferta(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById('alert-publicacion');
+      alertBox.classList.add('hidden');
+
+      if (!margenValido) {
+        alert('El margen bruto debe ser al menos del 35% para proteger al comercio.');
+        return;
+      }
+
+      const comercioId = document.getElementById('oferta-comercio').value;
+      const titulo = document.getElementById('oferta-titulo').value.trim();
+      const regular = parseFloat(document.getElementById('oferta-regular').value);
+      const promo = parseFloat(document.getElementById('oferta-promo').value);
+      const costo = parseFloat(document.getElementById('oferta-costo').value);
+      const stock = parseInt(document.getElementById('oferta-stock').value);
+      const horario = document.getElementById('oferta-horario').value.trim();
+      let customId = document.getElementById('oferta-id').value.trim();
+
+      if (!customId) {
+        customId = `OFE-${Math.floor(1000 + Math.random() * 9000)}`;
+      }
+
+      const descPct = Math.round(((regular - promo) / regular) * 100);
+
+      const payload = {
+        id: customId,
+        comercio_id: comercioId,
+        titulo: titulo,
+        precio_regular_ves: regular,
+        precio_oferta_ves: promo,
+        costo_directo_ves: costo,
+        descuento_pct: descPct,
+        stock_disponible: stock,
+        horario_validez: horario
+      };
+
+      try {
+        const res = await fetch('/api/ofertas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          alertBox.className = 'p-3 rounded-xl border text-xs bg-emerald-500/10 border-emerald-500/40 text-emerald-300 flex items-center space-x-2';
+          alertBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i><span>Oferta <b>${titulo}</b> publicada exitosamente con ID <b>${customId}</b>. ¡Ya está visible en el radar!</span>`;
+          alertBox.classList.remove('hidden');
+
+          // Reset parcial
+          document.getElementById('oferta-titulo').value = '';
+          document.getElementById('oferta-regular').value = '';
+          document.getElementById('oferta-promo').value = '';
+          document.getElementById('oferta-costo').value = '';
+          document.getElementById('oferta-id').value = '';
+          calcularMargen();
+          cargarOfertas();
+          cargarMetricas();
+        } else {
+          alertBox.className = 'p-3 rounded-xl border text-xs bg-red-500/10 border-red-500/40 text-red-300 flex items-center space-x-2';
+          alertBox.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-400"></i><span>Error al publicar: ${data.detail || data.error_type || 'Rechazo de invariante'}</span>`;
+          alertBox.classList.remove('hidden');
+        }
+      } catch (err) {
+        alertBox.className = 'p-3 rounded-xl border text-xs bg-red-500/10 border-red-500/40 text-red-300 flex items-center space-x-2';
+        alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i><span>Error de red al conectar con el servidor :8030.</span>`;
+        alertBox.classList.remove('hidden');
+      }
+    }
+
+    // Modal Comercio
+    function toggleModalComercio() {
+      const modal = document.getElementById('modal-comercio');
+      modal.classList.toggle('hidden');
+    }
+
+    // Registrar Comercio
+    async function registrarComercio(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('com-nombre').value.trim();
+      const rif = document.getElementById('com-rif').value.trim();
+      const categoria = document.getElementById('com-categoria').value;
+      const lat = parseFloat(document.getElementById('com-lat').value);
+      const lon = parseFloat(document.getElementById('com-lon').value);
+
+      const payload = {
+        nombre: nombre,
+        rif: rif,
+        categoria: categoria,
+        lat: lat,
+        lon: lon,
+        tier: "BASICO"
+      };
+
+      try {
+        const res = await fetch('/api/comercios', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          alert(`Comercio "${nombre}" afiliado con éxito con ID ${data.comercio.id}`);
+          toggleModalComercio();
+          document.getElementById('form-comercio').reset();
+          await cargarComercios();
+          document.getElementById('oferta-comercio').value = data.comercio.id;
+          cargarMetricas();
+        } else {
+          alert('Error al registrar comercio: ' + JSON.stringify(data));
+        }
+      } catch (err) {
+        alert('Error de conexión al registrar comercio.');
+      }
+    }
+  </script>
+</body>
+</html>

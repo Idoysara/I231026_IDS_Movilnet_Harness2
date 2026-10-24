@@ -1,0 +1,46 @@
+{
+  "mcpServers": {
+    "n8n-mcp": {
+      "type": "http",
+      "url": "https://n8n.lpgtec.net/mcp-server/http",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTIxZmVjNC1iMGI3LTQ4ODEtODdmNS1lZTU5YTQxMTYyMTUiLCJpc3MiOiJuOG4iLCJhdWQiOiJtY3Atc2VydmVyLWFwaSIsImp0aSI6ImE0YjUyM2U3LTI5NDYtNDg5MC1iZmEzLTdiMjM2MWJlZTEyOSIsImlhdCI6MTc5MTI0MjAyMn0.3pgNsTbw3OIomltKfjshf0u3artgdrrXMnoNpZswmEc"
+      },
+      "description": "Servidor MCP nativo de n8n LPGTEC con 27 herramientas de automatización, ejecución de flujos y gestión de datos"
+    },
+    "movilnet-n8n-bridge": {
+      "command": "/Users/ismael/Desktop/Movilnet_051026/AI_Movilnet_300926-main/venv/bin/python3",
+      "args": ["/Users/ismael/Desktop/Movilnet_051026/AI_Movilnet_300926-main/mcp/n8n_tools.py"],
+      "env": {
+        "PYTHONPATH": "/Users/ismael/Desktop/Movilnet_051026/AI_Movilnet_300926-main",
+        "N8N_BASE_URL": "https://n8n.lpgtec.net",
+        "N8N_API_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTIxZmVjNC1iMGI3LTQ4ODEtODdmNS1lZTU5YTQxMTYyMTUiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiZjhhMWE1NmQtY2JkYi00MjM1LThmNDctMGM1ZjM5NzQzOTAzIiwiaWF0IjoxNzkxMjQyMzMyLCJleHAiOjE3OTg5NDg4MDB9.q6HiXqDygN5FSHwQ36Phmief0XACLJcwuFObdj-3MnM"
+      },
+      "description": "Puente local MCP para gestión y sincronización de workflows en Movilnet Core"
+    },
+    "skillspector": {
+      "command": "/Users/ismael/Desktop/Movilnet_051026/AI_Movilnet_300926-main/venv/bin/python3",
+      "args": ["/Users/ismael/Desktop/Movilnet_051026/AI_Movilnet_300926-main/mcp/skillspector_mcp.py"],
+      "env": {
+        "PYTHONPATH": "/Users/ismael/Desktop/Movilnet_051026/AI_Movilnet_300926-main"
+      },
+      "description": "Servidor MCP de seguridad y antimalware homologado con NVIDIA SkillSpector (71 patrones, 17 categorías)"
+    },
+    "phone-migration-guardian": {
+      "command": "python3",
+      "args": ["mcp/phone_migration_mcp.py"],
+      "env": {
+        "PYTHONPATH": "."
+      },
+      "description": "Servidor MCP militar para la migración atómica universal de líneas telefónicas en Movilnet Core con rollback y validación AST"
+    },
+    "pwa-protocol-guardian": {
+      "command": "python3",
+      "args": ["mcp/pwa_protocol_mcp.py"],
+      "env": {
+        "PYTHONPATH": "."
+      },
+      "description": "Servidor MCP militar de auditoría, sincronización, Service Worker y validación Zero-Token del protocolo PWA en Movilnet Core"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Launcher nativo de macOS para Cazador_Ofertas.app
+APP_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+exec "$APP_DIR/🚀_INICIAR_CAZADOR_OFERTAS.command"

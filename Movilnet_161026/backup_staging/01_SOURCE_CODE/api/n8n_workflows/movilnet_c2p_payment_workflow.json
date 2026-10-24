@@ -1,0 +1,95 @@
+{
+  "name": "Movilnet Omnicanal — Pasarela Financiera Pago Móvil C2P",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "movilnet-c2p-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node_c2p_webhook",
+      "name": "1. Receptor de Pagos C2P",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Validación Previa y Formateo C2P\ndata = _input.first().json\nref_id = str(data.get('reference_id', '')).strip()\nphone = str(data.get('msisdn', '')).strip()\nbank = str(data.get('bank_code', '0102')).strip()\namount = float(data.get('amount_ves', 0.0))\ncid = str(data.get('payer_cid', '')).strip()\notp = str(data.get('otp_token', '')).strip()\n\nreturn {\n    'reference_id': ref_id,\n    'msisdn': phone,\n    'bank_code': bank,\n    'amount_ves': amount,\n    'payer_cid': cid,\n    'otp_token': otp,\n    'validated_precheck': bool(ref_id and phone and amount > 0 and otp),\n    'timestamp': $now.toISO()\n}\n"
+      },
+      "id": "node_c2p_validator",
+      "name": "2. Validador de Parámetros C2P",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/v1/payments/c2p",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"reference_id\": $json.reference_id, \"msisdn\": $json.msisdn, \"bank_code\": $json.bank_code, \"amount_ves\": $json.amount_ves, \"payer_cid\": $json.payer_cid, \"otp_token\": $json.otp_token } }}",
+        "options": {
+          "timeout": 8000
+        }
+      },
+      "id": "node_c2p_api_call",
+      "name": "3. Ejecutar Conciliación C2P API REST",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Generador de Recibo Digital Fiscal Movilnet\nres = _input.first().json\nref = res.get('reference_id', 'REF-000000')\nmsisdn = res.get('msisdn', 'Línea')\nbank = res.get('bank_name', 'Institución Bancaria')\namount_ves = res.get('amount_ves', 0.0)\namount_usd = res.get('amount_usd', 0.0)\nnew_bal = res.get('new_balance_ves', 0.0)\nexec_at = res.get('executed_at', $now.toISO())\n\nreceipt = (\n    f\"🧾 *COMPROBANTE DE RECARGA EXITOSA* 🧾\\n\"\\\n    f\"*Telecomunicaciones Movilnet C.A.*\\n\\n\"\\\n    f\"🔹 *Referencia:* `{ref}`\\n\"\\\n    f\"🔹 *Línea Beneficiaria:* `{msisdn}`\\n\"\\\n    f\"🔹 *Banco Origen:* {bank}\\n\"\\\n    f\"🔹 *Monto Acreditado:* Bs. {amount_ves:,.2f} (~${amount_usd:.2f} USD)\\n\"\\\n    f\"🔹 *Nuevo Saldo Disponible:* Bs. {new_bal:,.2f}\\n\"\\\n    f\"🔹 *Fecha y Hora:* {exec_at}\\n\\n\"\\\n    f\"_¡Gracias por mantenerte conectado con la señal 4GMAX de Movilnet!_\"\n)\n\nreturn {\n    'receipt_text': receipt,\n    'reference_id': ref,\n    'status': 'APROBADO_CONCILIADO'\n}\n"
+      },
+      "id": "node_c2p_receipt",
+      "name": "4. Generar Recibo Digital Fiscal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"transaction_status\": \"COMPLETED\", \"reference_id\": $json.reference_id, \"receipt\": $json.receipt_text, \"notified\": true } }}",
+        "options": {}
+      },
+      "id": "node_c2p_respond",
+      "name": "5. Responder Webhook Financiero C2P",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1180, 300]
+    }
+  ],
+  "connections": {
+    "1. Receptor de Pagos C2P": {
+      "main": [[{"node": "2. Validador de Parámetros C2P", "type": "main", "index": 0}]]
+    },
+    "2. Validador de Parámetros C2P": {
+      "main": [[{"node": "3. Ejecutar Conciliación C2P API REST", "type": "main", "index": 0}]]
+    },
+    "3. Ejecutar Conciliación C2P API REST": {
+      "main": [[{"node": "4. Generar Recibo Digital Fiscal", "type": "main", "index": 0}]]
+    },
+    "4. Generar Recibo Digital Fiscal": {
+      "main": [[{"node": "5. Responder Webhook Financiero C2P", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true
+  },
+  "tags": [
+    {"name": "Omnicanal"},
+    {"name": "Fintech"},
+    {"name": "C2P"},
+    {"name": "SUDEBAN"}
+  ]
+}

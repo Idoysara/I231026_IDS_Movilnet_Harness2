@@ -1,0 +1,52 @@
+{
+  "report_id": "CLOUD-AUDIT-C01732F6",
+  "timestamp_utc": "2026-10-22T18:26:18Z",
+  "checks": [
+    {
+      "check_name": "Dockerfile_Hardening_MultiStage",
+      "status": "PASS",
+      "details": "Dockerfile multi-stage hardened verificado: usuario non-root (1001), core/ presente y healthcheck din\u00e1mico.",
+      "target_file": "Dockerfile"
+    },
+    {
+      "check_name": "Render_IaC_Specification",
+      "status": "PASS",
+      "details": "render.yaml verificado: Servicio Web Free Tier, healthCheckPath /health y startCommand api/service.py.",
+      "target_file": "render.yaml"
+    },
+    {
+      "check_name": "Railway_IaC_Specification",
+      "status": "PASS",
+      "details": "railway.json verificado: Builder Dockerfile y healthcheckPath /health configurados.",
+      "target_file": "railway.json"
+    },
+    {
+      "check_name": "PWA_Static_Assets",
+      "status": "PASS",
+      "details": "PWA verificada: Soporte de par\u00e1metros URL ?phone= e indexaci\u00f3n en localStorage implementados.",
+      "target_file": "ui/pwa_stitch/index.html"
+    },
+    {
+      "check_name": "Dynamic_Port_Support",
+      "status": "PASS",
+      "details": "api/service.py verificado: Lee HOST y PORT desde variables de entorno de la nube.",
+      "target_file": "api/service.py"
+    },
+    {
+      "check_name": "Database_Resilience",
+      "status": "PASS",
+      "details": "db/connection.py verificado: Soporta Postgres 15 y Failover autom\u00e1tico a Resilient SQLite WAL.",
+      "target_file": "db/connection.py"
+    }
+  ],
+  "all_passed": true,
+  "summary": {
+    "total_checks": 6,
+    "passed_checks": 6,
+    "failed_checks": 0,
+    "readiness_status": "READY_FOR_24_7_CLOUD_DEPLOYMENT",
+    "sample_magic_link_render": "https://movilnet-core.onrender.com/ui/pwa_stitch/index.html?phone=04160000001",
+    "sample_magic_link_custom_domain": "https://autogestion.movilnet.com.ve/ui/pwa_stitch/index.html?phone=04160000001"
+  },
+  "sha256_seal": "SHA256:2b70c0179f84975976af27572e94dc56199fcb60df3544555f3f0c74021f0678"
+}

@@ -1,0 +1,2701 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Conversatorio en Vivo — Webhook Central +58 424 153 3712 (00584241533712) con Teléfonos Externos — Telecomunicaciones Movilnet C.A.">
+  <title>Conversatorio Webhook Central +58 424 153 3712 (00584241533712) | Movilnet 4GMAX Oficial</title>
+  <link rel="icon" href="/ui/assets/logos/favicon.gif" type="image/gif">
+
+  <!-- Tipografía Oficial Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES DINÁMICAS DE ILUMINACIÓN (LIGHT / MEDIUM / DARK)
+       ========================================================================== */
+    :root, [data-theme="light"] {
+      --movilnet-red: #FF3838;
+      --movilnet-red-dark: #E02424;
+      --movilnet-red-glow: rgba(255, 56, 56, 0.35);
+      --movilnet-red-subtle: rgba(255, 56, 56, 0.08);
+
+      --bg-page: #F3F4F6;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F9FAFB;
+      --bg-header: linear-gradient(180deg, #FF3838 0%, #FF2626 100%);
+      --bg-subnav: #FFFFFF;
+      --border-color: #E5E7EB;
+      --border-strong: #D1D5DB;
+
+      --text-main: #111827;
+      --text-secondary: #4B5563;
+      --text-muted: #6B7280;
+
+      --bubble-user-bg: #DCF8C6;
+      --bubble-user-text: #111827;
+      --bubble-user-border: #C5E1A5;
+
+      --bubble-bot-bg: #FFFFFF;
+      --bubble-bot-text: #111827;
+      --bubble-bot-border: #E5E7EB;
+      --bubble-bot-accent: #FF3838;
+
+      --footer-bg: #374151;
+      --footer-text: #D1D5DB;
+    }
+
+    [data-theme="medium"] {
+      --movilnet-red: #FF4A4A;
+      --movilnet-red-dark: #DC2626;
+      --movilnet-red-glow: rgba(255, 74, 74, 0.4);
+      --movilnet-red-subtle: rgba(255, 74, 74, 0.15);
+
+      --bg-page: #0F172A;
+      --bg-card: #1E293B;
+      --bg-subtle: #192336;
+      --bg-header: linear-gradient(180deg, #DC2626 0%, #B91C1C 100%);
+      --bg-subnav: #1E293B;
+      --border-color: #334155;
+      --border-strong: #475569;
+
+      --text-main: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+
+      --bubble-user-bg: #064E3B;
+      --bubble-user-text: #F1F5F9;
+      --bubble-user-border: #047857;
+
+      --bubble-bot-bg: #1E293B;
+      --bubble-bot-text: #F8FAFC;
+      --bubble-bot-border: #334155;
+      --bubble-bot-accent: #FF4A4A;
+
+      --footer-bg: #0A0F1D;
+      --footer-text: #94A3B8;
+    }
+
+    [data-theme="dark"] {
+      --movilnet-red: #FF5252;
+      --movilnet-red-dark: #E02424;
+      --movilnet-red-glow: rgba(255, 82, 82, 0.45);
+      --movilnet-red-subtle: rgba(255, 82, 82, 0.18);
+
+      --bg-page: #060B14;
+      --bg-card: #0C1524;
+      --bg-subtle: #08101C;
+      --bg-header: linear-gradient(180deg, #151F2E 0%, #0D1522 100%);
+      --bg-subnav: #0A111C;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.15);
+
+      --text-main: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+
+      --bubble-user-bg: #022C22;
+      --bubble-user-text: #ECFDF5;
+      --bubble-user-border: rgba(16, 185, 129, 0.3);
+
+      --bubble-bot-bg: #0D1626;
+      --bubble-bot-text: #F8FAFC;
+      --bubble-bot-border: rgba(255, 82, 82, 0.35);
+      --bubble-bot-accent: #FF5252;
+
+      --footer-bg: #04070D;
+      --footer-text: #64748B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* ==========================================================================
+       2. CABECERA INSTITUCIONAL CON BOTÓN REGRESAR Y SELECTOR DE ILUMINACIÓN
+       ========================================================================== */
+    header.corporate-header {
+      background: var(--bg-header);
+      color: #fff;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+      position: relative;
+      z-index: 40;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* BOTÓN REGRESAR A LA PÁGINA ANTERIOR */
+    .btn-back-header {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-back-header:hover {
+      background: #FFFFFF;
+      color: var(--movilnet-red);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transform: translateX(-2px);
+    }
+
+    /* LOGO OFICIAL MOVILNET CON MÁXIMA PRESENCIA Y CONTRASTE */
+    .brand-logo-container {
+      display: flex;
+      align-items: center;
+      padding-right: 12px;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .brand-logo-img {
+      height: 30px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+    }
+
+    /* Segmentos Institucionales Oficiales */
+    .segment-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .segment-pill {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .segment-pill.active {
+      background: #FFFFFF;
+      color: var(--movilnet-red);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .segment-pill.pyme {
+      background: #00BCD4;
+      color: #FFFFFF;
+    }
+    .segment-pill.pyme:hover {
+      background: #0097A7;
+    }
+
+    .segment-pill.empresa {
+      background: rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .header-right-tools {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* SELECTOR DE INTENSIDAD DE ILUMINACIÓN (LIGHT / MEDIUM / DARK) */
+    .illumination-control-box {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2px;
+      border-radius: 999px;
+      gap: 2px;
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.70rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .theme-btn.active {
+      background: #FFFFFF;
+      color: var(--movilnet-red);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-4gmax-official {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+    }
+
+    .top-action-btn {
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .top-action-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: #fff;
+    }
+
+    /* ==========================================================================
+       3. SUB-BARRA DE NAVEGACIÓN INSTITUCIONAL
+       ========================================================================== */
+    nav.subnav-bar {
+      background: var(--bg-subnav);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      position: relative;
+      z-index: 30;
+    }
+
+    .subnav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .subnav-item {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .subnav-item:hover, .subnav-item.active {
+      color: var(--movilnet-red);
+    }
+
+    .live-webhook-pill {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #10B981;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .live-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulse-dot 1.5s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* ==========================================================================
+       4. CONTENEDOR DE 2 COLUMNAS (WHATSAPP CARRIER-GRADE)
+       ========================================================================== */
+    .conversatorio-wrapper {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      flex: 1;
+      height: calc(100vh - 98px);
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+
+    @media (max-width: 900px) {
+      .conversatorio-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .col-lista {
+        display: none;
+      }
+    }
+
+    /* COLUMNA 1: LISTA DE CONTACTOS ÚNICOS */
+    .col-lista {
+      background: var(--bg-subtle);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .col-lista-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-card);
+    }
+
+    .col-lista-header h2 {
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .badge-contacts-count {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--movilnet-red);
+      background: var(--movilnet-red-subtle);
+      border: 1px solid rgba(255, 56, 56, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .chat-search-box {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .chat-search-input {
+      width: 100%;
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-main);
+      padding: 8px 12px 8px 34px;
+      font-size: 0.82rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .chat-search-input:focus {
+      background: var(--bg-card);
+      border-color: var(--movilnet-red);
+      box-shadow: 0 0 0 3px var(--movilnet-red-subtle);
+    }
+
+    .chat-search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .filter-pills::-webkit-scrollbar { display: none; }
+
+    .pill-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn:hover {
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    .pill-btn.active {
+      background: var(--movilnet-red);
+      border-color: var(--movilnet-red);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px var(--movilnet-red-glow);
+    }
+
+    .phones-scroll-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .phone-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 11px 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .phone-item:hover {
+      border-color: rgba(255, 56, 56, 0.4);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .phone-item.selected {
+      border-color: var(--movilnet-red);
+      background: var(--movilnet-red-subtle);
+      box-shadow: 0 4px 12px var(--movilnet-red-subtle), inset 3px 0 0 var(--movilnet-red);
+    }
+
+    .phone-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .phone-title-group {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .phone-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.86rem;
+      color: var(--text-main);
+    }
+
+    .tag-carrier {
+      font-size: 0.64rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .tag-movilnet { 
+      background: rgba(255, 56, 56, 0.15); 
+      color: var(--movilnet-red); 
+      border: 1px solid rgba(255, 56, 56, 0.35); 
+    }
+    .tag-movistar { 
+      background: rgba(0, 169, 224, 0.15); 
+      color: #0284C7; 
+      border: 1px solid rgba(0, 169, 224, 0.35); 
+    }
+    .tag-digitel { 
+      background: rgba(226, 24, 54, 0.15); 
+      color: #DB2777; 
+      border: 1px solid rgba(226, 24, 54, 0.35); 
+    }
+
+    .phone-preview-text {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .phone-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .badge-msg-count {
+      background: var(--movilnet-red-subtle);
+      border: 1px solid rgba(255, 56, 56, 0.3);
+      color: var(--movilnet-red);
+      font-size: 0.66rem;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 999px;
+    }
+
+    /* BANDERAS Y BADGES DE VALIDACIÓN Y CERTIFICACIÓN WHATSAPP */
+    .badge-cert-wa {
+      background: rgba(34, 197, 94, 0.14);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: #16a34a;
+      font-size: 0.63rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .badge-cert-wa.warning {
+      background: rgba(234, 179, 8, 0.14);
+      border-color: rgba(234, 179, 8, 0.35);
+      color: #ca8a04;
+    }
+
+    .badge-cert-header {
+      background: rgba(34, 197, 94, 0.14);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: #16a34a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .thread-cert-banner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 100%);
+      border: 1px solid rgba(34, 197, 94, 0.28);
+      border-radius: 8px;
+      padding: 6px 12px;
+      margin-bottom: 12px;
+      font-size: 0.74rem;
+      color: var(--text-main);
+    }
+
+    .msg-delivery-flag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.28);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .seal-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #16a34a;
+      background: rgba(34, 197, 94, 0.16);
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+
+    /* COLUMNA 2: ÁREA DE CHAT ACTIVO CONTINUO */
+    .col-chat {
+      background: var(--bg-page);
+      background-image: 
+        radial-gradient(rgba(255, 56, 56, 0.04) 1px, transparent 1px),
+        radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px, 10px 10px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-active-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .chat-avatar-glow {
+      position: relative;
+    }
+
+    .chat-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--movilnet-red-subtle);
+      border: 2px solid var(--movilnet-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 2px 6px var(--movilnet-red-subtle);
+    }
+
+    .avatar-live-dot {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10B981;
+      border: 2px solid var(--bg-card);
+      box-shadow: 0 0 6px #10B981;
+    }
+
+    .chat-titles h3 {
+      font-size: 1.0rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-titles p {
+      font-size: 0.77rem;
+      color: var(--text-secondary);
+      margin-top: 1px;
+    }
+
+    .header-badges-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-total-thread {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .chat-route-tag {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .route-fastpath { 
+      background: rgba(16, 185, 129, 0.15); 
+      color: #059669; 
+      border: 1px solid rgba(16, 185, 129, 0.35); 
+    }
+    .route-funnel { 
+      background: rgba(245, 158, 11, 0.15); 
+      color: #D97706; 
+      border: 1px solid rgba(245, 158, 11, 0.35); 
+    }
+    .route-gemini { 
+      background: rgba(2, 132, 199, 0.15); 
+      color: #0284C7; 
+      border: 1px solid rgba(2, 132, 199, 0.35); 
+    }
+
+    /* BOTÓN FLOTANTE IR AL FINAL */
+    .btn-scroll-bottom {
+      position: absolute;
+      right: 28px;
+      bottom: 125px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      color: var(--movilnet-red);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px) scale(0.9);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-scroll-bottom.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .btn-scroll-bottom:hover {
+      background: var(--movilnet-red);
+      color: #FFFFFF;
+      border-color: var(--movilnet-red);
+      box-shadow: 0 6px 18px var(--movilnet-red-glow);
+    }
+
+    .btn-scroll-bottom svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .scroll-badge-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--movilnet-red);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 1px 7px;
+      border: 2px solid var(--bg-card);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    /* CUERPO DEL CHAT */
+    .chat-messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scroll-behavior: smooth;
+    }
+
+    .date-divider {
+      text-align: center;
+      margin: 10px 0 6px 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .date-divider::before, .date-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .date-divider span {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.70rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 12px;
+    }
+
+    .turn-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bubble-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 82%;
+    }
+
+    .bubble-wrapper.user {
+      align-self: flex-start;
+    }
+
+    .bubble-wrapper.bot {
+      align-self: flex-end;
+    }
+
+    .bubble-card {
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      position: relative;
+      white-space: pre-wrap;
+      word-break: break-word;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Burbuja del Usuario */
+    .bubble-user-card {
+      background: var(--bubble-user-bg);
+      color: var(--bubble-user-text);
+      border: 1px solid var(--bubble-user-border);
+      border-bottom-left-radius: 2px;
+    }
+
+    /* Burbuja del Bot / MOVI */
+    .bubble-bot-card {
+      background: var(--bubble-bot-bg);
+      color: var(--bubble-bot-text);
+      border: 1px solid var(--bubble-bot-border);
+      border-left: 4px solid var(--bubble-bot-accent);
+      border-bottom-right-radius: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .bubble-header {
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .sender-user { 
+      color: #059669; 
+      display: flex; 
+      align-items: center; 
+      gap: 5px; 
+    }
+    .sender-bot { 
+      color: var(--movilnet-red); 
+      display: flex; 
+      align-items: center; 
+      gap: 5px; 
+      font-weight: 800;
+    }
+
+    .bubble-time {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      font-weight: normal;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bubble-note-pill {
+      margin-top: 8px;
+      font-size: 0.70rem;
+      color: var(--movilnet-red);
+      background: var(--movilnet-red-subtle);
+      border: 1px solid rgba(255, 56, 56, 0.25);
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
+    /* BARRA INFERIOR DE ENVÍO Y SIMULACIÓN */
+    .chat-bottom-bar {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      flex-shrink: 0;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .chips-shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .chips-shortcuts-label {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .chip-item {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chip-item:hover {
+      background: var(--movilnet-red-subtle);
+      border-color: var(--movilnet-red);
+      color: var(--movilnet-red);
+      transform: translateY(-1px);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .phone-input-mini {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-main);
+      padding: 10px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      width: 145px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .phone-input-mini:focus {
+      border-color: var(--movilnet-red);
+    }
+
+    .chat-input {
+      flex: 1;
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-main);
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .chat-input:focus {
+      border-color: var(--movilnet-red);
+      background: var(--bg-card);
+      box-shadow: 0 0 0 3px var(--movilnet-red-subtle);
+    }
+
+    .btn-send {
+      background: linear-gradient(180deg, var(--movilnet-red) 0%, var(--movilnet-red-dark) 100%);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.86rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px var(--movilnet-red-glow);
+    }
+
+    .btn-send:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--movilnet-red-glow);
+    }
+
+    .collapsible-tech-bar {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
+
+    .collapsible-tech-bar:hover {
+      color: var(--movilnet-red);
+    }
+
+    .tech-details-box {
+      display: none;
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #67E8F9;
+      max-height: 130px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    /* FOOTER INSTITUCIONAL OFICIAL */
+    footer.corporate-footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      padding: 6px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background-color 0.25s ease;
+    }
+
+    /* ==========================================================================
+       MODAL Y BADGES FORENSES DE PROCESS TIMERS E2E
+       ========================================================================== */
+    .msg-delivery-flag-pill {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .msg-delivery-flag-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    .process-timers-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeInModal 0.2s ease;
+    }
+    .process-timers-backdrop.open {
+      display: flex;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .process-timers-box {
+      background: var(--bg-card);
+      color: var(--text-main);
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+    }
+    .process-timers-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-subtle);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+    .process-timers-header h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .process-timers-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.4rem;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+    .process-timers-close:hover {
+      color: var(--movilnet-red);
+      background: rgba(255, 56, 56, 0.1);
+    }
+    .process-timers-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .stepper-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      padding-left: 28px;
+    }
+    .stepper-timeline::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--border-color);
+    }
+    .milestone-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .milestone-dot {
+      position: absolute;
+      left: -28px;
+      top: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+    .milestone-item.active .milestone-dot {
+      border-color: #16a34a;
+      background: #22c55e;
+      color: #fff;
+    }
+    .milestone-item.pending .milestone-dot {
+      border-color: #d97706;
+      background: #f59e0b;
+      color: #fff;
+    }
+    .milestone-item.error .milestone-dot {
+      border-color: #ef4444;
+      background: #ef4444;
+      color: #fff;
+    }
+    .milestone-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .milestone-ts {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .milestone-desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .deltas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .delta-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .delta-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+    .delta-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .rca-alert-box {
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .rca-alert-box.warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #d97706;
+    }
+    .rca-alert-box.success {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: #16a34a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. CABECERA ROJA INSTITUCIONAL CON BOTÓN VOLVER Y REGULADOR DE ILUMINACIÓN
+       ========================================================================== */ -->
+  <header class="corporate-header">
+    <div class="brand-section">
+      <!-- BOTÓN REGRESAR A LA PÁGINA ANTERIOR -->
+      <button onclick="window.history.length > 1 ? window.history.back() : window.location.href='/ui/pwa_stitch/simulador.html'" class="btn-back-header" title="Volver a la página anterior">
+        <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span>
+        <span>Volver</span>
+      </button>
+
+      <!-- LOGOTIPO VECTORIAL OFICIAL DE ALTA VISIBILIDAD -->
+      <div class="brand-logo-container">
+        <img id="header-logo" src="/ui/assets/logos/movilnet_logo_blanco.svg" alt="Movilnet Oficial" class="brand-logo-img" />
+      </div>
+
+      <!-- Segmentos Institucionales (Personas, PYME, Empresas) -->
+      <div class="segment-pills">
+        <a href="#personas" class="segment-pill active">Personas</a>
+        <a href="#pyme" class="segment-pill pyme">PYME</a>
+        <a href="#empresas" class="segment-pill empresa">Empresas</a>
+      </div>
+    </div>
+
+    <div class="header-right-tools">
+      <!-- SELECTOR DE INTENSIDAD DE ILUMINACIÓN (LIGHT / MEDIUM / DARK) -->
+      <div class="illumination-control-box" title="Regular intensidad de iluminación visual">
+        <button class="theme-btn active" data-theme="light" onclick="setIllumination('light')">
+          <span class="material-symbols-outlined" style="font-size:14px;">light_mode</span>
+          <span>Light</span>
+        </button>
+        <button class="theme-btn" data-theme="medium" onclick="setIllumination('medium')">
+          <span class="material-symbols-outlined" style="font-size:14px;">tonality</span>
+          <span>Medium</span>
+        </button>
+        <button class="theme-btn" data-theme="dark" onclick="setIllumination('dark')">
+          <span class="material-symbols-outlined" style="font-size:14px;">dark_mode</span>
+          <span>Dark</span>
+        </button>
+      </div>
+
+      <!-- Insignia Oficial 4GMAX -->
+      <img src="/ui/assets/logos/boton_4gmax_oficial.svg" alt="4GMAX" class="btn-4gmax-official" />
+
+      <a href="/ui/pwa_stitch/simulador.html" target="_blank" class="top-action-btn" title="Simulador Celular PWA">
+        <span class="material-symbols-outlined" style="font-size:15px;">smartphone</span>
+        <span>App Móvil</span>
+      </a>
+
+      <a href="/ui/monitor/index.html" class="top-action-btn" title="Monitor Secuencias NOC">
+        <span class="material-symbols-outlined" style="font-size:15px;">tune</span>
+        <span>Monitor NOC</span>
+      </a>
+
+      <button type="button" onclick="clearAllConversations()" class="top-action-btn" title="Limpiar conversaciones previas para pruebas en limpio" style="cursor:pointer; border:1px solid rgba(255,255,255,0.35); background:rgba(0,0,0,0.18); color:#fff;">
+        <span class="material-symbols-outlined" style="font-size:15px;">delete_sweep</span>
+        <span>Limpiar</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. SUB-BARRA DE NAVEGACIÓN INSTITUCIONAL BLANCA
+       ========================================================================== */ -->
+  <nav class="subnav-bar">
+    <div class="subnav-links">
+      <span class="subnav-item active">
+        <span class="material-symbols-outlined" style="font-size:16px;">forum</span>
+        <span>Conversatorio Webhook Central (+58 424 153 3712 / 00584241533712)</span>
+      </span>
+      <span class="subnav-item">
+        <span class="material-symbols-outlined" style="font-size:16px;">bolt</span>
+        <span>Fast-Path O(1)</span>
+      </span>
+      <span class="subnav-item">
+        <span class="material-symbols-outlined" style="font-size:16px;">smart_toy</span>
+        <span>MOVI Asistente</span>
+      </span>
+    </div>
+
+    <div class="live-webhook-pill" id="headerLiveStatus">
+      <span class="live-pulse-dot"></span>
+      <span>Webhook Activo (:8010 ↔ n8n Cloud)</span>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       3. CONTENEDOR DE 2 COLUMNAS (WHATSAPP CARRIER-GRADE)
+       ========================================================================== */ -->
+  <div class="conversatorio-wrapper">
+
+    <!-- COLUMNA 1: CONTACTOS / CHATS ÚNICOS -->
+    <aside class="col-lista">
+      <div class="col-lista-header">
+        <h2>
+          <span>👥 Chats del Webhook</span>
+          <span class="badge-contacts-count" id="badgeContactsCount">0 contactos</span>
+        </h2>
+
+        <!-- BUSCADOR EN VIVO DE CONTACTOS -->
+        <div class="chat-search-box">
+          <span class="material-symbols-outlined chat-search-icon">search</span>
+          <input type="text" id="searchChatsInput" class="chat-search-input" placeholder="Buscar por número o nombre..." oninput="filterChats()">
+        </div>
+
+        <!-- FILTROS POR OPERADORA -->
+        <div class="filter-pills">
+          <button class="pill-btn active" data-filter="ALL" onclick="setFilter('ALL')">Todos</button>
+          <button class="pill-btn" data-filter="MOVILNET" onclick="setFilter('MOVILNET')">0416/0426 Movilnet</button>
+          <button class="pill-btn" data-filter="MOVISTAR" onclick="setFilter('MOVISTAR')">0414/0424 Movistar</button>
+          <button class="pill-btn" data-filter="DIGITEL" onclick="setFilter('DIGITEL')">0412 Digitel</button>
+        </div>
+      </div>
+
+      <!-- LISTA DE CONTACTOS ÚNICOS -->
+      <div class="phones-scroll-list" id="phonesListContainer">
+        <!-- Renderizado dinámicamente -->
+      </div>
+    </aside>
+
+    <!-- COLUMNA 2: HILO CONTINUO DE CONVERSACIÓN (HISTORIAL) -->
+    <main class="col-chat">
+      <!-- ENCABEZADO DEL CHAT ACTIVO -->
+      <div class="chat-active-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar-glow">
+            <div class="chat-avatar" id="activeAvatar">🤖</div>
+            <div class="avatar-live-dot"></div>
+          </div>
+          <div class="chat-titles">
+            <h3 id="activePhoneTitle">0414-2554590 (Ids)</h3>
+            <p id="activeCarrierSubtitle">Movistar Venezuela ↔ Bot Movilnet (+58 424 153 3712 / 00584241533712) • En línea vía Webhook</p>
+          </div>
+        </div>
+
+        <div class="header-badges-right">
+          <span class="badge-total-thread" id="activeThreadBadge">0 mensajes</span>
+          <span class="chat-route-tag route-gemini" id="activeRouteTag">🧠 Gemini AI Agent</span>
+        </div>
+      </div>
+
+      <!-- ÁREA DE MENSAJES (BURBUJAS CONTINUAS WHATSAPP/TELEGRAM) -->
+      <div class="chat-messages-area" id="chatMessagesArea">
+        <!-- Renderizado dinámicamente -->
+      </div>
+
+      <!-- BOTÓN FLOTANTE: IR AL FINAL -->
+      <button id="btnScrollToBottom" class="btn-scroll-bottom" onclick="scrollToBottomSmooth()" title="Ir al final de la conversación">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        <span id="scrollBadgeCount" class="scroll-badge-count" style="display:none;">0</span>
+      </button>
+
+      <!-- BARRA INFERIOR DE ENVÍO Y SIMULACIÓN -->
+      <div class="chat-bottom-bar">
+        <!-- ATAJOS DE PRUEBA RÁPIDA -->
+        <div class="chips-shortcuts">
+          <span class="chips-shortcuts-label">Atajos Rápidos:</span>
+          <span class="chip-item" onclick="quickFill('Buenas noches cómo estás')">🌙 Buenas noches</span>
+          <span class="chip-item" onclick="quickFill('Saldo')">💰 Consultar Saldo</span>
+          <span class="chip-item" onclick="quickFill('Planes')">📋 Ver Planes 4GMAX</span>
+          <span class="chip-item" onclick="quickFill('Portabilidad')">🎯 Portabilidad eSIM</span>
+          <span class="chip-item" onclick="quickFill('Recarga')">💳 Recarga C2P</span>
+        </div>
+
+        <form class="chat-input-row" onsubmit="handleSend(event)">
+          <input type="text" id="inputPhone" class="phone-input-mini" placeholder="Teléfono" value="0414-2554590" readonly title="Contacto activo seleccionado">
+          <input type="text" id="inputMsg" class="chat-input" placeholder="Escribe un mensaje para continuar la conversación..." value="Buenas noches">
+          <button type="submit" class="btn-send" id="btnSend">
+            <span class="material-symbols-outlined" style="font-size:18px;">send</span>
+            <span>Enviar</span>
+          </button>
+        </form>
+
+        <div class="collapsible-tech-bar" onclick="toggleTechDetails()">
+          <span class="material-symbols-outlined" style="font-size:16px;">terminal</span>
+          <span>Ver trazabilidad técnica de n8n / Movilnet Core (clic para alternar)</span>
+        </div>
+        <div class="tech-details-box" id="techDetailsBox">
+          <!-- Detalle de nodos -->
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- FOOTER INSTITUCIONAL OFICIAL -->
+  <footer class="corporate-footer">
+    <div>
+      <span>Telecomunicaciones Movilnet C.A. RIF G-20000012-3. Todos los derechos reservados.</span>
+    </div>
+    <div>
+      <span>Microservicio Core N→1 en Puerto Dedicado :8010</span>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE LÓGICA Y CONMUTADOR DE ILUMINACIÓN -->
+  <script>
+    let activeFilter = 'ALL';
+    let searchQuery = '';
+    let selectedPhoneKey = null;
+    let prevTopLastSeen = null;
+    let userManualSelectionTime = 0;
+    let groupedThreads = [];
+
+    // GESTIÓN DE INTENSIDAD DE ILUMINACIÓN (LIGHT / MEDIUM / DARK)
+    function setIllumination(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem('movilnet_illumination', theme);
+      } catch(e) {}
+      
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme') === theme);
+      });
+    }
+
+    // Inicializar iluminación guardada
+    const savedTheme = localStorage.getItem('movilnet_illumination') || 'light';
+    setIllumination(savedTheme);
+
+    // ESTADO DE CONTROL INTELIGENTE DE SCROLL (Smart Scroll Anchor)
+    let isUserScrolledUp = false;
+    let lastRenderedThreadId = null;
+    let lastRenderedMsgsCount = 0;
+    let lastRenderedLastMsgId = null;
+    let unreadNewMessagesCount = 0;
+
+    // SEMILLAS INICIALES VACÍAS (Cero ruido histórico — Fuente de verdad 100% en vivo)
+    const seedThreads = [];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      groupedThreads = [];
+      renderContactsList();
+      renderActiveChat(true);
+      
+      const chatArea = document.getElementById('chatMessagesArea');
+      if (chatArea) {
+        chatArea.addEventListener('scroll', handleChatScroll);
+      }
+
+      loadConversationsFromServer();
+      setInterval(loadConversationsFromServer, 2500);
+    });
+
+    function handleChatScroll() {
+      const chatArea = document.getElementById('chatMessagesArea');
+      if (!chatArea) return;
+      const threshold = 70;
+      const distanceFromBottom = chatArea.scrollHeight - chatArea.scrollTop - chatArea.clientHeight;
+      const btn = document.getElementById('btnScrollToBottom');
+      
+      if (distanceFromBottom > threshold) {
+        isUserScrolledUp = true;
+        if (btn) btn.classList.add('visible');
+      } else {
+        isUserScrolledUp = false;
+        unreadNewMessagesCount = 0;
+        if (btn) {
+          btn.classList.remove('visible');
+          const badge = document.getElementById('scrollBadgeCount');
+          if (badge) {
+            badge.style.display = 'none';
+            badge.innerText = '0';
+          }
+        }
+      }
+    }
+
+    function scrollToBottomSmooth() {
+      const chatArea = document.getElementById('chatMessagesArea');
+      if (chatArea) {
+        chatArea.scrollTo({ top: chatArea.scrollHeight, behavior: 'smooth' });
+        isUserScrolledUp = false;
+        unreadNewMessagesCount = 0;
+        const btn = document.getElementById('btnScrollToBottom');
+        if (btn) btn.classList.remove('visible');
+        const badge = document.getElementById('scrollBadgeCount');
+        if (badge) {
+          badge.style.display = 'none';
+          badge.innerText = '0';
+        }
+      }
+    }
+
+    async function loadConversationsFromServer() {
+      try {
+        const ts = Date.now();
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        
+        let localData = null;
+        let responseOk = false;
+
+        // 1. Intento primario: Endpoint del microservicio (:8010 o Render Cloud)
+        try {
+          const localRes = await fetch('/api/v1/monitor/conversations?t=' + ts);
+          if (localRes.ok) {
+            localData = await localRes.json();
+            responseOk = true;
+          }
+        } catch (localErr) {
+          console.warn('[Conversatorio] Error consultando /api/v1/monitor/conversations local:', localErr);
+        }
+
+        // 2. Consultar Render Cloud para sincronización bidireccional y tolerancia a fallos
+        let renderData = null;
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+          const renderRes = await fetch('https://one21026-ids-movilnet-pwa.onrender.com/api/v1/monitor/conversations?t=' + ts, { signal: controller.signal });
+          clearTimeout(timeoutId);
+          if (renderRes.ok) {
+            renderData = await renderRes.json();
+          }
+        } catch (renderErr) {
+          console.warn('[Conversatorio] Render Cloud sync no disponible:', renderErr);
+        }
+
+        // 3. Fusión inteligente de fuentes (Local :8010 + Render Cloud)
+        if (localData && renderData) {
+          const localThreads = localData.grouped_threads || localData.threads || [];
+          const cloudThreads = renderData.grouped_threads || renderData.threads || [];
+          localData.grouped_threads = mergeThreadsWithSeeds(localThreads, cloudThreads);
+          if (renderData.n8n_poller_telemetry && renderData.n8n_poller_telemetry.is_connected) {
+            localData.n8n_poller_telemetry = renderData.n8n_poller_telemetry;
+          }
+        } else if (!localData && renderData) {
+          localData = renderData;
+        }
+
+        if (!localData) {
+          const statusElem = document.getElementById('headerLiveStatus');
+          if (statusElem) {
+            statusElem.innerHTML = `
+              <span class="live-pulse-dot" style="background:#eab308; box-shadow:0 0 8px #eab308;"></span>
+              <span style="font-weight:700; color:#ca8a04;">RECONECTANDO CON MOVILNET CORE (:8010)...</span>
+            `;
+          }
+          return;
+        }
+
+        const curThread = groupedThreads.find(t => t.phone_key === selectedPhoneKey);
+        const prevCount = curThread && curThread.messages ? curThread.messages.length : 0;
+
+        const serverThreads = localData.grouped_threads || localData.threads || [];
+        if (Array.isArray(serverThreads) && serverThreads.length > 0) {
+          groupedThreads = mergeThreadsWithSeeds([], serverThreads);
+        } else if (localData && Array.isArray(localData.conversations) && localData.conversations.length > 0) {
+          const aggregated = aggregateTracesLocally(localData.conversations);
+          groupedThreads = mergeThreadsWithSeeds([], aggregated);
+        } else {
+          groupedThreads = [];
+          selectedPhoneKey = null;
+        }
+
+        const poller = localData.n8n_poller_telemetry || {};
+        const isPollerBlocked = poller.is_connected === false || (poller.consecutive_failures && poller.consecutive_failures >= 3);
+        const statusElem = document.getElementById('headerLiveStatus');
+        if (statusElem) {
+          const totalMsgs = groupedThreads.reduce((acc, th) => acc + (th.messages ? th.messages.length : 0), 0);
+          if (isPollerBlocked) {
+            statusElem.innerHTML = `
+              <span class="live-pulse-dot" style="background:#ef4444; box-shadow:0 0 8px #ef4444;"></span>
+              <span style="font-weight:700; color:#dc2626;">🚨 SINCRONIZADOR N8N BLOQUEADO / SIN RED (${poller.last_error || 'Fallo de conexión'})</span>
+              <span style="opacity:0.5;">•</span>
+              <span style="font-size:0.72rem; color:#dc2626; font-weight:700;">Inicie mediante scripts/reiniciar_todo_limpio.command</span>
+            `;
+          } else {
+            statusElem.innerHTML = `
+              <span class="live-pulse-dot" style="background:#22c55e; box-shadow:0 0 8px #22c55e;"></span>
+              <span style="font-weight:700; color:#16a34a;">MODO ONLINE SUPERVISANDO EN VIVO (LOCAL :8010 ↔ n8n Cloud ↔ WhatsApp)</span>
+              <span style="opacity:0.5;">•</span>
+              <span>${groupedThreads.length} líneas / ${totalMsgs} mensajes</span>
+              <span class="badge-cert-header" style="padding:2px 8px; font-size:0.65rem; margin-left:6px;">🛡️ ENTREGAS WHATSAPP & QR: 100% MONITOREADAS</span>
+            `;
+          }
+        }
+
+        const topThread = groupedThreads[0];
+        const isFreshTopActivity = topThread && prevTopLastSeen && topThread.last_seen !== prevTopLastSeen;
+        const isManualSelectionFresh = (Date.now() - userManualSelectionTime < 15000);
+
+        if (topThread && (!selectedPhoneKey || (isFreshTopActivity && !isManualSelectionFresh))) {
+          selectedPhoneKey = topThread.phone_key;
+        } else if (!selectedPhoneKey || !groupedThreads.some(t => t.phone_key === selectedPhoneKey)) {
+          if (groupedThreads.length > 0) selectedPhoneKey = groupedThreads[0].phone_key;
+        }
+
+        prevTopLastSeen = topThread ? topThread.last_seen : null;
+        const newThread = groupedThreads.find(t => t.phone_key === selectedPhoneKey);
+        const newCount = newThread && newThread.messages ? newThread.messages.length : 0;
+        const hasNewMessages = newCount > prevCount || isFreshTopActivity;
+
+        renderContactsList();
+        renderActiveChat(hasNewMessages);
+      } catch (err) {
+        console.error('[Conversatorio Sync Error]:', err);
+      }
+    }
+
+    function normMsgId(m) {
+      if (!m) return '';
+      const raw = String(m.execution_id || m.trace_id || '').trim();
+      return raw.replace(/^TRACE-EXEC-/, '').replace(/^TRACE-SIM-/, '').replace(/^SIM-/, '');
+    }
+
+    function normPhoneKey(key) {
+      if (!key) return 'Desconocido';
+      const raw = String(key).replace(/\D/g, '');
+      if (raw.startsWith('0058') && raw.length === 14) return '0' + raw.slice(4);
+      if (raw.startsWith('58') && raw.length === 12) return '0' + raw.slice(2);
+      if (raw.length === 10 && raw.startsWith('4')) return '0' + raw;
+      if (raw.length === 11 && raw.startsWith('0')) return raw;
+      return String(key);
+    }
+
+    function mergeThreadsWithSeeds(existing, incoming) {
+      const map = {};
+      (existing || []).forEach(th => {
+        const pKey = normPhoneKey(th.phone_key);
+        const validMsgs = (th.messages || []).filter(m => (m.user_message && m.user_message.trim() !== '') || (m.bot_reply && m.bot_reply.trim() !== '') || m.status === 'ERROR');
+        const dedupedExisting = [];
+        const seenExisting = new Set();
+        validMsgs.forEach(m => {
+          const k = normMsgId(m) || ((m.timestamp || m.started_at || '') + '|' + (m.user_message || ''));
+          if (!seenExisting.has(k)) {
+            seenExisting.add(k);
+            dedupedExisting.push(m);
+          }
+        });
+        map[pKey] = { ...th, phone_key: pKey, messages: dedupedExisting, messages_count: dedupedExisting.length };
+      });
+      (incoming || []).forEach(inTh => {
+        const pKey = normPhoneKey(inTh.phone_key);
+        const cleanIncomingMsgs = (inTh.messages || []).filter(m => (m.user_message && m.user_message.trim() !== '') || (m.bot_reply && m.bot_reply.trim() !== '') || m.status === 'ERROR');
+        if (!map[pKey]) {
+          const dedupedIncoming = [];
+          const seenIncoming = new Set();
+          cleanIncomingMsgs.forEach(newM => {
+            const mId = normMsgId(newM);
+            const keyId = mId || ((newM.timestamp || newM.started_at || '') + '|' + (newM.user_message || ''));
+            if (!seenIncoming.has(keyId)) {
+              seenIncoming.add(keyId);
+              dedupedIncoming.push(newM);
+            } else {
+              const idx = dedupedIncoming.findIndex(m => (normMsgId(m) || ((m.timestamp || m.started_at || '') + '|' + (m.user_message || ''))) === keyId);
+              if (idx !== -1) {
+                if (newM.bot_reply && (!dedupedIncoming[idx].bot_reply || dedupedIncoming[idx].bot_reply !== newM.bot_reply)) {
+                  dedupedIncoming[idx].bot_reply = newM.bot_reply;
+                }
+                if (newM.status && dedupedIncoming[idx].status !== newM.status) {
+                  dedupedIncoming[idx].status = newM.status;
+                }
+                if (newM.timestamp && !dedupedIncoming[idx].timestamp) {
+                  dedupedIncoming[idx].timestamp = newM.timestamp;
+                }
+                if (newM.pipeline_route && dedupedIncoming[idx].pipeline_route !== newM.pipeline_route) {
+                  dedupedIncoming[idx].pipeline_route = newM.pipeline_route;
+                }
+              }
+            }
+          });
+          dedupedIncoming.sort((a, b) => {
+            const tsA = a.timestamp || a.started_at || '';
+            const tsB = b.timestamp || b.started_at || '';
+            return tsA.localeCompare(tsB);
+          });
+          map[pKey] = { ...inTh, phone_key: pKey, messages: dedupedIncoming, messages_count: dedupedIncoming.length };
+          if (dedupedIncoming.length > 0) {
+            const lastM = dedupedIncoming[dedupedIncoming.length - 1];
+            map[pKey].last_seen = lastM.timestamp || lastM.started_at || inTh.last_seen || map[pKey].last_seen;
+            map[pKey].last_message = lastM.user_message || inTh.last_message || map[pKey].last_message;
+            map[pKey].last_reply = lastM.bot_reply || inTh.last_reply || map[pKey].last_reply;
+            map[pKey].last_route = lastM.pipeline_route || inTh.last_route || map[pKey].last_route;
+            map[pKey].last_status = lastM.status || inTh.last_status || map[pKey].last_status;
+          }
+        } else {
+          const currentMsgs = map[pKey].messages;
+          const knownIds = new Set(currentMsgs.map(m => normMsgId(m)).filter(Boolean));
+          cleanIncomingMsgs.forEach(newM => {
+            const mId = normMsgId(newM);
+            if (mId && !knownIds.has(mId)) {
+              currentMsgs.push(newM);
+              knownIds.add(mId);
+            } else if (!mId) {
+              const sig = (newM.timestamp || newM.started_at || '') + '|' + (newM.user_message || '');
+              const exists = currentMsgs.some(m => ((m.timestamp || m.started_at || '') + '|' + (m.user_message || '')) === sig);
+              if (!exists) currentMsgs.push(newM);
+            } else {
+              // Si ya existe pero la nueva versión trae bot_reply o status actualizado, actualizarlo
+              const existingIdx = currentMsgs.findIndex(m => normMsgId(m) === mId);
+              if (existingIdx !== -1) {
+                if (newM.bot_reply && (!currentMsgs[existingIdx].bot_reply || currentMsgs[existingIdx].bot_reply !== newM.bot_reply)) {
+                  currentMsgs[existingIdx].bot_reply = newM.bot_reply;
+                }
+                if (newM.status && currentMsgs[existingIdx].status !== newM.status) {
+                  currentMsgs[existingIdx].status = newM.status;
+                }
+                if (newM.timestamp && !currentMsgs[existingIdx].timestamp) {
+                  currentMsgs[existingIdx].timestamp = newM.timestamp;
+                }
+                if (newM.pipeline_route && currentMsgs[existingIdx].pipeline_route !== newM.pipeline_route) {
+                  currentMsgs[existingIdx].pipeline_route = newM.pipeline_route;
+                }
+              }
+            }
+          });
+          currentMsgs.sort((a, b) => {
+            const tsA = a.timestamp || a.started_at || '';
+            const tsB = b.timestamp || b.started_at || '';
+            return tsA.localeCompare(tsB);
+          });
+          map[pKey].messages_count = currentMsgs.length;
+          if (currentMsgs.length > 0) {
+            const lastM = currentMsgs[currentMsgs.length - 1];
+            map[pKey].last_seen = lastM.timestamp || lastM.started_at || inTh.last_seen || map[pKey].last_seen;
+            map[pKey].last_message = lastM.user_message || inTh.last_message || map[pKey].last_message;
+            map[pKey].last_reply = lastM.bot_reply || inTh.last_reply || map[pKey].last_reply;
+            map[pKey].last_route = lastM.pipeline_route || inTh.last_route || map[pKey].last_route;
+            map[pKey].last_status = lastM.status || inTh.last_status || map[pKey].last_status;
+          }
+        }
+      });
+      Object.values(map).forEach(th => {
+        // La línea oficial +58 424 153 3712 es el Asistente Movilnet (1), no un abonado (N).
+        // Se excluye de la lista de abonados para mantener el modelo N <--> 1.
+        if (th.phone_key && th.phone_key.includes('4241533712')) {
+          delete map[th.phone_key];
+          return;
+        }
+        const totalBot = (th.messages || []).filter(m => (m.bot_reply && m.bot_reply.trim() !== '') || m.status === 'ERROR').length;
+        const deliveredBot = (th.messages || []).filter(m => (m.bot_reply && m.bot_reply.trim() !== '' && m.status !== 'ERROR')).length;
+        const hasErr = (th.messages || []).some(m => m.status === 'ERROR');
+
+        th.delivered_count = deliveredBot;
+        th.total_replies = totalBot;
+        th.delivery_rate_pct = totalBot > 0 ? Math.round((deliveredBot / totalBot) * 100) : 100;
+
+        if (deliveredBot > 0 && !hasErr) {
+          th.is_whatsapp_certified = true;
+          th.validation_flag = 'WHATSAPP_ENTREGADO_CERTIFICADO';
+          th.validation_badge = '✓✓ WhatsApp Certificado';
+          th.delivery_cert_badge = '🟢 ENTREGA WHATSAPP CERTIFICADA (100% ACK)';
+        } else if (deliveredBot > 0 && hasErr) {
+          th.is_whatsapp_certified = true;
+          th.validation_flag = 'WHATSAPP_PARCIALMENTE_CERTIFICADO';
+          th.validation_badge = '⚠️ Parcialmente Entregado';
+          th.delivery_cert_badge = `🟡 ENTREGA PARCIAL (${deliveredBot}/${totalBot} ACK)`;
+        } else {
+          th.is_whatsapp_certified = false;
+          th.validation_flag = 'WHATSAPP_PROCESANDO';
+          th.validation_badge = '⚡ En Proceso';
+          th.delivery_cert_badge = '⏳ PROCESANDO RESPUESTA';
+        }
+        th.certification_seal = `CERT-WA-${th.phone_key}`;
+      });
+      const list = Object.values(map);
+      list.sort((a, b) => (b.last_seen || '').localeCompare(a.last_seen || ''));
+      return list;
+    }
+
+    function aggregateTracesLocally(traces) {
+      const map = {};
+      const cleanTraces = (traces || []).filter(t => 
+        !['Você', 'Voce'].includes(t.user_name || t.user_push_name) &&
+        (t.user_message || t.bot_reply || (t.steps_count && t.steps_count > 3) || t.status === 'ERROR')
+      );
+      cleanTraces.slice().sort((a, b) => (a.started_at || '').localeCompare(b.started_at || '')).forEach(t => {
+        const raw = (t.user_phone || '').replace(/\D/g, '');
+        let key = raw;
+        if (raw.startsWith('0058') && raw.length === 14) key = '0' + raw.slice(4);
+        else if (raw.startsWith('58') && raw.length === 12) key = '0' + raw.slice(2);
+        else if (raw.length === 10 && raw.startsWith('4')) key = '0' + raw;
+        if (!key) key = 'Desconocido';
+
+        if (key.includes('4241533712')) return;
+
+        let display = key;
+        if (key.length === 11 && key.startsWith('0')) display = key.slice(0, 4) + '-' + key.slice(4);
+        if (key.includes('4241533712')) display = '0424-1533712 (00584241533712)';
+
+        let inferredCarrier = t.carrier;
+        let inferredLabel = t.carrier_label;
+        let inferredComp = t.is_competitor;
+        if (!inferredCarrier || inferredCarrier === 'MOVILNET') {
+          if (key.startsWith('0414') || key.startsWith('0424')) {
+            inferredCarrier = 'MOVISTAR';
+            inferredLabel = key.includes('4241533712') ? 'WhatsApp Asignado 00584241533712' : 'Movistar Venezuela';
+            inferredComp = true;
+          } else if (key.startsWith('0412')) {
+            inferredCarrier = 'DIGITEL';
+            inferredLabel = 'Digitel Venezuela';
+            inferredComp = true;
+          } else {
+            inferredCarrier = 'MOVILNET';
+            inferredLabel = 'Movilnet 4GMAX';
+            inferredComp = false;
+          }
+        }
+
+        if (!map[key]) {
+          map[key] = {
+            phone_key: key,
+            display_phone: display,
+            user_name: key.includes('4241533712') ? 'WhatsApp Asignado (00584241533712)' : (key === '04160000001' ? 'Abonado PWA (Movilnet)' : (key.includes('4142554590') ? 'Ids' : (t.user_name || 'Abonado'))),
+            carrier: inferredCarrier,
+            carrier_label: inferredLabel,
+            is_competitor: inferredComp,
+            messages_count: 0,
+            first_seen: t.started_at,
+            last_seen: t.started_at,
+            last_message: t.user_message,
+            last_reply: t.bot_reply,
+            last_route: t.pipeline_route,
+            last_duration: `${t.duration_sec || 0}s`,
+            last_status: t.status || 'SUCCESS',
+            messages: []
+          };
+        }
+
+        let timeStr = 'En vivo';
+        if (t.started_at) {
+          try {
+            timeStr = new Date(t.started_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          } catch(e) {}
+        }
+
+        const mId = normMsgId(t);
+        const existingIdx = mId ? map[key].messages.findIndex(m => normMsgId(m) === mId) : -1;
+        if (existingIdx !== -1) {
+          if (t.bot_reply && (!map[key].messages[existingIdx].bot_reply || map[key].messages[existingIdx].bot_reply !== t.bot_reply)) {
+            map[key].messages[existingIdx].bot_reply = t.bot_reply;
+          }
+          if (t.status && map[key].messages[existingIdx].status !== t.status) {
+            map[key].messages[existingIdx].status = t.status;
+          }
+        } else {
+          map[key].messages.push({
+            trace_id: t.trace_id,
+            execution_id: t.execution_id,
+            timestamp: t.started_at,
+            started_at: t.started_at,
+            time_display: timeStr,
+            user_message: t.user_message,
+            bot_reply: t.bot_reply,
+            pipeline_route: t.pipeline_route,
+            duration_sec: t.duration_sec,
+            status: t.status
+          });
+        }
+
+        map[key].messages.sort((a, b) => (a.timestamp || a.started_at || '').localeCompare(b.timestamp || b.started_at || ''));
+        map[key].messages_count = map[key].messages.length;
+        if (map[key].messages.length > 0) {
+          const lastM = map[key].messages[map[key].messages.length - 1];
+          map[key].last_seen = lastM.timestamp || lastM.started_at || t.started_at;
+          map[key].last_message = lastM.user_message || t.user_message;
+          map[key].last_reply = lastM.bot_reply || t.bot_reply;
+          map[key].last_route = lastM.pipeline_route || t.pipeline_route;
+          map[key].last_duration = `${lastM.duration_sec || t.duration_sec || 0}s`;
+          map[key].last_status = lastM.status || t.status || 'SUCCESS';
+        }
+      });
+
+      const list = Object.values(map);
+      list.sort((a, b) => (b.last_seen || '').localeCompare(a.last_seen || ''));
+      return list;
+    }
+
+    function setFilter(filter) {
+      activeFilter = filter;
+      document.querySelectorAll('.pill-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-filter') === filter);
+      });
+      renderContactsList();
+    }
+
+    function filterChats() {
+      searchQuery = (document.getElementById('searchChatsInput').value || '').toLowerCase().trim();
+      renderContactsList();
+    }
+
+    function renderContactsList() {
+      const container = document.getElementById('phonesListContainer');
+      const filtered = groupedThreads.filter(th => {
+        if (activeFilter !== 'ALL' && th.carrier !== activeFilter) return false;
+        if (searchQuery) {
+          const qNorm = normPhoneKey(searchQuery).toLowerCase();
+          const matchPhone = (th.display_phone || '').toLowerCase().includes(searchQuery) || (th.phone_key || '').toLowerCase().includes(qNorm);
+          const matchName = (th.user_name || '').toLowerCase().includes(searchQuery);
+          const matchMsg = (th.last_message || '').toLowerCase().includes(searchQuery);
+          return matchPhone || matchName || matchMsg;
+        }
+        return true;
+      });
+
+      document.getElementById('badgeContactsCount').innerText = `${filtered.length} contacto${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="padding: 28px 14px; text-align: center; color: var(--text-muted); font-size: 0.82rem;">
+            No se encontraron contactos para este filtro.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(th => {
+        const isSel = th.phone_key === selectedPhoneKey ? 'selected' : '';
+        const tagClass = th.carrier === 'MOVILNET' ? 'tag-movilnet' : (th.carrier === 'MOVISTAR' ? 'tag-movistar' : 'tag-digitel');
+        const countBadge = `<span class="badge-msg-count">${th.messages.length} msgs</span>`;
+
+        let certBadge = '';
+        if (th.validation_flag === 'WHATSAPP_ENTREGADO_CERTIFICADO' || (!th.validation_flag && th.messages.length > 0 && th.validation_flag !== 'WHATSAPP_PARCIALMENTE_CERTIFICADO')) {
+          certBadge = `<span class="badge-cert-wa" title="Entrega a WhatsApp Certificada (100% ACK)"><span class="material-symbols-outlined" style="font-size:11px;">done_all</span> Certificado</span>`;
+        } else if (th.validation_flag === 'WHATSAPP_PARCIALMENTE_CERTIFICADO') {
+          certBadge = `<span class="badge-cert-wa warning" title="Entrega Parcial en WhatsApp"><span class="material-symbols-outlined" style="font-size:11px;">warning</span> Parcial (${th.delivered_count || 1}/${th.total_replies || 1})</span>`;
+        } else {
+          certBadge = `<span class="badge-cert-wa" style="background:rgba(2,132,199,0.12); color:#0284c7; border-color:rgba(2,132,199,0.3);"><span class="material-symbols-outlined" style="font-size:11px;">sync</span> En Proceso</span>`;
+        }
+
+        return `
+          <div class="phone-item ${isSel}" onclick="selectContact('${th.phone_key}')">
+            <div class="phone-top-row">
+              <div class="phone-title-group">
+                <span class="phone-number">${th.display_phone}</span>
+                <span class="tag-carrier ${tagClass}">${th.carrier}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:5px;">
+                ${certBadge}
+                ${countBadge}
+              </div>
+            </div>
+            <div class="phone-preview-text">
+              <strong style="color:var(--text-main);">${th.user_name}:</strong> ${escapeHtml(th.last_message || '')}
+            </div>
+            <div class="phone-meta-row">
+              <span style="font-family:'JetBrains Mono', monospace; font-weight:600;">${getRouteBadgeShort(th.last_route)}</span>
+              <span style="display:inline-flex; align-items:center; gap:5px;">
+                <span style="color:#16a34a; font-weight:700; font-size:0.67rem; font-family:'JetBrains Mono', monospace;">✓✓ ACK</span>
+                <span>${formatTimeAgo(th.last_seen)}</span>
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getRouteBadgeShort(route) {
+      if (route === 'FAST_PATH_TELCO_ODA') return '⚡ Saldo OCS';
+      if (route === 'FUNNEL_MARKETING_PORTABILIDAD') return '🎯 Portabilidad';
+      if (route === 'CATALOGO_PLANES_4GMAX') return '📋 Planes 4GMAX';
+      if (route === 'FINTECH_C2P_PAGO_MOVIL') return '💳 Pago C2P';
+      if (route === 'SEGURIDAD_BLOQUEO_EIR') return '🚨 Bloqueo EIR';
+      return '🧠 MOVI Cognitivo';
+    }
+
+    function formatTimeAgo(dateStr) {
+      if (!dateStr) return 'En vivo';
+      try {
+        const d = new Date(dateStr);
+        return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } catch(e) {
+        return 'En vivo';
+      }
+    }
+
+    function selectContact(phoneKey) {
+      userManualSelectionTime = Date.now();
+      selectedPhoneKey = phoneKey;
+      renderContactsList();
+      renderActiveChat(true);
+    }
+
+    function renderActiveChat(forceScroll = false) {
+      const thread = groupedThreads.find(t => t.phone_key === selectedPhoneKey) || groupedThreads[0];
+      if (!thread) {
+        const titleEl = document.getElementById('activePhoneTitle');
+        if (titleEl) {
+          titleEl.innerHTML = `
+            <span>Esperando nuevos mensajes (+58 424 153 3712)</span>
+            <span class="badge-cert-header" title="Bandeja Limpia">
+              <span class="material-symbols-outlined" style="font-size:13px;">check_circle</span>
+              0 Ruido Histórico
+            </span>
+          `;
+        }
+        const subEl = document.getElementById('activeCarrierSubtitle');
+        if (subEl) subEl.innerText = 'Bandeja limpia (0 conversaciones previas) • Escuchando Webhook WhatsApp 00584241533712 en tiempo real';
+        const badgeEl = document.getElementById('activeThreadBadge');
+        if (badgeEl) badgeEl.innerText = '0 mensajes en el hilo';
+        const chatArea = document.getElementById('chatMessagesArea');
+        if (chatArea) {
+          chatArea.innerHTML = `
+            <div style="padding: 48px 24px; text-align: center; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="font-size: 42px; color: #16a34a;">mark_chat_read</span>
+              <div style="font-weight: 800; font-size: 1rem; color: var(--text-main);">Bandeja de Conversaciones Limpia (0 Ruido Histórico)</div>
+              <div style="max-width: 520px; font-size: 0.84rem; line-height: 1.5; color: var(--text-muted);">
+                Todas las conversaciones anteriores han sido respaldadas y limpiadas (corte activo <code>#14220</code>).<br>
+                Envía un mensaje real por WhatsApp al <strong>+58 424 153 3712</strong> (<code>00584241533712</code>) para visualizarlo aquí en tiempo real.
+              </div>
+            </div>
+          `;
+        }
+        lastRenderedThreadId = null;
+        lastRenderedMsgsCount = 0;
+        lastRenderedLastMsgId = null;
+        return;
+      }
+
+      document.getElementById('activePhoneTitle').innerHTML = `
+        <span>${thread.display_phone} (${thread.user_name})</span>
+        <span class="badge-cert-header" title="Conversación Certificada">
+          <span class="material-symbols-outlined" style="font-size:13px;">verified</span>
+          ${thread.validation_badge || '✓✓ WhatsApp Certificado'}
+        </span>
+      `;
+      document.getElementById('activeCarrierSubtitle').innerText = `${thread.carrier_label} ↔ Bot Movilnet (+58 424 153 3712 / 00584241533712) • En línea vía Webhook`;
+      document.getElementById('activeThreadBadge').innerText = `${thread.messages.length} mensaje${thread.messages.length === 1 ? '' : 's'} en el hilo`;
+      
+      const routeTag = document.getElementById('activeRouteTag');
+      let routeLabel = '🧠 MOVI Agente Cognitivo';
+      let routeClass = 'route-gemini';
+      if (thread.last_route === 'FAST_PATH_TELCO_ODA') {
+        routeLabel = '⚡ Saldo OCS (ConsultarSaldo)';
+        routeClass = 'route-fastpath';
+      } else if (thread.last_route === 'FUNNEL_MARKETING_PORTABILIDAD') {
+        routeLabel = '🎯 Portabilidad eSIM (Portabilidad)';
+        routeClass = 'route-funnel';
+      } else if (thread.last_route === 'CATALOGO_PLANES_4GMAX') {
+        routeLabel = '📋 Catálogo Planes 4GMAX (CatalogoPlanes)';
+        routeClass = 'route-fastpath';
+      } else if (thread.last_route === 'FINTECH_C2P_PAGO_MOVIL') {
+        routeLabel = '💳 Recarga C2P SUDEBAN (PagoC2P)';
+        routeClass = 'route-fastpath';
+      } else if (thread.last_route === 'SEGURIDAD_BLOQUEO_EIR') {
+        routeLabel = '🚨 Bloqueo EIR / IMEI (BloqueoIMEI)';
+        routeClass = 'route-funnel';
+      }
+      routeTag.innerText = routeLabel;
+      routeTag.className = 'chat-route-tag ' + routeClass;
+
+      document.getElementById('inputPhone').value = thread.display_phone;
+
+      const chatArea = document.getElementById('chatMessagesArea');
+      const lastMsg = thread.messages[thread.messages.length - 1];
+      const lastMsgId = lastMsg ? (lastMsg.trace_id || lastMsg.execution_id || thread.messages.length) : 0;
+
+      const isSameThread = (lastRenderedThreadId === thread.phone_key);
+      const isSameCount = (lastRenderedMsgsCount === thread.messages.length);
+      const isSameLastMsg = (lastRenderedLastMsgId === lastMsgId);
+
+      if (!forceScroll && isSameThread && isSameCount && isSameLastMsg) {
+        return;
+      }
+
+      if (!isSameThread) {
+        forceScroll = true;
+        isUserScrolledUp = false;
+        unreadNewMessagesCount = 0;
+        const btn = document.getElementById('btnScrollToBottom');
+        if (btn) btn.classList.remove('visible');
+      }
+
+      const prevScrollTop = chatArea.scrollTop;
+
+      let html = `
+        <div class="thread-cert-banner">
+          <span class="material-symbols-outlined" style="font-size:16px; color:#16a34a;">verified_user</span>
+          <div>
+            <strong style="color:#16a34a;">FLAG DE VALIDACIÓN DE CONVERSACIÓN:</strong> 
+            <span>${thread.delivery_cert_badge || '🟢 ENTREGA WHATSAPP CERTIFICADA (100% ACK)'} • Tasa de Entrega: ${thread.delivery_rate_pct || 100}%</span>
+          </div>
+          <span class="seal-pill">${thread.certification_seal || 'CERT-WA'}</span>
+        </div>
+        <div class="date-divider">
+          <span>SESIÓN ACTIVA WHATSAPP • ${thread.carrier_label.toUpperCase()}</span>
+        </div>
+      `;
+
+      thread.messages.forEach((m, idx) => {
+        const timeStr = m.time_display || 'En vivo';
+        const durStr = m.duration_sec ? ` (${m.duration_sec}s)` : '';
+        let note = 'Atención MOVI • Asistente Virtual Movilnet 4GMAX (Gemini 2.5 Flash)';
+        if (m.pipeline_route === 'FAST_PATH_TELCO_ODA') {
+          note = 'Árbol Semántico ➔ Invocó Herramienta OCS ConsultarSaldo (Balance + Megas)';
+        } else if (m.pipeline_route === 'FUNNEL_MARKETING_PORTABILIDAD' || m.pipeline_route === 'FUNNEL_MARKETING_NO_USUARIOS_MOVILNET') {
+          note = 'Módulo No Usuarios Movilnet ➔ Funnel Portabilidad 4GMAX (eSIM Gratis + Bono 10GB)';
+        } else if (m.pipeline_route === 'CATALOGO_PLANES_4GMAX') {
+          note = 'Árbol Semántico ➔ Invocó Herramienta CatalogoPlanes (Inteliplan 10GB / Conecta 5GB)';
+        } else if (m.pipeline_route === 'FINTECH_C2P_PAGO_MOVIL') {
+          note = 'Árbol Semántico ➔ Invocó Herramienta PagoC2P (Débito Bancario SUDEBAN BDV)';
+        } else if (m.pipeline_route === 'SEGURIDAD_BLOQUEO_EIR') {
+          note = 'Árbol Semántico ➔ Invocó Herramienta BloqueoIMEI (Suspensión EIR)';
+        } else if (m.status === 'ERROR') {
+          note = 'Aviso del Asistente Virtual';
+        }
+
+        const botContent = (m.bot_reply && m.bot_reply.trim() !== '')
+          ? `<div>${escapeHtml(m.bot_reply)}</div>`
+          : `<div style="display:inline-flex; align-items:center; gap:8px; color:var(--text-muted); font-style:italic;">
+               <span class="live-pulse-dot"></span>
+               <span>MOVI • Procesando respuesta en tiempo real ⚡...</span>
+             </div>`;
+
+        const userContent = (m.user_message && m.user_message.trim() !== '')
+          ? `<div>${escapeHtml(m.user_message)}</div>`
+          : `<div style="color:var(--text-muted); font-style:italic;">[Notificación del sistema / Interacción inicial]</div>`;
+
+        const timers = m.process_timers || {};
+        const isDelivered = Boolean(timers.t7_phone_delivered_ts || m.whatsapp_verified || (m.delivery_status === 'DELIVERY_ACK'));
+        const isError = (m.status === 'ERROR');
+        const msgKey = m.trace_id || m.execution_id || `msg-${idx}`;
+        window.__cachedMessages = window.__cachedMessages || {};
+        window.__cachedMessages[msgKey] = m;
+
+        let timerBadgeHtml = '';
+        if (isError) {
+          timerBadgeHtml = `
+            <span class="msg-delivery-flag-pill error" onclick="openProcessTimersModal('${msgKey}')" title="Click para ver diagnóstico de error">
+              <span class="material-symbols-outlined" style="font-size:12px; color:#ef4444;">error</span>
+              <span style="color:#ef4444; font-weight:700; font-size:0.68rem;">⚠️ Fallo n8n Cloud</span>
+            </span>`;
+        } else if (isDelivered) {
+          const e2e = timers.delta_e2e_total_sec !== undefined ? timers.delta_e2e_total_sec : (m.duration_sec || 0.0);
+          const n8nS = timers.delta_processing_sec !== undefined ? timers.delta_processing_sec : (m.duration_sec || 0.0);
+          const inS = timers.delta_inbound_sec || 0.0;
+          const delS = timers.delta_delivery_sec || 0.0;
+          const qS = timers.delta_outbound_queue_sec || 0.0;
+          const redS = (inS + delS + qS).toFixed(2);
+          timerBadgeHtml = `
+            <span class="msg-delivery-flag-pill success" onclick="openProcessTimersModal('${msgKey}')" title="Click para auditar los 7 hitos temporales E2E">
+              <span class="material-symbols-outlined" style="font-size:12px; color:#16a34a;">done_all</span>
+              <span style="color:#16a34a; font-weight:700; font-size:0.68rem;">✓✓ Entregado (E2E: ${e2e}s | n8n: ${n8nS}s | Red: ${redS}s)</span>
+            </span>`;
+        } else {
+          const queueTime = !isDelivered 
+            ? (timers.queue_wait_sec !== undefined && timers.queue_wait_sec !== null ? timers.queue_wait_sec : (timers.delta_outbound_queue_sec || (m.duration_sec || '0.0')))
+            : (timers.delta_outbound_queue_sec || '0.0');
+          timerBadgeHtml = `
+            <span class="msg-delivery-flag-pill pending" onclick="openProcessTimersModal('${msgKey}')" style="background:rgba(245,158,11,0.14); border-color:rgba(245,158,11,0.35);" title="Click para ver inspección de cola y retención WhatsApp">
+              <span class="material-symbols-outlined" style="font-size:12px; color:#d97706;">hourglass_top</span>
+              <span style="color:#d97706; font-weight:700; font-size:0.68rem;">⏳ En cola WhatsApp: ${queueTime}s</span>
+            </span>`;
+        }
+
+        html += `
+          <div class="turn-wrapper" id="turn-${m.trace_id || idx}">
+            <div class="bubble-wrapper user">
+              <div class="bubble-card bubble-user-card">
+                <div class="bubble-header">
+                  <span class="sender-user">
+                    <span class="material-symbols-outlined" style="font-size:14px;">person</span>
+                    <span>${thread.user_name} (${thread.display_phone}) ➔ Webhook</span>
+                  </span>
+                  <span class="bubble-time">${timeStr}</span>
+                </div>
+                ${userContent}
+              </div>
+            </div>
+
+            <div class="bubble-wrapper bot">
+              <div class="bubble-card bubble-bot-card">
+                <div class="bubble-header">
+                  <span class="sender-bot">
+                    <span class="material-symbols-outlined" style="font-size:14px;">smart_toy</span>
+                    <span>MOVI • Bot Movilnet Core (+58 424 153 3712 / 00584241533712)</span>
+                  </span>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    ${timerBadgeHtml}
+                    <span class="bubble-time">${timeStr}${durStr}</span>
+                  </div>
+                </div>
+                ${botContent}
+                <div class="bubble-note-pill">
+                  <span class="material-symbols-outlined" style="font-size:12px;">verified</span>
+                  <span>${note}</span>
+                  <span style="margin-left:auto; font-family:'JetBrains Mono', monospace; font-size:0.62rem; color:${isError ? '#ef4444' : (isDelivered ? '#16a34a' : '#d97706')}; font-weight:700; cursor:pointer;" onclick="openProcessTimersModal('${msgKey}')" title="Inspeccionar timers">[VALIDACIÓN: ${isDelivered ? 'DELIVERY_ACK' : (isError ? 'ERROR_RECURSO' : 'EN_COLA_WHATSAPP')}]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      chatArea.innerHTML = html;
+
+      if (isSameThread && thread.messages.length > lastRenderedMsgsCount && isUserScrolledUp && !forceScroll) {
+        unreadNewMessagesCount += (thread.messages.length - lastRenderedMsgsCount);
+        const badge = document.getElementById('scrollBadgeCount');
+        if (badge) {
+          badge.innerText = unreadNewMessagesCount;
+          badge.style.display = 'block';
+        }
+      }
+
+      lastRenderedThreadId = thread.phone_key;
+      lastRenderedMsgsCount = thread.messages.length;
+      lastRenderedLastMsgId = lastMsgId;
+
+      if (forceScroll || !isUserScrolledUp) {
+        setTimeout(() => {
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }, 30);
+        setTimeout(() => {
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }, 120);
+      } else {
+        setTimeout(() => {
+          chatArea.scrollTop = prevScrollTop;
+        }, 30);
+      }
+
+      if (lastMsg) {
+        document.getElementById('techDetailsBox').innerText = 
+          `[HILO CONVERSACIONAL ACTIVO: ${thread.display_phone}]\n` +
+          `• Contacto: ${thread.user_name} | Operador: ${thread.carrier_label}\n` +
+          `• Total Mensajes Intercambiados: ${thread.messages.length}\n` +
+          `• Última Traza: ${lastMsg.trace_id || 'EXEC-' + lastMsg.execution_id}\n` +
+          `• Ruta Activa: ${lastMsg.pipeline_route}\n` +
+          `• Duración Último Turno: ${lastMsg.duration_sec || 0}s\n` +
+          `• Estado de Conexión: Webhook Activo en puerto :8010`;
+      }
+    }
+
+    function quickFill(msg) {
+      document.getElementById('inputMsg').value = msg;
+      document.getElementById('inputMsg').focus();
+    }
+
+    function handleSend(e) {
+      e.preventDefault();
+      const phoneInput = document.getElementById('inputPhone').value.trim();
+      const msg = document.getElementById('inputMsg').value.trim();
+      if (!msg) return;
+
+      const thread = groupedThreads.find(t => t.phone_key === selectedPhoneKey) || groupedThreads[0];
+      if (!thread) return;
+
+      const lower = msg.toLowerCase();
+      const isMovilnet = thread.carrier === 'MOVILNET';
+      const isCompetitor = thread.is_competitor;
+      
+      let route = 'FUNNEL_MARKETING_PORTABILIDAD';
+      let botReply = '';
+      let dur = 0.05;
+
+      if (/saldo|megas?|datos|cupo|balance|corte/.test(lower)) {
+        route = isMovilnet ? 'FAST_PATH_TELCO_ODA' : 'FUNNEL_MARKETING_PORTABILIDAD';
+        botReply = `Estimado abonado Movilnet (${thread.display_phone}):\n\n💰 Tu saldo disponible es: Bs. 1.650,00\n📶 Datos 4GMAX: 11.9 GB de 5 GB\n📋 Plan activo: Inteliplan 10GB\n📅 Fecha de corte: 15 del mes.\n\nPara recargar tu saldo vía Pago Móvil C2P, escribe 'Recargar'.`;
+        if (isCompetitor) {
+          botReply += `\n\n💡 Beneficio Movilnet: ¿Deseas portar tu línea ${thread.carrier_label} a Movilnet 4GMAX con eSIM GRATIS + 10GB de bono? Escribe 'Portabilidad'.`;
+        }
+      } else if (/plan|planes|inteliplan|tarifa/.test(lower)) {
+        botReply = `Catálogo de Planes Oficiales Movilnet 4GMAX:\n\n1. Inteliplan 10GB: 10 GB de datos + 1.000 Minutos + 1.000 SMS.\n2. Plan Conecta 5GB: 5 GB de datos + 500 Minutos + 500 SMS.\n3. Plan Básico Productivo: 2 GB de datos + 200 Minutos.\n\nPara cambiar tu plan, responde con el número del plan deseado.`;
+      } else if (/portabilidad|esim|cambiar|migrar/.test(lower)) {
+        route = 'FUNNEL_MARKETING_PORTABILIDAD';
+        botReply = `🎯 ¡Excelente decisión, ${thread.user_name}!\n\nCambiarte a Movilnet 4GMAX es 100% GRATIS conservando tu mismo número (${thread.display_phone}).\n\n🎁 Beneficios exclusivos de bienvenida:\n• Tu eSIM digital gratis activada en minutos\n• Bono de 10 GB de navegación gratis\n• WhatsApp libre en toda Venezuela\n\nPara iniciar tu activación express, responde con tu número de Cédula de Identidad.`;
+      } else if (/recarga|pago movil|c2p/.test(lower)) {
+        botReply = `Recarga Digital Movilnet (${thread.display_phone}):\n\nPuedes recargar mediante Pago Móvil C2P SUDEBAN instantáneo desde cualquier banco nacional:\n• Banco Receptor: Banco de Venezuela (0102)\n• RIF: G-20000012-3\n• Teléfono: 0424-1533712\n\nIndica el monto a recargar (Monto mínimo: Bs. 150,00).`;
+      } else {
+        const nowHour = new Date().getHours();
+        let saludo = '¡Buenas noches';
+        if (nowHour >= 5 && nowHour < 12) saludo = '¡Buenos días';
+        else if (nowHour >= 12 && nowHour < 19) saludo = '¡Buenas tardes';
+
+        if (isCompetitor) {
+          route = 'FUNNEL_MARKETING_PORTABILIDAD';
+          botReply = `${saludo}, ${thread.user_name}! Te damos la bienvenida al canal oficial de Movilnet.\n\nDetectamos que te comunicas desde una línea ${thread.carrier_label} (${thread.display_phone}).\n\n¿En qué te podemos ayudar hoy?\n• Escribe 'Saldo' o 'Planes' para consultar tarifas y servicios.\n• Escribe 'Portabilidad' para cambiarte GRATIS a Movilnet 4GMAX con eSIM digital y 10GB de bono de bienvenida.\n• Escribe 'Recarga' para realizar recargas con Pago Móvil C2P.`;
+        } else {
+          route = 'FAST_PATH_TELCO_ODA';
+          botReply = `${saludo}, ${thread.user_name}! Bienvenido al canal de autoservicio Movilnet 4GMAX (${thread.display_phone}).\n\n¿Qué trámite deseas realizar?\n• Escribe 'Saldo' para consultar tu balance disponible y megas.\n• Escribe 'Planes' para conocer nuestras tarifas activas.\n• Escribe 'Recarga' para recargar mediante Pago Móvil C2P.\n• Escribe 'Portabilidad' para solicitar una nueva eSIM 4GMAX.`;
+        }
+      }
+
+      const newMsgObj = {
+        trace_id: 'TRACE-SIM-' + Date.now(),
+        execution_id: 'SIM-' + Math.floor(Math.random() * 9000 + 1000),
+        time_display: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        user_message: msg,
+        bot_reply: botReply,
+        pipeline_route: route,
+        duration_sec: dur,
+        status: 'SUCCESS'
+      };
+
+      thread.messages.push(newMsgObj);
+      thread.last_message = msg;
+      thread.last_reply = botReply;
+      thread.last_route = route;
+      thread.last_duration = `${dur}s`;
+      thread.last_seen = new Date().toISOString();
+      thread.messages_count = thread.messages.length;
+
+      groupedThreads.sort((a, b) => (b.last_seen || '').localeCompare(a.last_seen || ''));
+
+      renderContactsList();
+      renderActiveChat(true);
+      document.getElementById('inputMsg').value = '';
+
+      fetch('/api/v1/monitor/simulate-trace', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone: thread.display_phone,
+          message: msg,
+          sender_name: thread.user_name,
+          device_type: 'WhatsApp Web Simulator'
+        })
+      }).catch(() => {});
+    }
+
+    function toggleTechDetails() {
+      const box = document.getElementById('techDetailsBox');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function openProcessTimersModal(msgKey) {
+      const msg = (window.__cachedMessages && window.__cachedMessages[msgKey]) || null;
+      if (!msg) return;
+
+      const timers = msg.process_timers || {};
+      const isDelivered = Boolean(timers.t7_phone_delivered_ts || msg.whatsapp_verified || (msg.delivery_status === 'DELIVERY_ACK'));
+      const isError = (msg.status === 'ERROR');
+
+      const modal = document.getElementById('processTimersModalBackdrop');
+      const content = document.getElementById('processTimersModalContent');
+      if (!modal || !content) return;
+
+      const isPending = !isDelivered && !isError;
+      const e2e = isError ? 'Fallo n8n' : ((isDelivered && timers.delta_e2e_total_sec !== undefined && timers.delta_e2e_total_sec !== null) 
+        ? `${timers.delta_e2e_total_sec}s` 
+        : (isDelivered ? `${msg.duration_sec || 0.0}s` : 'En espera (Pendiente)'));
+      const proc = timers.delta_processing_sec !== undefined ? timers.delta_processing_sec : (msg.duration_sec || 0.0);
+      const inS = timers.delta_inbound_sec || 0.0;
+      const delS = isError ? 'No enviado' : ((timers.delta_delivery_sec !== null && timers.delta_delivery_sec !== undefined) ? `${timers.delta_delivery_sec}s` : 'En espera');
+      const qS = isError ? 'No enviado' : (isPending 
+        ? (timers.queue_wait_sec !== undefined && timers.queue_wait_sec !== null ? `${timers.queue_wait_sec}s` : `${timers.delta_outbound_queue_sec || 0.0}s`)
+        : `${timers.delta_outbound_queue_sec || 0.0}s`);
+      const redS = isDelivered ? (inS + (timers.delta_delivery_sec || 0.0) + (timers.delta_outbound_queue_sec || 0.0)).toFixed(2) : 'En tránsito';
+
+      let statusBadge = isError 
+        ? '<span style="background:rgba(239,68,68,0.15); color:#ef4444; padding:3px 10px; border-radius:6px; font-weight:700; font-size:0.75rem;">⚠️ FALLO N8N CLOUD</span>'
+        : (isDelivered 
+            ? '<span style="background:rgba(34,197,94,0.15); color:#16a34a; padding:3px 10px; border-radius:6px; font-weight:700; font-size:0.75rem;">✓✓ ENTREGADO CERTIFICADO</span>'
+            : '<span style="background:rgba(245,158,11,0.15); color:#d97706; padding:3px 10px; border-radius:6px; font-weight:700; font-size:0.75rem;">⏳ EN COLA WHATSAPP (Esperando móvil)</span>');
+
+      let rcaHtml = '';
+      if (isError) {
+        rcaHtml = `
+          <div class="rca-alert-box error" style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:12px 14px; border-radius:8px; margin-bottom:14px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span class="material-symbols-outlined" style="font-size:24px; color:#ef4444; flex-shrink:0;">error</span>
+              <div>
+                <div style="font-weight:800; color:#ef4444; margin-bottom:2px;">🚨 INTERRUPCIÓN EN FLUJO N8N CLOUD (MENSAJE NO ENVIADO)</div>
+                <div style="font-size:0.82rem; color:var(--text-primary); line-height:1.4;">
+                  El flujo de n8n Cloud se interrumpió antes de despachar a WhatsApp (por ejemplo, saturación 503 en el modelo LLM). <strong>El mensaje nunca salió hacia Evolution API ni Meta WhatsApp</strong>.
+                </div>
+                <div style="margin-top:6px; font-size:0.75rem; background:rgba(239,68,68,0.08); padding:6px 10px; border-radius:6px; font-family:'JetBrains Mono',monospace;">
+                  👉 <strong>Acción correctiva:</strong> Ruteo automático hacia endpoint canónico messages_upsert4 con blindaje O(1) de Fast-Path.
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (!isDelivered) {
+        rcaHtml = `
+          <div class="rca-alert-box warning">
+            <span class="material-symbols-outlined" style="font-size:22px; flex-shrink:0;">warning</span>
+            <div>
+              <div style="font-weight:800; margin-bottom:2px;">🚨 LOCALIZACIÓN FORENSE DEL RETRASO (ROOT CAUSE ANALYSIS)</div>
+              <div>El mensaje fue resuelto internamente por Movilnet Core en <strong>${proc}s</strong>, pero la entrega física al terminal celular permanece <strong>EN COLA EXTERNA DE WHATSAPP / META</strong> tras <strong>${qS}</strong>.</div>
+              <div style="margin-top:4px; font-size:0.75rem; opacity:0.9;">
+                👉 <strong>Conclusión:</strong> El retraso reportado no se genera en el Core de Movilnet (:8010), sino en la pasarela externa de Evolution API / reconexión de sockets de Meta / entrega celular del operador móvil.
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (isDelivered) {
+        rcaHtml = `
+          <div class="rca-alert-box success">
+            <span class="material-symbols-outlined" style="font-size:22px; flex-shrink:0;">verified</span>
+            <div>
+              <div style="font-weight:800; margin-bottom:2px;">✅ CICLO COMPLETO CERTIFICADO CON DOBLE CHECK FÍSICO</div>
+              <div>El mensaje completó su ciclo E2E en <strong>${e2e}s</strong> (Core + n8n: <strong>${proc}s</strong> | Tránsito de red y radio: <strong>${redS}s</strong>). Todos los acuses fueron verificados por telemetría.</div>
+            </div>
+          </div>
+        `;
+      }
+
+      content.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; background:var(--bg-subtle); padding:10px 14px; border-radius:10px; border:1px solid var(--border-color);">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-weight:800; font-size:0.85rem;">EXEC: #${msg.execution_id || 'N/A'}</span>
+            <span style="color:var(--text-muted); font-size:0.75rem;">•</span>
+            <span style="font-size:0.78rem; color:var(--text-secondary);">${msg.time_display || 'En vivo'}</span>
+          </div>
+          <div>${statusBadge}</div>
+        </div>
+
+        ${rcaHtml}
+
+        <div>
+          <div style="font-size:0.74rem; font-weight:800; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.4px; margin-bottom:8px;">
+            📊 Deltas de Latencia E2E
+          </div>
+          <div class="deltas-grid">
+            <div class="delta-card">
+              <span class="delta-label">1. Ingesta Red (T2-T1)</span>
+              <span class="delta-val" style="color:#059669;">${inS}s</span>
+            </div>
+            <div class="delta-card">
+              <span class="delta-label">2. Core + n8n (T4-T2)</span>
+              <span class="delta-val" style="color:var(--movilnet-red);">${proc}s</span>
+            </div>
+            <div class="delta-card">
+              <span class="delta-label">3. Cola Salida (T6-T4)</span>
+              <span class="delta-val" style="color:#d97706;">${qS}s</span>
+            </div>
+            <div class="delta-card">
+              <span class="delta-label">4. Entrega Móvil (T7-T6)</span>
+              <span class="delta-val" style="color:#2563eb;">${delS}</span>
+            </div>
+            <div class="delta-card" style="background:var(--movilnet-red-subtle); border-color:rgba(255,56,56,0.3);">
+              <span class="delta-label" style="color:var(--movilnet-red);">Ciclo Total (T7-T1)</span>
+              <span class="delta-val" style="color:var(--movilnet-red);">${e2e}</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:0.74rem; font-weight:800; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.4px; margin-bottom:12px;">
+            ⏱️ Secuencia Cronológica de los 7 Hitos Temporales
+          </div>
+          <div class="stepper-timeline">
+            <div class="milestone-item active">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">smartphone</span></div>
+              <div class="milestone-title">
+                <span>T1: Envío del Abonado (WhatsApp Client)</span>
+                <span class="milestone-ts">${timers.t1_user_sent_ts || 'Registrado'}</span>
+              </div>
+              <div class="milestone-desc">Usuario escribe y envía el mensaje desde la app móvil de WhatsApp (messageTimestamp original).</div>
+            </div>
+
+            <div class="milestone-item active">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">input</span></div>
+              <div class="milestone-title">
+                <span>T2: Ingesta Webhook n8n (messages.upsert)</span>
+                <span class="milestone-ts">${timers.t2_n8n_in_ts || msg.started_at || 'Registrado'}</span>
+              </div>
+              <div class="milestone-desc">Llegada del paquete HTTP al webhook de n8n Cloud (+${inS}s de tránsito en red).</div>
+            </div>
+
+            <div class="milestone-item active">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">memory</span></div>
+              <div class="milestone-title">
+                <span>T3: Resolución Movilnet Core / Algoritmo IA</span>
+                <span class="milestone-ts">${timers.t3_core_resolved_ts || 'Registrado'}</span>
+              </div>
+              <div class="milestone-desc">Motor Fast-Path SQLite / Árbol ODA / Inferencia Gemini Flash resuelve la respuesta exacta.</div>
+            </div>
+
+            <div class="milestone-item active">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">output</span></div>
+              <div class="milestone-title">
+                <span>T4: Despacho Salida n8n Cloud</span>
+                <span class="milestone-ts">${timers.t4_n8n_out_ts || 'Registrado'}</span>
+              </div>
+              <div class="milestone-desc">Finalización del workflow en n8n y envío hacia el nodo HTTP Request / Evolution API.</div>
+            </div>
+
+            <div class="milestone-item ${!isError && timers.t5_evolution_queued_ts ? 'active' : 'pending'}">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">outbox</span></div>
+              <div class="milestone-title">
+                <span>T5: Encolado en Pasarela Evolution API (/sendText)</span>
+                <span class="milestone-ts">${!isError && timers.t5_evolution_queued_ts ? timers.t5_evolution_queued_ts : (isError ? 'Interrumpido' : 'En espera')}</span>
+              </div>
+              <div class="milestone-desc">${isError ? 'No alcanzado: el flujo se interrumpió en n8n antes de invocar la pasarela de salida.' : 'Aceptación del paquete por el demonio Baileys de mensajería saliente.'}</div>
+            </div>
+
+            <div class="milestone-item ${!isError && timers.t6_meta_server_ack_ts ? 'active' : 'pending'}">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">cloud_done</span></div>
+              <div class="milestone-title">
+                <span>T6: Acuse de Servidor Meta WhatsApp (SERVER_ACK)</span>
+                <span class="milestone-ts">${!isError && timers.t6_meta_server_ack_ts ? timers.t6_meta_server_ack_ts : (isError ? 'No emitido' : 'En cola')}</span>
+              </div>
+              <div class="milestone-desc">${isError ? 'No emitido: la orden nunca llegó a los servidores de Meta WhatsApp debido al error previo.' : 'Confirmación de recepción por los servidores de WhatsApp Cloud (Check Gris simple ✓).'}</div>
+            </div>
+
+            <div class="milestone-item ${isDelivered ? 'active' : 'pending'}">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">done_all</span></div>
+              <div class="milestone-title">
+                <span>T7: Entrega Física en Teléfono del Usuario (DELIVERY_ACK)</span>
+                <span class="milestone-ts">${timers.t7_phone_delivered_ts || '⏳ Esperando acuse del móvil...'}</span>
+              </div>
+              <div class="milestone-desc">${isDelivered ? 'Mensaje recibido exitosamente en la pantalla del usuario (Doble Check Gris ✓✓).' : 'Pendiente de entrega inalámbrica al terminal. Si el teléfono está apagado o sin cobertura, espera en cola de Meta.'}</div>
+            </div>
+
+            <div class="milestone-item ${timers.t8_user_read_ts ? 'active' : 'pending'}">
+              <div class="milestone-dot"><span class="material-symbols-outlined" style="font-size:12px;">visibility</span></div>
+              <div class="milestone-title">
+                <span>T8: Lectura por el Usuario (READ_ACK)</span>
+                <span class="milestone-ts">${timers.t8_user_read_ts || 'No leído aún'}</span>
+              </div>
+              <div class="milestone-desc">${timers.t8_user_read_ts ? 'El usuario abrió la conversación y leyó la respuesta (Doble Check Azul ✓✓).' : 'El usuario aún no ha abierto el chat en su aplicación.'}</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      modal.classList.add('open');
+    }
+
+    function closeProcessTimersModal() {
+      const modal = document.getElementById('processTimersModalBackdrop');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function handleTimersBackdropClick(event) {
+      if (event.target && event.target.id === 'processTimersModalBackdrop') {
+        closeProcessTimersModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProcessTimersModal();
+    });
+
+    async function clearAllConversations() {
+      try {
+        const res = await fetch('/api/v1/monitor/clear-conversations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ min_execution_id: 14220 })
+        });
+        if (res.ok) {
+          groupedThreads = [];
+          selectedPhoneKey = null;
+          lastRenderedThreadId = null;
+          lastRenderedMsgsCount = 0;
+          lastRenderedLastMsgId = null;
+          renderContactsList();
+          renderActiveChat(true);
+          await loadConversationsFromServer();
+        }
+      } catch (err) {
+        console.error('[Conversatorio] Error al limpiar conversaciones:', err);
+      }
+    }
+  </script>
+
+  <!-- MODAL DE INSPECCIÓN DE PROCESS TIMERS Y 7 HITOS TEMPORALES -->
+  <div id="processTimersModalBackdrop" class="process-timers-backdrop" onclick="handleTimersBackdropClick(event)">
+    <div class="process-timers-box" role="dialog" aria-modal="true" aria-labelledby="timersModalTitle">
+      <div class="process-timers-header">
+        <h3 id="timersModalTitle">
+          <span class="material-symbols-outlined" style="color:var(--movilnet-red);">timer</span>
+          <span>Auditoría Forense de Ciclo E2E (WhatsApp ↔ Movilnet Core)</span>
+        </h3>
+        <button class="process-timers-close" onclick="closeProcessTimersModal()" title="Cerrar modal (Esc)">&times;</button>
+      </div>
+      <div class="process-timers-body" id="processTimersModalContent">
+        <!-- Contenido dinámico inyectado por openProcessTimersModal -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

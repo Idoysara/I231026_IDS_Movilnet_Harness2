@@ -1,0 +1,67 @@
+# ==============================================================================
+# .gitignore — I231026_IDS_Movilnet_Harness2
+# Certificación Militar Tier-1 Platinum (Harness2 / Google Research)
+# ==============================================================================
+
+# Sistema Operativo y Editores
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python y Entornos Virtuales
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Cache
+.cache/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Archivos de Gran Tamaño / Backups
+*.tar.gz
+*.zip
+*.tar
+*.iso
+*.dmg
+
+# Bóvedas Temporales y Datos Sensibles (Zero-PII)
+vaults/*/raw_*
+vaults/*/tmp_*
+.env
+.env.local
+.env.*.local

@@ -1,0 +1,41 @@
+{
+  "department": "Finanzas, Tesorería, Facturación y FinTech",
+  "version": "1.0.0",
+  "last_updated": "2026-10-14T07:15:00Z",
+  "description": "Reglas de negocio financieras, conciliación SUDEBAN Pago Móvil C2P, límites de recarga y parámetros BCV",
+  "bcv_parameters": {
+    "currency_base": "USD",
+    "sync_schedule": "hourly",
+    "fallback_rate_bs": 36.85,
+    "bcv_api_endpoint": "https://api.movilnet.com.ve/bcv/latest"
+  },
+  "c2p_recharge_limits": {
+    "min_amount_bs": 50.00,
+    "max_amount_bs": 50000.00,
+    "max_transactions_per_day": 5,
+    "idempotency_window_minutes": 15
+  },
+  "official_receiver_account": {
+    "receiver_phone": "0424-1533712",
+    "receiver_e164": "+584241533712",
+    "receiver_bank_code": "0102",
+    "receiver_bank_name": "Banco de Venezuela (BDV)",
+    "receiver_rif": "G-20003565-1",
+    "receiver_beneficiary_name": "Telecomunicaciones Movilnet C.A."
+  },
+  "enabled_banks_sudeban": [
+    {"code": "0102", "name": "Banco de Venezuela", "supports_c2p_token": true},
+    {"code": "0105", "name": "Banco Mercantil", "supports_c2p_token": true},
+    {"code": "0108", "name": "Banco Provincial", "supports_c2p_token": true},
+    {"code": "0134", "name": "Banesco", "supports_c2p_token": true},
+    {"code": "0114", "name": "Bancaribe", "supports_c2p_token": true},
+    {"code": "0172", "name": "Bancamiga", "supports_c2p_token": true},
+    {"code": "0163", "name": "Banco del Tesoro", "supports_c2p_token": true},
+    {"code": "0175", "name": "Banco Bicentenario", "supports_c2p_token": true}
+  ],
+  "billing_invariants": {
+    "currency": "VES",
+    "allow_partial_payments": false,
+    "instant_ocs_topup": true
+  }
+}

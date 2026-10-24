@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Mi Movilnet — Portal PWA Oficial de Autoservicio Móvil para Abonados 0416 / 0426. Consulta de saldo OCS y recargas C2P.">
+  <title>Mi Movilnet — Autoservicio Móvil | Telecomunicaciones Movilnet C.A.</title>
+  
+  <!-- Configuración PWA W3C -->
+  <link rel="manifest" href="/ui/pwa/manifest.json">
+  <meta name="theme-color" content="#002B49">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Hojas de Estilo del Sistema de Diseño Movilnet (WCAG 2.1 AAA) -->
+  <link rel="stylesheet" href="/ui/css/movilnet_tokens.css">
+  <link rel="stylesheet" href="/ui/pwa/css/pwa.css">
+
+  <!-- Script temprano para persistencia de tema (Zero-FOUC) -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('movilnet_pwa_theme');
+      if (!saved) {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          saved = 'dark';
+        } else {
+          saved = 'light';
+        }
+      }
+      document.documentElement.setAttribute('data-theme', saved);
+      document.documentElement.className = 'theme-' + saved;
+    })();
+  </script>
+</head>
+<body>
+  <!-- Salto Accesible -->
+  <a href="#pwa-main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- Header de la Aplicación -->
+  <header class="pwa-header" role="banner">
+    <div class="pwa-brand">
+      <div class="pwa-logo-box">M</div>
+      <div class="pwa-brand-text">
+        <h1>Mi Movilnet</h1>
+        <p>Autoservicio Móvil 4GMAX</p>
+      </div>
+    </div>
+    
+    <div class="pwa-header-controls">
+      <!-- Selector de Tema Tri-Modal: Light / Medium / Dark -->
+      <div class="pwa-theme-toggle" role="group" aria-label="Tema visual de la aplicación">
+        <button type="button" class="theme-btn active" data-theme-target="light" title="Modo Claro" aria-pressed="true" onclick="window.setPwaTheme('light')">
+          <span class="theme-icon" aria-hidden="true">☀️</span>
+          <span class="theme-text">Claro</span>
+        </button>
+        <button type="button" class="theme-btn" data-theme-target="medium" title="Modo Intermedio (Slate)" aria-pressed="false" onclick="window.setPwaTheme('medium')">
+          <span class="theme-icon" aria-hidden="true">⛅</span>
+          <span class="theme-text">Medio</span>
+        </button>
+        <button type="button" class="theme-btn" data-theme-target="dark" title="Modo Oscuro (NOC)" aria-pressed="false" onclick="window.setPwaTheme('dark')">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+          <span class="theme-text">Oscuro</span>
+        </button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:6px;">
+        <label for="pwa-phone-select" style="position:absolute; width:1px; height:1px; overflow:hidden;">Línea Activa:</label>
+        <select id="pwa-phone-select" class="pwa-phone-chip" style="background:#0F2A42; color:#FFF; border:1px solid #FFA300; border-radius:16px; padding:4px 10px; font-weight:700; cursor:pointer; font-size:0.82rem;" onchange="window.switchPwaSubscriber(this.value)" title="Cambiar línea de prueba">
+          <option value="04160000001">📱 04160000001 (Básico 5GB)</option>
+          <option value="04165551234">📱 04165551234 (Inteliplan 10GB)</option>
+          <option value="04260000002">📱 04260000002 (Corporativo)</option>
+        </select>
+        <div id="pwa-phone-badge" style="display:none;">04160000001</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main id="pwa-main-content" class="pwa-container" role="main">
+    
+    <!-- 1. Tarjeta Principal de Saldo y Cuota OCS Fast-Path -->
+    <section class="pwa-balance-card" aria-label="Estado de cuenta y consumo">
+      <div class="pwa-balance-top">
+        <span id="pwa-plan-name" class="pwa-plan-name">PLAN INTELIPLAN 10GB</span>
+        <span class="pwa-line-status">LÍNEA ACTIVA</span>
+      </div>
+      
+      <div style="font-size: 0.8rem; opacity: 0.85; margin-bottom: 2px;">Saldo Disponible</div>
+      <div id="pwa-balance-ves" class="pwa-balance-val">Bs. 0,00</div>
+      <div id="pwa-balance-usd" class="pwa-balance-usd">≈ $0,00 USD</div>
+
+      <div class="pwa-quota-wrap">
+        <div class="pwa-quota-labels">
+          <span>Datos 4GMAX</span>
+          <span id="pwa-quota-text">Cargando cuota...</span>
+        </div>
+        <div class="pwa-quota-progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+          <div id="pwa-quota-fill" class="pwa-quota-fill" style="width: 60%;"></div>
+        </div>
+        <div id="pwa-cutoff-date" style="font-size: 0.72rem; opacity: 0.75; margin-top: 6px; text-align: right;">
+          Próximo corte: 28 del mes
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Acciones Rápidas del Abonado & Canales Digitales -->
+    <section class="pwa-actions-grid" aria-label="Acciones y canales frecuentes">
+      <button class="pwa-action-btn" onclick="openPwaApp('c2p')">
+        <span class="pwa-action-icon">💳</span>
+        <span>Recarga C2P Pago Móvil</span>
+      </button>
+
+      <button class="pwa-action-btn" onclick="openPwaApp('chat')">
+        <span class="pwa-action-icon">🤖</span>
+        <span>Atención IA (N1)</span>
+      </button>
+
+      <button class="pwa-action-btn" onclick="openPwaApp('whatsapp')">
+        <span class="pwa-action-icon">💬</span>
+        <span>WhatsApp Oficial</span>
+      </button>
+
+      <button class="pwa-action-btn" onclick="openPwaApp('telegram')">
+        <span class="pwa-action-icon">✈️</span>
+        <span>Telegram Bot</span>
+      </button>
+
+      <button class="pwa-action-btn" onclick="openPwaApp('usage')">
+        <span class="pwa-action-icon">📊</span>
+        <span>Detalle de Consumo</span>
+      </button>
+
+      <button class="pwa-action-btn" onclick="openPwaApp('eir')">
+        <span class="pwa-action-icon">🔒</span>
+        <span>Seguridad EIR</span>
+      </button>
+    </section>
+
+    <!-- 3. Formulario Interactivo de Recarga C2P Pago Móvil -->
+    <section id="sec-c2p" class="pwa-card" aria-labelledby="hdr-c2p">
+      <h2 id="hdr-c2p" class="pwa-card-header">
+        <span>⚡ Recarga Rápida C2P (Pago Móvil)</span>
+      </h2>
+
+      <form id="pwa-c2p-form">
+        <div class="pwa-form-group">
+          <label for="c2p-bank-select">Banco Emisor (SUDEBAN)</label>
+          <select id="c2p-bank-select" class="pwa-select" required>
+            <option value="0102">0102 - Banco de Venezuela</option>
+            <option value="0134">0134 - Banesco</option>
+            <option value="0105">0105 - Mercantil</option>
+            <option value="0108">0108 - Banco Provincial</option>
+          </select>
+        </div>
+
+        <div class="pwa-form-group">
+          <label for="c2p-amount-input">Monto a Recargar (Bolívares VES)</label>
+          <input type="number" id="c2p-amount-input" class="pwa-input" min="10" step="5" value="150.00" required>
+        </div>
+
+        <div class="pwa-form-group">
+          <label for="c2p-phone-input">Número de Línea Movilnet (0416 / 0426)</label>
+          <input type="tel" id="c2p-phone-input" class="pwa-input" value="04160000001" pattern="^(?:0)?(416|426)\d{7}$" required>
+        </div>
+
+        <div class="pwa-form-group">
+          <label for="c2p-cid-input">Cédula del Pagador</label>
+          <input type="text" id="c2p-cid-input" class="pwa-input" value="V-10000001" required>
+        </div>
+
+        <div class="pwa-form-group">
+          <label for="c2p-otp-input">Clave Dinámica C2P / Token SMS</label>
+          <input type="text" id="c2p-otp-input" class="pwa-input" value="782910" required>
+        </div>
+
+        <button type="submit" id="c2p-submit-btn" class="pwa-btn-submit">
+          <span>⚡ Confirmar Pago Móvil C2P</span>
+        </button>
+
+        <div id="c2p-feedback"></div>
+      </form>
+    </section>
+
+    <!-- 4. Asistente Cognitivo IA Integrado (Agente N1 Customer Care) -->
+    <section id="sec-chat" class="pwa-card" aria-labelledby="hdr-chat">
+      <h2 id="hdr-chat" class="pwa-card-header">
+        <span>🤖 Asistente Virtual Movilnet</span>
+      </h2>
+
+      <!-- Banner Proactivo de Campañas & Ofertas Recomendadas (Funnel Marketing) -->
+      <div id="pwa-marketing-banner" style="background: linear-gradient(135deg, #002B49 0%, #004C82 100%); color: #ffffff; padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <span style="font-weight: 700; color: #FFA300;">🔥 Oferta Activa:</span> 
+          <span>Recarga hoy con C2P y recibe <strong>1GB de Bono</strong> de navegación.</span>
+        </div>
+        <button type="button" onclick="document.getElementById('sec-c2p').scrollIntoView({behavior:'smooth'})" style="background: #FFA300; color: #002B49; border: none; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap; margin-left: 8px;">
+          ⚡ Aprovechar
+        </button>
+      </div>
+
+      <div class="pwa-chat-container">
+        <div id="pwa-chat-messages" class="pwa-chat-messages">
+          <div class="pwa-msg assistant">
+            ¡Hola! Soy tu asistente virtual de Telecomunicaciones Movilnet C.A. ¿En qué te puedo colaborar con tu línea 0416 / 0426 hoy?
+          </div>
+        </div>
+        <!-- Sugerencias de prueba rápida 1-Click -->
+        <div style="display:flex; gap:6px; overflow-x:auto; padding:6px 0; margin-bottom:8px; white-space:nowrap;">
+          <button type="button" class="pwa-action-chip" style="background:#f0f4f8; border:1px solid #CBD5E1; color:#002B49; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="document.getElementById('pwa-chat-input').value = 'Hola, ¿cuál es mi saldo y cuántos megas me quedan?'; document.getElementById('pwa-chat-form').dispatchEvent(new Event('submit'));">💰 Saldo y Megas</button>
+          <button type="button" class="pwa-action-chip" style="background:#f0f4f8; border:1px solid #CBD5E1; color:#002B49; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="document.getElementById('pwa-chat-input').value = 'Quiero recibir mi recibo o factura por correo a cliente@gmail.com'; document.getElementById('pwa-chat-form').dispatchEvent(new Event('submit'));">📧 Recibo Gmail</button>
+          <button type="button" class="pwa-action-chip" style="background:#f0f4f8; border:1px solid #CBD5E1; color:#002B49; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="document.getElementById('pwa-chat-input').value = 'Agenda una cita en el calendario para visitar la oficina El Rosal'; document.getElementById('pwa-chat-form').dispatchEvent(new Event('submit'));">📅 Cita Calendar</button>
+          <button type="button" class="pwa-action-chip" style="background:#f0f4f8; border:1px solid #CBD5E1; color:#002B49; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="document.getElementById('pwa-chat-input').value = 'Guarda mi contrato digital en Google Drive'; document.getElementById('pwa-chat-form').dispatchEvent(new Event('submit'));">💾 Guardar Drive</button>
+        </div>
+
+        <form id="pwa-chat-form" class="pwa-chat-input-wrap" onsubmit="return false;">
+          <input type="text" id="pwa-chat-input" class="pwa-chat-input" placeholder="Pregunta sobre tu plan, megas o saldo..." aria-label="Mensaje para el asistente" autocomplete="off">
+          <button type="submit" id="pwa-chat-send" class="pwa-chat-send" aria-label="Enviar mensaje">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       VENTANAS FLOTANTES POR APLICACIÓN (ASISTENTE IA, WHATSAPP, TELEGRAM, CONSUMO, EIR)
+       ======================================================================== -->
+
+  <!-- 0. Ventana Asistente Virtual Movilnet (Simulador Celular / Tablet Independiente) -->
+  <div id="modal-app-chat" class="pwa-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hdr-modal-chat-title">
+    <div id="win-app-chat" class="pwa-app-window device-phone">
+      <div class="app-win-header" style="background: linear-gradient(135deg, #002B49 0%, #004C82 100%);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:36px; height:36px; border-radius:50%; background:#FF6A13; display:flex; align-items:center; justify-content:center; color:#FFF; font-weight:800; font-size:1.1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">🤖</div>
+          <div>
+            <div id="hdr-modal-chat-title" style="font-weight:700; font-size:0.95rem;">Asistente Virtual Movilnet</div>
+            <div style="font-size:0.7rem; color:#A5D8FF;">Inteligencia Artificial 4GMAX • En línea</div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px;">
+          <!-- Selector de Modo de Dispositivo: Celular vs Tablet -->
+          <div class="device-toggle-bar" role="group" aria-label="Simular tamaño de dispositivo">
+            <button type="button" id="btn-mode-phone" class="device-toggle-btn active" onclick="setAppDeviceMode('modal-app-chat', 'phone')" title="Simular Smartphone">📱 Celular</button>
+            <button type="button" id="btn-mode-tablet" class="device-toggle-btn" onclick="setAppDeviceMode('modal-app-chat', 'tablet')" title="Simular Tablet">💻 Tablet</button>
+          </div>
+          <button class="app-win-close" onclick="closePwaApp('chat')" aria-label="Cerrar Asistente">✕</button>
+        </div>
+      </div>
+
+      <!-- Banner de Funnel Marketing en Ventana Independiente -->
+      <div style="background: #0F2A42; color: #FFF; padding: 8px 14px; font-size: 0.78rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div>
+          <span style="color:#FFA300; font-weight:700;">🔥 Oferta Activa:</span> Recarga C2P y recibe <strong>1GB de Bono</strong>.
+        </div>
+        <button type="button" onclick="closePwaApp('chat'); openPwaApp('c2p');" style="background:#FFA300; color:#002B49; border:none; border-radius:4px; padding:3px 7px; font-size:0.72rem; font-weight:700; cursor:pointer;">
+          ⚡ Recargar
+        </button>
+      </div>
+
+      <!-- Mensajes en Ventana Independiente -->
+      <div id="modal-chat-messages" class="app-win-body" style="background:#F8FAFC;">
+        <div class="chat-bubble bot" style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:10px 14px; font-size:0.86rem; color:#0F172A; max-width:85%;">
+          ¡Hola! Soy tu asistente virtual independiente de <strong>Telecomunicaciones Movilnet C.A.</strong><br/><br/>
+          Estoy listo para gestionar tu línea <code>0416</code> / <code>0426</code>, consultar tu saldo OCS, megas de navegación o recomendarte planes y ofertas. ¿En qué te colaboro hoy?
+        </div>
+      </div>
+
+      <!-- Sugerencias de prueba rápida 1-Click -->
+      <div style="display:flex; gap:6px; overflow-x:auto; padding:6px 12px; background:rgba(0,0,0,0.03); border-top:1px solid rgba(0,0,0,0.06); white-space:nowrap;">
+        <button type="button" style="background:#FFF; border:1px solid #CBD5E1; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('chat', 'Hola, ¿cuál es mi saldo y cuántos megas me quedan?')">💰 Saldo y Megas</button>
+        <button type="button" style="background:#FFF; border:1px solid #CBD5E1; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('chat', 'Quiero recibir mi recibo o factura por correo a cliente@gmail.com')">📧 Recibo Gmail</button>
+        <button type="button" style="background:#FFF; border:1px solid #CBD5E1; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('chat', 'Agenda una cita en el calendario para visitar la oficina El Rosal')">📅 Cita Calendar</button>
+        <button type="button" style="background:#FFF; border:1px solid #CBD5E1; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('chat', 'Guarda mi contrato digital en Google Drive')">💾 Guardar Drive</button>
+        <button type="button" style="background:#FFF; border:1px solid #CBD5E1; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('chat', 'Quiero recargar mi plan con Pago Móvil C2P')">⚡ Recargar C2P</button>
+      </div>
+
+      <!-- Entrada de Texto de la Ventana Independiente -->
+      <form id="modal-chat-form" class="app-win-footer" onsubmit="return false;">
+        <input type="text" id="modal-chat-input" class="pwa-input" style="flex:1; border-radius:24px; padding:10px 16px; border:1px solid #CBD5E1;" placeholder="Escribe tu consulta aquí..." autocomplete="off">
+        <button type="submit" id="modal-chat-send" class="pwa-btn-submit" style="width:auto; padding:0 18px; border-radius:24px; min-height:42px; background:#002B49; font-weight:700;">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 1. Ventana WhatsApp Oficial Movilnet -->
+  <div id="modal-app-whatsapp" class="pwa-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hdr-wa-title">
+    <div class="pwa-app-window whatsapp">
+      <div class="app-win-header">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:38px; height:38px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; color:#FFF; font-weight:800; font-size:1.1rem;">M</div>
+          <div>
+            <div id="hdr-wa-title" style="font-weight:700; font-size:0.95rem;">Movilnet WhatsApp Oficial ✅</div>
+            <div style="font-size:0.7rem; opacity:0.85;">en línea • Cuenta de empresa</div>
+          </div>
+        </div>
+        <button class="app-win-close" onclick="closePwaApp('whatsapp')" aria-label="Cerrar WhatsApp">✕</button>
+      </div>
+
+      <div id="wa-chat-messages" class="app-win-body">
+        <div class="chat-bubble bot">
+          ¡Hola! 👋 Bienvenido al canal oficial de <strong>WhatsApp de Telecomunicaciones Movilnet C.A.</strong><br/><br/>
+          ¿Cómo podemos ayudarte hoy con tu línea <code>0416</code> / <code>0426</code>? Puedes consultar saldo, megas o recargar por Pago Móvil C2P.
+        </div>
+      </div>
+
+      <!-- Sugerencias de prueba rápida WhatsApp 1-Click -->
+      <div style="display:flex; gap:6px; overflow-x:auto; padding:6px 12px; background:#EFEAE2; border-top:1px solid rgba(0,0,0,0.06); white-space:nowrap;">
+        <button type="button" style="background:#FFF; border:1px solid #25D366; color:#075E54; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('whatsapp', 'Hola, ¿cuál es mi saldo y cuántos megas me quedan?')">💰 Saldo y Megas</button>
+        <button type="button" style="background:#FFF; border:1px solid #25D366; color:#075E54; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('whatsapp', 'Quiero recibir mi recibo o factura por correo a cliente@gmail.com')">📧 Recibo Gmail</button>
+        <button type="button" style="background:#FFF; border:1px solid #25D366; color:#075E54; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('whatsapp', 'Agenda una cita en el calendario para visitar la oficina El Rosal')">📅 Cita Calendar</button>
+        <button type="button" style="background:#FFF; border:1px solid #25D366; color:#075E54; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('whatsapp', 'Guarda mi contrato digital en Google Drive')">💾 Guardar Drive</button>
+        <button type="button" style="background:#FFF; border:1px solid #25D366; color:#075E54; border-radius:12px; padding:4px 8px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="window.sendQuickPrompt('whatsapp', 'Quiero recargar mi plan con Pago Móvil C2P')">⚡ Recargar C2P</button>
+      </div>
+
+      <form id="wa-chat-form" class="app-win-footer" onsubmit="return false;">
+        <input type="text" id="wa-chat-input" class="pwa-input" style="flex:1; border-radius:20px; padding:10px 16px;" placeholder="Escribe un mensaje de WhatsApp...">
+        <button type="submit" id="wa-chat-send" class="pwa-btn-submit" style="width:auto; padding:0 16px; border-radius:50%; min-height:42px; background:#00A884;">➤</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Ventana Telegram Bot Movilnet -->
+  <div id="modal-app-telegram" class="pwa-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hdr-tg-title">
+    <div class="pwa-app-window telegram">
+      <div class="app-win-header">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:38px; height:38px; border-radius:50%; background:#2AABEE; display:flex; align-items:center; justify-content:center; color:#FFF; font-weight:800; font-size:1.1rem;">✈️</div>
+          <div>
+            <div id="hdr-tg-title" style="font-weight:700; font-size:0.95rem;">@MovilnetAtencionBot</div>
+            <div style="font-size:0.7rem; color:#2AABEE;">bot • en línea</div>
+          </div>
+        </div>
+        <button class="app-win-close" onclick="closePwaApp('telegram')" aria-label="Cerrar Telegram">✕</button>
+      </div>
+
+      <div id="tg-chat-messages" class="app-win-body">
+        <div class="chat-bubble bot">
+          ¡Bienvenido a <strong>Movilnet Telegram Bot</strong>! 🚀<br/><br/>
+          Puedo gestionar consultas de saldo OCS en tiempo real, recargas inmediatas C2P y guiarte con las mejores ofertas de navegación 4GMAX.
+        </div>
+      </div>
+
+      <form id="tg-chat-form" class="app-win-footer" onsubmit="return false;">
+        <input type="text" id="tg-chat-input" class="pwa-input" style="flex:1; border-radius:20px; padding:10px 16px; background:#242F3D; color:#FFF; border:none;" placeholder="Escribe un mensaje en Telegram...">
+        <button type="submit" id="tg-chat-send" class="pwa-btn-submit" style="width:auto; padding:0 16px; border-radius:50%; min-height:42px; background:#2AABEE;">➤</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Ventana Detalle de Consumo ODA -->
+  <div id="modal-app-usage" class="pwa-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hdr-usage-title">
+    <div class="pwa-app-window">
+      <div class="app-win-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:1.2rem;">📊</span>
+          <div id="hdr-usage-title" style="font-weight:700; font-size:0.95rem;">Detalle de Consumo ODA</div>
+        </div>
+        <button class="app-win-close" onclick="closePwaApp('usage')" aria-label="Cerrar Detalle de Consumo">✕</button>
+      </div>
+
+      <div class="app-win-body">
+        <div style="background:#F0F4F8; padding:14px; border-radius:12px; margin-bottom:12px;">
+          <strong style="color:#002B49; font-size:0.95rem;">Plan Activo: PLAN BÁSICO CONECTA 5GB</strong>
+          <div style="font-size:0.8rem; color:#64748B; margin-top:4px;">Corte de Facturación: 31-10-2026</div>
+        </div>
+
+        <div style="border:1px solid #E2E8F0; border-radius:12px; padding:14px; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;">
+            <span>🌐 Navegación 4GMAX</span>
+            <strong style="color:#00558C;">31.8 GB libres</strong>
+          </div>
+          <div style="height:6px; background:#E2E8F0; border-radius:3px; overflow:hidden;">
+            <div style="width:15%; height:100%; background:#FF6A13;"></div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #E2E8F0; border-radius:12px; padding:14px; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;">
+            <span>📞 Minutos a Todas las Operadoras</span>
+            <strong style="color:#00558C;">485 / 500 Min</strong>
+          </div>
+          <div style="height:6px; background:#E2E8F0; border-radius:3px; overflow:hidden;">
+            <div style="width:8%; height:100%; background:#15803D;"></div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;">
+            <span>✉️ Mensajes de Texto (SMS)</span>
+            <strong style="color:#00558C;">940 / 1000 SMS</strong>
+          </div>
+          <div style="height:6px; background:#E2E8F0; border-radius:3px; overflow:hidden;">
+            <div style="width:6%; height:100%; background:#00A3E0;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-win-footer" style="justify-content:flex-end;">
+        <button class="pwa-btn-submit" onclick="closePwaApp('usage')" style="width:auto; padding:8px 16px;">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Ventana Seguridad EIR y Bloqueo Inmediato -->
+  <div id="modal-app-eir" class="pwa-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hdr-eir-title">
+    <div class="pwa-app-window">
+      <div class="app-win-header" style="background-color:#B91C1C;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:1.2rem;">🔒</span>
+          <div id="hdr-eir-title" style="font-weight:700; font-size:0.95rem;">Seguridad EIR — Bloqueo de Línea</div>
+        </div>
+        <button class="app-win-close" onclick="closePwaApp('eir')" aria-label="Cerrar Seguridad EIR">✕</button>
+      </div>
+
+      <div class="app-win-body">
+        <p style="font-size:0.85rem; color:#475569;">
+          Canal de emergencia para suspensión inmediata de línea y bloqueo de IMEI en lista negra GSMA / CONATEL ante extravío o hurto.
+        </p>
+
+        <div class="pwa-form-group">
+          <label style="font-size:0.8rem; font-weight:600;">Línea a Bloquear:</label>
+          <input type="text" class="pwa-input" value="04160000001" readonly style="background:#F1F5F9;">
+        </div>
+
+        <div class="pwa-form-group">
+          <label style="font-size:0.8rem; font-weight:600;">Código IMEI (15 dígitos):</label>
+          <input type="text" id="pwa-eir-imei" class="pwa-input" placeholder="Ej: 354160000001000" maxlength="15">
+        </div>
+
+        <div class="pwa-form-group">
+          <label style="font-size:0.8rem; font-weight:600;">Motivo de Bloqueo:</label>
+          <select class="pwa-select">
+            <option>Hurto / Robo de Dispositivo</option>
+            <option>Extravío en Vía Pública</option>
+            <option>Sospecha de SIM-Swap o Fraude</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="app-win-footer" style="justify-content:space-between;">
+        <button type="button" class="pwa-btn-submit" onclick="closePwaApp('eir')" style="background:#E2E8F0; color:#0F172A; width:auto; padding:8px 16px;">Cancelar</button>
+        <button type="button" class="pwa-btn-submit" onclick="alert('Línea y equipo bloqueados en lista negra EIR GSMA.'); closePwaApp('eir');" style="background:#B91C1C; width:auto; padding:8px 16px;">🚨 Ejecutar Bloqueo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de Navegación Inferior (PWA Tab Bar) -->
+  <nav class="pwa-tab-bar" role="navigation" aria-label="Barra de navegación móvil">
+    <a href="#pwa-main-content" class="pwa-tab-item active">
+      <span class="pwa-tab-icon">🏠</span>
+      <span>Inicio</span>
+    </a>
+    <a href="#sec-c2p" class="pwa-tab-item">
+      <span class="pwa-tab-icon">💳</span>
+      <span>Recargar</span>
+    </a>
+    <a href="#sec-chat" class="pwa-tab-item">
+      <span class="pwa-tab-icon">💬</span>
+      <span>Ayuda</span>
+    </a>
+    <a href="/ui/dashboard/noc_dashboard.html" class="pwa-tab-item">
+      <span class="pwa-tab-icon">📈</span>
+      <span>NOC</span>
+    </a>
+    <a href="/ui/monitor/conversatorio.html" class="pwa-tab-item">
+      <span class="pwa-tab-icon">💬</span>
+      <span>Conversatorio</span>
+    </a>
+    <a href="/ui/admin/index.html" class="pwa-tab-item">
+      <span class="pwa-tab-icon">🛡️</span>
+      <span>Admin</span>
+    </a>
+  </nav>
+
+  <!-- Lógica PWA -->
+  <script src="/ui/pwa/js/pwa.js?v=3.0.0"></script>
+</body>
+</html>

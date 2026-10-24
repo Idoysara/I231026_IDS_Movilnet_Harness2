@@ -1,0 +1,27 @@
+{
+  "certificate_id": "MOVILNET-PROD-CERT-237C9D24C84A",
+  "project": "AI_Movilnet_300926",
+  "organization": "Telecomunicaciones Movilnet C.A.",
+  "scope": "Despliegue General a Producci\u00f3n Carrier-Grade (4.000.000 de Abonados)",
+  "status": "PRODUCCION_HOMOLOGADA_Y_EN_SERVICIO_100%",
+  "timestamp_utc": "2026-10-03T10:52:08.082995+00:00",
+  "phases_certified": {
+    "Fase 0": "Discovery & Inception (41 tests)",
+    "Fase 1": "Capa de Datos ODA & WAL Sharding (8 tests)",
+    "Fase 2": "REST API & n8n Workflows Omnicanal (75 tests)",
+    "Fase 3": "Core IA Swarm L5 & Churn ML (74 tests)",
+    "Fase 4": "Interfaces WCAG AAA, NOC & PWA (44 tests)",
+    "Produccion": "Pipeline CI/CD, Docker & Disaster Recovery (8 tests)"
+  },
+  "total_automated_tests": 250,
+  "total_tests_passed": 250,
+  "pass_rate_pct": 100.0,
+  "deployment_manifest_seal": "237c9d24c84a635bc2e4e66a404148772fab0f0c9a39439905e4244d4046f544",
+  "sla_verified": {
+    "throughput_tps": 556.06,
+    "p95_latency_ms": 21.54,
+    "availability_target": "99.999%",
+    "wcag_standard": "WCAG 2.1 Level AAA"
+  },
+  "sha256_cryptographic_seal": "e0a7787fc2a8a0dc04f5106626e2849354a3f47ebc3cf40b3306ec3af6ef41ee"
+}

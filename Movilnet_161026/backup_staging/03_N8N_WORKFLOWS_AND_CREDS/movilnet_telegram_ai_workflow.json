@@ -1,0 +1,155 @@
+{
+  "name": "Movilnet Omnicanal — Canal Telegram Bot Oficial",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "movilnet-telegram-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node_tg_webhook",
+      "name": "1. Telegram Webhook Receptor",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Procesador de Mensajes y Comandos Telegram\ninput_data = _input.first().json\nmsg_obj = input_data.get('message', {})\nfrom_user = msg_obj.get('from', {})\ntext = msg_obj.get('text', '').strip()\nchat_id = msg_obj.get('chat', {}).get('id', '')\n\n# Detección de comandos de Telegram\ncmd = text.split()[0].lower() if text.startswith('/') else ''\nargs = text.split()[1:] if len(text.split()) > 1 else []\n\n# Teléfono o Cédula por argumento o defecto para pruebas\nidentifier = args[0] if args else '04160000001'\n\nreturn {\n    'chat_id': chat_id,\n    'username': from_user.get('username', 'Usuario'),\n    'command': cmd,\n    'identifier': identifier,\n    'raw_text': text,\n    'is_command': bool(cmd),\n    'timestamp': $now.toISO()\n}\n"
+      },
+      "id": "node_tg_parser",
+      "name": "2. Parser de Comandos Telegram",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond_is_balance_cmd",
+              "leftValue": "={{ $json.command }}",
+              "rightValue": "/saldo",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "cond_is_plans_cmd",
+              "leftValue": "={{ $json.command }}",
+              "rightValue": "/planes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        }
+      },
+      "id": "node_tg_router",
+      "name": "3. Enrutador de Comandos",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/v1/subscribers/balance",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"msisdn\": $json.identifier } }}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "node_tg_api_balance",
+      "name": "4A. Consultar Saldo API REST",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, 180]
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Renderizador de Formato Telegram MarkdownV2 con Teclado Inline\nres = _input.first().json\nmsisdn = res.get('msisdn', 'Abonado')\nplan = res.get('plan_name', 'Plan Movilnet 4GMAX')\nves = res.get('balance_ves', 0.0)\nusd = res.get('balance_usd_equiv', 0.0)\nrem_mb = res.get('remaining_data_mb', 0)\ntot_mb = res.get('total_quota_mb', 10240)\ncutoff = res.get('billing_cutoff_date', '31/10/2026')\n\ntg_text = (\n    f\"*🤖 BOT OFICIAL MOVILNET VENEZUELA*\\n\\n\"\\\n    f\"📲 *Línea:* `{msisdn}`\\n\"\\\n    f\"📦 *Plan:* {plan}\\n\"\\\n    f\"💰 *Saldo:* Bs\\. {ves:,.2f} \\(~\\${usd:.2f} USD\\)\\n\"\\\n    f\"📶 *Cupo de Datos:* {rem_mb:,} MB de {tot_mb:,} MB\\n\"\\\n    f\"📆 *Fecha de Corte:* {cutoff}\\n\\n\"\\\n    f\"_Seleccione una opción rápida:_\"\n)\n\ninline_keyboard = [\n    [{\"text\": \"💳 Recargar Pago Móvil C2P\", \"callback_data\": f\"recargar_{msisdn}\"}],\n    [{\"text\": \"📊 Ver Catálogo de Planes\", \"callback_data\": \"ver_planes\"}],\n    [{\"text\": \"🚨 Reportar Robo / Bloqueo EIR\", \"callback_data\": f\"eir_lock_{msisdn}\"}]\n]\n\nreturn {\n    'reply_text': tg_text,\n    'reply_markup': {'inline_keyboard': inline_keyboard},\n    'parse_mode': 'Markdown'\n}\n"
+      },
+      "id": "node_tg_render",
+      "name": "5A. Renderizar MarkdownV2 & Botones",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1180, 180]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8000/api/v1/catalog/plans",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "node_tg_api_catalog",
+      "name": "4B. Consultar Catálogo TMF620",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, 440]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"channel\": \"TELEGRAM\", \"text\": $json.reply_text || \"Comando procesado correctamente\", \"reply_markup\": $json.reply_markup || {} } }}",
+        "options": {}
+      },
+      "id": "node_tg_respond",
+      "name": "6. Responder Webhook Telegram",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1440, 300]
+    }
+  ],
+  "connections": {
+    "1. Telegram Webhook Receptor": {
+      "main": [[{"node": "2. Parser de Comandos Telegram", "type": "main", "index": 0}]]
+    },
+    "2. Parser de Comandos Telegram": {
+      "main": [[{"node": "3. Enrutador de Comandos", "type": "main", "index": 0}]]
+    },
+    "3. Enrutador de Comandos": {
+      "main": [
+        [{"node": "4A. Consultar Saldo API REST", "type": "main", "index": 0}],
+        [{"node": "4B. Consultar Catálogo TMF620", "type": "main", "index": 0}]
+      ]
+    },
+    "4A. Consultar Saldo API REST": {
+      "main": [[{"node": "5A. Renderizar MarkdownV2 & Botones", "type": "main", "index": 0}]]
+    },
+    "5A. Renderizar MarkdownV2 & Botones": {
+      "main": [[{"node": "6. Responder Webhook Telegram", "type": "main", "index": 0}]]
+    },
+    "4B. Consultar Catálogo TMF620": {
+      "main": [[{"node": "6. Responder Webhook Telegram", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true
+  },
+  "tags": [
+    {"name": "Omnicanal"},
+    {"name": "Telegram"},
+    {"name": "Bot"},
+    {"name": "Movilnet"}
+  ]
+}

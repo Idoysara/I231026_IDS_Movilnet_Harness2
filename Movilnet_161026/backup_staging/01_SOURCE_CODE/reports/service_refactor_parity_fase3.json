@@ -1,0 +1,401 @@
+{
+  "label": "fase3",
+  "generated_at": "2026-10-17T18:35:09.042623+00:00",
+  "total": 56,
+  "passed": 56,
+  "failed": 0,
+  "rows": [
+    {
+      "case_id": "health",
+      "request": "GET /health",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "api_health",
+      "request": "GET /api/v1/health",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "status",
+      "request": "GET /api/v1/status",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "openapi",
+      "request": "GET /openapi.json",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "openapi_v1",
+      "request": "GET /api/v1/openapi.json",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "docs",
+      "request": "GET /docs",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "options_status",
+      "request": "OPTIONS /api/v1/status",
+      "status": 204,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "plans",
+      "request": "GET /api/v1/catalog/plans",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "plan_by_id",
+      "request": "GET /api/v1/catalog/plans/PLAN_JUBILADO_PATRIA",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "plan_missing",
+      "request": "GET /api/v1/catalog/plans/PLAN-NO-EXISTE-XYZ",
+      "status": 404,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "banks",
+      "request": "GET /api/v1/banks",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "unknown_get",
+      "request": "GET /ruta/no/registrada",
+      "status": 404,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "unknown_post",
+      "request": "POST /api/v1/no-existe",
+      "status": 404,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "balance_empty",
+      "request": "POST /api/v1/subscribers/balance",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "balance_bad_phone",
+      "request": "POST /api/v1/subscribers/balance",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "balance_competitor",
+      "request": "POST /api/v1/subscribers/balance",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "balance_invalid_json",
+      "request": "POST /api/v1/subscribers/balance",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "c2p_empty",
+      "request": "POST /api/v1/payments/c2p",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "c2p_bad_bank",
+      "request": "POST /api/v1/payments/c2p",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "c2p_negative_amount",
+      "request": "POST /api/v1/payments/c2p",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "c2p_invalid_json",
+      "request": "POST /api/v1/payments/c2p",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "simswap_empty",
+      "request": "POST /api/v1/security/sim-swap",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "simswap_bad_phone",
+      "request": "POST /api/v1/security/sim-swap",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "eir_empty",
+      "request": "POST /api/v1/security/eir-lock",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "eir_bad_phone",
+      "request": "POST /api/v1/security/eir-lock",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wh_deliveries",
+      "request": "GET /api/v1/webhooks/deliveries",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wh_inbound_empty",
+      "request": "POST /api/v1/webhooks/inbound-events",
+      "status": 401,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wh_c2p_callback_empty",
+      "request": "POST /api/v1/webhooks/c2p-callback",
+      "status": 401,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wh_eir_callback_empty",
+      "request": "POST /api/v1/webhooks/eir-callback",
+      "status": 401,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wh_dlq_empty",
+      "request": "POST /api/v1/webhooks/dlq/retry",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wh_dlq_missing",
+      "request": "POST /api/v1/webhooks/dlq/retry",
+      "status": 404,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "cc_empty",
+      "request": "POST /api/v1/agents/customer-care/process",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "cc_blank_text",
+      "request": "POST /api/v1/agents/customer-care/process",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "cc_prohibited_sender",
+      "request": "POST /api/v1/agents/customer-care/process",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "cc_alias_chat_empty",
+      "request": "POST /api/v1/agent/chat",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "cc_saldo",
+      "request": "POST /api/v1/agents/customer-care/process",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "fintech_empty",
+      "request": "POST /api/v1/agents/fintech-c2p/process",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "eir_agent_empty",
+      "request": "POST /api/v1/agents/emergency-eir/process",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "eir_agent_status_noparam",
+      "request": "GET /api/v1/agents/emergency-eir/status",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "churn_predict_empty",
+      "request": "POST /api/v1/agents/retention-churn/predict",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "churn_offer_empty",
+      "request": "POST /api/v1/agents/retention-churn/offer",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "churn_status_noparam",
+      "request": "GET /api/v1/agents/retention-churn/status",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "noc_metrics",
+      "request": "GET /api/v1/metrics/live",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "noc_status",
+      "request": "GET /api/v1/noc/status",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wa_send_empty",
+      "request": "POST /api/v1/whatsapp/send",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "wa_gateway_bad_mode",
+      "request": "POST /api/v1/whatsapp/gateway-mode",
+      "status": 400,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "ui_pwa_index",
+      "request": "GET /ui/pwa_stitch/index.html",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "ui_simulador",
+      "request": "GET /ui/pwa_stitch/simulador.html",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "ui_conversatorio",
+      "request": "GET /ui/monitor/conversatorio.html",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "ui_missing",
+      "request": "GET /ui/no/existe.html",
+      "status": 404,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "ui_traversal",
+      "request": "GET /ui/../../.env",
+      "status": 404,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "ui_traversal_enc",
+      "request": "GET /ui/..%2f..%2f.env",
+      "status": 404,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "root",
+      "request": "GET /",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "index_html",
+      "request": "GET /index.html",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "simulador_alias",
+      "request": "GET /simulador",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    },
+    {
+      "case_id": "celular_alias",
+      "request": "GET /celular",
+      "status": 200,
+      "ok": true,
+      "issues": []
+    }
+  ]
+}

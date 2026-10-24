@@ -1,0 +1,220 @@
+{
+  "name": "Cazador de Ofertas Movilnet - Deflector Omnicanal (WhatsApp / Telegram / PWA)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cazador-whatsapp",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-wa",
+      "name": "Webhook WhatsApp",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [100, 200]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cazador-telegram",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-tg",
+      "name": "Webhook Telegram",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [100, 400]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cazador-pwa",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-pwa",
+      "name": "Webhook PWA Event",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [100, 600]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalizador Omnicanal de Entradas para Cazador de Ofertas\nconst item = $input.first().json;\n\nlet canal = 'whatsapp';\nlet remitente = '';\nlet mensaje = '';\nlet lat = null;\nlet lon = null;\n\n// 1. Detección de origen WhatsApp (Meta Cloud API, Baileys o Whapify)\nif (item.entry && item.entry[0]?.changes && item.entry[0].changes[0]?.value?.messages) {\n  canal = 'whatsapp';\n  const msgObj = item.entry[0].changes[0].value.messages[0];\n  remitente = msgObj.from || '';\n  if (msgObj.type === 'location') {\n    lat = msgObj.location.latitude;\n    lon = msgObj.location.longitude;\n    mensaje = 'mi ubicacion actual';\n  } else if (msgObj.text) {\n    mensaje = msgObj.text.body || '';\n  }\n} else if (item.message && item.message.chat) {\n  // 2. Detección de origen Telegram (Bot API)\n  canal = 'telegram';\n  remitente = item.message.from?.phone_number || item.message.chat?.id?.toString() || '';\n  if (item.message.location) {\n    lat = item.message.location.latitude;\n    lon = item.message.location.longitude;\n    mensaje = 'mi ubicacion gps';\n  } else {\n    mensaje = item.message.text || '';\n  }\n} else {\n  // 3. Detección directa PWA o Payload Unificado\n  canal = item.canal || 'pwa';\n  remitente = item.remitente || item.msisdn || '';\n  mensaje = item.mensaje || item.query || 'ofertas';\n  lat = item.ubicacion_lat || item.lat || null;\n  lon = item.ubicacion_lon || item.lon || null;\n}\n\n// Normalización de número venezolano a formato local 0416 / 0426\nlet limpio = remitente.toString().replace(/[^0-9]/g, '');\nif (limpio.startsWith('58') && limpio.length === 12) {\n  limpio = '0' + limpio.substring(2);\n}\n\nconst esMovilnet = limpio.startsWith('0416') || limpio.startsWith('0426');\n\nreturn [{\n  json: {\n    canal,\n    remitente_original: remitente,\n    msisdn_normalizado: limpio,\n    es_movilnet: esMovilnet,\n    mensaje,\n    lat,\n    lon,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-normalizador",
+      "name": "Normalizador Omnicanal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [360, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.es_movilnet }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "node-filtro-movilnet",
+      "name": "¿Es Abonado Movilnet?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [600, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8030/api/deflector/n8n",
+        "sendBody": true,
+        "contentType": "json",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "canal", "value": "={{ $json.canal }}" },
+            { "name": "remitente", "value": "={{ $json.msisdn_normalizado }}" },
+            { "name": "mensaje", "value": "={{ $json.mensaje }}" },
+            { "name": "ubicacion_lat", "value": "={{ $json.lat }}" },
+            { "name": "ubicacion_lon", "value": "={{ $json.lon }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-cazador-api",
+      "name": "Invocar Cazador Core API (:8030)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [840, 320]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Enriquecimiento de respuesta según canal\nconst inputData = $input.first().json;\nconst meta = $('Normalizador Omnicanal').first().json;\n\nreturn [{\n  json: {\n    canal: meta.canal,\n    destinatario: meta.remitente_original,\n    msisdn: inputData.destinatario,\n    mensaje_saliente: inputData.mensaje_saliente,\n    magic_link: inputData.magic_link,\n    zero_rating_activo: inputData.zero_rating_activo,\n    ofertas_encontradas: inputData.ofertas_encontradas,\n    anillos: inputData.anillos_resumen,\n    telegram_webapp_url: inputData.magic_link\n  }\n}];"
+      },
+      "id": "node-formateador",
+      "name": "Enriquecedor de Respuesta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1080, 320]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.canal }}",
+        "rules": {
+          "rules": [
+            { "value2": "whatsapp" },
+            { "value2": "telegram" },
+            { "value2": "pwa" }
+          ]
+        }
+      },
+      "id": "node-switch-canal",
+      "name": "Switch Canal Saliente",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [1300, 320]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"channel\": \"whatsapp\",\n  \"to\": \"{{ $json.destinatario }}\",\n  \"message\": \"{{ $json.mensaje_saliente }}\",\n  \"magic_link\": \"{{ $json.magic_link }}\",\n  \"zero_rating\": true\n}",
+        "options": {}
+      },
+      "id": "node-resp-wa",
+      "name": "Respuesta WhatsApp Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 180]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"channel\": \"telegram\",\n  \"to\": \"{{ $json.destinatario }}\",\n  \"text\": \"{{ $json.mensaje_saliente }}\",\n  \"inline_keyboard\": [\n    [\n      {\n        \"text\": \"🚀 Abrir Radar PWA (Zero-Rating)\",\n        \"web_app\": { \"url\": \"{{ $json.magic_link }}\" }\n      }\n    ]\n  ]\n}",
+        "options": {}
+      },
+      "id": "node-resp-tg",
+      "name": "Respuesta Telegram Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 340]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "node-resp-pwa",
+      "name": "Respuesta PWA Directa",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 500]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"rejected\",\n  \"error\": \"NON_MOVILNET_SUBSCRIBER\",\n  \"message\": \"👋 ¡Hola! El Cazador de Ofertas y el beneficio de navegación Zero-Rating (sin consumo de datos) es exclusivo para líneas Movilnet (0416 y 0426).\",\n  \"operadora_detectada\": \"{{ $json.msisdn_normalizado.substring(0, 4) }}\"\n}",
+        "options": {
+          "responseCode": 403
+        }
+      },
+      "id": "node-rechazo-no-movilnet",
+      "name": "Rechazo Operadora Ajena",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [840, 560]
+    }
+  ],
+  "connections": {
+    "Webhook WhatsApp": {
+      "main": [
+        [{ "node": "Normalizador Omnicanal", "type": "main", "index": 0 }]
+      ]
+    },
+    "Webhook Telegram": {
+      "main": [
+        [{ "node": "Normalizador Omnicanal", "type": "main", "index": 0 }]
+      ]
+    },
+    "Webhook PWA Event": {
+      "main": [
+        [{ "node": "Normalizador Omnicanal", "type": "main", "index": 0 }]
+      ]
+    },
+    "Normalizador Omnicanal": {
+      "main": [
+        [{ "node": "¿Es Abonado Movilnet?", "type": "main", "index": 0 }]
+      ]
+    },
+    "¿Es Abonado Movilnet?": {
+      "main": [
+        [{ "node": "Invocar Cazador Core API (:8030)", "type": "main", "index": 0 }],
+        [{ "node": "Rechazo Operadora Ajena", "type": "main", "index": 0 }]
+      ]
+    },
+    "Invocar Cazador Core API (:8030)": {
+      "main": [
+        [{ "node": "Enriquecedor de Respuesta", "type": "main", "index": 0 }]
+      ]
+    },
+    "Enriquecedor de Respuesta": {
+      "main": [
+        [{ "node": "Switch Canal Saliente", "type": "main", "index": 0 }]
+      ]
+    },
+    "Switch Canal Saliente": {
+      "main": [
+        [{ "node": "Respuesta WhatsApp Webhook", "type": "main", "index": 0 }],
+        [{ "node": "Respuesta Telegram Webhook", "type": "main", "index": 0 }],
+        [{ "node": "Respuesta PWA Directa", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

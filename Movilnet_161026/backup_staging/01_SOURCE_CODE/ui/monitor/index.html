@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Conversatorio en Vivo — Webhook +58 416 625 1587 con Teléfonos Externos — Telecomunicaciones Movilnet C.A.">
+  <title>Conversatorio Webhook +58 416 625 1587 | Movilnet 4GMAX</title>
+
+  <style>
+    :root {
+      --movilnet-orange: #FF6600;
+      --movilnet-orange-glow: rgba(255, 102, 0, 0.4);
+      --movilnet-dark: #0B0E14;
+      --movilnet-card: #131824;
+      --movilnet-card-alt: #182030;
+      --movilnet-border: #232D3F;
+      --chat-bg: #0D111A;
+      --bubble-user: #005C4B;
+      --bubble-bot: #1F2C34;
+      --movistar-blue: #00A9E0;
+      --digitel-red: #E21836;
+      --accent-green: #00C853;
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --code-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--movilnet-dark);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* BARRA SUPERIOR */
+    header.top-header {
+      background: linear-gradient(180deg, #161F2E 0%, #0E1420 100%);
+      border-bottom: 1px solid var(--movilnet-border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      background: var(--movilnet-orange);
+      color: #fff;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      box-shadow: 0 0 14px var(--movilnet-orange-glow);
+    }
+
+    .header-text h1 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bot-pill {
+      background: rgba(0, 200, 83, 0.15);
+      border: 1px solid rgba(0, 200, 83, 0.4);
+      color: #00E676;
+      font-weight: 700;
+      font-family: var(--code-font);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-live {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0, 200, 83, 0.12);
+      border: 1px solid rgba(0, 200, 83, 0.35);
+      color: #00E676;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    .btn-top {
+      background: var(--movilnet-card);
+      border: 1px solid var(--movilnet-border);
+      color: var(--text-muted);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-top:hover {
+      color: #fff;
+      border-color: var(--movilnet-orange);
+    }
+
+    /* CONTENEDOR DE 2 COLUMNAS (ESTILO CONVERSATORIO / WHATSAPP) */
+    .conversatorio-wrapper {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      flex: 1;
+      height: calc(100vh - 65px);
+      overflow: hidden;
+    }
+
+    @media (max-width: 850px) {
+      .conversatorio-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .col-lista {
+        display: none; /* En pantallas pequeñas se puede alternar */
+      }
+    }
+
+    /* ======================================================== */
+    /* COLUMNA 1: LISTA DE TELÉFONOS EXTERNOS QUE SE COMUNICAN   */
+    /* ======================================================== */
+    .col-lista {
+      background: var(--movilnet-card);
+      border-right: 1px solid var(--movilnet-border);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .col-lista-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--movilnet-border);
+      background: var(--movilnet-card-alt);
+    }
+
+    .col-lista-header h2 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .pill-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .pill-btn.active {
+      color: #fff;
+      background: var(--movilnet-border);
+      border-color: #4A5568;
+    }
+
+    .phones-scroll-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .phone-item {
+      background: var(--movilnet-card-alt);
+      border: 1px solid var(--movilnet-border);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .phone-item:hover {
+      border-color: var(--movilnet-orange);
+      background: #192233;
+    }
+
+    .phone-item.selected {
+      border-color: var(--movilnet-orange);
+      background: #1E283C;
+      box-shadow: 0 0 10px rgba(255, 102, 0, 0.25);
+    }
+
+    .phone-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .phone-number {
+      font-family: var(--code-font);
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #fff;
+    }
+
+    .tag-carrier {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .tag-movilnet { background: rgba(255, 102, 0, 0.2); color: #FFA500; border: 1px solid rgba(255, 102, 0, 0.4); }
+    .tag-movistar { background: rgba(0, 169, 224, 0.2); color: #38BDF8; border: 1px solid rgba(0, 169, 224, 0.4); }
+    .tag-digitel { background: rgba(226, 24, 54, 0.2); color: #F87171; border: 1px solid rgba(226, 24, 54, 0.4); }
+
+    .phone-preview-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .phone-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.68rem;
+      color: #6B7280;
+    }
+
+    /* ======================================================== */
+    /* COLUMNA 2: EL CONVERSATORIO ACTIVO (CHAT WHATSAPP E2E)    */
+    /* ======================================================== */
+    .col-chat {
+      background: var(--chat-bg);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .chat-active-header {
+      background: var(--movilnet-card-alt);
+      border-bottom: 1px solid var(--movilnet-border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #202D42;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      border: 1px solid var(--movilnet-border);
+    }
+
+    .chat-titles h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-titles p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .chat-route-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .route-fastpath { background: rgba(0, 200, 83, 0.15); color: #00E676; border: 1px solid rgba(0, 200, 83, 0.3); }
+    .route-funnel { background: rgba(139, 92, 246, 0.18); color: #C084FC; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .route-gemini { background: rgba(6, 182, 212, 0.15); color: #22D3EE; border: 1px solid rgba(6, 182, 212, 0.3); }
+
+    /* CUERPO DEL CONVERSATORIO (BURBUJAS) */
+    .chat-messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .msg-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bubble-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 75%;
+    }
+
+    .bubble-wrapper.user {
+      align-self: flex-start;
+    }
+
+    .bubble-wrapper.bot {
+      align-self: flex-end;
+    }
+
+    .bubble-card {
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .bubble-user-card {
+      background: var(--bubble-user);
+      color: #E9EDEF;
+      border-bottom-left-radius: 2px;
+    }
+
+    .bubble-bot-card {
+      background: var(--bubble-bot);
+      color: #E9EDEF;
+      border: 1px solid #2B3848;
+      border-bottom-right-radius: 2px;
+    }
+
+    .bubble-header {
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sender-user { color: #25D366; }
+    .sender-bot { color: var(--movilnet-orange); }
+
+    .bubble-time {
+      font-size: 0.65rem;
+      color: #94A3B8;
+      font-weight: normal;
+    }
+
+    .bubble-note-pill {
+      margin-top: 6px;
+      font-size: 0.68rem;
+      color: #A5F3FC;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* BARRA INFERIOR DE SIMULACIÓN Y ENVÍO RÁPIDO */
+    .chat-bottom-bar {
+      background: var(--movilnet-card-alt);
+      border-top: 1px solid var(--movilnet-border);
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .chips-shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .chip-item {
+      background: #141C2B;
+      border: 1px solid #28374D;
+      color: #CBD5E1;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip-item:hover {
+      background: #233044;
+      border-color: var(--movilnet-orange);
+      color: #fff;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: #0B0E14;
+      border: 1px solid #2B3848;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .chat-input:focus {
+      border-color: var(--movilnet-orange);
+    }
+
+    .phone-input-mini {
+      width: 150px;
+      background: #0B0E14;
+      border: 1px solid #2B3848;
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-family: var(--code-font);
+      outline: none;
+    }
+
+    .btn-send {
+      background: var(--movilnet-orange);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(255, 102, 0, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-send:hover {
+      background: #FF771A;
+      transform: translateY(-1px);
+    }
+
+    /* SECCIÓN PLEGABLE DE TRAZABILIDAD TÉCNICA */
+    .collapsible-tech-bar {
+      font-size: 0.72rem;
+      color: #64748B;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-top: 4px;
+    }
+
+    .collapsible-tech-bar:hover {
+      color: #94A3B8;
+    }
+
+    .tech-details-box {
+      display: none;
+      background: #090C12;
+      border: 1px solid #1E293B;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: var(--code-font);
+      font-size: 0.72rem;
+      color: #A5F3FC;
+      max-height: 140px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR -->
+  <header class="top-header">
+    <div class="brand-box">
+      <div class="logo-badge">MOVILNET</div>
+      <div class="header-text">
+        <h1>
+          Conversatorio Webhook Central:
+          <span class="bot-pill">📱 +58 416 625 1587</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="status-live">
+        <span class="pulse-dot"></span>
+        <span id="headerLiveStatus">Webhook Activo (:8010 ↔ n8n Cloud)</span>
+      </div>
+      <a href="/ui/admin/index.html" class="btn-top">⚙️ Vista Admin NOC</a>
+      <a href="/ui/pwa/index.html" class="btn-top">📱 PWA Abonados</a>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR DE 2 COLUMNAS -->
+  <div class="conversatorio-wrapper">
+
+    <!-- ======================================================== -->
+    <!-- COLUMNA 1: LISTA DE TELÉFONOS QUE SE COMUNICAN CON EL BOT -->
+    <!-- ======================================================== -->
+    <aside class="col-lista">
+      <div class="col-lista-header">
+        <h2>👥 Teléfonos Conectados al Webhook</h2>
+        <div class="filter-pills">
+          <button class="pill-btn active" data-filter="ALL" onclick="setFilter('ALL')">Todos</button>
+          <button class="pill-btn" data-filter="MOVILNET" onclick="setFilter('MOVILNET')">0416/0426</button>
+          <button class="pill-btn" data-filter="MOVISTAR" onclick="setFilter('MOVISTAR')">0414 Movistar</button>
+          <button class="pill-btn" data-filter="DIGITEL" onclick="setFilter('DIGITEL')">0412 Digitel</button>
+        </div>
+      </div>
+
+      <div class="phones-scroll-list" id="phonesListContainer">
+        <!-- Generado dinámicamente -->
+      </div>
+    </aside>
+
+    <!-- ======================================================== -->
+    <!-- COLUMNA 2: EL CONVERSATORIO ACTIVO (CHAT WHATSAPP E2E)   -->
+    <!-- ======================================================== -->
+    <main class="col-chat">
+      <!-- ENCABEZADO DEL CHAT -->
+      <div class="chat-active-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar" id="activeAvatar">📱</div>
+          <div class="chat-titles">
+            <h3 id="activePhoneTitle">0414-2554590 (Ids)</h3>
+            <p id="activeCarrierSubtitle">Movistar Venezuela ↔ Bot Movilnet (+58 416 625 1587)</p>
+          </div>
+        </div>
+
+        <div>
+          <span class="chat-route-tag route-gemini" id="activeRouteTag">🧠 Gemini AI Agent</span>
+        </div>
+      </div>
+
+      <!-- ÁREA DE MENSAJES (BURBUJAS WHATSAPP) -->
+      <div class="chat-messages-area" id="chatMessagesArea">
+        <!-- Renderizado dinámicamente -->
+      </div>
+
+      <!-- BARRA INFERIOR DE ENVÍO Y SIMULACIÓN -->
+      <div class="chat-bottom-bar">
+        <!-- ATAJOS DE PRUEBA RÁPIDA -->
+        <div class="chips-shortcuts">
+          <span style="font-size:0.7rem; color:#6B7280; font-weight:600;">Pruebas rápidas:</span>
+          <span class="chip-item" onclick="quickFill('04160000001', 'Consulta mi saldo y megas', 'Movilnet 4M')">🟢 0416 Saldo (FastPath Core)</span>
+          <span class="chip-item" onclick="quickFill('04142554590', 'Podemos probar si estás funcionando', 'Ids')">🔵 0414 Prueba Real (Ejecución 9635)</span>
+          <span class="chip-item" onclick="quickFill('04141234567', 'Quiero cambiarme a Movilnet con eSIM', 'Carlos')">🎯 0414 Funnel Portabilidad eSIM</span>
+          <span class="chip-item" onclick="quickFill('04129876543', 'Qué planes tienen disponibles?', 'Valeria')">🔴 0412 Digitel (Bono 10GB)</span>
+        </div>
+
+        <form class="chat-input-row" onsubmit="handleSend(event)">
+          <input type="text" id="inputPhone" class="phone-input-mini" placeholder="Teléfono" value="0414-2554590" title="Número del usuario externo">
+          <input type="text" id="inputMsg" class="chat-input" placeholder="Escribe un mensaje para activar el webhook..." value="Podemos probar si estás funcionando">
+          <button type="submit" class="btn-send" id="btnSend">
+            <span>Enviar ➔</span>
+          </button>
+        </form>
+
+        <div class="collapsible-tech-bar" onclick="toggleTechDetails()">
+          <span>⚙️ Ver trazabilidad técnica de n8n (opcional)</span>
+        </div>
+        <div class="tech-details-box" id="techDetailsBox">
+          <!-- Detalle de nodos -->
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- SCRIPT CONVERSATORIO -->
+  <script>
+    let activeFilter = 'ALL';
+    let selectedTraceId = 'TRACE-EXEC-9647';
+
+    // DATOS DE LAS CONVERSACIONES (Semillas iniciales de alta fidelidad)
+    let conversations = [
+      {
+        trace_id: "TRACE-EXEC-9647",
+        execution_id: "9647",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent (Éxito 2.97s)",
+        last_time: "05:36 PM",
+        user_msg: "Hikaaaaa",
+        bot_reply: "¡Hola! ¿En qué puedo ayudarte?",
+        duration: "2.97s",
+        resolution_note: "Recibido vía Webhook +58 416 625 1587 ➔ n8n Ejecución #9647 ➔ Gemini Flash ➔ Despachado a WhatsApp"
+      },
+      {
+        trace_id: "TRACE-EXEC-9645",
+        execution_id: "9645",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent (Éxito 1.64s)",
+        last_time: "05:15 PM",
+        user_msg: "Hola",
+        bot_reply: "¡Hola! ¿En qué puedo ayudarte?",
+        duration: "1.64s",
+        resolution_note: "Recibido vía Webhook +58 416 625 1587 ➔ n8n Ejecución #9645 ➔ Gemini Flash ➔ Despachado a WhatsApp"
+      },
+      {
+        trace_id: "TRACE-EXEC-9644",
+        execution_id: "9644",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent (503 Demanda Alta)",
+        last_time: "04:20 PM",
+        user_msg: "Pero cómo está el tiempo en caracas",
+        bot_reply: "⚠️ INCIDENTE EN PROVEEDOR EXTERNO DE IA (GOOGLE GEMINI 503):\nEl webhook de WhatsApp (+58 416 625 1587) recibió el mensaje en 1ms. En n8n Cloud, el nodo 'AI Agent' llamó a Google AI Studio (`gemini-2.5-flash`), el cual devolvió: '503 Service Unavailable: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.'\n\nAl fallar el nodo en 1.68s, n8n interrumpió el flujo y no envió respuesta al celular.",
+        duration: "1.68s",
+        resolution_note: "Recibido vía Webhook Evolution API ➔ Error en nodo 'AI Agent' (API Gemini 503 por alta demanda)"
+      },
+      {
+        trace_id: "TRACE-EXEC-9643",
+        execution_id: "9643",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent (Éxito)",
+        last_time: "04:19 PM",
+        user_msg: "Quiero ir al cine",
+        bot_reply: "No tengo acceso a información sobre cines o cartelera de películas.",
+        duration: "26.06s",
+        resolution_note: "Recibido vía Webhook +58 416 625 1587 ➔ n8n Ejecución #9643 ➔ Gemini Flash ➔ Despachado a WhatsApp"
+      },
+      {
+        trace_id: "TRACE-EXEC-9642",
+        execution_id: "9642",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent (Éxito)",
+        last_time: "04:18 PM",
+        user_msg: "Hola",
+        bot_reply: "¡Hola! ¿En qué puedo ayudarte hoy?",
+        duration: "36.33s",
+        resolution_note: "Recibido vía Webhook +58 416 625 1587 ➔ n8n Ejecución #9642 ➔ Gemini Flash ➔ Despachado a WhatsApp"
+      },
+      {
+        trace_id: "TRACE-EXEC-9640",
+        execution_id: "9640",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent (503 Externo)",
+        last_time: "04:14 PM",
+        user_msg: "Hola",
+        bot_reply: "⚠️ INCIDENTE DETECTADO EN PROVEEDOR EXTERNO DE IA:\nEl webhook de WhatsApp recibió el mensaje correctamente en <1ms. Sin embargo, en n8n Cloud el nodo 'AI Agent' arrojó error 'Service unavailable' (HTTP 503 de Google AI Studio / Gemini) tras 52 segundos, por lo que n8n no despachó respuesta a WhatsApp.\n\n💡 DIAGNÓSTICO DEL OBSERVADOR: La infraestructura del webhook (+58 416 625 1587) y Movilnet Core están 100% operativos. La degradación ocurrió exclusivamente en la API externa de Gemini en la nube.",
+        duration: "52.36s",
+        resolution_note: "Recibido vía Webhook Evolution API ➔ Error en nodo 'AI Agent' (API Gemini 503)"
+      },
+      {
+        trace_id: "TRACE-EXEC-9638",
+        execution_id: "9638",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini + Recetas (Timeout)",
+        last_time: "03:57 PM",
+        user_msg: "Necesito una merienda",
+        bot_reply: "⚠️ INCIDENTE DE TIMEOUT EN HERRAMIENTA EXTERNA:\nEl mensaje 'Necesito una merienda' activó el nodo 'Recetas'. El modelo en la nube excedió el tiempo límite de espera (92 segundos) y devolvió error 'Service unavailable'.",
+        duration: "92.23s",
+        resolution_note: "Recibido vía Webhook Evolution API ➔ Timeout en tool Recetas / Gemini"
+      },
+      {
+        trace_id: "TRACE-EXEC-9637",
+        execution_id: "9637",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent + SerpAPI",
+        last_time: "03:26 PM",
+        user_msg: "Que novedad tenemos",
+        bot_reply: `Aunque no tengo una sección específica de "novedades", puedo proporcionarte algunas noticias actuales de Estados Unidos y el conflicto entre Israel y Gaza, según la información disponible:
+
+• Estados Unidos:
+  - Una mujer llamada Christa Pike está en el centro de atención legal en medio de su ejecución.
+  - El FBI frustró un ataque en el Mall of America, en el que un adolescente fue provisto de un rifle de asalto por la propia agencia.
+  - Trump ha flexibilizado las reglas sobre el "diésel teñido", que normalmente es un combustible agrícola.
+  - Estudiantes de Cornell están realizando una sentada por una supuesta agresión en una fraternidad en 2024.
+
+• Conflicto Israel-Gaza:
+  - Tres años después del 7 de octubre, los ataques israelíes en Gaza continúan y el número de muertes aumenta.
+  - Estados Unidos ha movido bombarderos de largo alcance del Reino Unido.
+  - Israel fue supuestamente advertido antes del 7 de octubre.
+
+Ten en cuenta que estas son algunas de las noticias recientes y que el panorama informativo puede cambiar rápidamente.`,
+        duration: "7.66s",
+        resolution_note: "Recibido en vivo vía Webhook +58 416 625 1587 ➔ n8n Ejecución #9637 ➔ Gemini Flash + Búsqueda Google SerpAPI"
+      },
+      {
+        trace_id: "TRACE-EXEC-9636",
+        execution_id: "9636",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent",
+        last_time: "03:13 PM",
+        user_msg: "Hokaaaaaaa",
+        bot_reply: "¡Hola! ¿En qué puedo ayudarte?",
+        duration: "1.81s",
+        resolution_note: "Recibido en vivo vía Webhook +58 416 625 1587 ➔ n8n Ejecución #9636 ➔ Gemini Flash"
+      },
+      {
+        trace_id: "TRACE-EXEC-9635",
+        execution_id: "9635",
+        phone: "0414-2554590",
+        name: "Ids",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "AI_AGENT_GEMINI",
+        route_label: "🧠 Gemini AI Agent",
+        last_time: "12:46 PM",
+        user_msg: "Podemos probar si estás funcionando",
+        bot_reply: "Estoy funcionando correctamente. ¿Hay algo específico en lo que te gustaría que te ayude para probar?",
+        duration: "2.85s",
+        resolution_note: "Procesado por n8n + Modelo Gemini Flash + Memoria PostgreSQL (32 msgs)"
+      },
+      {
+        trace_id: "TRACE-FASTPATH-4M",
+        execution_id: "FASTPATH-01",
+        phone: "0416-0000001",
+        name: "Abonado Movilnet",
+        carrier: "MOVILNET",
+        carrier_label: "Movilnet 4GMAX (Base 4M)",
+        is_competitor: false,
+        route: "FAST_PATH_TELCO_ODA",
+        route_label: "⚡ Fast-Path Core ODA",
+        last_time: "12:50 PM",
+        user_msg: "Consulta mi saldo y megas",
+        bot_reply: "Estimado abonado 0416-0000001: Su saldo disponible es Bs. 1.650,00. Datos 4GMAX: 11.9 GB de 5 GB. Corte: 15 del mes.",
+        duration: "0.15ms",
+        resolution_note: "Resuelto instantáneamente por Movilnet Core :8010 (SQLite WAL + HMAC-SHA256 • 0 tokens)"
+      },
+      {
+        trace_id: "TRACE-FUNNEL-PORTA",
+        execution_id: "PORTA-01",
+        phone: "0414-1234567",
+        name: "Carlos Movistar",
+        carrier: "MOVISTAR",
+        carrier_label: "Movistar Venezuela",
+        is_competitor: true,
+        route: "FUNNEL_MARKETING_PORTABILIDAD",
+        route_label: "🎯 Funnel Portabilidad",
+        last_time: "01:05 PM",
+        user_msg: "Quiero cambiarme a Movilnet con eSIM",
+        bot_reply: "¡Hola Carlos! Te damos la bienvenida a Movilnet 4GMAX. Al portar tu número Movistar recibes tu eSIM GRATIS + 10GB de bono de bienvenida. ¿Deseas iniciar tu activación ahora?",
+        duration: "0.22ms",
+        resolution_note: "Detectado abonado competencia ➔ Activó Funnel BOFU de Portabilidad (10GB + eSIM)"
+      }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPhoneList();
+      selectConversation('TRACE-EXEC-9647');
+      loadConversationsFromServer();
+      setInterval(loadConversationsFromServer, 2500);
+    });
+
+    async function loadConversationsFromServer() {
+      try {
+        const res = await fetch('/api/v1/monitor/conversations');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && Array.isArray(data.conversations) && data.conversations.length > 0) {
+          const serverItems = data.conversations.map(c => {
+            const isMovilnet = (c.user_phone || '').includes('416') || (c.user_phone || '').includes('426');
+            const routeTag = c.pipeline_route === 'FAST_PATH_TELCO_ODA' ? '⚡ Fast-Path Core ODA' : 
+                             (c.pipeline_route === 'FUNNEL_MARKETING_PORTABILIDAD' ? '🎯 Funnel Portabilidad' : '🧠 Gemini AI Agent');
+            
+            let timeStr = 'En vivo';
+            if (c.started_at) {
+              try {
+                timeStr = new Date(c.started_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              } catch(e) {}
+            }
+
+            return {
+              trace_id: c.trace_id,
+              execution_id: c.execution_id,
+              phone: c.user_phone,
+              name: c.user_name || (c.user_phone === '04142554590' ? 'Ids' : 'Abonado'),
+              carrier: c.carrier,
+              carrier_label: c.carrier_label,
+              is_competitor: c.is_competitor,
+              route: c.pipeline_route,
+              route_label: routeTag,
+              last_time: timeStr,
+              user_msg: c.user_message,
+              bot_reply: c.bot_reply,
+              duration: `${c.duration_sec}s`,
+              resolution_note: c.pipeline_route === 'FAST_PATH_TELCO_ODA'
+                ? 'Resuelto instantáneamente por Movilnet Core :8010 (SQLite WAL + Blind Index HMAC-SHA256 • 0 tokens)'
+                : (c.pipeline_route === 'FUNNEL_MARKETING_PORTABILIDAD'
+                  ? 'Detectado abonado competencia ➔ Activó Funnel Portabilidad'
+                  : `Procesado por n8n (Ejecución #${c.execution_id}) + Gemini Flash + Memoria PostgreSQL`)
+            };
+          });
+
+          // Unir con locales
+          const existingIds = new Set(serverItems.map(s => s.trace_id));
+          const localOnly = conversations.filter(l => !existingIds.has(l.trace_id));
+          conversations = [...serverItems, ...localOnly];
+
+          const statusElem = document.getElementById('headerLiveStatus');
+          if (statusElem && conversations[0]) {
+            statusElem.innerText = `Webhook Activo (:8010 ↔ n8n Cloud) • Última Ejecución: #${conversations[0].execution_id || '9636'}`;
+          }
+
+          if (!selectedTraceId || !conversations.some(c => c.trace_id === selectedTraceId)) {
+            selectedTraceId = conversations[0].trace_id;
+          }
+          renderPhoneList();
+          updateChatView();
+        }
+      } catch (err) {
+        // En caso de modo desconectado, preserva el cache local
+      }
+    }
+
+    function setFilter(filter) {
+      activeFilter = filter;
+      document.querySelectorAll('.pill-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-filter') === filter);
+      });
+      renderPhoneList();
+    }
+
+    function renderPhoneList() {
+      const container = document.getElementById('phonesListContainer');
+      const filtered = conversations.filter(c => {
+        if (activeFilter === 'ALL') return true;
+        return c.carrier === activeFilter;
+      });
+
+      container.innerHTML = filtered.map(c => {
+        const isSel = c.trace_id === selectedTraceId ? 'selected' : '';
+        const tagClass = c.carrier === 'MOVILNET' ? 'tag-movilnet' : (c.carrier === 'MOVISTAR' ? 'tag-movistar' : 'tag-digitel');
+
+        return `
+          <div class="phone-item ${isSel}" onclick="selectConversation('${c.trace_id}')">
+            <div class="phone-top-row">
+              <span class="phone-number">${c.phone}</span>
+              <span class="tag-carrier ${tagClass}">${c.carrier}</span>
+            </div>
+            <div class="phone-preview-text">
+              <strong>${c.name}:</strong> ${escapeHtml(c.user_msg)}
+            </div>
+            <div class="phone-meta-row">
+              <span>${c.route_label}</span>
+              <span>${c.last_time}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function selectConversation(traceId) {
+      selectedTraceId = traceId;
+      renderPhoneList();
+      updateChatView();
+
+      // Consultar detalle profundo de nodos si está disponible en el servidor
+      try {
+        const res = await fetch(`/api/v1/monitor/trace?id=${encodeURIComponent(traceId)}`);
+        if (res.ok) {
+          const detail = await res.json();
+          if (detail && Array.isArray(detail.steps)) {
+            let stepsText = `[TRAZA SECUENCIAL E2E: ${detail.trace_id} | Ejecución #${detail.execution_id}]\n`;
+            stepsText += `• Remitente: ${detail.user_phone} (${detail.carrier_label})\n`;
+            stepsText += `• Webhook Destino: ${detail.bot_number} (messages.upsert)\n`;
+            stepsText += `• Duración Total: ${detail.total_duration_sec}s | Ruta: ${detail.pipeline_route}\n\n`;
+            stepsText += `--- PASOS EJECUTADOS EN TIEMPO REAL ---\n`;
+            detail.steps.forEach(s => {
+              stepsText += `Paso ${s.step_index}: [${s.phase_category}] ${s.node_name} (${s.execution_time_ms}ms) -> ${s.description}\n`;
+            });
+            document.getElementById('techDetailsBox').innerText = stepsText;
+            return;
+          }
+        }
+      } catch (e) {}
+
+      const conv = conversations.find(c => c.trace_id === traceId) || conversations[0];
+      document.getElementById('techDetailsBox').innerText = 
+        `[TRAZA TÉCNICA E2E: ${conv.trace_id}]\n` +
+        `• Remitente Externo: ${conv.phone} (${conv.carrier_label})\n` +
+        `• Webhook Destino: +58 416 625 1587 (messages.upsert)\n` +
+        `• Ruta Evaluada: ${conv.route}\n` +
+        `• Tiempo de Ejecución: ${conv.duration}\n` +
+        `• Resolución: ${conv.resolution_note}`;
+    }
+
+    function updateChatView() {
+      const conv = conversations.find(c => c.trace_id === selectedTraceId) || conversations[0];
+      if (!conv) return;
+
+      // Encabezado
+      document.getElementById('activePhoneTitle').innerText = `${conv.phone} (${conv.name})`;
+      document.getElementById('activeCarrierSubtitle').innerText = `${conv.carrier_label} ↔ Bot Movilnet (+58 416 625 1587)`;
+      
+      const routeTag = document.getElementById('activeRouteTag');
+      routeTag.innerText = conv.route_label;
+      routeTag.className = 'chat-route-tag ' + (
+        conv.route === 'FAST_PATH_TELCO_ODA' ? 'route-fastpath' : 
+        (conv.route === 'FUNNEL_MARKETING_PORTABILIDAD' ? 'route-funnel' : 'route-gemini')
+      );
+
+      // Cargar en los inputs de abajo si no están siendo editados
+      const phoneInput = document.getElementById('inputPhone');
+      if (document.activeElement !== phoneInput) phoneInput.value = conv.phone;
+
+      // Renderizar burbujas del conversatorio
+      const chatArea = document.getElementById('chatMessagesArea');
+      chatArea.innerHTML = `
+        <div class="msg-group">
+          <!-- BURBUJA 1: MENSAJE ENTRANTE DEL USUARIO EXTERNO AL WEBHOOK -->
+          <div class="bubble-wrapper user">
+            <div class="bubble-card bubble-user-card">
+              <div class="bubble-header">
+                <span class="sender-user">👤 ${conv.name} (${conv.phone}) ➔ Webhook</span>
+                <span class="bubble-time">${conv.last_time}</span>
+              </div>
+              <div>${escapeHtml(conv.user_msg)}</div>
+            </div>
+          </div>
+
+          <!-- BURBUJA 2: RESPUESTA QUE ENVÍA EL BOT +58 416 625 1587 -->
+          <div class="bubble-wrapper bot">
+            <div class="bubble-card bubble-bot-card">
+              <div class="bubble-header">
+                <span class="sender-bot">🤖 Bot Movilnet Core (+58 416 625 1587)</span>
+                <span class="bubble-time">${conv.last_time} (${conv.duration})</span>
+              </div>
+              <div>${escapeHtml(conv.bot_reply)}</div>
+              <div class="bubble-note-pill">
+                ✓ ${conv.resolution_note}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function quickFill(phone, msg, name) {
+      document.getElementById('inputPhone').value = phone;
+      document.getElementById('inputMsg').value = msg;
+    }
+
+    function handleSend(e) {
+      e.preventDefault();
+      const phone = document.getElementById('inputPhone').value.trim();
+      const msg = document.getElementById('inputMsg').value.trim();
+      if (!phone || !msg) return;
+
+      const isMovilnet = phone.includes('416') || phone.includes('426');
+      const isMovistar = phone.includes('414') || phone.includes('424');
+      const carrier = isMovilnet ? 'MOVILNET' : (isMovistar ? 'MOVISTAR' : 'DIGITEL');
+      const carrierLabel = isMovilnet ? 'Movilnet 4GMAX' : (isMovistar ? 'Movistar Venezuela' : 'Digitel Venezuela');
+      const lower = msg.toLowerCase();
+      const isTelco = ['saldo', 'mega', 'contrato', 'c2p'].some(k => lower.includes(k));
+
+      let route = 'AI_AGENT_GEMINI';
+      let routeLabel = '🧠 Gemini AI Agent';
+      let botReply = `Hola, gracias por escribir a Movilnet. ¿Cómo podemos apoyarte hoy?`;
+      let note = 'Enrutado por Rama 9 (Fallback IA Gemini + Postgres)';
+      let dur = '1.8s';
+
+      if (isMovilnet && isTelco) {
+        route = 'FAST_PATH_TELCO_ODA';
+        routeLabel = '⚡ Fast-Path Core ODA';
+        botReply = `Estimado abonado ${phone}: Su saldo disponible es Bs. 1.650,00. Datos 4GMAX: 11.9 GB. Corte: 15 del mes.`;
+        note = 'Resuelto en <0.15ms por Movilnet Core :8010 (0 tokens)';
+        dur = '0.15ms';
+      } else if (!isMovilnet) {
+        route = 'FUNNEL_MARKETING_PORTABILIDAD';
+        routeLabel = '🎯 Funnel Portabilidad';
+        botReply = `¡Hola! Vemos que escribes desde ${carrierLabel}. Pásate a Movilnet 4GMAX con tu eSIM GRATIS y llévate 10GB de bono.`;
+        note = 'Detectada línea externa ➔ Oferta de captación portabilidad activada';
+        dur = '0.22ms';
+      }
+
+      const newConv = {
+        trace_id: 'TRACE-' + Date.now(),
+        phone: phone,
+        name: phone === '0414-2554590' ? 'Ids' : 'Abonado',
+        carrier: carrier,
+        carrier_label: carrierLabel,
+        is_competitor: !isMovilnet,
+        route: route,
+        route_label: routeLabel,
+        last_time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        user_msg: msg,
+        bot_reply: botReply,
+        duration: dur,
+        resolution_note: note
+      };
+
+      conversations.unshift(newConv);
+      selectConversation(newConv.trace_id);
+
+      // Notificar al backend en segundo plano
+      fetch('/api/v1/admin/simulate-inbound', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone, message: msg })
+      }).catch(() => {});
+    }
+
+    function toggleTechDetails() {
+      const box = document.getElementById('techDetailsBox');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

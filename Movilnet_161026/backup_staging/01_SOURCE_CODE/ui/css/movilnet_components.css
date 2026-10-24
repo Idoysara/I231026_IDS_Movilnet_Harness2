@@ -1,0 +1,792 @@
+/**
+ * movilnet_components.css — Componentes Atómicos y Moleculares Accesibles
+ * Proyecto: AI_Movilnet_300926 — Telecomunicaciones Movilnet C.A.
+ * Estándar: WCAG 2.1 AAA / UX-IX-AX Design System
+ */
+
+/* ==========================================================================
+   1. RESET Y CONFIGURACIÓN BASE
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 200ms ease, color 200ms ease;
+  min-height: 100vh;
+}
+
+/* Enfoque visible accesible universal */
+:focus-visible {
+  outline: 3px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   2. NAVEGACIÓN Y ENCABEZADO CORPORATIVO
+   ========================================================================== */
+.mov-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--mov-blue-primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid var(--mov-orange-accent);
+}
+
+.mov-navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--text-inverse);
+}
+
+.mov-logo-badge {
+  background: linear-gradient(135deg, var(--mov-orange-accent), #FF8533);
+  color: #FFFFFF;
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--font-size-lg);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mov-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.mov-brand-title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-tight);
+  color: #FFFFFF;
+}
+
+.mov-brand-sub {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mov-navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Indicador de Estado del Enjambre Swarm L5 */
+.mov-swarm-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+}
+
+.mov-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22C55E;
+  box-shadow: 0 0 8px #22C55E;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* ==========================================================================
+   3. BOTONES ACCESIBLES (WCAG 2.5.5 Min Tap Target 44px)
+   ========================================================================== */
+.mov-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--min-tap-target);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.mov-btn-primary {
+  background-color: var(--mov-orange-accent);
+  color: #FFFFFF;
+}
+
+.mov-btn-primary:hover:not(:disabled) {
+  background-color: #E65A08;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.mov-btn-primary:active:not(:disabled) {
+  background-color: #CC4E04;
+  transform: translateY(0);
+}
+
+.mov-btn-secondary {
+  background-color: var(--mov-blue-primary);
+  color: #FFFFFF;
+}
+
+.mov-btn-secondary:hover:not(:disabled) {
+  background-color: var(--mov-blue-4gmax);
+  transform: translateY(-1px);
+}
+
+.mov-btn-outline {
+  background-color: transparent;
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.mov-btn-outline:hover:not(:disabled) {
+  background-color: var(--bg-subtle);
+  border-color: var(--border-strong);
+}
+
+.mov-btn-danger {
+  background-color: var(--mov-danger);
+  color: #FFFFFF;
+}
+
+.mov-btn-danger:hover:not(:disabled) {
+  background-color: #991B1B;
+}
+
+.mov-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mov-btn-icon-only {
+  width: var(--min-tap-target);
+  height: var(--min-tap-target);
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   4. CHIPS, BADGES Y ETIQUETAS SEMÁNTICAS
+   ========================================================================== */
+.mov-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  line-height: 1.4;
+}
+
+.mov-badge-success {
+  background-color: var(--mov-success-bg);
+  color: var(--mov-success);
+  border: 1px solid rgba(21, 128, 61, 0.25);
+}
+
+.mov-badge-warning {
+  background-color: var(--mov-warning-bg);
+  color: var(--mov-warning);
+  border: 1px solid rgba(180, 83, 9, 0.25);
+}
+
+.mov-badge-danger {
+  background-color: var(--mov-danger-bg);
+  color: var(--mov-danger);
+  border: 1px solid rgba(185, 28, 28, 0.25);
+}
+
+.mov-badge-info {
+  background-color: var(--mov-info-bg);
+  color: var(--mov-info);
+  border: 1px solid rgba(3, 105, 161, 0.25);
+}
+
+.mov-badge-4gmax {
+  background: linear-gradient(135deg, var(--mov-blue-4gmax), var(--mov-cyan-data));
+  color: #FFFFFF;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   5. TARJETAS Y CONTENEDORES (SURFACES)
+   ========================================================================== */
+.mov-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.mov-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(255, 106, 19, 0.35);
+}
+
+.mov-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.mov-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+/* Tarjeta KPI Ejecutiva */
+.mov-kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.mov-kpi-label {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  color: var(--text-muted);
+  font-weight: var(--font-weight-semibold);
+}
+
+.mov-kpi-value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  line-height: var(--line-height-tight);
+}
+
+.mov-kpi-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   6. FORMULARIOS, INPUTS Y VALIDACIÓN ACCESIBLE
+   ========================================================================== */
+.mov-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.mov-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.mov-input {
+  min-height: var(--min-tap-target);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-base);
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+}
+
+.mov-input:hover {
+  border-color: var(--border-strong);
+}
+
+.mov-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+  outline: none;
+}
+
+.mov-input::placeholder {
+  color: var(--text-muted);
+}
+
+.mov-help-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   7. BARRAS DE PROGRESO ACCESIBLES (OCS Quotas)
+   ========================================================================== */
+.mov-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+
+.mov-progress-track {
+  width: 100%;
+  height: 12px;
+  background-color: var(--bg-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.mov-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mov-blue-4gmax), var(--mov-cyan-data));
+  border-radius: var(--radius-full);
+  transition: width 400ms var(--transition-timing);
+}
+
+.mov-progress-bar-warning {
+  background: linear-gradient(90deg, #D97706, #F59E0B);
+}
+
+.mov-progress-bar-danger {
+  background: linear-gradient(90deg, #DC2626, #EF4444);
+}
+
+/* ==========================================================================
+   8. PESTAÑAS ACCESIBLES (WAI-ARIA Tablist)
+   ========================================================================== */
+.mov-tablist {
+  display: flex;
+  border-bottom: 2px solid var(--border-subtle);
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  overflow-x: auto;
+}
+
+.mov-tab {
+  min-height: var(--min-tap-target);
+  padding: var(--space-3) var(--space-5);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.mov-tab:hover {
+  color: var(--mov-orange-accent);
+}
+
+.mov-tab[aria-selected="true"] {
+  color: var(--mov-orange-accent);
+  border-bottom-color: var(--mov-orange-accent);
+}
+
+.mov-tabpanel {
+  display: none;
+}
+
+.mov-tabpanel.active {
+  display: block;
+  animation: fadeIn 200ms ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   9. MODALES Y DIÁLOGOS ACCESIBLES (role="dialog")
+   ========================================================================== */
+.mov-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 17, 24, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+  padding: var(--space-4);
+}
+
+.mov-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mov-modal-dialog {
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  max-width: 560px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95) translateY(10px);
+  transition: var(--transition-modal);
+  overflow: hidden;
+}
+
+.mov-modal-backdrop.open .mov-modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+.mov-modal-header {
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mov-modal-body {
+  padding: var(--space-6);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.mov-modal-footer {
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  background-color: var(--bg-subtle);
+}
+
+/* ==========================================================================
+   10. SKELETON LOADER (Previene Layout Shifts - CLS = 0)
+   ========================================================================== */
+.mov-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-subtle) 25%,
+    rgba(255, 255, 255, 0.15) 37%,
+    var(--bg-subtle) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* ==========================================================================
+   11. CONTENEDOR PWA MÓVIL SIMULADO (Frame Preview)
+   ========================================================================== */
+.mov-mobile-frame {
+  max-width: 412px;
+  margin: 0 auto;
+  border: 8px solid #1E293B;
+  border-radius: 36px;
+  background-color: var(--bg-surface);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  min-height: 780px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mov-mobile-notch {
+  width: 140px;
+  height: 20px;
+  background-color: #1E293B;
+  margin: 0 auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.mov-mobile-screen {
+  flex: 1;
+  padding: var(--space-4);
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   12. VENTANAS MODULARES DE CHAT (WHATSAPP & TELEGRAM SIMULATOR)
+   ========================================================================== */
+.chat-window-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 420px));
+  gap: var(--space-6);
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+
+.chat-app-window {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+  border: 1px solid var(--border-subtle);
+  background-color: #ECE5DD;
+  position: relative;
+}
+
+/* Ventana WhatsApp */
+.chat-app-window.whatsapp {
+  background-color: #EFEAE2;
+  background-image: radial-gradient(#D5D0C9 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.whatsapp .chat-header {
+  background-color: #075E54;
+  color: #FFFFFF;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.whatsapp .chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.whatsapp .chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.whatsapp .chat-header-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.whatsapp .chat-header-status {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+.whatsapp .chat-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.whatsapp .chat-bubble {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  box-shadow: 0 1px 1.5px rgba(0,0,0,0.13);
+  position: relative;
+}
+
+.whatsapp .chat-bubble.bot {
+  background-color: #FFFFFF;
+  color: #111B21;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+
+.whatsapp .chat-bubble.user {
+  background-color: #E7FFDB;
+  color: #111B21;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+}
+
+.whatsapp .chat-input-bar {
+  background-color: #F0F2F5;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.whatsapp .chat-input {
+  flex: 1;
+  background: #FFFFFF;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.whatsapp .chat-send-btn {
+  background: #00A884;
+  color: #FFFFFF;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/* Ventana Telegram */
+.chat-app-window.telegram {
+  background-color: #0E1621;
+  background-image: radial-gradient(#17212B 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.telegram .chat-header {
+  background-color: #17212B;
+  color: #FFFFFF;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #0E1621;
+}
+
+.telegram .chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.telegram .chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2AABEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.telegram .chat-header-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.telegram .chat-header-status {
+  font-size: 0.72rem;
+  color: #2AABEE;
+}
+
+.telegram .chat-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.telegram .chat-bubble {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+
+.telegram .chat-bubble.bot {
+  background-color: #182533;
+  color: #F5F5F5;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.telegram .chat-bubble.user {
+  background-color: #2B5278;
+  color: #FFFFFF;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.telegram .chat-input-bar {
+  background-color: #17212B;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #0E1621;
+}
+
+.telegram .chat-input {
+  flex: 1;
+  background: #242F3D;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.telegram .chat-send-btn {
+  background: #2AABEE;
+  color: #FFFFFF;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+

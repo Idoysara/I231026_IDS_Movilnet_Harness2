@@ -1,0 +1,40 @@
+{
+  "department": "Operaciones de Red, Infraestructura y Monitoreo (NOC)",
+  "version": "1.0.0",
+  "last_updated": "2026-10-14T07:15:00Z",
+  "description": "Reglas operativas del NOC, mitigación de averías masivas, avisos proactivos de mantenimiento y telemetría de radiobases",
+  "proactive_bulletins": [
+    {
+      "incident_id": "INC-2026-ZULIA-01",
+      "region": "Zulia",
+      "municipalities": ["Maracaibo", "San Francisco"],
+      "type": "MODERNIZACION_4GMAX",
+      "status": "IN_PROGRESS",
+      "start_time": "2026-10-14T04:00:00Z",
+      "estimated_restoration_time": "2026-10-14T12:00:00Z",
+      "customer_message": "Informamos a nuestros abonados de Maracaibo y San Francisco que cuadrillas técnicas ejecutan labores de modernización y optimización en radiobases 4GMAX. El servicio se normalizará progresivamente antes de las 12:00 PM.",
+      "auto_suppress_ticket": true
+    },
+    {
+      "incident_id": "INC-2026-CARABOBO-02",
+      "region": "Carabobo",
+      "municipalities": ["Valencia", "Naguanagua"],
+      "type": "CORTE_FIBRA_TERCEROS",
+      "status": "DISPATCHED",
+      "start_time": "2026-10-14T05:30:00Z",
+      "estimated_restoration_time": "2026-10-14T10:00:00Z",
+      "customer_message": "Cuadrillas del NOC se encuentran empalmando tramo de fibra óptica afectado en el eje Valencia-Naguanagua. Restablecimiento estimado en 2 horas.",
+      "auto_suppress_ticket": true
+    }
+  ],
+  "monitoring_thresholds": {
+    "high_traffic_cell_threshold_pct": 85.0,
+    "max_packet_loss_pct": 2.5,
+    "auto_escalate_incident_subscriber_count": 20
+  },
+  "radiobase_technologies": [
+    {"tech": "3G", "frequency_mhz": [850, 1900], "status": "ACTIVE_LEGACY"},
+    {"tech": "4G_LTE", "frequency_mhz": [1700, 2100, 700], "status": "PRIMARY_4GMAX"},
+    {"tech": "5G_TRIAL", "frequency_mhz": [3500], "status": "PILOT_ENTERPRISE"}
+  ]
+}

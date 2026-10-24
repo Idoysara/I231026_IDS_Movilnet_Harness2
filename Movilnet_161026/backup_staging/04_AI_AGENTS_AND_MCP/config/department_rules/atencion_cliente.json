@@ -1,0 +1,66 @@
+{
+  "department": "Atención al Cliente, Soporte Técnico y Canales",
+  "version": "1.0.0",
+  "last_updated": "2026-10-14T07:15:00Z",
+  "description": "Reglas de atención omnicanal, FastPath determinista, horarios de operadores humanos y SLAs de reclamos",
+  "fastpath_intents": {
+    "saldo": {
+      "keywords": ["saldo", "cuanto debo", "megas", "cupo", "mis datos", "balance", "consulta saldo"],
+      "execution_sla_ms": 15,
+      "requires_llm": false,
+      "response_template": "Estimado abonado Movilnet 4GMAX, su saldo disponible es de {balance_bs} Bs. Su plan {plan_name} cuenta con {remaining_mb} MB libres hasta el {cutoff_date}."
+    },
+    "planes": {
+      "keywords": ["planes", "tarifas", "cambiar plan", "precios", "inteliplan", "paquetes"],
+      "execution_sla_ms": 15,
+      "requires_llm": false,
+      "response_template": "Conoce los Planes Inteliplan 4GMAX disponibles: 10GB (385.50 Bs), 20GB Pro (690.00 Bs) y 50GB Ultra (1450.00 Bs). Escribe 'Contratar [plan]' o gestiona en la PWA."
+    },
+    "recarga": {
+      "keywords": ["recarga", "recargar", "pagar", "pago movil", "c2p", "donde recargo"],
+      "execution_sla_ms": 15,
+      "requires_llm": false,
+      "response_template": "Para recargar por Pago Móvil C2P oficial a Movilnet: Banco 0102 (Venezuela), Teléfono 0424-1533712, RIF G-20003565-1. Indica monto y clave dinámica para validar."
+    },
+    "apn": {
+      "keywords": ["apn", "configurar datos", "no tengo internet", "punto de acceso", "parametros"],
+      "execution_sla_ms": 15,
+      "requires_llm": false,
+      "response_template": "Parámetros APN Movilnet 4GMAX:\n• Nombre: Movilnet 4G\n• APN: int.movilnet.com.ve\n• Tipo de APN: default,supl\nGuarda los cambios y reinicia tu equipo."
+    }
+  },
+  "human_handoff_schedule": {
+    "is_enabled": true,
+    "work_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "start_time_vet": "08:00",
+    "end_time_vet": "17:00",
+    "timezone": "America/Caracas",
+    "outside_hours_message": "Nuestro equipo de asesores humanos atiende de Lunes a Viernes de 8:00 AM a 5:00 PM. Tu solicitud ha quedado registrada con ticket #{ticket_id}. Nuestro asistente MOVI continúa atendiéndote 24/7."
+  },
+  "claim_sla_hours": {
+    "recharge_issue": 24,
+    "billing_inconsistency": 48,
+    "sim_activation": 12,
+    "technical_outage": 6
+  },
+  "tone_and_voice": {
+    "persona": "MOVI - Asistente Inteligente Oficial de Telecomunicaciones Movilnet",
+    "attributes": ["empático", "ágil", "preciso", "resolutivo", "respetuoso"],
+    "prohibited_phrases": [
+      "No puedo ayudarte con eso",
+      "Eso no es mi culpa",
+      "Llama al 0800-MOVILNET tú mismo",
+      "Espera eternamente"
+    ]
+  },
+  "zero_hallucination_and_missing_data_rules": {
+    "zero_hallucination": true,
+    "strictly_prohibited_assumptions": [
+      "Asumir que el usuario está en Caracas si no lo ha especificado",
+      "Inventar locales, restaurantes, farmacias o direcciones que no estén en la base de datos verificada",
+      "Inventar modelos de planes o precios fuera del catálogo oficial"
+    ],
+    "mandatory_action_on_missing_data": "Solicitar amablemente, de forma breve y cordial la ubicación, ciudad o datos faltantes antes de construir la respuesta.",
+    "token_optimization": "Respuestas de 2 a 4 oraciones concisas y amigables para fidelizar al usuario."
+  }
+}

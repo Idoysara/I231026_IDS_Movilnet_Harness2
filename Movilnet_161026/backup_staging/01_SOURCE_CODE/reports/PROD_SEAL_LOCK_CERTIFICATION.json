@@ -1,0 +1,39 @@
+{
+  "protocol": "PROTOCOLO_DECAGONAL_CERO_ERRORES",
+  "governance": "Universal Best Practices Engineering Rule (Pilares I al VII)",
+  "status": "PROD_LOCKED_AND_SHIELDED",
+  "sealed_at_utc": "2026-10-14T17:45:00Z",
+  "sealed_at_vet": "2026-10-14T13:45:00-04:00",
+  "certification": {
+    "production_branch": "main",
+    "production_commit": "c33a56ea0843ee3bf11d620b369f239a12e4fbde",
+    "production_tag": "v1.0.0-prod-sealed",
+    "render_service_id": "srv-cuenec5ds78s73cqo21g",
+    "render_deploy_id": "dep-db7qb57avr4c7396gv9g",
+    "render_production_url": "https://movilnet-core.onrender.com",
+    "render_health_status": "healthy",
+    "render_database_status": "CONNECTED"
+  },
+  "official_telecom_identities": {
+    "asistente_central_oficial": "+58 424 153 3712",
+    "canal_whatsapp_jid": "584241533712@s.whatsapp.net",
+    "n8n_webhook_url": "https://n8n.lpgtec.net/webhook-test/messages_upsert4",
+    "n8n_workflow_id": "sNMbtiEiTkuQ9OCY",
+    "n8n_workflow_url": "https://n8n.lpgtec.net/workflow/sNMbtiEiTkuQ9OCY/43204e",
+    "modelo_conversacional": "N <--> 1 (Abonados N conversan con Asistente 1)"
+  },
+  "active_working_environment": {
+    "active_branch": "develop",
+    "local_service_url": "http://localhost:8010",
+    "local_monitor_url": "http://localhost:8010/ui/monitor/conversatorio.html",
+    "local_pwa_url": "http://localhost:8010/pwa",
+    "port_guard_status": "ISOLATED_PORT_8010 (Port 8000 reserved for DSS GPS)"
+  },
+  "security_invariants_and_shield_rules": [
+    "REGLA 1: La rama 'main' queda formalmente blindada, congelada e inmutable bajo el tag 'v1.0.0-prod-sealed'.",
+    "REGLA 2: Queda estrictamente prohibido realizar commits directos, merges o push a 'main' sin autorización humana expresa.",
+    "REGLA 3: Queda estrictamente prohibido disparar trigger_render_deploy o tocar la configuración de Render Cloud.",
+    "REGLA 4: La línea +58 424 153 3712 es el único canal oficial del asistente (1) y no puede ser sustituida por ningún otro número.",
+    "REGLA 5: Todo nuevo requerimiento, refactorización, prueba o desarrollo debe ejecutarse 100% en la rama 'develop' y en el entorno local :8010."
+  ]
+}

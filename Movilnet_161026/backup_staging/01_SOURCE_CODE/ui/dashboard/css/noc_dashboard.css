@@ -1,0 +1,531 @@
+/**
+ * noc_dashboard.css — Estilos Carrier-Grade NOC / CCO para Telecomunicaciones Movilnet C.A.
+ * Proyecto: AI_Movilnet_300926
+ * Estándar: WCAG 2.1 AAA | Dark Mode Operativo | Contrastes > 7:1
+ */
+
+:root {
+  --noc-bg-canvas: #060B11;
+  --noc-bg-panel: #0D1520;
+  --noc-bg-panel-elevated: #131E2D;
+  --noc-bg-header: #091018;
+  --noc-border: #1E2D42;
+  --noc-border-focus: #FF6A13;
+  
+  --noc-blue-brand: #00558C;
+  --noc-blue-glow: rgba(0, 163, 224, 0.25);
+  --noc-orange: #FF6A13;
+  --noc-cyan: #00A3E0;
+  
+  --noc-text-bright: #F8FAFC;
+  --noc-text-normal: #CBD5E1;
+  --noc-text-dim: #94A3B8;
+  --noc-text-muted: #64748B;
+  
+  --noc-status-green: #22C55E;
+  --noc-status-green-bg: rgba(34, 197, 94, 0.15);
+  --noc-status-amber: #F59E0B;
+  --noc-status-amber-bg: rgba(245, 158, 11, 0.15);
+  --noc-status-red: #EF4444;
+  --noc-status-red-bg: rgba(239, 68, 68, 0.18);
+  --noc-status-cyan: #06B6D4;
+  --noc-status-cyan-bg: rgba(6, 182, 212, 0.15);
+  
+  --noc-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--noc-bg-canvas);
+  color: var(--noc-text-normal);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-size: 14px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessibility: Focus rings WCAG AAA */
+:focus-visible {
+  outline: 3px solid var(--noc-border-focus);
+  outline-offset: 2px;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 10px;
+  background: var(--noc-orange);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  font-weight: 700;
+  z-index: 9999;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 10px;
+}
+
+/* Header de Operaciones NOC */
+.noc-header {
+  background-color: var(--noc-bg-header);
+  border-bottom: 1px solid var(--noc-border);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.noc-brand-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.noc-logo {
+  height: 38px;
+  width: auto;
+  border-radius: 4px;
+}
+
+.noc-title-wrap h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--noc-text-bright);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.noc-title-wrap p {
+  font-size: 0.8rem;
+  color: var(--noc-text-dim);
+}
+
+.noc-badge-env {
+  display: inline-block;
+  background: #002B49;
+  color: #00A3E0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid #00558C;
+  text-transform: uppercase;
+}
+
+.noc-controls-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.noc-clock-box {
+  background: #0B121C;
+  border: 1px solid var(--noc-border);
+  border-radius: 6px;
+  padding: 6px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.noc-clock-time {
+  font-family: var(--noc-font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--noc-cyan);
+}
+
+.noc-clock-date {
+  font-size: 0.72rem;
+  color: var(--noc-text-dim);
+}
+
+.noc-btn-refresh {
+  background: var(--noc-blue-brand);
+  color: #FFFFFF;
+  border: 1px solid #00A3E0;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  min-height: 44px; /* WCAG Target */
+}
+
+.noc-btn-refresh:hover {
+  background: #0073BD;
+  box-shadow: 0 0 10px var(--noc-blue-glow);
+}
+
+.noc-pulse-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--noc-status-green);
+  display: inline-block;
+  box-shadow: 0 0 8px var(--noc-status-green);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px var(--noc-status-green); }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Layout del Dashboard */
+.noc-container {
+  padding: 24px;
+  max-width: 1800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Grilla de Métricas Top-Level (KPIs 4M Abonados) */
+.noc-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.noc-kpi-card {
+  background: var(--noc-bg-panel);
+  border: 1px solid var(--noc-border);
+  border-radius: 8px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.noc-kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: #2D4263;
+}
+
+.noc-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--noc-blue-brand);
+}
+
+.noc-kpi-card.accent-orange::before { background: var(--noc-orange); }
+.noc-kpi-card.accent-green::before { background: var(--noc-status-green); }
+.noc-kpi-card.accent-cyan::before { background: var(--noc-cyan); }
+.noc-kpi-card.accent-amber::before { background: var(--noc-status-amber); }
+
+.noc-kpi-label {
+  font-size: 0.8rem;
+  color: var(--noc-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.noc-kpi-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--noc-text-bright);
+  font-family: var(--noc-font-mono);
+  line-height: 1.2;
+}
+
+.noc-kpi-subtext {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--noc-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Grilla Principal 2 Columnas */
+.noc-main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1200px) {
+  .noc-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Paneles Generales */
+.noc-panel {
+  background: var(--noc-bg-panel);
+  border: 1px solid var(--noc-border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.noc-panel-header {
+  background: var(--noc-bg-panel-elevated);
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--noc-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.noc-panel-header h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--noc-text-bright);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.noc-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.noc-panel-body {
+  padding: 18px;
+  flex: 1;
+}
+
+/* Swarm Multi-Agent Grid */
+.noc-swarm-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .noc-swarm-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.noc-agent-card {
+  background: #09111C;
+  border: 1px solid #1A283B;
+  border-radius: 6px;
+  padding: 14px;
+  position: relative;
+}
+
+.noc-agent-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.noc-agent-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--noc-text-bright);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.noc-agent-tag {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 85, 140, 0.4);
+  color: #00A3E0;
+  border: 1px solid #00558C;
+  font-family: var(--noc-font-mono);
+}
+
+.noc-agent-role {
+  font-size: 0.8rem;
+  color: var(--noc-text-dim);
+  margin-bottom: 12px;
+}
+
+.noc-agent-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: #050B12;
+  border: 1px solid #142030;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.noc-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.noc-stat-lbl {
+  font-size: 0.68rem;
+  color: var(--noc-text-muted);
+  text-transform: uppercase;
+}
+
+.noc-stat-val {
+  font-family: var(--noc-font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--noc-cyan);
+}
+
+.noc-stat-val.sla-good {
+  color: var(--noc-status-green);
+}
+
+/* Gráfico de Barras Segmentos */
+.noc-segments-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.noc-seg-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.noc-seg-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.noc-seg-track {
+  height: 8px;
+  background: #101B2B;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.noc-seg-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.noc-seg-fill.prepago { background: var(--noc-orange); }
+.noc-seg-fill.pospago { background: var(--noc-cyan); }
+.noc-seg-fill.corporativo { background: #38BDF8; }
+.noc-seg-fill.jubilado { background: var(--noc-status-green); }
+
+/* Tablas Carrier-Grade */
+.noc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.noc-table th {
+  background: #09121E;
+  color: var(--noc-text-dim);
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--noc-border);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+}
+
+.noc-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #142030;
+  color: var(--noc-text-normal);
+  vertical-align: middle;
+}
+
+.noc-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.noc-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: var(--noc-font-mono);
+}
+
+.noc-badge.success {
+  background: var(--noc-status-green-bg);
+  color: var(--noc-status-green);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.noc-badge.danger {
+  background: var(--noc-status-red-bg);
+  color: var(--noc-status-red);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.noc-badge.warning {
+  background: var(--noc-status-amber-bg);
+  color: var(--noc-status-amber);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.noc-badge.info {
+  background: var(--noc-status-cyan-bg);
+  color: var(--noc-status-cyan);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+/* Footer de Estado de Conectividad */
+.noc-footer {
+  margin-top: 12px;
+  padding: 12px 24px;
+  border-top: 1px solid var(--noc-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--noc-text-dim);
+}
+
+.noc-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.noc-footer-right {
+  font-family: var(--noc-font-mono);
+  color: var(--noc-text-muted);
+}

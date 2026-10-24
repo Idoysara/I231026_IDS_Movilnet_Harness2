@@ -1,0 +1,34 @@
+{
+  "certificate_id": "FASE4-PASO3-CERT-1ECA704F0E3C",
+  "project": "AI_Movilnet_300926",
+  "phase": "Fase 4: Diseño y Desarrollo de Interfaces de Usuario (UI / UX / IX / AX), Dashboard Ejecutivo y Despliegue Final",
+  "step": "Paso 3: Portal PWA de Autoservicio Móvil del Abonado (Offline-First / OCS Fast-Path / C2P)",
+  "organization": "Telecomunicaciones Movilnet C.A.",
+  "status": "CERTIFICADO_Y_APROBADO_100%",
+  "timestamp_utc": "2026-10-02T15:43:12.564873+00:00",
+  "wcag_standard": "WCAG 2.1 Level AAA (Touch Targets >= 44px, Contraste > 7:1)",
+  "pwa_capabilities": [
+    "W3C Web App Manifest standalone e instalable en iOS y Android",
+    "Service Worker con Cache-First para assets y Network-First para OCS",
+    "Consulta de Saldo OCS en O(1) con desglose de cuotas 4GMAX",
+    "Pasarela Financiera C2P Pago Móvil instantánea con bancos SUDEBAN",
+    "Integración con Agente N1 (Customer Care) para soporte cognitivo",
+    "Modo Offline de Contingencia ante pérdidas de conectividad celular"
+  ],
+  "tests_summary": {
+    "step_tests": 8,
+    "step_passed": 8,
+    "global_tests": 227,
+    "global_passed": 227,
+    "duration_seconds": 5.414
+  },
+  "file_hashes": {
+    "ui/pwa/index.html": "322cf2050155cdfd6b9128a938d5bd67443fbde047f72b59a5c45c98e37a6055",
+    "ui/pwa/manifest.json": "ea2ce379ebdde3976233869722439452973b0a1d003e66813d7250323d6b4960",
+    "ui/pwa/sw.js": "d3941afa45e570e1309d923645a485505464543344fc39053a0f0ab877638599",
+    "ui/pwa/css/pwa.css": "91317d2ad78fc43354153c6024c66c96bd672265b4769a172be7b5a554fd3a82",
+    "ui/pwa/js/pwa.js": "435c02ba64d34b31d2316908628aff28c75de3181b842751aa6c5cc5b638f67c",
+    "tests/test_phase4_step3_pwa.py": "f9826394dbb4ecdc8c30db73a53a14a9ace0db8edfea8e689d957ecd5f93861d"
+  },
+  "sha256_cryptographic_seal": "1eca704f0e3c64492a163d08071f0bc6ced8b93bd17b23f000e733f1e092a77e"
+}

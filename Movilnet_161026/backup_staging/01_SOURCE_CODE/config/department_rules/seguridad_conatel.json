@@ -1,0 +1,32 @@
+{
+  "department": "Seguridad, Prevención de Fraude y Regulatorio CONATEL",
+  "version": "1.0.0",
+  "last_updated": "2026-10-14T07:15:00Z",
+  "description": "Reglas de seguridad y cumplimiento legal, validación IMEI por Luhn, lista negra EIR y Zero-PII",
+  "imei_rules": {
+    "length": 15,
+    "algorithm": "luhn",
+    "block_on_theft": true,
+    "require_police_report_reference": false,
+    "eir_sync_mode": "instant_and_conatel_batch"
+  },
+  "kyc_rules": {
+    "identity_document_types": ["V", "E", "J", "G", "P"],
+    "phone_ownership_validation": true,
+    "max_failed_auth_attempts": 3,
+    "lockout_duration_minutes": 15
+  },
+  "zero_pii_policy": {
+    "enforce_zero_pii": true,
+    "redact_credit_cards": true,
+    "redact_passwords": true,
+    "redact_full_cid_in_logs": true,
+    "cid_mask_pattern": "V-***{last4}",
+    "retention_ram_only_ms": 30
+  },
+  "conatel_compliance": {
+    "official_emergency_numbers": ["911", "171", "0800-MOVILNET"],
+    "mandatory_disclaimer": "Servicio regulado conforme a la Ley Orgánica de Telecomunicaciones y providencias de CONATEL.",
+    "sim_swap_cooling_period_hours": 24
+  }
+}

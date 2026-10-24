@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard Web Ejecutivo NOC/CCO de Telecomunicaciones Movilnet C.A. — Monitoreo Carrier-Grade en tiempo real.">
+  <title>NOC / CCO — Sala de Control y Operaciones Carrier-Grade | Movilnet C.A.</title>
+  
+  <!-- Design Tokens y Estilos NOC Dark Mode (WCAG 2.1 AAA) -->
+  <link rel="stylesheet" href="/ui/css/movilnet_tokens.css">
+  <link rel="stylesheet" href="/ui/dashboard/css/noc_dashboard.css">
+</head>
+<body>
+  <!-- Enlace accesible de salto al contenido -->
+  <a href="#noc-main-content" class="skip-link">Saltar directamente al contenido principal</a>
+
+  <!-- Header Institucional NOC -->
+  <header class="noc-header" role="banner">
+    <div class="noc-brand-area">
+      <div class="noc-title-wrap">
+        <h1>
+          <span>MOVILNET C.A. — SALA DE CONTROL NOC / CCO</span>
+          <span class="noc-badge-env">PRODUCCIÓN CARRIER-GRADE</span>
+        </h1>
+        <p>Centro de Control de Operaciones & Monitoreo del Enjambre Cognitivo Swarm L5</p>
+      </div>
+    </div>
+
+    <div class="noc-controls-area">
+      <div class="noc-clock-box" aria-label="Reloj de operaciones">
+        <span id="noc-clock-time" class="noc-clock-time">00:00:00 VET</span>
+        <span id="noc-clock-date" class="noc-clock-date">CARGANDO FECHA...</span>
+      </div>
+
+      <button id="btn-manual-refresh" class="noc-btn-refresh" aria-label="Sincronizar telemetría ahora">
+        <span>⚡ Sincronizar Ahora</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal del Dashboard -->
+  <main id="noc-main-content" class="noc-container" role="main">
+    
+    <!-- 1. Fila de KPIs Principales (4M Abonados & Finanzas) -->
+    <section class="noc-kpi-grid" aria-label="Indicadores Claves de Desempeño">
+      
+      <article class="noc-kpi-card accent-orange">
+        <div class="noc-kpi-label">
+          <span>Base Total Instalada</span>
+          <span class="noc-pulse-indicator" title="Activo"></span>
+        </div>
+        <div id="kpi-total-subs" class="noc-kpi-value">4.000.000</div>
+        <div class="noc-kpi-subtext">Abonados Movilnet (0416 / 0426)</div>
+      </article>
+
+      <article class="noc-kpi-card accent-green">
+        <div class="noc-kpi-label">
+          <span>Líneas Móviles Activas</span>
+          <span class="noc-badge success">96.1%</span>
+        </div>
+        <div id="kpi-active-lines" class="noc-kpi-value">3.845.210</div>
+        <div class="noc-kpi-subtext">Tráfico concurrente normal</div>
+      </article>
+
+      <article class="noc-kpi-card accent-cyan">
+        <div class="noc-kpi-label">
+          <span>Recaudación C2P (Hoy)</span>
+          <span class="noc-badge info">SUDEBAN T+0</span>
+        </div>
+        <div id="kpi-c2p-ves" class="noc-kpi-value">Bs. 18.450.200,00</div>
+        <div id="kpi-c2p-usd" class="noc-kpi-subtext">≈ $500.683,85 USD</div>
+      </article>
+
+      <article class="noc-kpi-card accent-amber">
+        <div class="noc-kpi-label">
+          <span>SLA Cumplimiento Swarm</span>
+          <span class="noc-badge success">L5 AUTÓNOMO</span>
+        </div>
+        <div id="kpi-swarm-sla" class="noc-kpi-value">99.98%</div>
+        <div class="noc-kpi-subtext">Circuit Breaker: Operacional</div>
+      </article>
+
+    </section>
+
+    <!-- 2. Grilla Principal: Enjambre Swarm a la izquierda, Red y Bancos a la derecha -->
+    <div class="noc-main-grid">
+      
+      <!-- Columna Izquierda: Monitoreo Enjambre Swarm L5 & Segmentación -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Panel Enjambre Swarm N1-N4 -->
+        <section class="noc-panel" aria-labelledby="hdr-swarm-l5">
+          <div class="noc-panel-header">
+            <h2 id="hdr-swarm-l5">🐝 Estado Operativo del Enjambre Swarm Nivel 5 (Agentes N1 - N4)</h2>
+            <div class="noc-panel-actions">
+              <span class="noc-badge success">4 AGENTES ONLINE</span>
+            </div>
+          </div>
+          <div class="noc-panel-body">
+            <div class="noc-swarm-grid">
+              
+              <!-- N1 -->
+              <article class="noc-agent-card">
+                <div class="noc-agent-top">
+                  <span class="noc-agent-name">🤖 N1: Customer Care</span>
+                  <span class="noc-agent-tag">TMF621</span>
+                </div>
+                <div class="noc-agent-role">Atención al Abonado, Consultas OCS & Fast-Path</div>
+                <div class="noc-agent-stats">
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Latencia Prom.</span>
+                    <span id="agent-n1-lat" class="noc-stat-val sla-good">0.207 ms</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Throughput</span>
+                    <span id="agent-n1-tps" class="noc-stat-val">1.250 TPS</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">SLA Meta</span>
+                    <span class="noc-stat-val">&lt; 2.0 ms</span>
+                  </div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--noc-text-dim);">
+                  Modo: Fast-Path Determinista L1 / Memoria Compartida
+                </div>
+              </article>
+
+              <!-- N2 -->
+              <article class="noc-agent-card">
+                <div class="noc-agent-top">
+                  <span class="noc-agent-name">💳 N2: Fintech C2P</span>
+                  <span class="noc-agent-tag">TMF676</span>
+                </div>
+                <div class="noc-agent-role">Conciliación Bancaria C2P & Oráculo Oficial BCV</div>
+                <div class="noc-agent-stats">
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Latencia Prom.</span>
+                    <span id="agent-n2-lat" class="noc-stat-val sla-good">0.005 ms</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Throughput</span>
+                    <span id="agent-n2-tps" class="noc-stat-val">480 TPS</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Tasa BCV</span>
+                    <span id="kpi-bcv-rate" class="noc-stat-val">36.85 Bs/$</span>
+                  </div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--noc-text-dim);">
+                  Bancos: 23 SUDEBAN Habilitados / Cero Pérdidas
+                </div>
+              </article>
+
+              <!-- N3 -->
+              <article class="noc-agent-card">
+                <div class="noc-agent-top">
+                  <span class="noc-agent-name">🚨 N3: Emergency EIR</span>
+                  <span class="noc-agent-tag">GSMA EIR</span>
+                </div>
+                <div class="noc-agent-role">Validación Luhn-10, Bloqueo Hurto & SIM-Swap &lt;72h</div>
+                <div class="noc-agent-stats">
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Latencia Prom.</span>
+                    <span id="agent-n3-lat" class="noc-stat-val sla-good">0.013 ms</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Bloqueos EIR</span>
+                    <span id="agent-n3-locks" class="noc-stat-val">142 Bloqueos</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Anti-Replay</span>
+                    <span class="noc-stat-val">300s TTL</span>
+                  </div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--noc-text-dim);">
+                  Conexión: HLR/HSS Movilnet & Lista Negra GSMA
+                </div>
+              </article>
+
+              <!-- N4 -->
+              <article class="noc-agent-card">
+                <div class="noc-agent-top">
+                  <span class="noc-agent-name">🎯 N4: Retention Churn</span>
+                  <span class="noc-agent-tag">TMF680</span>
+                </div>
+                <div class="noc-agent-role">Scoring ML Tetramodal & Cupones Proactivos NBA</div>
+                <div class="noc-agent-stats">
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Latencia ML</span>
+                    <span id="agent-n4-lat" class="noc-stat-val sla-good">0.887 ms</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">Retención Exitosa</span>
+                    <span id="agent-n4-ret" class="noc-stat-val">74.6%</span>
+                  </div>
+                  <div class="noc-stat-item">
+                    <span class="noc-stat-lbl">SLA Meta</span>
+                    <span class="noc-stat-val">&lt; 5.0 ms</span>
+                  </div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--noc-text-dim);">
+                  Modelo: Inferencia Heurística Logit + Cupones Instantáneos
+                </div>
+              </article>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Panel de Segmentación de Abonados -->
+        <section class="noc-panel" aria-labelledby="hdr-segments">
+          <div class="noc-panel-header">
+            <h2 id="hdr-segments">👥 Distribución de la Base de Abonados (4 Millones)</h2>
+            <span class="noc-badge info">ODA PARTITIONED</span>
+          </div>
+          <div class="noc-panel-body">
+            <div class="noc-segments-bar-wrap">
+              
+              <div class="noc-seg-row">
+                <div class="noc-seg-info">
+                  <span><strong>Prepago Masivo (0416/0426)</strong> — 2.720.000 Abonados</span>
+                  <span>68.0%</span>
+                </div>
+                <div class="noc-seg-track">
+                  <div class="noc-seg-fill prepago" style="width: 68%;"></div>
+                </div>
+              </div>
+
+              <div class="noc-seg-row">
+                <div class="noc-seg-info">
+                  <span><strong>Pospago Conecta</strong> — 760.000 Abonados</span>
+                  <span>19.0%</span>
+                </div>
+                <div class="noc-seg-track">
+                  <div class="noc-seg-fill pospago" style="width: 19%;"></div>
+                </div>
+              </div>
+
+              <div class="noc-seg-row">
+                <div class="noc-seg-info">
+                  <span><strong>Corporativo 4GMAX</strong> — 360.000 Abonados</span>
+                  <span>9.0%</span>
+                </div>
+                <div class="noc-seg-track">
+                  <div class="noc-seg-fill corporativo" style="width: 9%;"></div>
+                </div>
+              </div>
+
+              <div class="noc-seg-row">
+                <div class="noc-seg-info">
+                  <span><strong>Jubilados & Pensionados</strong> — 160.000 Abonados</span>
+                  <span>4.0%</span>
+                </div>
+                <div class="noc-seg-track">
+                  <div class="noc-seg-fill jubilado" style="width: 4%;"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Columna Derecha: Radio Red 4GMAX, Bancos & Auditoría de Seguridad -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Panel Red Radioeléctrica 4GMAX -->
+        <section class="noc-panel" aria-labelledby="hdr-network">
+          <div class="noc-panel-header">
+            <h2 id="hdr-network">📡 Infraestructura 4GMAX & Core</h2>
+            <span class="noc-badge success">CARRIER-GRADE</span>
+          </div>
+          <div class="noc-panel-body">
+            <table class="noc-table">
+              <tbody>
+                <tr>
+                  <td>Disponibilidad Core</td>
+                  <td><strong id="net-core-avail">99.995%</strong></td>
+                </tr>
+                <tr>
+                  <td>Estaciones Radiobase Activas</td>
+                  <td><strong id="net-enodeb-count">1.842 eNodeB</strong></td>
+                </tr>
+                <tr>
+                  <td>Throughput Promedio</td>
+                  <td><strong id="net-throughput">48.7 Mbps</strong></td>
+                </tr>
+                <tr>
+                  <td>Tráfico Pico Agregado</td>
+                  <td><strong id="net-traffic">340.2 Gbps</strong></td>
+                </tr>
+                <tr>
+                  <td>Índice Calidad CONATEL</td>
+                  <td><strong id="net-conatel-index" style="color: var(--noc-status-green);">98.6/100</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Panel Pasarela Bancaria SUDEBAN -->
+        <section class="noc-panel" aria-labelledby="hdr-banks">
+          <div class="noc-panel-header">
+            <h2 id="hdr-banks">🏦 Pasarela C2P — Bancos SUDEBAN</h2>
+            <span class="noc-badge info">TOP RECAUDACIÓN</span>
+          </div>
+          <div class="noc-panel-body" style="padding: 0;">
+            <table class="noc-table">
+              <thead>
+                <tr>
+                  <th>Institución Bancaria</th>
+                  <th>Volumen</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="noc-banks-tbody">
+                <tr>
+                  <td><strong>Banco de Venezuela (0102)</strong></td>
+                  <td><span class="noc-badge info">52.4%</span></td>
+                  <td><span class="noc-badge success">ONLINE</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Banesco (0134)</strong></td>
+                  <td><span class="noc-badge info">21.8%</span></td>
+                  <td><span class="noc-badge success">ONLINE</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Mercantil (0105)</strong></td>
+                  <td><span class="noc-badge info">14.2%</span></td>
+                  <td><span class="noc-badge success">ONLINE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Panel Eventos de Seguridad Recientes -->
+        <section class="noc-panel" aria-labelledby="hdr-security">
+          <div class="noc-panel-header">
+            <h2 id="hdr-security">🔒 Eventos de Seguridad & Bloqueos EIR</h2>
+            <span class="noc-badge danger">LIVE LOG</span>
+          </div>
+          <div class="noc-panel-body" style="padding: 0;">
+            <table class="noc-table">
+              <thead>
+                <tr>
+                  <th>Hora</th>
+                  <th>Evento</th>
+                  <th>Línea</th>
+                  <th>Resolución</th>
+                </tr>
+              </thead>
+              <tbody id="noc-security-tbody">
+                <tr>
+                  <td><span style="font-family: monospace;">11:15:02</span></td>
+                  <td><strong>EIR_THEFT_BLOCK</strong></td>
+                  <td><span style="font-family: monospace;">0416***4512</span></td>
+                  <td><span class="noc-badge danger">BLOQUEO_APLICADO</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer de Telemetría -->
+  <footer class="noc-footer" role="contentinfo">
+    <div class="noc-footer-left">
+      <span id="noc-conn-pulse" class="noc-pulse-indicator"></span>
+      <span id="noc-conn-status-text">TELEMETRÍA EN VIVO (ACTIVA)</span>
+      <span>•</span>
+      <span>Nodo: NOC-CENTRAL-CARACAS-01</span>
+      <span>•</span>
+      <span>Arquitectura TM Forum ODA</span>
+    </div>
+    <div class="noc-footer-right">
+      <span>AI_Movilnet_300926 — Antigravity Nivel 5</span>
+    </div>
+  </footer>
+
+  <!-- Script de Operaciones y Telemetría -->
+  <script src="/ui/dashboard/js/noc_dashboard.js"></script>
+</body>
+</html>

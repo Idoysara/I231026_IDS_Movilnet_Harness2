@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de Diseño UI/UX/IX/AX y Dashboard Ejecutivo — Telecomunicaciones Movilnet C.A.">
+  <meta name="theme-color" content="#002B49">
+  <title>Movilnet Design System & Dashboard Ejecutivo — AI_Movilnet_300926</title>
+  
+  <!-- Estilos del Sistema de Diseño -->
+  <link rel="stylesheet" href="/ui/css/movilnet_tokens.css">
+  <link rel="stylesheet" href="/ui/css/movilnet_components.css">
+
+  <style>
+    /* Estilos de soporte para el showcase */
+    .showcase-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: var(--space-6);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-6);
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-4);
+    }
+    .color-swatch {
+      height: 72px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      color: #FFFFFF;
+      box-shadow: var(--shadow-sm);
+    }
+    .code-snippet {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-xs);
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       BARRA DE NAVEGACIÓN SUPERIOR INSTITUCIONAL
+       ======================================================================== -->
+  <header class="mov-navbar" role="banner">
+    <a href="#" class="mov-navbar-brand" aria-label="Ir al inicio de Movilnet Design System">
+      <div class="mov-logo-badge">movilnet</div>
+      <div class="mov-brand-text">
+        <span class="mov-brand-title">Sistema de Diseño UI/UX/IX/AX</span>
+        <span class="mov-brand-sub">Proyecto AI_Movilnet_300926 — 4M Abonados</span>
+      </div>
+    </a>
+
+    <div class="mov-navbar-controls">
+      <!-- Reloj Legal Caracas VET -->
+      <div class="mov-swarm-status" aria-label="Hora oficial en Caracas y estado del enjambre">
+        <span class="mov-status-dot" aria-hidden="true"></span>
+        <span id="caracas-clock">02:00:00 VET (UTC-4)</span>
+      </div>
+
+      <!-- Badge Enjambre L5 -->
+      <span class="mov-badge mov-badge-success" title="Enjambre Autónomo Multi-Agente Activo">
+        🐝 SWARM L5: OPERACIONAL
+      </span>
+
+      <!-- Selector de Modo Oscuro / NOC -->
+      <button id="btn-toggle-theme" class="mov-btn mov-btn-outline" style="border-color: rgba(255,255,255,0.3); color: #FFF;" aria-label="Cambiar a Modo Oscuro NOC" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+        <span class="theme-label">Modo NOC</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       CONTENIDO PRINCIPAL Y PESTAÑAS WAI-ARIA
+       ======================================================================== -->
+  <main class="showcase-container" role="main">
+
+    <!-- Lista de Pestañas Accesibles -->
+    <div class="mov-tablist" role="tablist" aria-label="Vistas del Sistema de Diseño y Prototipos">
+      <button class="mov-tab" role="tab" aria-selected="true" aria-controls="tab-tokens" id="tab-btn-tokens" tabindex="0">
+        🎨 Design Tokens & Color
+      </button>
+      <button class="mov-tab" role="tab" aria-selected="false" aria-controls="tab-components" id="tab-btn-components" tabindex="-1">
+        🧩 Componentes Accesibles
+      </button>
+      <button class="mov-tab" role="tab" aria-selected="false" aria-controls="tab-dashboard" id="tab-btn-dashboard" tabindex="-1">
+        📊 Dashboard Ejecutivo NOC
+      </button>
+      <button class="mov-tab" role="tab" aria-selected="false" aria-controls="tab-pwa" id="tab-btn-pwa" tabindex="-1">
+        📱 PWA Autoservicio Móvil
+      </button>
+      <button class="mov-tab" role="tab" aria-selected="false" aria-controls="tab-whatsapp" id="tab-btn-whatsapp" tabindex="-1">
+        💬 Chat WhatsApp
+      </button>
+      <button class="mov-tab" role="tab" aria-selected="false" aria-controls="tab-telegram" id="tab-btn-telegram" tabindex="-1">
+        ✈️ Chat Telegram
+      </button>
+    </div>
+
+    <!-- ======================================================================
+         PESTAÑA 1: DESIGN TOKENS & IDENTIDAD CORPORATIVA
+         ====================================================================== -->
+    <section id="tab-tokens" class="mov-tabpanel active" role="tabpanel" aria-labelledby="tab-btn-tokens">
+      <div class="mov-card" style="margin-bottom: var(--space-6);">
+        <h2 style="font-size: var(--font-size-2xl); font-weight: 800; margin-bottom: var(--space-2); color: var(--mov-blue-primary);">
+          Identidad Visual Movilnet & Design Tokens WCAG 2.1 AAA
+        </h2>
+        <p style="color: var(--text-secondary); max-width: 800px; margin-bottom: var(--space-6);">
+          Tokens de diseño estandarizados conforme al formato de la W3C Community Group. Todos los contrastes de texto sobre fondos corporativos superan el umbral estricto AAA (&ge; 7:1 para texto normal y &ge; 4.5:1 para componentes interactivos).
+        </p>
+
+        <h3 style="font-size: var(--font-size-lg); font-weight: 700; margin-bottom: var(--space-4);">
+          Paleta Cromática de Marca (Brand Colors)
+        </h3>
+        <div class="grid-4" style="margin-bottom: var(--space-6);">
+          <div>
+            <div class="color-swatch" style="background-color: #002B49;">#002B49</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Azul Noche Primario</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Contraste: 12.8:1 (AAA)</span>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: #FF6A13;">#FF6A13</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Naranja Dinámico</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Acento Principal & CTAs</span>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: #00558C;">#00558C</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Azul 4GMAX</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Contraste: 7.2:1 (AAA)</span>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: #00A3E0;">#00A3E0</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Cyan Conecta</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Telemetría de Datos OCS</span>
+          </div>
+        </div>
+
+        <h3 style="font-size: var(--font-size-lg); font-weight: 700; margin-bottom: var(--space-4);">
+          Estados Semánticos y Operacionales
+        </h3>
+        <div class="grid-4" style="margin-bottom: var(--space-6);">
+          <div>
+            <div class="color-swatch" style="background-color: #15803D;">#15803D</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Éxito / ACTIVO</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Transacciones C2P OK</span>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: #B45309;">#B45309</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Alerta / MORA</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Saldo Bajo / Retención N4</span>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: #B91C1C;">#B91C1C</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Peligro / THEFT_LOCK</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Bloqueo IMEI EIR N3</span>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: #0369A1;">#0369A1</div>
+            <strong style="font-size: var(--font-size-sm); display: block; margin-top: 6px;">Informativo / OCS</strong>
+            <span style="font-size: var(--font-size-xs); color: var(--text-muted);">Catálogo TMF620</span>
+          </div>
+        </div>
+
+        <h3 style="font-size: var(--font-size-lg); font-weight: 700; margin-bottom: var(--space-4);">
+          Especificación de Tokens (JSON W3C)
+        </h3>
+        <div class="code-snippet">
+          <pre><code>// ui/tokens/design_tokens.json (Fragmento)
+{
+  "color": {
+    "brand": {
+      "primary": { "value": "#002B49", "wcag_aaa": true },
+      "accent":  { "value": "#FF6A13", "wcag_aaa": true },
+      "secondary": { "value": "#00558C", "wcag_aaa": true }
+    }
+  },
+  "accessibility_a11y": {
+    "minimum_tap_target": "44px",
+    "contrast_ratio_normal_text": "12.8:1 (Rating AAA)"
+  }
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 2: COMPONENTES ATÓMICOS Y MOLECULARES
+         ====================================================================== -->
+    <section id="tab-components" class="mov-tabpanel" role="tabpanel" aria-labelledby="tab-btn-components" hidden>
+      <div class="grid-2" style="margin-bottom: var(--space-6);">
+        <!-- Botones Accesibles -->
+        <div class="mov-card">
+          <div class="mov-card-header">
+            <h3 class="mov-card-title">Botones Táctiles Accesibles (44px)</h3>
+            <span class="mov-badge mov-badge-info">WCAG 2.5.5</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-4);">
+            <button class="mov-btn mov-btn-primary">Botón Primario</button>
+            <button class="mov-btn mov-btn-secondary">Botón Secundario</button>
+            <button class="mov-btn mov-btn-outline">Botón Contorno</button>
+            <button class="mov-btn mov-btn-danger">Bloqueo EIR</button>
+            <button class="mov-btn mov-btn-primary" disabled>Deshabilitado</button>
+          </div>
+          <p style="font-size: var(--font-size-xs); color: var(--text-muted);">
+            Todos los botones poseen una altura mínima de 44px para cumplir con el tamaño de objetivo táctil accesible sin solapamiento.
+          </p>
+        </div>
+
+        <!-- Badges y Chips Semánticos -->
+        <div class="mov-card">
+          <div class="mov-card-header">
+            <h3 class="mov-card-title">Badges Semánticos y Chips</h3>
+            <span class="mov-badge mov-badge-4gmax">LTE 4GMAX</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-4);">
+            <span class="mov-badge mov-badge-success">● ACTIVO</span>
+            <span class="mov-badge mov-badge-warning">● EN MORA</span>
+            <span class="mov-badge mov-badge-danger">● THEFT LOCK EIR</span>
+            <span class="mov-badge mov-badge-info">● TASA BCV</span>
+            <span class="mov-badge mov-badge-4gmax">Inteliplan 10GB</span>
+          </div>
+          <div style="margin-top: var(--space-4);">
+            <label class="mov-label">Skeleton Loader (Previene Cumulative Layout Shift - CLS = 0):</label>
+            <div class="mov-skeleton" style="height: 24px; width: 80%; margin-top: 6px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulador de Modales Accesibles -->
+      <div class="mov-card">
+        <div class="mov-card-header">
+          <h3 class="mov-card-title">Diálogos Modales Accesibles (role="dialog" & Focus Trap)</h3>
+        </div>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-4);">
+          Los modales implementan atrapamiento de foco, cierre mediante la tecla Escape, contraste AAA y restauración de foco al elemento previo.
+        </p>
+        <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+          <button class="mov-btn mov-btn-primary" data-modal-open="modal-c2p-demo">
+            💳 Abrir Modal Pasarela C2P
+          </button>
+          <button class="mov-btn mov-btn-danger" data-modal-open="modal-eir-demo">
+            🛡️ Abrir Modal Emergencia EIR
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 3: DASHBOARD EJECUTIVO NOC / CCO
+         ====================================================================== -->
+    <section id="tab-dashboard" class="mov-tabpanel" role="tabpanel" aria-labelledby="tab-btn-dashboard" hidden>
+      <!-- KPIs Ejecutivos en Tiempo Real -->
+      <div class="grid-4" style="margin-bottom: var(--space-6);">
+        <div class="mov-card mov-kpi-card">
+          <span class="mov-kpi-label">Abonados Activos (0416/0426)</span>
+          <span class="mov-kpi-value">4.000.000</span>
+          <div class="mov-kpi-footer">
+            <span class="mov-badge mov-badge-success">100% WAL Multi-Hilo</span>
+            <span>8 Shards HASH</span>
+          </div>
+        </div>
+
+        <div class="mov-card mov-kpi-card">
+          <span class="mov-kpi-label">Transacciones C2P Hoy</span>
+          <span class="mov-kpi-value" style="color: var(--mov-orange-accent);">124.892</span>
+          <div class="mov-kpi-footer">
+            <span class="mov-badge mov-badge-info">23 Bancos SUDEBAN</span>
+            <span id="bcv-rate-badge">BCV: 41.5230 Bs</span>
+          </div>
+        </div>
+
+        <div class="mov-card mov-kpi-card">
+          <span class="mov-kpi-label">Bloqueos de Seguridad EIR</span>
+          <span class="mov-kpi-value" style="color: var(--mov-danger);">142</span>
+          <div class="mov-kpi-footer">
+            <span class="mov-badge mov-badge-danger">GSMA Blacklist</span>
+            <span>Luhn-10 Validado</span>
+          </div>
+        </div>
+
+        <div class="mov-card mov-kpi-card">
+          <span class="mov-kpi-label">Retención Churn ML (NBA)</span>
+          <span class="mov-kpi-value" style="color: var(--mov-blue-4gmax);">94.7%</span>
+          <div class="mov-kpi-footer">
+            <span class="mov-badge mov-badge-success">Modelo L5 Activo</span>
+            <span>Anti-Doble Gasto</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buscador Fast-Path OCS y Stream Swarm L5 -->
+      <div class="grid-2">
+        <!-- Buscador Fast-Path -->
+        <div class="mov-card">
+          <div class="mov-card-header">
+            <h3 class="mov-card-title">Búsqueda Rápida de Abonado (OCS Fast-Path)</h3>
+            <span class="mov-badge mov-badge-4gmax">SLA &lt; 2ms</span>
+          </div>
+          <p style="font-size: var(--font-size-xs); color: var(--text-secondary); margin-bottom: var(--space-4);">
+            Consulta en memoria WAL con sanitización de PII Zero-Knowledge (HMAC-SHA256).
+          </p>
+          <form id="form-subscriber-search">
+            <div class="mov-form-group">
+              <label for="input-search-msisdn" class="mov-label">Número de Teléfono Movilnet:</label>
+              <div style="display: flex; gap: var(--space-2);">
+                <input type="text" id="input-search-msisdn" class="mov-input" style="flex: 1;" placeholder="Ej: 04161234567" value="04161234567" required pattern="^04(16|26)[0-9]{7}$">
+                <button type="submit" class="mov-btn mov-btn-primary">Consultar</button>
+              </div>
+              <span class="mov-help-text">Prefijos válidos: 0416 o 0426 seguido de 7 dígitos.</span>
+            </div>
+          </form>
+          <div id="subscriber-result-box" aria-live="polite"></div>
+        </div>
+
+        <!-- Flujo en Vivo Swarm L5 -->
+        <div class="mov-card">
+          <div class="mov-card-header">
+            <h3 class="mov-card-title">Monitor de Enjambre Autónomo (Swarm L5)</h3>
+            <span class="mov-badge mov-badge-success">4 Agentes Conectados</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); font-size: var(--font-size-xs); font-family: var(--font-mono);">
+            <div style="padding: var(--space-2); background: var(--bg-subtle); border-left: 3px solid var(--mov-blue-primary); border-radius: var(--radius-sm);">
+              <strong>[N1 Customer Care]</strong> Fast-path balance lookup para 04161234567 completado en <strong>0.18ms</strong>.
+            </div>
+            <div style="padding: var(--space-2); background: var(--bg-subtle); border-left: 3px solid var(--mov-orange-accent); border-radius: var(--radius-sm);">
+              <strong>[N2 Fintech C2P]</strong> Pago móvil procesado ref: C2P-781928 banco: 0102 BDV monto: 311.42 Bs.
+            </div>
+            <div style="padding: var(--space-2); background: var(--bg-subtle); border-left: 3px solid var(--mov-danger); border-radius: var(--radius-sm);">
+              <strong>[N3 Emergencia EIR]</strong> Validación Luhn-10 IMEI 864923048123456 &rarr; OK. Sincronizado en GSMA.
+            </div>
+            <div style="padding: var(--space-2); background: var(--bg-subtle); border-left: 3px solid var(--mov-blue-4gmax); border-radius: var(--radius-sm);">
+              <strong>[N4 Retención ML]</strong> Score Churn 0.72 inferido &rarr; Cupón RESCATE-VIP generado con hash SHA-256.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 4: PORTAL AUTOSERVICIO PWA MÓVIL (MARCO SMARTPHONE)
+         ====================================================================== -->
+    <section id="tab-pwa" class="mov-tabpanel" role="tabpanel" aria-labelledby="tab-btn-pwa" hidden>
+      <div style="text-align: center; margin-bottom: var(--space-6);">
+        <h2 style="font-size: var(--font-size-2xl); font-weight: 800; color: var(--mov-blue-primary);">
+          Portal Autoservicio PWA del Abonado (0416 / 0426)
+        </h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+          Experiencia web móvil ultra-rápida, responsive y accesible para los 4.000.000 de clientes de Movilnet.
+        </p>
+      </div>
+
+      <!-- Marco de Teléfono Móvil -->
+      <div class="mov-mobile-frame" role="region" aria-label="Simulador de aplicación móvil Movilnet">
+        <div class="mov-mobile-notch"></div>
+        <div class="mov-mobile-screen">
+          <!-- Cabecera de la App Móvil -->
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4);">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div class="mov-logo-badge" style="font-size: 0.875rem; padding: 2px 8px;">movilnet</div>
+              <span style="font-weight: 700; font-size: 0.875rem;">Mi Movilnet</span>
+            </div>
+            <span class="mov-badge mov-badge-4gmax">4GMAX</span>
+          </div>
+
+          <!-- Tarjeta de Saldo y Quota OCS -->
+          <div class="mov-card" style="padding: var(--space-4); margin-bottom: var(--space-4); background: linear-gradient(135deg, var(--mov-blue-primary), #004470); color: #FFF;">
+            <span style="font-size: 0.75rem; opacity: 0.85; text-transform: uppercase;">Línea 0416-1234567</span>
+            <div style="display: flex; align-items: baseline; justify-content: space-between; margin: 8px 0;">
+              <span style="font-size: 1.75rem; font-weight: 800; font-family: var(--font-mono);">
+                311,42 Bs
+              </span>
+              <span style="font-size: 0.875rem; opacity: 0.9;">($7.50 USD)</span>
+            </div>
+
+            <!-- Barra de Quota Accesible -->
+            <div class="mov-progress-container" style="margin-top: 12px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem;">
+                <span>Datos Restantes:</span>
+                <strong>8,192 MB de 10,240 MB</strong>
+              </div>
+              <div class="mov-progress-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Uso de cuota de datos 4GMAX">
+                <div class="mov-progress-bar" style="width: 80%;"></div>
+              </div>
+            </div>
+            <span style="font-size: 0.75rem; opacity: 0.8; display: block; margin-top: 6px;">
+              Corte de Facturación: 28 de Octubre de 2026
+            </span>
+          </div>
+
+          <!-- Acciones Rápidas del Abonado -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: var(--space-4);">
+            <button class="mov-btn mov-btn-primary" style="font-size: 0.75rem;" data-modal-open="modal-c2p-demo">
+              💳 Recarga C2P
+            </button>
+            <button class="mov-btn mov-btn-outline" style="font-size: 0.75rem;">
+              📦 Cambiar Plan
+            </button>
+            <button class="mov-btn mov-btn-outline" style="font-size: 0.75rem;">
+              🎁 Mis Cupones
+            </button>
+            <button class="mov-btn mov-btn-danger" style="font-size: 0.75rem;" data-modal-open="modal-eir-demo">
+              🛡️ Bloqueo Hurto
+            </button>
+          </div>
+
+          <!-- Banner Oferta Retención NBA (Agente N4) -->
+          <div class="mov-card" style="padding: var(--space-3); border-left: 4px solid var(--mov-orange-accent); background-color: var(--bg-subtle);">
+            <span class="mov-badge mov-badge-warning" style="font-size: 0.65rem;">OFERTA EXCLUSIVA DE FIDELIZACIÓN</span>
+            <h4 style="font-size: 0.875rem; font-weight: 700; margin: 4px 0;">¡Bono 4GMAX + 20% Descuento!</h4>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 8px;">
+              Por tu fidelidad, canjea el cupón <code>RESCATE-VIP</code> en tu próxima recarga C2P.
+            </p>
+            <button class="mov-btn mov-btn-primary" style="min-height: 36px; padding: 4px 12px; font-size: 0.75rem;" data-modal-open="modal-c2p-demo">
+              Canjear Cupón
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 5: VENTANA OFICIAL WHATSAPP BUSINESS MOVILNET (SIMULADOR)
+         ====================================================================== -->
+    <section id="tab-whatsapp" class="mov-tabpanel" role="tabpanel" aria-labelledby="tab-btn-whatsapp" hidden>
+      <div style="text-align: center; margin-bottom: var(--space-4);">
+        <h2 style="font-size: var(--font-size-2xl); font-weight: 800; color: #075E54;">
+          Canal Conversacional WhatsApp Cloud API
+        </h2>
+        <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
+          Simulador de ventana nativa de WhatsApp Web / Móvil conectado directamente al Agente N1 (Google Gemini 2.5 Flash + Funnel Marketing).
+        </p>
+      </div>
+
+      <div class="chat-window-container">
+        <div class="chat-app-window whatsapp" role="region" aria-label="Ventana de chat WhatsApp Movilnet">
+          <!-- Cabecera WhatsApp -->
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <div class="chat-avatar">M</div>
+              <div>
+                <div class="chat-header-title">Movilnet Atención Oficial ✅</div>
+                <div class="chat-header-status">en línea • cuenta de empresa oficial</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:16px; opacity:0.85; font-size:1.1rem; cursor:pointer;">
+              <span>📹</span>
+              <span>📞</span>
+              <span>⋮</span>
+            </div>
+          </div>
+
+          <!-- Cuerpo de Mensajes WhatsApp -->
+          <div id="whatsapp-messages" class="chat-body" role="log" aria-live="polite">
+            <div class="chat-bubble bot">
+              ¡Hola! 👋 Soy tu asistente oficial de <strong>Telecomunicaciones Movilnet C.A.</strong><br/><br/>
+              ¿En qué puedo ayudarte hoy con tu línea <code>0416</code> / <code>0426</code>? Puedes consultar saldo, megas, recargar por Pago Móvil C2P o pedir recomendaciones.
+            </div>
+          </div>
+
+          <!-- Barra de Entrada WhatsApp -->
+          <form id="whatsapp-form" class="chat-input-bar" onsubmit="return false;">
+            <input type="text" id="whatsapp-input" class="chat-input" placeholder="Escribe un mensaje aquí..." aria-label="Mensaje para WhatsApp">
+            <button type="submit" id="whatsapp-send" class="chat-send-btn" aria-label="Enviar WhatsApp">➤</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PESTAÑA 6: VENTANA OFICIAL TELEGRAM BOT MOVILNET (SIMULADOR)
+         ====================================================================== -->
+    <section id="tab-telegram" class="mov-tabpanel" role="tabpanel" aria-labelledby="tab-btn-telegram" hidden>
+      <div style="text-align: center; margin-bottom: var(--space-4);">
+        <h2 style="font-size: var(--font-size-2xl); font-weight: 800; color: #2AABEE;">
+          Canal Conversacional Telegram Bot API
+        </h2>
+        <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
+          Simulador de ventana de Telegram Desktop / Dark Mode conectado en tiempo real al enjambre cognitivo de Movilnet.
+        </p>
+      </div>
+
+      <div class="chat-window-container">
+        <div class="chat-app-window telegram" role="region" aria-label="Ventana de chat Telegram Movilnet">
+          <!-- Cabecera Telegram -->
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <div class="chat-avatar">✈️</div>
+              <div>
+                <div class="chat-header-title">@MovilnetAtencionBot</div>
+                <div class="chat-header-status">bot • en línea</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:16px; opacity:0.85; font-size:1.1rem; cursor:pointer;">
+              <span>🔍</span>
+              <span>⋮</span>
+            </div>
+          </div>
+
+          <!-- Cuerpo de Mensajes Telegram -->
+          <div id="telegram-messages" class="chat-body" role="log" aria-live="polite">
+            <div class="chat-bubble bot">
+              ¡Bienvenido a <strong>Movilnet Telegram Bot</strong>! 🚀<br/><br/>
+              Puedo gestionar consultas de saldo OCS en tiempo real, recargas inmediatas C2P y guiarte con las mejores ofertas de navegación 4GMAX.
+            </div>
+          </div>
+
+          <!-- Barra de Entrada Telegram -->
+          <form id="telegram-form" class="chat-input-bar" onsubmit="return false;">
+            <input type="text" id="telegram-input" class="chat-input" placeholder="Escribe un mensaje..." aria-label="Mensaje para Telegram">
+            <button type="submit" id="telegram-send" class="chat-send-btn" aria-label="Enviar Telegram">➤</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODALES ACCESIBLES (WAI-ARIA role="dialog")
+       ======================================================================== -->
+
+  <!-- Modal 1: Pasarela Financiera C2P Pago Móvil -->
+  <div id="modal-c2p-demo" class="mov-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-c2p-title">
+    <div class="mov-modal-dialog">
+      <div class="mov-modal-header">
+        <h3 id="modal-c2p-title" class="mov-card-title">💳 Pasarela Financiera C2P Pago Móvil</h3>
+        <button class="mov-btn mov-btn-outline mov-btn-icon-only" data-modal-close="modal-c2p-demo" aria-label="Cerrar ventana de pago">✕</button>
+      </div>
+      <div class="mov-modal-body">
+        <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--space-4);">
+          Débito interbancario instantáneo avalado por SUDEBAN y conectado a los 23 bancos del sistema nacional.
+        </p>
+
+        <div class="mov-form-group">
+          <label for="c2p-bank-select" class="mov-label">Banco Emisor del Pagador:</label>
+          <select id="c2p-bank-select" class="mov-input">
+            <option value="0102">0102 — Banco de Venezuela, S.A.</option>
+            <option value="0108">0108 — BBVA Banco Provincial</option>
+            <option value="0105">0105 — Banco Mercantil, C.A.</option>
+            <option value="0134">0134 — Banesco Banco Universal</option>
+            <option value="0172">0172 — Bancamiga Banco Universal</option>
+            <option value="0191">0191 — Banco Nacional de Crédito (BNC)</option>
+          </select>
+        </div>
+
+        <div class="grid-2">
+          <div class="mov-form-group">
+            <label for="c2p-amount-usd" class="mov-label">Monto a Recargar (USD):</label>
+            <input type="number" id="c2p-amount-usd" class="mov-input" value="7.50" min="1" max="100" step="0.50">
+          </div>
+          <div class="mov-form-group">
+            <label for="c2p-amount-ves" class="mov-label">Equivalente BCV (Bs):</label>
+            <input type="text" id="c2p-amount-ves" class="mov-input" readonly value="311.42">
+          </div>
+        </div>
+
+        <div class="mov-form-group">
+          <label for="c2p-otp-token" class="mov-label">Clave Dinámica OTP / Token Bancario:</label>
+          <input type="password" id="c2p-otp-token" class="mov-input" placeholder="Ej: 849201" maxlength="8">
+          <span class="mov-help-text">Clave generada en la aplicación móvil de su banco emisor.</span>
+        </div>
+
+        <div style="background: var(--bg-subtle); padding: var(--space-3); border-radius: var(--radius-md); font-size: var(--font-size-xs);">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span>Comisión SUDEBAN (0.3%):</span>
+            <strong id="c2p-commission">0.93 Bs</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Total a Debitar en Cuenta:</span>
+            <strong id="c2p-total-ves" style="color: var(--mov-blue-primary);">312.35 Bs</strong>
+          </div>
+        </div>
+      </div>
+      <div class="mov-modal-footer">
+        <button class="mov-btn mov-btn-outline" data-modal-close="modal-c2p-demo">Cancelar</button>
+        <button class="mov-btn mov-btn-primary" onclick="alert('Simulación C2P exitosa. Recarga aplicada al abonado.')">Confirmar Pago Móvil</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Bloqueo de Emergencia EIR por Robo/Hurto -->
+  <div id="modal-eir-demo" class="mov-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-eir-title">
+    <div class="mov-modal-dialog">
+      <div class="mov-modal-header" style="border-bottom-color: var(--mov-danger);">
+        <h3 id="modal-eir-title" class="mov-card-title" style="color: var(--mov-danger);">
+          🛡️ Bloqueo de Dispositivo e IMEI (EIR)
+        </h3>
+        <button class="mov-btn mov-btn-outline mov-btn-icon-only" data-modal-close="modal-eir-demo" aria-label="Cerrar ventana de emergencia">✕</button>
+      </div>
+      <div class="mov-modal-body">
+        <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--space-4);">
+          Ingreso inmutable a la lista negra GSMA / EIR para impedir que el equipo sustraído funcione en ninguna red celular del país.
+        </p>
+
+        <div class="mov-form-group">
+          <label for="eir-imei-input" class="mov-label">Código IMEI de 15 dígitos:</label>
+          <input type="text" id="eir-imei-input" class="mov-input" placeholder="Ej: 864923048123456" maxlength="15">
+          <span id="eir-imei-feedback" class="mov-help-text">Ingrese los 15 dígitos del IMEI para validar con GSMA.</span>
+        </div>
+
+        <div class="mov-form-group">
+          <label for="eir-reason-select" class="mov-label">Causal del Bloqueo:</label>
+          <select id="eir-reason-select" class="mov-input">
+            <option value="THEFT_LOCK">Hurto o Robo con Violencia</option>
+            <option value="LOST_DEVICE">Extravío en Vía Pública</option>
+            <option value="FRAUD_PREVENTION">Sospecha de Fraude / SIM-Swap</option>
+          </select>
+        </div>
+      </div>
+      <div class="mov-modal-footer">
+        <button class="mov-btn mov-btn-outline" data-modal-close="modal-eir-demo">Cancelar</button>
+        <button id="btn-submit-eir" class="mov-btn mov-btn-danger" disabled onclick="alert('Dispositivo bloqueado inmediatamente en lista negra EIR.')">
+          Ejecutar Bloqueo Inmediato
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts del Sistema de Diseño -->
+  <script src="/ui/js/movilnet_ui.js"></script>
+</body>
+</html>

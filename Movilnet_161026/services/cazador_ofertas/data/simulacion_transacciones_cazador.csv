@@ -1,0 +1,12 @@
+transaccion_id,cupon_id,msisdn,comercio_id,oferta_titulo,monto_total_ves,comision_movilnet_ves,neto_comercio_ves,split_ratio,timestamp
+TX-02D338A5,CUP-4319DA71,04161028027,COM-007,Pack Delicateses y Embutidos Importados (Prolicor Sabana Grande),290.0,58.0,232.0,20% / 80%,2026-10-23 21:16:07
+TX-D8CCECBA,CUP-03332B89,04261210522,COM-CCS-BOYE-05,Desayuno Tradicional Arepa Reina Pepiada o Jamón y Queso + Jugo de Naranja Natural (Panadería),125.0,25.0,100.0,20% / 80%,2026-10-23 21:16:07
+TX-FBC74809,CUP-0D27071A,04163118118,COM-CCS-PARA-02,Kit Primeros Auxilios & Salud Familiar (Alcohol + Gasas + Curitas + Betadine) (Farmatodo),158.05,31.61,126.44,20% / 80%,2026-10-23 21:16:07
+TX-F2E19DFA,CUP-9823207D,04261273607,COM-CCS-BOYE-06,Cambio de Aceite Mineral/Semisintético + Filtro de Aceite Instalado (Ferretería),434.6,86.92,347.68,20% / 80%,2026-10-23 21:16:07
+TX-12226116,CUP-387140E4,04269001446,COM-CCS-SBER-03,Plato Degustación Criollo (Pabellón Criollo Completo + Jugo de Papelón con Limón) (Ristorante),196.2,39.24,156.96,20% / 80%,2026-10-23 21:16:07
+TX-5E06D9B4,CUP-A88699E9,04161028027,COM-CCS-MONT-06,Servicio de Alineación Delantera + Balanceo 4 Ruedas Computarizado (Centro),257.5,51.5,206.0,20% / 80%,2026-10-23 21:16:07
+TX-B5514C5E,CUP-FB50931C,04163678690,COM-CCS-HATI-06,Kit Herramientas Básicas para el Hogar (Destornilladores + Martillo + Pinza) (Artesanías),220.0,44.0,176.0,20% / 80%,2026-10-23 21:16:07
+TX-653BB4A4,CUP-BB641988,04262711892,COM-030,Recarga Promocional Prepago Plan Movilnet (Movilnet Sede Principal El Recreo),95.0,19.0,76.0,20% / 80%,2026-10-23 21:16:07
+TX-4DA5C6C8,CUP-1270B111,04161028027,COM-CCS-SBER-02,Pack Cuidado Pediátrico (Pañales Etapa 3 + Toallitas Húmedas + Crema) (Locatel),277.95,55.59,222.36,20% / 80%,2026-10-23 21:16:07
+TX-25B7EF7A,CUP-C2264CE9,04262711892,COM-CCS-PARA-03,Combo Parrilla Especial 2 Personas (Carne Solomo + Chorizo + Arepitas + Guasacaca) (Restaurante),402.8,80.56,322.24,20% / 80%,2026-10-23 21:16:07
+TX-88A459B1,CUP-3A9C4F60,04262711892,COM-CCS-CALI-02,Combo Alivio Gripal (Antigripal Noche/Día + Vitamina C Efervescente) (Farmatodo),164.8,32.96,131.84,20% / 80%,2026-10-23 21:16:07
